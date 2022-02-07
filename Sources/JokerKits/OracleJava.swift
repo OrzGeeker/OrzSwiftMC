@@ -35,6 +35,13 @@ public struct OracleJava {
         return try Shell.runCommand(with: ["java", "--version"])
     }
     
+    
+    /// 获取当前设备上安装的所有JVM信息
+    /// - Returns: 返回值，字符串
+    static public func installedJVM() throws -> String {
+        return try Shell.run(path: "/usr/libexec/java_home", args: ["-V"])
+    }
+    
     static public func installedJavaVersions() throws -> [String]? {
         var ret: [String]? = nil
         
