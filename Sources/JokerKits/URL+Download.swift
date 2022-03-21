@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 #if os(Linux)
 import Crypto
@@ -16,7 +19,7 @@ import CommonCrypto
 public extension URL {
     var getData: Data? {
         get async throws {
-            let (data, response) = try await URLSession.shared.data(from: self)
+            let (data, response) = try await URLSession.dataTask(from: self)
             guard (response as? HTTPURLResponse)?.statusCode == 200
             else {
                 return nil

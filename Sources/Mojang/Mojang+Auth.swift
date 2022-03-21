@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 public extension Mojang {
     enum AuthAPI {
@@ -48,7 +51,7 @@ public extension Mojang {
                 request.setValue("application/json", forHTTPHeaderField: "Content-Type")
                 request.httpBody = bodyData
                 
-                let (data, response) = try await URLSession.shared.data(for: request)
+                let (data, response) = try await URLSession.dataTask(for: request)
                 guard (response as? HTTPURLResponse)?.statusCode == 200
                 else {
                     let error = try JSONDecoder().decode(AuthRespError.self, from: data)

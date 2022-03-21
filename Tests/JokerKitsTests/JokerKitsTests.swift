@@ -130,5 +130,13 @@ final class JokerKitsTests: XCTestCase {
             XCTAssertNotNil(index)
         }
     }
+    
+    func testCrossPlatformNetwork() async throws {
+        let url = URL(string: "https://launchermeta.mojang.com/mc/game/version_manifest.json")!
+        let (_, _) = try await URLSession.dataTask(from: url)
+        
+        let request = URLRequest(url: url)
+        let (_, _) = try await URLSession.dataTask(for: request)
+    }
 }
 
