@@ -8,7 +8,6 @@
 import PaperMC
 import JokerKits
 import ConsoleKit
-import Darwin
 import Foundation
 
 @main
