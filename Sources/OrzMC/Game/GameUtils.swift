@@ -84,7 +84,9 @@ struct GameUtils {
 
                         guard hashValue == hash
                         else {
-                            throw URLError(.badServerResponse)
+                            let error = URLError(.badServerResponse)
+                            continuation.resume(throwing: error)
+                            return
                         }
                         
                         // 移动文件
