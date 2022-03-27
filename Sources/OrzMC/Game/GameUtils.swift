@@ -66,12 +66,9 @@ struct GameUtils {
             
             progressBar?.start()
             Downloader().download(url) { [progressBar] progress, filePath in
-                
                 progressBar?.activity.currentProgress = progress
-                
                 if let fileURL = filePath {
                     progressBar?.succeed()
-                    
                     do {
                         // Check Hash Value
                         var hashValue = try fileURL.fileSHA1Value
@@ -97,6 +94,9 @@ struct GameUtils {
                         console.output(error.localizedDescription.consoleText(.error), newLine: true)
                         continuation.resume(throwing: error)
                     }
+                }
+                else {
+                    progressBar?.fail()
                 }
             }
         }
