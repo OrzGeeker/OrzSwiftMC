@@ -20,10 +20,6 @@ struct PluginCommand: Command {
     }
     func run(using context: CommandContext, signature: Signature) throws {
         let console = context.console
-        guard let output = signature.output, output.isDirPath() else {
-            console.error("未指定插件存放目录路径")
-            return
-        }
         if signature.list {
             plugins.compactMap {
                 try? $0.jsonRepresentation()
@@ -33,6 +29,11 @@ struct PluginCommand: Command {
             }
         }
         else {
+            guard let output = signature.output, output.isDirPath() else {
+                console.error("未指定插件存放目录路径")
+                console.info("选项: -o <file_path> 指定下载文件存放路径")
+                return
+            }
             try DispatchGroup().syncExecAndWait {
                 for plugin in plugins {
                     await plugin.download(console, output: output)
