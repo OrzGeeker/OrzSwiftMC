@@ -119,6 +119,14 @@ public extension PluginInfo {
                 site: "https://geysermc.org/",
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser"),
+            PluginInfo(
+                name: "SimpleVoiceChat",
+                desc: "语音聊天",
+                url:  "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat/download",
+                site: "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat",
+                docs: "https://modrepo.de/minecraft/voicechat/wiki",
+                repo: "https://github.com/henkelmax/simple-voice-chat",
+                enable: false),
             // MARK: 不在被维护
             PluginInfo(
                 name: "PlugMan",
