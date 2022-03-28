@@ -29,15 +29,22 @@ struct PluginCommand: Command {
             }
         }
         else {
-            guard let output = signature.output, output.isDirPath() else {
-                console.error("未指定插件存放目录路径")
-                console.info("选项: -o <file_path> 指定下载文件存放路径")
+            let outputPath = signature.output ?? Bundle.main.executablePath
+            guard let outputFilePath = outputPath else {
+                console.error("未指定文件存放路径")
                 return
             }
+            
+            var outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
+            if !outpuFileDirURL.path.isDirPath() {
+                outpuFileDirURL.deleteLastPathComponent()
+            }
+            
             try DispatchGroup().syncExecAndWait {
                 for plugin in plugins {
-                    await plugin.download(console, output: output)
+                    await plugin.download(console, outputDirURL: outpuFileDirURL)
                 }
+                console.output("文件已下载到目录：\(outpuFileDirURL.path)", style: .success)
             } errorClosure: { error in
                 console.error(error.localizedDescription)
             }
@@ -52,7 +59,7 @@ struct PluginInfo: Codable, JsonRepresentable {
     let site: String?
     let docs: String?
     let repo: String?
-    func download(_ console: Console, output: String) async {
+    func download(_ console: Console, outputDirURL: URL) async {
         guard let url = URL(string: self.url) else {
             console.error("插件下载地址无效")
             return
@@ -60,11 +67,13 @@ struct PluginInfo: Codable, JsonRepresentable {
         let progressBar = console.progressBar(title: self.name)
         progressBar.start()
         return await withCheckedContinuation { continuation in
-            Downloader().download(url) { progress, filePath in
-                if let localFilePath = filePath {
+            Downloader().download(url) { progress, fileURL in
+                if let localFileURL = fileURL {
                     progressBar.succeed()
                     do {
-                        try FileManager.moveFile(fromFilePath: localFilePath.absoluteString, toFilePath: output, overwrite: false)
+                        let srcFilePath = localFileURL.path
+                        let targetFilePath = outputDirURL.appendingPathComponent(self.name).appendingPathExtension("jar").path
+                        try FileManager.moveFile(fromFilePath: srcFilePath, toFilePath: targetFilePath, overwrite: true)
                         continuation.resume()
                     }
                     catch let e {
