@@ -44,7 +44,7 @@ struct PluginCommand: Command {
                 for plugin in plugins {
                     await plugin.download(console, outputDirURL: outpuFileDirURL)
                 }
-                console.output("文件已下载到目录：\(outpuFileDirURL.path)", style: .success)
+                console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
             } errorClosure: { error in
                 console.error(error.localizedDescription)
             }
