@@ -10,7 +10,8 @@ import ConsoleKit
 struct OrzCommandGroup: CommandGroup {
     var commands: [String : AnyCommand] = [
         "client": ClientCommand(),
-        "server": ServerCommand()
+        "server": ServerCommand(),
+        "plugin": PluginCommand(),
     ]
     var help: String = "Minecraft 客户端/服务端部署工具"
 }

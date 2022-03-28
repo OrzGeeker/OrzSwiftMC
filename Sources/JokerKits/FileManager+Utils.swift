@@ -10,7 +10,7 @@ import Foundation
 public extension FileManager {
     static func moveFile(fromFilePath: String, toFilePath: String, overwrite: Bool = false) throws {
         if FileManager.default.fileExists(atPath: toFilePath), overwrite {
-            try FileManager.default.removeItem(atPath: toFilePath)
+            try FileManager.default.removeItem(atPath: toFilePath) // This Operation is very dangeous
         }
         
         let dirPath = URL(fileURLWithPath: toFilePath).deletingLastPathComponent().path
