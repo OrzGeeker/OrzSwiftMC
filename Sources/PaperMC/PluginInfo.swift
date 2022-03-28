@@ -25,17 +25,23 @@ public struct PluginInfo: Codable, JsonRepresentable {
         let progressBar = console.progressBar(title: self.name)
         progressBar.start()
         return await withCheckedContinuation { continuation in
-            Downloader().download(url) { progress, fileURL in
-                if let localFileURL = fileURL {
-                    progressBar.succeed()
+            Downloader().download(url) { progress, fileURL, error in
+                if let error = error {
+                    progressBar.fail()
+                    console.error(error.localizedDescription)
+                    continuation.resume()
+                }
+                else if let localFileURL = fileURL {
                     do {
                         let srcFilePath = localFileURL.path
                         let targetFilePath = outputDirURL.appendingPathComponent(self.name).appendingPathExtension("jar").path
                         try FileManager.moveFile(fromFilePath: srcFilePath, toFilePath: targetFilePath, overwrite: true)
+                        progressBar.succeed()
                         continuation.resume()
                     }
-                    catch let e {
-                        console.error(e.localizedDescription)
+                    catch let error {
+                        progressBar.fail()
+                        console.error(error.localizedDescription)
                         continuation.resume()
                     }
                 }
@@ -109,7 +115,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "GeyserMC",
                 desc: "基岩版客户端联机Java版服务器",
-                url:  "https://ci.opencollab.dev//job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar",
+                url:  "https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar",
                 site: "https://geysermc.org/",
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser"),

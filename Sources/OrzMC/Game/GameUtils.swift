@@ -65,10 +65,13 @@ struct GameUtils {
             }
             
             progressBar?.start()
-            Downloader().download(url) { [progressBar] progress, filePath in
+            Downloader().download(url) { progress, filePath, error in
                 progressBar?.activity.currentProgress = progress
-                if let fileURL = filePath {
-                    progressBar?.succeed()
+                if let error = error {
+                    progressBar?.fail()
+                    continuation.resume(throwing: error)
+                }
+                else if let fileURL = filePath {
                     do {
                         // Check Hash Value
                         var hashValue = try fileURL.fileSHA1Value
@@ -81,6 +84,7 @@ struct GameUtils {
 
                         guard hashValue == hash
                         else {
+                            progressBar?.fail()
                             let error = URLError(.badServerResponse)
                             continuation.resume(throwing: error)
                             return
@@ -89,14 +93,16 @@ struct GameUtils {
                         // 移动文件
                         let fromFilePath = fileURL.path
                         try FileManager.moveFile(fromFilePath: fromFilePath, toFilePath: toFilePath, overwrite: true)
+                        progressBar?.succeed()
                         continuation.resume()
                     } catch let error {
-                        console.output(error.localizedDescription.consoleText(.error), newLine: true)
+                        progressBar?.fail()
+                        console.error(error.localizedDescription)
                         continuation.resume(throwing: error)
                     }
                 }
                 else {
-                    progressBar?.fail()
+                    progressBar?.activity.currentProgress = progress
                 }
             }
         }
