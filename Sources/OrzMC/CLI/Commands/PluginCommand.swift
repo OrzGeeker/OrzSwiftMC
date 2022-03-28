@@ -8,6 +8,7 @@
 import ConsoleKit
 import JokerKits
 import Foundation
+import PaperMC
 
 struct PluginCommand: Command {
     var help: String = "下载服务端需要的插件"
@@ -50,55 +51,6 @@ struct PluginCommand: Command {
             }
         }
     }
-}
-
-struct PluginInfo: Codable, JsonRepresentable {
-    let name: String
-    let desc: String
-    let url: String
-    let site: String?
-    let docs: String?
-    let repo: String?
-    func download(_ console: Console, outputDirURL: URL) async {
-        guard let url = URL(string: self.url) else {
-            console.error("插件下载地址无效")
-            return
-        }
-        let progressBar = console.progressBar(title: self.name)
-        progressBar.start()
-        return await withCheckedContinuation { continuation in
-            Downloader().download(url) { progress, fileURL in
-                if let localFileURL = fileURL {
-                    progressBar.succeed()
-                    do {
-                        let srcFilePath = localFileURL.path
-                        let targetFilePath = outputDirURL.appendingPathComponent(self.name).appendingPathExtension("jar").path
-                        try FileManager.moveFile(fromFilePath: srcFilePath, toFilePath: targetFilePath, overwrite: true)
-                        continuation.resume()
-                    }
-                    catch let e {
-                        console.error(e.localizedDescription)
-                        continuation.resume()
-                    }
-                }
-                else {
-                    progressBar.activity.currentProgress = progress
-                }
-            }
-        }
-    }
-}
-
-extension PluginCommand {
-    var plugins: [PluginInfo] {
-        [
-            PluginInfo(
-                name: "Grief Prevention",
-                desc: "防止服务器悲剧发生",
-                url:  "https://dev.bukkit.org/projects/grief-prevention/files/latest",
-                site: "https://dev.bukkit.org/projects/grief-prevention",
-                docs: "https://docs.griefprevention.com/",
-                repo: "https://github.com/TechFortress/GriefPrevention"),
-        ]
-    }
+    
+    let plugins = PluginInfo.getAllPluginInfos()
 }

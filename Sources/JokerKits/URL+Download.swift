@@ -10,10 +10,10 @@ import Foundation
 import FoundationNetworking
 #endif
 
-#if os(Linux)
-import Crypto
-#else
+#if canImport(CommonCrypto)
 import CommonCrypto
+#else
+import Crypto
 #endif
 
 public extension URL {
@@ -34,16 +34,15 @@ public extension URL {
                 throw URLError(.badURL)
             }
             let data = try Data(contentsOf: self)
-#if os(Linux)
             
-            let digest = Insecure.SHA1.hash(data: data)
-            let hexBytes = digest.map { String(format: "%02hhx", $0) }
-            
-#else
+#if canImport(CommonCrypto)
             var digest = [UInt8](repeating: 0, count:Int(CC_SHA1_DIGEST_LENGTH))
             data.withUnsafeBytes {
                 _ = CC_SHA1($0.baseAddress, CC_LONG(data.count), &digest)
             }
+            let hexBytes = digest.map { String(format: "%02hhx", $0) }
+#else
+            let digest = Insecure.SHA1.hash(data: data)
             let hexBytes = digest.map { String(format: "%02hhx", $0) }
 #endif
             
@@ -57,19 +56,16 @@ public extension URL {
                 throw URLError(.badURL)
             }
             let data = try Data(contentsOf: self)
-#if os(Linux)
-            
-            let digest = SHA256.hash(data: data)
-            let hexBytes = digest.map { String(format: "%02hhx", $0) }
-            
-#else
+#if canImport(CommonCrypto)
             var digest = [UInt8](repeating: 0, count:Int(CC_SHA256_DIGEST_LENGTH))
             data.withUnsafeBytes {
                 _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &digest)
             }
             let hexBytes = digest.map { String(format: "%02hhx", $0) }
+#else
+            let digest = SHA256.hash(data: data)
+            let hexBytes = digest.map { String(format: "%02hhx", $0) }
 #endif
-            
             return hexBytes.joined()
         }
     }

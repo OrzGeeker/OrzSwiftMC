@@ -57,7 +57,10 @@ let package = Package(
         
         .target(
             name: "PaperMC",
-            dependencies: ["JokerKits"]
+            dependencies: [
+                "JokerKits",
+                .product(name: "ConsoleKit", package: "console-kit"),
+            ]
         ),
         .testTarget(
             name: "PaperMCTests",
