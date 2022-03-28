@@ -57,7 +57,7 @@ public extension PluginInfo {
     static func getAllPluginInfos() -> [PluginInfo] {
         return [
             PluginInfo(
-                name: "Grief Prevention",
+                name: "GriefPrevention",
                 desc: "防止服务器悲剧发生",
                 url:  "https://dev.bukkit.org/projects/grief-prevention/files/latest",
                 site: "https://dev.bukkit.org/projects/grief-prevention",
@@ -106,7 +106,7 @@ public extension PluginInfo {
                 docs: nil,
                 repo: "https://github.com/apavarino/Deadchest"),
             PluginInfo(
-                name: "Holographic Displays",
+                name: "HolographicDisplays",
                 desc: "全息显示",
                 url:  "https://dev.bukkit.org/projects/holographic-displays/files/latest",
                 site: "https://dev.bukkit.org/projects/holographic-displays",
