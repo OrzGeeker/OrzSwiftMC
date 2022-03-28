@@ -35,7 +35,7 @@ struct PluginCommand: Command {
                 console.error("未指定文件存放路径")
                 return
             }
-            var outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
+            let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
             try DispatchGroup().syncExecAndWait {
                 for plugin in plugins {
                     await plugin.download(console, outputDirURL: outpuFileDirURL)
