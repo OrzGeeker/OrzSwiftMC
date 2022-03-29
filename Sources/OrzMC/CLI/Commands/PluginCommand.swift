@@ -47,5 +47,5 @@ struct PluginCommand: Command {
         }
     }
     
-    let plugins = PluginInfo.getAllPluginInfos()
+    let plugins = PluginInfo.allPlugins()
 }
