@@ -26,15 +26,14 @@ public class Downloader: NSObject {
     public func download(_ url: URL, progress: @escaping DownloadProgress) {
         self.progress = progress
         self.downloadTask = URLSession.shared.downloadTask(with: url)
-        self.downloadTask?.delegate = self
-        self.downloadTask?.resume()
-        
-        
 #if canImport(FoundationNetworking)
         if let downloadTask = self.downloadTask {
             self.addObserver(downloadTask.progress, forKeyPath:#keyPath(Progress.fractionCompleted), options: [.new], context: nil)
         }
+#else
+        self.downloadTask?.delegate = self
 #endif
+        self.downloadTask?.resume()
     }
 
 #if canImport(FoundationNetworking)
