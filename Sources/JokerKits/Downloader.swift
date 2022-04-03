@@ -9,6 +9,8 @@ import Foundation
 import Alamofire
 
 public typealias DownloadProgress = (_ progress: Double, _ filePath: URL?, _ error: Error?) -> Void
+
+/// 使用[Alamofire](https://github.com/Alamofire/Alamofire)下载大文件
 public class Downloader: NSObject {
     var downloadTask: URLSessionDownloadTask?
     var progress: Double = 0
