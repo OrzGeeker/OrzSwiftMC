@@ -6,66 +6,28 @@
 //
 
 import Foundation
-
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
+import Alamofire
 
 public typealias DownloadProgress = (_ progress: Double, _ filePath: URL?, _ error: Error?) -> Void
-
 public class Downloader: NSObject {
-    
-#if canImport(FoundationNetworking)
-    @objc dynamic var downloadTask: URLSessionDownloadTask?
-    var kvoToken = NSKeyValueObservation?
-#else
     var downloadTask: URLSessionDownloadTask?
-#endif
-    
-    var progress: DownloadProgress?
+    var progress: Double = 0
     public func download(_ url: URL, progress: @escaping DownloadProgress) {
-        self.progress = progress
-        self.downloadTask = URLSession.shared.downloadTask(with: url)
-#if canImport(FoundationNetworking)
-        if let downloadTask = self.downloadTask {
-            self.addObserver(downloadTask.progress, forKeyPath:#keyPath(Progress.fractionCompleted), options: [.new], context: nil)
-        }
-#else
-        self.downloadTask?.delegate = self
-#endif
-        self.downloadTask?.resume()
-    }
-
-#if canImport(FoundationNetworking)
-    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == #keyPath(Progress.fractionCompleted), let newFraction = change?[NSKeyValueChangeKey.newKey] {
-            print("\(keyPath!) \(newFraction)")
-        }
-    }
-    
-    
-    deinit {
-        self.removeObserver(self, forKeyPath: #keyPath(Progress.fractionCompleted))
-    }
-#endif
-}
-
-extension Downloader: URLSessionDownloadDelegate {
-    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
-        if let progress = self.progress {
-            progress(1, location, nil)
-        }
-    }
-    
-    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        if let progress = self.progress, totalBytesWritten > 0 {
-            progress(Double(totalBytesWritten) / Double(totalBytesExpectedToWrite), nil, nil)
-        }
-    }
-    
-    public func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        if let progress = self.progress {
-            progress(Double(task.countOfBytesReceived) / Double(task.countOfBytesExpectedToReceive), nil, error)
+        AF.download(url).downloadProgress(closure: { downloadProgress in
+            self.progress = downloadProgress.fractionCompleted
+            progress(self.progress, nil, nil)
+        }).response { response in
+            guard response.error != nil else {
+                progress(self.progress, nil, response.error)
+                return
+            }
+            if let fileURL = response.fileURL {
+                progress(1, fileURL, nil)
+            }
+            else {
+                let error = AFError.responseSerializationFailed(reason: .invalidEmptyResponse(type: "找不到已下载的文件"))
+                progress(self.progress, nil, error)
+            }
         }
     }
 }
