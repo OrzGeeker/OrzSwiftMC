@@ -7,7 +7,7 @@
 
 import Foundation
 
-#if os(Linux)
+#if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 
@@ -15,15 +15,40 @@ public typealias DownloadProgress = (_ progress: Double, _ filePath: URL?, _ err
 
 public class Downloader: NSObject {
     
+#if canImport(FoundationNetworking)
+    @objc dynamic var downloadTask: URLSessionDownloadTask?
+    var kvoToken = NSKeyValueObservation?
+#else
     var downloadTask: URLSessionDownloadTask?
-    var progress: DownloadProgress?
+#endif
     
+    var progress: DownloadProgress?
     public func download(_ url: URL, progress: @escaping DownloadProgress) {
         self.progress = progress
         self.downloadTask = URLSession.shared.downloadTask(with: url)
         self.downloadTask?.delegate = self
         self.downloadTask?.resume()
+        
+        
+#if canImport(FoundationNetworking)
+        if let downloadTask = self.downloadTask {
+            self.addObserver(downloadTask.progress, forKeyPath:#keyPath(Progress.fractionCompleted), options: [.new], context: nil)
+        }
+#endif
     }
+
+#if canImport(FoundationNetworking)
+    public override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == #keyPath(Progress.fractionCompleted), let newFraction = change?[NSKeyValueChangeKey.newKey] {
+            print("\(keyPath!) \(newFraction)")
+        }
+    }
+    
+    
+    deinit {
+        self.removeObserver(self, forKeyPath: #keyPath(Progress.fractionCompleted))
+    }
+#endif
 }
 
 extension Downloader: URLSessionDownloadDelegate {
