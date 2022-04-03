@@ -8,7 +8,6 @@
 import XCTest
 @testable import JokerKits
 import Dispatch
-import ObjectiveC
 
 final class JokerKitsTests: XCTestCase {
     
