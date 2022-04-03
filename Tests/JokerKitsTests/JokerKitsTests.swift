@@ -8,6 +8,9 @@
 import XCTest
 @testable import JokerKits
 import Dispatch
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
 
 final class JokerKitsTests: XCTestCase {
     
