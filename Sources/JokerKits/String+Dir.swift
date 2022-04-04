@@ -17,4 +17,8 @@ public extension String {
         let _ =  FileManager.default.fileExists(atPath: self, isDirectory: &isDir)
         return isDir.boolValue
     }
+    
+    func isExist() -> Bool {
+        return FileManager.default.fileExists(atPath: self)
+    }
 }

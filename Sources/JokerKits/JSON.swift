@@ -71,12 +71,16 @@ public struct JSON {
 }
 
 public protocol JsonRepresentable where Self: Encodable {
-    func jsonRepresentation() throws -> String?
+    func jsonRepresentation(_ keyCodingStrategy: JSONEncoder.KeyEncodingStrategy?) throws -> String?
 }
 
 public extension JsonRepresentable {
-    func jsonRepresentation() throws -> String? {
-        let data = try JSON.encoder.encode(self)
+    func jsonRepresentation(_ keyCodingStrategy: JSONEncoder.KeyEncodingStrategy? = nil) throws -> String? {
+        let encoder = JSON.encoder
+        if let strategy = keyCodingStrategy {
+            encoder.keyEncodingStrategy = strategy
+        }
+        let data = try encoder.encode(self)
         return String(data: data, encoding: .utf8)
     }
 }

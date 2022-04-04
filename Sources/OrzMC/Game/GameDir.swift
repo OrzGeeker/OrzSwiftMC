@@ -26,7 +26,7 @@ extension Platform {
     static let console = Terminal()
 }
 
-enum GameType: String {
+enum GameType: String, JsonRepresentable {
     case vanilla
     case paper
 }

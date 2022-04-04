@@ -24,6 +24,9 @@ class Launcher: Client {
     /// 客户端启动
     func start() async throws {
         
+        // 选择启动的方式
+        try self.chooseProfile()
+        
         // 正版验证
         try await self.authenticate()
         
