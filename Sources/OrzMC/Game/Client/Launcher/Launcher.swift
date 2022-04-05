@@ -43,6 +43,7 @@ struct ClientInfo {
     var version: Version
     var username: String
     var debug: Bool
+    var launcherProfile: LauncherProfile?
     
     // 正版授权
     var accountName: String?

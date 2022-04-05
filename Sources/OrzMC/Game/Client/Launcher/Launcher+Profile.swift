@@ -14,12 +14,20 @@ extension Launcher {
         let clientDir = GameDir.client(version: version)
         let dstFilePath = clientDir.filePath("launcher_profiles.json")
         if dstFilePath.isExist() {
-            // TODO: 展示选择项目
-            Platform.console.output("选项启动方式")
+            let fileURL = URL(fileURLWithPath: dstFilePath)
+            let data = try Data(contentsOf: fileURL)
+            var launcherProfile = try LauncherProfile.profile(from: data)
+            let menuItems = Array(launcherProfile.profiles.keys.sorted())
+            let chooseItem = Platform.console.choose("选择启动方式：".consoleText(.info), from: menuItems)
+            launcherProfile.selectedProfile = chooseItem
+            self.clientInfo.launcherProfile = launcherProfile
         }
-        else {
-            try clientDir.dirPath.makeDirIfNeed()
+        // 保存最新的Launcher Profile
+        try clientDir.dirPath.makeDirIfNeed()
+        guard let launcherProfile = self.clientInfo.launcherProfile else {
             try LauncherProfile.vanillaProfile(version: version).writeToFile(dstFilePath)
+            return
         }
+        try launcherProfile.writeToFile(dstFilePath)
     }
 }
