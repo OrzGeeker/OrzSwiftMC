@@ -38,5 +38,4 @@ struct LauncherProfile: JsonRepresentable, Decodable {
             try json.write(toFile: dst, atomically: true, encoding: .utf8)
         }
     }
-    
 }

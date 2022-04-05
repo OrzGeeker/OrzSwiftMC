@@ -107,7 +107,6 @@ extension PluginInfo {
                 site: "https://dev.bukkit.org/projects/back-ondeath",
                 docs: "nil",
                 repo: "nil"),
-            
             // MARK: 下面的无法每次获取最新版本
             PluginInfo(
                 name: "LoginSecurity",
@@ -157,6 +156,14 @@ extension PluginInfo {
                 site: "https://www.spigotmc.org/resources/vault.34315/",
                 docs: nil,
                 repo: "https://github.com/milkbowl/Vault"),
+            PluginInfo(
+                name: "PlasmoVoice",
+                desc: "游戏语音通话",
+                url:  "https://www.spigotmc.org/resources/plasmo-voice-server.91064/download?version=444433",
+                type: .spigot,
+                site: "https://modrinth.com/mod/plasmo-voice",
+                docs: "https://github.com/plasmoapp/plasmo-voice/wiki/",
+                repo: "https://github.com/plasmoapp/plasmo-voice"),
             // MARK: 下面是暂时不用的插件
             PluginInfo(
                 name: "Dynmap",
@@ -176,6 +183,6 @@ extension PluginInfo {
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser",
                 enable: false),
-        ].filter { $0.enable }
+        ].filter { $0.enable && $0.url.count > 0 }
     }
 }

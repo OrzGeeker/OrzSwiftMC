@@ -21,11 +21,16 @@ extension Launcher {
         let jarExt = "jar"
         let cpSep = Platform.os() == .windows ? ";" : ":"
         
-        let classPath = Array([
+        var libraryDirs = Array([
             GameDir.libraries(version: clientInfo.version.id).dirPath,
-            GameDir.clientVersion(version: clientInfo.version.id).dirPath
-        ].compactMap { FileManager.allFiles(in: $0, ext: jarExt) }.joined())
+            GameDir.clientVersion(version: clientInfo.version.id).dirPath,
+        ])
+        // Fabric 客户端启动时附带的额外库
+        if let fabricLibrariesDir = try self.fabricClientVersionProfileLibrariesDir()?.dirPath {
+            libraryDirs.append(fabricLibrariesDir)
+        }
         
+        let classPath = libraryDirs.compactMap { FileManager.allFiles(in: $0, ext: jarExt) }.joined()
         let gameDir = GameDir.client(version: clientInfo.version.id).dirPath
         let envs = [
             "natives_directory": GameDir.clientVersionNative(version: clientInfo.version.id).dirPath,
@@ -57,7 +62,7 @@ extension Launcher {
         }
         
         // 处理jvm相关参数
-        let jvmArgsArray = gameInfo.arguments.jvm.compactMap { (arg) -> String? in
+        var jvmArgsArray = gameInfo.arguments.jvm.compactMap { (arg) -> String? in
             switch arg {
             case .object(let obj):
                 for rule in obj.rules {
@@ -75,6 +80,10 @@ extension Launcher {
                 return value
             }
         }
+        // 添加 Fabric 客户端相关的JVM参数
+        if let fabricJVMOptions = self.fabricClientJVMOptions() {
+            jvmArgsArray.append(contentsOf: fabricJVMOptions)
+        }
         
         // 处理游戏启动器参数
         let gameArgsArray = gameInfo.arguments.game.compactMap { (arg) -> String? in
@@ -86,14 +95,18 @@ extension Launcher {
             }
         }
         
+        var mainClass = gameInfo.mainClass
+        if let fabricMainClass = self.fabricClientMainClass() {
+            mainClass = fabricMainClass
+        }
+        
         //构造参数数组
         var args = [String]()
-        
         let regex = try NSRegularExpression(pattern: "\\$\\{(\\w+)\\}", options: .caseInsensitive)
         Array([
             javaArgsArray,
             jvmArgsArray,
-            [gameInfo.mainClass],
+            [mainClass],
             gameArgsArray
         ].joined()).forEach { arg in
             

@@ -21,6 +21,12 @@ extension Launcher {
         
         return GameDir.clientVersionProfileLibraries(version: self.clientInfo.version.id, profile: lastVersionId)
     }
+    func fabricClientJVMOptions() -> [String]? {
+        return self.clientInfo.fabricModel?.arguments.jvm
+    }
+    func fabricClientMainClass() -> String? {
+        return self.clientInfo.fabricModel?.mainClass
+    }
     func downloadFabric() async throws {
         guard let dstDir = try self.fabricClientVersionProfileLibrariesDir() else {
             return
