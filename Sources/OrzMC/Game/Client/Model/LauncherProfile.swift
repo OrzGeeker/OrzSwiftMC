@@ -20,7 +20,7 @@ struct LauncherProfile: JsonRepresentable, Decodable {
         let lastUsed: String
         static func now() -> String {
 #if os(Linux)
-            return Date().ISO8601Format()
+            return ""
 #else
             return Date().ISO8601Format(.iso8601)
 #endif
