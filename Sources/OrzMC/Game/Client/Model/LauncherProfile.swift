@@ -19,7 +19,11 @@ struct LauncherProfile: JsonRepresentable, Decodable {
         let lastVersionId: String
         let lastUsed: String
         static func now() -> String {
+#if os(Linux)
+            return Date().formatted()
+#else
             return Date().ISO8601Format(.iso8601)
+#endif
         }
     }
     struct AuthenticationDataBase: JsonRepresentable, Decodable {
