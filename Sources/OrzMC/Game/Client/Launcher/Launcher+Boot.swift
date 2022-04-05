@@ -26,7 +26,6 @@ extension Launcher {
             GameDir.clientVersion(version: clientInfo.version.id).dirPath
         ].compactMap { FileManager.allFiles(in: $0, ext: jarExt) }.joined())
         
-        
         let gameDir = GameDir.client(version: clientInfo.version.id).dirPath
         let envs = [
             "natives_directory": GameDir.clientVersionNative(version: clientInfo.version.id).dirPath,

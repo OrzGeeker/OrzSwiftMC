@@ -12,7 +12,8 @@ let package = Package(
         .executable(name: "orzmc", targets: ["OrzMC"]),
         .library(name: "JokerKits", targets: ["JokerKits"]),
         .library(name: "Mojang", targets: ["Mojang"]),
-        .library(name: "PaperMC", targets: ["PaperMC"])
+        .library(name: "PaperMC", targets: ["PaperMC"]),
+        .library(name: "Fabric", targets: ["Fabric"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -49,7 +50,8 @@ let package = Package(
             dependencies: [
                 "Mojang",
                 .product(name: "ConsoleKit", package: "console-kit"),
-                "PaperMC"
+                "PaperMC",
+                "Fabric"
             ]
         ),
         .testTarget(
@@ -64,7 +66,17 @@ let package = Package(
         .testTarget(
             name: "PaperMCTests",
             dependencies: ["PaperMC"]
+        ),
+        
+        .target(
+            name: "Fabric",
+            dependencies: ["JokerKits"]
+        ),
+        .testTarget(
+            name: "FabricTests",
+            dependencies: ["Fabric"]
         )
+        
     ],
     swiftLanguageVersions: [.v5]
 )

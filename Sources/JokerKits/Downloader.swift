@@ -32,4 +32,8 @@ public class Downloader: NSObject {
             }
         }
     }
+    
+    public func download(_ url: URL, to dstFile: String) async throws -> URL {
+        return try await AF.download(url).serializingDownloadedFileURL().value
+    }
 }

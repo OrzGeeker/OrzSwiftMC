@@ -12,6 +12,7 @@ struct OrzCommandGroup: CommandGroup {
         "client": ClientCommand(),
         "server": ServerCommand(),
         "plugin": PluginCommand(),
+//        "fabric": FabricCommand(),
     ]
     var help: String = "Minecraft 客户端/服务端部署工具"
 }

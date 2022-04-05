@@ -6,6 +6,7 @@
 //
 
 import Mojang
+import Fabric
 
 /// Minecraft 客户端启动器
 ///
@@ -33,6 +34,9 @@ class Launcher: Client {
         // 下载启动器启动所需要的文件、资源及依赖
         try await self.download()
         
+        // 下载Fabric相关的库
+        try await self.downloadFabric()
+        
         // 分析参数并启动客户端
         try await self.launch()
     }
@@ -54,4 +58,7 @@ struct ClientInfo {
     // JVM启动内存占用参数
     var minMem: String
     var maxMem: String
+    
+    // Fabric
+    var fabricModel: FabricModel?
 }

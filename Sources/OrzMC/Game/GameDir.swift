@@ -50,6 +50,8 @@ enum GameDir {
     case libraries(version: String, type: String = defaultClientType)
     case libraryObj(version: String, type: String = defaultClientType, path: String)
     case clientVersion(version: String, type: String = defaultClientType)
+    case clientVersionProfile(version: String, profile: String, type: String = defaultClientType)
+    case clientVersionProfileLibraries(version: String, profile: String, type: String = defaultClientType)
     case clientVersionNative(version: String, type: String = defaultClientType)
     case clientLogConfig(version: String, type: String = defaultClientType)
     case server(version: String, type: String = defaultClientType)
@@ -80,6 +82,10 @@ enum GameDir {
             return GameDir.libraries(version: version, type: type).pathComponents + [path]
         case .clientVersion(let version, let type):
             return GameDir.client(version: version, type: type).pathComponents + ["versions", version]
+        case .clientVersionProfile(let version, let profile, let type):
+            return GameDir.client(version: version, type: type).pathComponents + ["versions", profile]
+        case .clientVersionProfileLibraries(let version, let profile, let type):
+            return GameDir.clientVersionProfile(version: version, profile: profile, type: type).pathComponents + ["libraries"]
         case .clientVersionNative(let version, let type):
             let nativesPlatform = "\(version)-natives"
             return GameDir.clientVersion(version: version, type: type).pathComponents + [nativesPlatform]
