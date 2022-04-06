@@ -32,79 +32,46 @@ struct GameUtils {
         filename: String? = nil,
         console: Console = Platform.console
     ) async throws {
-        return try await withCheckedThrowingContinuation { continuation in
-            var progressBar: ActivityIndicator<ProgressBar>? = nil
-            let showProgress = progressHint != nil
-            if showProgress {
-                progressBar = console.progressBar(title: progressHint!)
+        var progressBar: ActivityIndicator<ProgressBar>? = nil
+        let showProgress = progressHint != nil
+        if showProgress {
+            progressBar = console.progressBar(title: progressHint!)
+        }
+        let toFilePath = targetDir.filePath(filename ?? url.lastPathComponent)
+        let toFilePathURL = URL(fileURLWithPath: toFilePath)
+        if toFilePath.isExist() {
+            var hashValue = try toFilePathURL.fileSHA1Value
+            switch hashType {
+            case .sha1:
+                hashValue = try toFilePathURL.fileSHA1Value
+            case .sha256:
+                hashValue = try toFilePathURL.fileSHA256Value
             }
-            
-            let toFilePath = targetDir.filePath(filename ?? url.lastPathComponent)
-            
-            // 已经下载过的，且校验完整的文件，不重复下载
-            do {
-                if FileManager.default.fileExists(atPath: toFilePath) {
-                    var hashValue = try URL(fileURLWithPath: toFilePath).fileSHA1Value
-                    switch hashType {
-                    case .sha1:
-                        hashValue = try URL(fileURLWithPath: toFilePath).fileSHA1Value
-                    case .sha256:
-                        hashValue = try URL(fileURLWithPath: toFilePath).fileSHA256Value
-                    }
-                    
-                    if hashValue == hash {
-                        progressBar?.start()
-                        progressBar?.succeed()
-                        continuation.resume()
-                        return
-                    }
-                }
-            } catch let error {
-                console.output(error.localizedDescription.consoleText(.error), newLine: true)
-                continuation.resume(throwing: error)
-            }
-            
-            progressBar?.start()
-            Downloader().download(url) { progress, filePath, error in
-                progressBar?.activity.currentProgress = progress
-                if let error = error {
-                    progressBar?.fail()
-                    continuation.resume(throwing: error)
-                }
-                else if let fileURL = filePath {
-                    do {
-                        // Check Hash Value
-                        var hashValue = try fileURL.fileSHA1Value
-                        switch hashType {
-                        case .sha1:
-                            hashValue = try fileURL.fileSHA1Value
-                        case .sha256:
-                            hashValue = try fileURL.fileSHA256Value
-                        }
-
-                        guard hashValue == hash
-                        else {
-                            progressBar?.fail()
-                            let error = URLError(.badServerResponse)
-                            continuation.resume(throwing: error)
-                            return
-                        }
-                        
-                        // 移动文件
-                        let fromFilePath = fileURL.path
-                        try FileManager.moveFile(fromFilePath: fromFilePath, toFilePath: toFilePath, overwrite: true)
-                        progressBar?.succeed()
-                        continuation.resume()
-                    } catch let error {
-                        progressBar?.fail()
-                        console.error(error.localizedDescription)
-                        continuation.resume(throwing: error)
-                    }
-                }
-                else {
-                    progressBar?.activity.currentProgress = progress
-                }
+            guard hashValue != hash else {
+                progressBar?.start()
+                progressBar?.succeed()
+                return
             }
         }
+        progressBar?.start()
+        let fileURL = try await Downloader.download(url) { progress in
+            progressBar?.activity.currentProgress = progress
+        }
+        // Check Hash Value
+        var hashValue = try fileURL.fileSHA1Value
+        switch hashType {
+        case .sha1:
+            hashValue = try fileURL.fileSHA1Value
+        case .sha256:
+            hashValue = try fileURL.fileSHA256Value
+        }
+        guard hashValue == hash else {
+            progressBar?.fail()
+            throw URLError(.badServerResponse)
+        }
+        // 移动文件
+        let fromFilePath = fileURL.path
+        try FileManager.moveFile(fromFilePath: fromFilePath, toFilePath: toFilePath, overwrite: true)
+        progressBar?.succeed()
     }
 }

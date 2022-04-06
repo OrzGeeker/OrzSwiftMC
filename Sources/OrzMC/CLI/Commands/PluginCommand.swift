@@ -38,7 +38,7 @@ struct PluginCommand: Command {
             let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
             try DispatchGroup().syncExecAndWait {
                 for plugin in plugins {
-                    await plugin.download(console, outputDirURL: outpuFileDirURL)
+                    try await plugin.download(console, outputDirURL: outpuFileDirURL)
                 }
                 console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
             } errorClosure: { error in
@@ -46,6 +46,6 @@ struct PluginCommand: Command {
             }
         }
     }
-    
+
     let plugins = PluginInfo.allPlugins()
 }
