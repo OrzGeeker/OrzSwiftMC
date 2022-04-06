@@ -51,7 +51,7 @@ extension Launcher {
                 continue
             }
             do {
-                let localFileURL = try await Downloader().download(lib.downloadURL, to: dstFilePath)
+                let localFileURL = try await Downloader.download(lib.downloadURL)
                 try FileManager.moveFile(fromFilePath: localFileURL.path, toFilePath: dstFilePath, overwrite: true)
             } catch let e {
                 loadingBar.fail()

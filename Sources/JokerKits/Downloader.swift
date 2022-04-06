@@ -9,6 +9,7 @@ import Foundation
 import Alamofire
 
 public typealias DownloadProgress = (_ progress: Double, _ filePath: URL?, _ error: Error?) -> Void
+public typealias UpdateProgress = (_ progress: Double) -> Void
 
 /// 使用[Alamofire](https://github.com/Alamofire/Alamofire)下载大文件
 public class Downloader: NSObject {
@@ -33,7 +34,13 @@ public class Downloader: NSObject {
         }
     }
     
-    public func download(_ url: URL, to dstFile: String) async throws -> URL {
+    public static func download(_ url: URL) async throws -> URL {
         return try await AF.download(url).serializingDownloadedFileURL().value
+    }
+    
+    public static func download(_ url: URL, updateProgress: @escaping UpdateProgress) async throws -> URL {
+        return try await AF.download(url).downloadProgress(closure: { progress in
+            updateProgress(progress.fractionCompleted)
+        }).serializingDownloadedFileURL().value
     }
 }
