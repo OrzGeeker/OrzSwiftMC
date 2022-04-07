@@ -1,15 +1,11 @@
 //
-//  File.swift
+//  URL+FileHash.swift
 //  
 //
-//  Created by wangzhizhou on 2021/12/26.
+//  Created by wangzhizhou on 2022/4/7.
 //
 
 import Foundation
-#if canImport(FoundationNetworking)
-import FoundationNetworking
-#endif
-
 #if canImport(CommonCrypto)
 import CommonCrypto
 #else
@@ -17,16 +13,6 @@ import Crypto
 #endif
 
 public extension URL {
-    var getData: Data? {
-        get async throws {
-            let (data, response) = try await URLSession.dataTask(from: self)
-            guard (response as? HTTPURLResponse)?.statusCode == 200
-            else {
-                return nil
-            }
-            return data
-        }
-    }
     var fileSHA1Value: String {
         get throws {
             guard self.isFileURL
