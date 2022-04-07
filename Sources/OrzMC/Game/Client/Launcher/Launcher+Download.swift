@@ -84,9 +84,10 @@ extension Launcher {
             }
             Platform.console.pushEphemeral()
             let assetObjURL = Mojang.assetObjURL(info.filePath())
+            let assetName = String(filename.split(separator: "/").last!)
             try await GameUtils.download(
                 assetObjURL,
-                progressHint: "(\(count)/\(total)) \(filename)",
+                progressHint: "(\(count)/\(total)) \(assetName)",
                 targetDir: GameDir.assetsObj(version: clientInfo.version.id, path: info.dirPath()),
                 hash: info.hash
             )

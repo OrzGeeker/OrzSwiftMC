@@ -15,6 +15,9 @@ struct ClientCommand: Command {
         @Flag(name: "debug", short: "d", help: "调试模式")
         var debug: Bool
         
+        @Flag(name: "auth", short: "a", help: "是否验证正版帐号(默认不验证)")
+        var authenticate: Bool
+        
         @Option(name: "version", short: "v", help: "游戏版本号")
         var version: String?
         
@@ -38,15 +41,20 @@ struct ClientCommand: Command {
             
             let debug = signature.debug
             
-            let accountName = OrzMC.userInput(hint: "输入正版帐号(如无可以直接回车)：")
-            if accountName.count > 0 {
-                Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
-                let accountPassword = OrzMC.userInput(hint: "输入正版密码((如无可以直接回车))：")
-                if accountPassword.count > 0 {
-                    let secureText = String(repeating: "*", count: accountPassword.count)
-                    Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
+            // 显示指定是否进行正版授权
+            var accountName: String? = nil
+            if signature.authenticate {
+                accountName = OrzMC.userInput(hint: "输入正版帐号(如无可以直接回车)：")
+                if let accountName = accountName, accountName.count > 0 {
+                    Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
+                    let accountPassword = OrzMC.userInput(hint: "输入正版密码((如无可以直接回车))：")
+                    if accountPassword.count > 0 {
+                        let secureText = String(repeating: "*", count: accountPassword.count)
+                        Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
+                    }
                 }
             }
+            // ---
             
             let minMem = signature.minMem ?? "512M"
             let maxMem = signature.maxMem ?? "2G"
@@ -55,6 +63,7 @@ struct ClientCommand: Command {
                 version: version,
                 username: username,
                 debug: debug,
+                authenticate: signature.authenticate,
                 accountName: accountName,
                 minMem: minMem,
                 maxMem: maxMem
