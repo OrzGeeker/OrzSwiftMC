@@ -34,36 +34,16 @@ extension Launcher {
         guard let libraries = self.clientInfo.fabricModel?.libraries else {
             return
         }
-        var count = 0
-        let total = libraries.count
-        Platform.console.pushEphemeral()
-        Platform.console.output("开始下载Fabric库文件".consoleText(.info))
-        for lib in libraries {
-            count += 1
-            
+        let loading = Platform.console.loadingBar(title: "开始下载Fabric库文件")
+        loading.start()
+        let downloadItemInfos = libraries.map { lib -> DownloadItemInfo in
             let fileName = lib.downloadURL.lastPathComponent
             let dstFilePath = dstDir.filePath(fileName)
-            
-            let progressBar = Platform.console.progressBar(title: "(\(count)/\(total)) \(fileName)")
-            progressBar.start()
-            
-            guard !dstFilePath.isExist() else {
-                progressBar.succeed()
-                continue
-            }
-            
-            do {
-                let localFileURL = try await Downloader.download(lib.downloadURL, updateProgress: { progress in
-                    progressBar.activity.currentProgress = progress
-                })
-                progressBar.succeed()
-                try FileManager.moveFile(fromFilePath: localFileURL.path, toFilePath: dstFilePath, overwrite: true)
-            } catch let e {
-                progressBar.fail()
-                Platform.console.error(e.localizedDescription)
-            }
+            let dstFileURL = URL(fileURLWithPath: dstFilePath)
+            return DownloadItemInfo(sourceURL: lib.downloadURL, dstFileURL: dstFileURL)
         }
-        Platform.console.popEphemeral()
+        try await Downloader.download(downloadItemInfos)
+        loading.succeed()
         Platform.console.output("下载Fabric库文件完成".consoleText(.success))
     }
 }

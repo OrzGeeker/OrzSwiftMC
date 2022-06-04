@@ -40,13 +40,12 @@ struct VanillaServer: Server {
         let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.vanilla.rawValue)
         let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
+        let serverJarFileItem = DownloadItemInfo(sourceURL: serverVersion.url, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)
         
-        let progressBar = Platform.console.progressBar(title: "下载服务端文件：\(serverJarFileName)")
-        progressBar.start()
-        try await Downloader.download([DownloadItemInfo(sourceURL: serverVersion.url, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)], updateProgress: { progress in
-            progressBar.activity.currentProgress = progress
-        })
-        progressBar.succeed()
+        let loading = Platform.console.loadingBar(title: "正在下载服务端文件")
+        loading.start()
+        try await Downloader.download(serverJarFileItem)
+        loading.succeed()
 
         try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }

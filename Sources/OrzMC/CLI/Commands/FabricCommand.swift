@@ -37,12 +37,10 @@ struct FabricCommand: AsyncCommand {
                     version: version)
             }
             else {
-                let progressbar = context.console.progressBar(title: installerURL.lastPathComponent)
-                progressbar.start()
-                let localFileURL = try await Downloader.download(installerURL) { progress in
-                    progressbar.activity.currentProgress = progress
-                }
-                progressbar.succeed()
+                let loading = context.console.loadingBar(title: installerURL.lastPathComponent)
+                loading.start()
+                let localFileURL = try await Downloader.download(installerURL)
+                loading.succeed()
                 try await Fabric.installFabric(
                     installType,
                     installerFileURL: localFileURL,

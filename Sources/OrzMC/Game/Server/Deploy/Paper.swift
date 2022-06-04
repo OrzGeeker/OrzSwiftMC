@@ -60,13 +60,12 @@ struct PaperServer: Server {
         let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
         let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
+        let serverJarFileItem = DownloadItemInfo(sourceURL: downloadURL, dstFileURL: serverJarFileURL, hash: application.sha256, hashType: .sha256)
         
-        let progressBar = Platform.console.progressBar(title: "下载服务端文件：\(serverJarFileName)")
-        progressBar.start()
-        try await Downloader.download([DownloadItemInfo(sourceURL: downloadURL, dstFileURL: serverJarFileURL, hash: application.sha256, hashType: .sha256)], updateProgress: { progress in
-            progressBar.activity.currentProgress = progress
-        })
-        progressBar.succeed()
+        let loading = Platform.console.loadingBar(title: "正在下载服务端文件")
+        loading.start()
+        try await Downloader.download(serverJarFileItem)
+        loading.succeed()
                 
         try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }

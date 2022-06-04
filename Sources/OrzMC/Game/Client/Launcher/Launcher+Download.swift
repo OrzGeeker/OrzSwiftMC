@@ -16,14 +16,11 @@ extension Launcher {
     /// 下载启动器启动需要的文件
     public func download() async throws {
         Platform.console.pushEphemeral()
-        let progressBar = Platform.console.progressBar(title: "正在下载客户端文件:")
-        progressBar.start()
+        let loading = Platform.console.loadingBar(title: "正在下载客户端文件")
+        loading.start()
         let downloadItems = try await generateDownloadItemInfos()
-        try await Downloader.download(downloadItems) { progress in
-            progressBar.activity.title = "正在下载客户端文件: \(Int(progress * 100))%"
-            progressBar.activity.currentProgress = progress
-        }
-        progressBar.succeed()
+        try await Downloader.download(downloadItems)
+        loading.succeed()
         Platform.console.popEphemeral()
         Platform.console.output("下载客户端文件完成", style: .success)
     }
