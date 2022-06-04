@@ -7,6 +7,7 @@
 
 import Mojang
 import JokerKits
+import Foundation
 
 enum VanillaServerError: Error {
     case getServerInfoFailed
@@ -35,16 +36,18 @@ struct VanillaServer: Server {
             throw VanillaServerError.getServerInfoFailed
         }
         
-        let fileName = serverVersion.url.lastPathComponent
-        let targetDir = GameDir.server(version: serverInfo.version, type: GameType.vanilla.rawValue)
-        let filePath = targetDir.filePath(fileName)
-        let progressHint = "下载服务端文件：\(fileName)"
-        try await GameUtils.download(
-            serverVersion.url,
-            progressHint: progressHint,
-            targetDir: targetDir,
-            hash: serverVersion.sha1)
+        let serverJarFileName = serverVersion.url.lastPathComponent
+        let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.vanilla.rawValue)
+        let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
+        let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
         
-        try await launchServer(filePath, workDirectory: targetDir)
+        let progressBar = Platform.console.progressBar(title: "下载服务端文件：\(serverJarFileName)")
+        progressBar.start()
+        try await Downloader.download([DownloadItemInfo(sourceURL: serverVersion.url, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)], updateProgress: { progress in
+            progressBar.activity.currentProgress = progress
+        })
+        progressBar.succeed()
+
+        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }
 }

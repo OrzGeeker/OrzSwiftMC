@@ -7,8 +7,8 @@
 
 import ConsoleKit
 
-struct OrzCommandGroup: CommandGroup {
-    var commands: [String : AnyCommand] = [
+struct OrzCommandGroup: AsyncCommandGroup {
+    var commands: [String : AnyAsyncCommand] = [
         "client": ClientCommand(),
         "server": ServerCommand(),
         "plugin": PluginCommand(),

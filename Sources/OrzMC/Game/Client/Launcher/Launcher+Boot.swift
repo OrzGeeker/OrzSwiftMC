@@ -135,13 +135,12 @@ extension Launcher {
             }
         }
         
-        try Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: gameDir) { process in
-            guard process.terminationStatus == 0
-            else {
-                print(process.terminationReason)
-                return
-            }
+        Platform.console.output("客户端正在启动，请稍等......", style: .success)
+        let process = try await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: gameDir)
+        guard process.terminationStatus == 0 else {
+            Platform.console.output("客户端异常退出", style: .error)
+            return
         }
-        Platform.console.output("客户端正在启动请稍等...", style: .success)
+        Platform.console.output("客户端正常", style: .success)
     }
 }

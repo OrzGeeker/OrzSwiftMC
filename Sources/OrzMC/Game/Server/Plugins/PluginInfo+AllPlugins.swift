@@ -188,6 +188,7 @@ extension PluginInfo {
                 enable: false),
         ].filter { $0.enable && $0.url.count > 0 }
     }
+    
     static func downloadItemInfos(of outputDirURL: URL) -> [DownloadItemInfo] {
         return allPlugins().compactMap { pluginInfo in
             guard let sourceURL = URL(string: pluginInfo.url) else {

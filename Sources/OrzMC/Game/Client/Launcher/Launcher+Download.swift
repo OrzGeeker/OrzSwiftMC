@@ -18,7 +18,7 @@ extension Launcher {
         Platform.console.pushEphemeral()
         let progressBar = Platform.console.progressBar(title: "正在下载客户端文件:")
         progressBar.start()
-        let downloadItems = try await generateDownloadItemInfs()
+        let downloadItems = try await generateDownloadItemInfos()
         try await Downloader.download(downloadItems) { progress in
             progressBar.activity.title = "正在下载客户端文件: \(Int(progress * 100))%"
             progressBar.activity.currentProgress = progress
@@ -28,7 +28,7 @@ extension Launcher {
         Platform.console.output("下载客户端文件完成", style: .success)
     }
     
-    private func generateDownloadItemInfs() async throws -> [DownloadItemInfo] {
+    private func generateDownloadItemInfos() async throws -> [DownloadItemInfo] {
         var downloadItems = [DownloadItemInfo]()
         
         let gameInfo = try await self.clientInfo.version.gameInfo

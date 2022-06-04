@@ -61,12 +61,12 @@ public struct Shell {
 
     @discardableResult
     public static func run(path: String, args: [String], workDirectory: String? = nil) async throws -> Process {
-        return try await withCheckedThrowingContinuation { continuation in            
+        return try await withCheckedThrowingContinuation { continuation in
             let fileURL = URL(fileURLWithPath: path)
             let process = Process()
             process.executableURL = fileURL
             process.arguments = args
-            
+
             if let workDirectory = workDirectory {
                 process.currentDirectoryURL = URL(fileURLWithPath: workDirectory)
             }

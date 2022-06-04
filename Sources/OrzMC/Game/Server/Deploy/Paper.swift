@@ -55,19 +55,19 @@ struct PaperServer: Server {
         else {
             throw PaperServerError.downloadURLFailed
         }
-        
-        let filename = downloadURL.lastPathComponent
-        let targetDir = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
-        let filePath = targetDir.filePath(filename)
-        let progressHint = "下载服务端文件：\(filename)"
-        
-        try await GameUtils.download(
-            downloadURL,
-            progressHint: progressHint,
-            targetDir: targetDir,
-            hash: application.sha256,
-            hashType: .sha256)
                 
-        try await launchServer(filePath, workDirectory: targetDir)
+        let serverJarFileName = downloadURL.lastPathComponent
+        let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
+        let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
+        let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
+        
+        let progressBar = Platform.console.progressBar(title: "下载服务端文件：\(serverJarFileName)")
+        progressBar.start()
+        try await Downloader.download([DownloadItemInfo(sourceURL: downloadURL, dstFileURL: serverJarFileURL, hash: application.sha256, hashType: .sha256)], updateProgress: { progress in
+            progressBar.activity.currentProgress = progress
+        })
+        progressBar.succeed()
+                
+        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }
 }

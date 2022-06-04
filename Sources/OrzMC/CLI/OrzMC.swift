@@ -12,12 +12,12 @@ import Foundation
 
 @main
 struct OrzMC {
-    static func main() throws {
+    static func main() async throws {
         let console = Platform.console
         let input = CommandInput(arguments: CommandLine.arguments)
         let context = CommandContext(console: console, input: input)
         do {
-            try console.run(OrzCommandGroup(), with: context)
+            try await console.run(OrzCommandGroup(), with: context)
         }
         catch let error {
             console.error("\(error)")

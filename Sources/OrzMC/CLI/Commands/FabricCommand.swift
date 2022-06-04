@@ -10,7 +10,7 @@ import ConsoleKit
 import Fabric
 import JokerKits
 
-struct FabricCommand: Command {
+struct FabricCommand: AsyncCommand {
     var help: String = "安装Fabric"
     
     struct Signature: CommandSignature {
@@ -24,33 +24,30 @@ struct FabricCommand: Command {
         var version: String?
     }
     
-    func run(using context: CommandContext, signature: Signature) throws {
+    func run(using context: CommandContext, signature: Signature) async throws {
+        
         if let installer = signature.installer, let version = signature.version, let installerURL = URL(string: installer), version.count > 0 {
-            try DispatchGroup().syncExecAndWait {
-                let installType = signature.server ? Fabric.InstallType.server : Fabric.InstallType.client
-                let installDir = signature.server ? GameDir.server(version: version) : GameDir.client(version: version)
-                if installerURL.isFileURL {
-                    try await Fabric.installFabric(
-                        installType,
-                        installerFileURL: installerURL,
-                        installDir: installDir.dirPath,
-                        version: version)
+            let installType = signature.server ? Fabric.InstallType.server : Fabric.InstallType.client
+            let installDir = signature.server ? GameDir.server(version: version) : GameDir.client(version: version)
+            if installerURL.isFileURL {
+                try await Fabric.installFabric(
+                    installType,
+                    installerFileURL: installerURL,
+                    installDir: installDir.dirPath,
+                    version: version)
+            }
+            else {
+                let progressbar = context.console.progressBar(title: installerURL.lastPathComponent)
+                progressbar.start()
+                let localFileURL = try await Downloader.download(installerURL) { progress in
+                    progressbar.activity.currentProgress = progress
                 }
-                else {
-                    let progressbar = context.console.progressBar(title: installerURL.lastPathComponent)
-                    progressbar.start()
-                    let localFileURL = try await Downloader.download(installerURL) { progress in
-                        progressbar.activity.currentProgress = progress
-                    }
-                    progressbar.succeed()
-                    try await Fabric.installFabric(
-                        installType,
-                        installerFileURL: localFileURL,
-                        installDir: installDir.dirPath,
-                        version: version)
-                }
-            } errorClosure: { error in
-                context.console.error(error.localizedDescription)
+                progressbar.succeed()
+                try await Fabric.installFabric(
+                    installType,
+                    installerFileURL: localFileURL,
+                    installDir: installDir.dirPath,
+                    version: version)
             }
         }
         else {

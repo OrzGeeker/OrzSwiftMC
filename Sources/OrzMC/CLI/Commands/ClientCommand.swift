@@ -9,8 +9,8 @@ import ConsoleKit
 import Dispatch
 import JokerKits
 
-struct ClientCommand: Command {
-
+struct ClientCommand: AsyncCommand {
+    
     struct Signature: CommandSignature {
         @Flag(name: "debug", short: "d", help: "调试模式")
         var debug: Bool
@@ -33,45 +33,42 @@ struct ClientCommand: Command {
     
     var help: String = "客户端相关命令"
     
-    func run(using context: CommandContext, signature: Signature) throws {
-        try DispatchGroup().syncExecAndWait({
-            let version = try await OrzMC.chooseGameVersion(signature.version)
-            
-            let username = signature.username ?? OrzMC.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
-            
-            let debug = signature.debug
-            
-            // 显示指定是否进行正版授权
-            var accountName: String? = nil
-            if signature.authenticate {
-                accountName = OrzMC.userInput(hint: "输入正版帐号(如无可以直接回车)：")
-                if let accountName = accountName, accountName.count > 0 {
-                    Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
-                    let accountPassword = OrzMC.userInput(hint: "输入正版密码((如无可以直接回车))：")
-                    if accountPassword.count > 0 {
-                        let secureText = String(repeating: "*", count: accountPassword.count)
-                        Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
-                    }
+    func run(using context: CommandContext, signature: Signature) async throws {
+        
+        let version = try await OrzMC.chooseGameVersion(signature.version)
+        
+        let username = signature.username ?? OrzMC.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
+        
+        let debug = signature.debug
+        
+        // 显示指定是否进行正版授权
+        var accountName: String? = nil
+        if signature.authenticate {
+            accountName = OrzMC.userInput(hint: "输入正版帐号(如无可以直接回车)：")
+            if let accountName = accountName, accountName.count > 0 {
+                Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
+                let accountPassword = OrzMC.userInput(hint: "输入正版密码((如无可以直接回车))：")
+                if accountPassword.count > 0 {
+                    let secureText = String(repeating: "*", count: accountPassword.count)
+                    Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
                 }
             }
-            // ---
-            
-            let minMem = signature.minMem ?? "512M"
-            let maxMem = signature.maxMem ?? "2G"
-            
-            let clientInfo = ClientInfo(
-                version: version,
-                username: username,
-                debug: debug,
-                authenticate: signature.authenticate,
-                accountName: accountName,
-                minMem: minMem,
-                maxMem: maxMem
-            )
-            
-            try await Launcher(clientInfo: clientInfo).start()
-        }, errorClosure: { error in
-            Platform.console.error(error.localizedDescription)
-        })
+        }
+        // ---
+        
+        let minMem = signature.minMem ?? "512M"
+        let maxMem = signature.maxMem ?? "2G"
+        
+        let clientInfo = ClientInfo(
+            version: version,
+            username: username,
+            debug: debug,
+            authenticate: signature.authenticate,
+            accountName: accountName,
+            minMem: minMem,
+            maxMem: maxMem
+        )
+        
+        try await Launcher(clientInfo: clientInfo).start()
     }
 }
