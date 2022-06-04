@@ -54,12 +54,14 @@ extension Server {
             }
             
             Platform.console.info("服务端正在运行中...")
+            
             let process = try await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
             guard process.terminationStatus == 0 else {
                 Platform.console.output("服务端异常退出", style: .error)
                 return
             }
             Platform.console.output("服务端正常退出", style: .success)
+
         }
         else {
             let process = try await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)

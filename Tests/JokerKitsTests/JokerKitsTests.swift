@@ -143,14 +143,5 @@ final class JokerKitsTests: XCTestCase {
         let (_, _) = try await URLSession.dataTask(for: request)
     }
     
-    func testDownloadAndProgressReport() async throws {
-        let url = URL(string: "https://launchermeta.mojang.com/mc/game/version_manifest.json")!
-        var currentProgress = 0.0
-        let localFileURL = try await Downloader.download(url) { progress in
-            currentProgress = progress
-        }
-        XCTAssert(currentProgress >= 1)
-        XCTAssertNotNil(localFileURL)
-    }
 }
 
