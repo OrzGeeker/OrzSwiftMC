@@ -48,29 +48,19 @@ public struct Downloader {
                 return
             }
         }
-        let tempFileURL = try await AF.download(item.sourceURL).serializingDownloadedFileURL().value
+        let tempFileURL = try await Downloader.download(item.sourceURL)
         try FileManager.moveFile(fromFilePath: tempFileURL.path, toFilePath: item.dstFileURL.path, overwrite: true)
     }
     
     public static func download(_ items: [DownloadItemInfo]) async throws {
-        await withThrowingTaskGroup(of: Void.self, body: { group in
+        try await withThrowingTaskGroup(of: Void.self, body: { group in
             for item in items {
                 group.addTask {
-                    if let hash = item.hash, let hashType = item.hashType, item.dstFileURL.path.isExist() {
-                        var hashValue: String? = nil
-                        switch hashType {
-                        case .sha1:
-                            hashValue = try item.dstFileURL.fileSHA1Value
-                        case .sha256:
-                            hashValue = try item.dstFileURL.fileSHA256Value
-                        }
-                        guard hashValue != hash else {
-                            return
-                        }
-                    }
-                    let tempFileURL = try await AF.download(item.sourceURL).serializingDownloadedFileURL().value
-                    try FileManager.moveFile(fromFilePath: tempFileURL.path, toFilePath: item.dstFileURL.path, overwrite: true)
+                    try await Downloader.download(item)
                 }
+            }
+            for try await _ in group {
+                
             }
         })
     }
