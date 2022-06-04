@@ -32,11 +32,13 @@ struct GameUtils {
         filename: String? = nil,
         console: Console = Platform.console
     ) async throws {
+        
         var progressBar: ActivityIndicator<ProgressBar>? = nil
         let showProgress = progressHint != nil
         if showProgress {
             progressBar = console.progressBar(title: progressHint!)
         }
+        
         let toFilePath = targetDir.filePath(filename ?? url.lastPathComponent)
         let toFilePathURL = URL(fileURLWithPath: toFilePath)
         if toFilePath.isExist() {

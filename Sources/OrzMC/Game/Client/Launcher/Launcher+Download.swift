@@ -15,111 +15,76 @@ extension Launcher {
     
     /// 下载启动器启动需要的文件
     public func download() async throws {
-        try await downloadClient()
-        try await downloadAssets()
-        try await downloadLibraries()
-        try await downloadLogConfigFile()
-    }
-    
-    /// 下载游戏客户端jar文件
-    private func downloadClient() async throws {
-        guard let client = try await self.clientInfo.version.gameInfo?.downloads.client
-        else {
-            return
-        }
-        // 下载版本信息JSON文件
-        if let url = clientInfo.version.url, let data = try await url.getData {
-            let dir = GameDir.clientVersion(version: clientInfo.version.id)
-            try dir.dirPath.makeDirIfNeed()
-            let filePath = dir.filePath(url.lastPathComponent)
-            let fileURL = URL(fileURLWithPath: filePath)
-            try data.write(to: fileURL)
-        }
-        // 下载版本Jar文件
         Platform.console.pushEphemeral()
-        let filename = [clientInfo.version.id, client.url.pathExtension].joined(separator: ".")
-        let progressHint = "下载客户端文件: \(filename)"
-        Platform.console.output(progressHint, style: .info)
-        try await GameUtils.download(
-            client.url,
-            progressHint: progressHint,
-            targetDir: GameDir.clientVersion(version: clientInfo.version.id),
-            hash: client.sha1,
-            filename: filename
-        )
+        let progressBar = Platform.console.progressBar(title: "正在下载客户端文件:")
+        progressBar.start()
+        let downloadItems = try await generateDownloadItemInfs()
+        try await Downloader.download(downloadItems) { progress in
+            progressBar.activity.title = "正在下载客户端文件: \(Int(progress * 100))%"
+            progressBar.activity.currentProgress = progress
+        }
+        progressBar.succeed()
         Platform.console.popEphemeral()
         Platform.console.output("下载客户端文件完成", style: .success)
     }
     
-    /// 下载游戏客户端资源文件
-    private func downloadAssets() async throws {
-        guard let assetIndex = try await self.clientInfo.version.gameInfo?.assetIndex, let objects = try await assetIndex.assetInfo?.objects
-        else {
-            return
+    private func generateDownloadItemInfs() async throws -> [DownloadItemInfo] {
+        var downloadItems = [DownloadItemInfo]()
+        
+        let gameInfo = try await self.clientInfo.version.gameInfo
+        guard let client = gameInfo?.downloads.client,
+              let assetIndex = gameInfo?.assetIndex,
+              let objects = try await assetIndex.assetInfo?.objects,
+              let libraries = gameInfo?.libraries,
+              let clientLogCfgFile = gameInfo?.logging.client.file
+        else { return downloadItems }
+        
+        // 游戏版本信息JSON文件
+        if let sourceURL = clientInfo.version.url {
+            let jsonFileName = sourceURL.lastPathComponent
+            let jsonFilePath = GameDir.clientVersion(version: clientInfo.version.id).filePath(jsonFileName)
+            let jsonFileURL = URL(fileURLWithPath: jsonFilePath)
+            let jsonFileItme = DownloadItemInfo(sourceURL: sourceURL, dstFileURL: jsonFileURL)
+            downloadItems.append(jsonFileItme)
         }
-        // 下载资源索引文件json
-        Platform.console.pushEphemeral()
+        
+        // 游戏客户端Jar文件
+        let clientJarFileName = [clientInfo.version.id, client.url.pathExtension].joined(separator: ".")
+        let clientJarFilePath = GameDir.clientVersion(version: clientInfo.version.id).filePath(clientJarFileName)
+        let clientJarFileURL = URL(fileURLWithPath: clientJarFilePath)
+        let clientJarItem = DownloadItemInfo(sourceURL: client.url, dstFileURL: clientJarFileURL, hash: client.sha1, hashType: .sha1)
+        downloadItems.append(clientJarItem)
+        
+        // 游戏客户端资源索引文件
         let indexFileName = assetIndex.url.lastPathComponent
-        let progressHint = "下载资源索引文件: \(indexFileName)"
-        Platform.console.output(progressHint, style: .info)
-        try await GameUtils.download(
-            assetIndex.url,
-            progressHint: progressHint,
-            targetDir: .assetsIdx(version: clientInfo.version.id),
-            hash: assetIndex.sha1,
-            filename: indexFileName
-        )
-        Platform.console.popEphemeral()
-        Platform.console.output("下载资源索引文件完成", style: .success)
-        // 下载资源对象文件
-        Platform.console.pushEphemeral()
-        Platform.console.output("下载资源文件", style: .info)
-        var count = 0
-        let total = objects.count
+        let indexFilePath = GameDir.assetsIdx(version: clientInfo.version.id).filePath(indexFileName)
+        let indexFileURL = URL(fileURLWithPath: indexFilePath)
+        let indexFileItem = DownloadItemInfo(sourceURL: assetIndex.url, dstFileURL: indexFileURL, hash: assetIndex.sha1, hashType: .sha1)
+        downloadItems.append(indexFileItem)
+        
+        // 游戏客户端资源对象文件
         for filename in objects.keys {
-            count += 1
             guard let info = objects[filename]
             else {
                 continue
             }
-            Platform.console.pushEphemeral()
             let assetObjURL = Mojang.assetObjURL(info.filePath())
-            let assetName = String(filename.split(separator: "/").last!)
-            try await GameUtils.download(
-                assetObjURL,
-                progressHint: "(\(count)/\(total)) \(assetName)",
-                targetDir: GameDir.assetsObj(version: clientInfo.version.id, path: info.dirPath()),
-                hash: info.hash
-            )
-            Platform.console.popEphemeral()
+            let assetFilePath = GameDir.assetsObj(version: clientInfo.version.id, path: info.dirPath()).filePath(assetObjURL.lastPathComponent)
+            let assetFileURL = URL(fileURLWithPath: assetFilePath)
+            let assetFileItem = DownloadItemInfo(sourceURL: assetObjURL, dstFileURL: assetFileURL, hash: info.hash, hashType: .sha1)
+            downloadItems.append(assetFileItem)
         }
-        Platform.console.popEphemeral()
-        Platform.console.output("下载资源文件完成", style: .success)
-    }
-    
-    /// 下载游戏客户端jar库文件
-    private func downloadLibraries() async throws {
-        guard let libraries = try await self.clientInfo.version.gameInfo?.libraries
-        else{
-            return
-        }
-        Platform.console.pushEphemeral()
-        Platform.console.output("下载库文件", style: .info)
-        var count = 0
-        let total = libraries.count
+        
+        // 游戏客户端依赖库文件
         for lib in libraries {
-            count += 1
-            // 获取需要下载的库
             var artifact = lib.downloads.artifact
             let dirPath = NSString(string: artifact.path).deletingLastPathComponent
             var targetDir = GameDir.libraryObj(version: clientInfo.version.id, path: dirPath)
-            var libName = lib.name
             
             let currentOSName = Platform.os().platformName()
             if let natives = lib.natives, let nativeClassifier = natives[currentOSName], let nativeArtifact = lib.downloads.classifiers?[nativeClassifier] {
                 artifact = nativeArtifact
                 targetDir = GameDir.clientVersionNative(version: clientInfo.version.id)
-                libName = [lib.name, nativeClassifier].joined(separator: ":")
             }
             
             // 判断当前平台是否需要下载
@@ -147,39 +112,22 @@ extension Launcher {
             }
             
             guard allowDownload else {
-                if clientInfo.debug {
-                    let info = "下载库文件(\(count)/\(total))：\(lib.name)".consoleText() + " [Not Need]".consoleText(.info)
-                    Platform.console.output(info)
-                }
                 continue
             }
-            Platform.console.pushEphemeral()
-            try await GameUtils.download(
-                artifact.url,
-                progressHint: "(\(count)/\(total)) \(libName)",
-                targetDir: targetDir,
-                hash: artifact.sha1
-            )
-            Platform.console.popEphemeral()
+            
+            let libFilePath = targetDir.filePath(artifact.url.lastPathComponent)
+            let libFileURL = URL(fileURLWithPath: libFilePath)
+            let libFileItem = DownloadItemInfo(sourceURL: artifact.url, dstFileURL: libFileURL, hash: artifact.sha1, hashType: .sha1)
+            downloadItems.append(libFileItem)
         }
-        Platform.console.popEphemeral()
-        Platform.console.output("下载库文件完成", style: .success)
-    }
-    
-    private func downloadLogConfigFile() async throws {
-        guard let clientFile = try await self.clientInfo.version.gameInfo?.logging.client.file
-        else {
-            return
-        }
-        Platform.console.pushEphemeral()
-        Platform.console.output("下载日志配置文件", style: .info)
-        try await GameUtils.download(
-            clientFile.url,
-            progressHint: "\(clientFile.id)",
-            targetDir: .clientLogConfig(version: clientInfo.version.id),
-            hash: clientFile.sha1
-        )
-        Platform.console.popEphemeral()
-        Platform.console.output("下载日志配置文件完成", style: .success)
+        
+        // 游戏客户端日志配置文件
+        let clientLogCfgFilePath = GameDir.clientLogConfig(version: clientInfo.version.id).filePath(clientLogCfgFile.url.lastPathComponent)
+        let clientLogCfgFileURL = URL(fileURLWithPath: clientLogCfgFilePath)
+        let clientLogCfgFileItem = DownloadItemInfo(sourceURL: clientLogCfgFile.url, dstFileURL: clientLogCfgFileURL, hash: clientLogCfgFile.sha1, hashType: .sha1)
+        downloadItems.append(clientLogCfgFileItem)
+        
+        // 返回所有需要下载的项目信息
+        return downloadItems
     }
 }

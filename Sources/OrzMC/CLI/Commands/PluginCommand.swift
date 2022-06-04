@@ -22,7 +22,7 @@ struct PluginCommand: Command {
     func run(using context: CommandContext, signature: Signature) throws {
         let console = context.console
         if signature.list {
-            plugins.compactMap {
+            PluginInfo.allPlugins().compactMap {
                 try? $0.jsonRepresentation()
             }
             .forEach {
@@ -37,15 +37,17 @@ struct PluginCommand: Command {
             }
             let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
             try DispatchGroup().syncExecAndWait {
-                for plugin in plugins {
-                    try await plugin.download(console, outputDirURL: outpuFileDirURL)
+                let progressBar = console.progressBar(title: "下插Plugin:")
+                progressBar.start()
+                try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL)) { progress in
+                    progressBar.activity.title = "下插Plugin: \(Int(progress * 100))%"
+                    progressBar.activity.currentProgress = progress
                 }
+                progressBar.succeed()
                 console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
             } errorClosure: { error in
                 console.error(error.localizedDescription)
             }
         }
     }
-
-    let plugins = PluginInfo.allPlugins()
 }

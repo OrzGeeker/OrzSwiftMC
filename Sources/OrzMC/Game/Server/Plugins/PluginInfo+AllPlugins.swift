@@ -5,6 +5,9 @@
 //  Created by wangzhizhou on 2022/3/29.
 //
 
+import JokerKits
+import Foundation
+
 extension PluginInfo {
     static func allPlugins() -> [PluginInfo] {
         return [
@@ -184,5 +187,15 @@ extension PluginInfo {
                 repo: "https://github.com/GeyserMC/Geyser",
                 enable: false),
         ].filter { $0.enable && $0.url.count > 0 }
+    }
+    static func downloadItemInfos(of outputDirURL: URL) -> [DownloadItemInfo] {
+        return allPlugins().compactMap { pluginInfo in
+            guard let sourceURL = URL(string: pluginInfo.url) else {
+                Platform.console.error("插件\(pluginInfo.name)下载地址无效")
+                return nil
+            }
+            let dstFileURL = outputDirURL.appendingPathComponent(pluginInfo.name).appendingPathExtension("jar")
+            return DownloadItemInfo(sourceURL: sourceURL, dstFileURL: dstFileURL)
+        }
     }
 }
