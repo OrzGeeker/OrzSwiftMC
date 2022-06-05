@@ -10,6 +10,7 @@ import JokerKits
 import ConsoleKit
 import Foundation
 
+#if swift(>=5.5) && canImport(_Concurrency)
 @main
 struct OrzMC {
     static func main() async throws {
@@ -25,3 +26,4 @@ struct OrzMC {
         }
     }
 }
+#endif
