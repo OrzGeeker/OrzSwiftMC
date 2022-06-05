@@ -42,11 +42,8 @@ struct VanillaServer: Server {
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
         let serverJarFileItem = DownloadItemInfo(sourceURL: serverVersion.url, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)
         
-        let loading = Platform.console.loadingBar(title: "正在下载服务端文件")
-        loading.start()
-        try await Downloader.download(serverJarFileItem)
-        loading.succeed()
-
+        let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
+        try await Downloader.download(serverJarFileItem, progressBar: progressBar)
         try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import ConsoleKit
 
 public struct DownloadItemInfo {
     
@@ -30,12 +31,13 @@ public struct DownloadItemInfo {
 }
 
 public struct Downloader {
-        
-    public static func download(_ sourceURL: URL) async throws -> URL {
-        return try await AF.download(sourceURL).serializingDownloadedFileURL().value
+    
+    public static func download(_ sourceURL: URL) -> (DownloadTask<URL>, StreamOf<Progress>) {
+        let request = AF.download(sourceURL)
+        return (request.serializingDownloadedFileURL(), request.downloadProgress())
     }
     
-    public static func download(_ item: DownloadItemInfo) async throws {
+    public static func download(_ item: DownloadItemInfo, progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
         if let hash = item.hash, let hashType = item.hashType, item.dstFileURL.path.isExist() {
             var hashValue: String? = nil
             switch hashType {
@@ -48,20 +50,54 @@ public struct Downloader {
                 return
             }
         }
-        let tempFileURL = try await Downloader.download(item.sourceURL)
-        try FileManager.moveFile(fromFilePath: tempFileURL.path, toFilePath: item.dstFileURL.path, overwrite: true)
+        let (downloadURLTask, downloadProgressStream) = Downloader.download(item.sourceURL)
+        if let progressBar = progressBar {
+            progressBar.start(refreshRate: 100)
+            for try await progress in downloadProgressStream {
+                try progressBar.updateProgress(progress.fractionCompleted)
+            }
+            progressBar.succeed()
+        }
+        try FileManager.moveFile(fromFilePath: try await downloadURLTask.value.path, toFilePath: item.dstFileURL.path, overwrite: true)
     }
     
-    public static func download(_ items: [DownloadItemInfo]) async throws {
+    public static func download(_ items: [DownloadItemInfo], progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
         try await withThrowingTaskGroup(of: Void.self, body: { group in
             for item in items {
                 group.addTask {
                     try await Downloader.download(item)
                 }
             }
-            for try await _ in group {
-                
+            if let progressBar = progressBar {
+                let total = items.count
+                var index = 0
+                progressBar.start(refreshRate: 100)
+                for try await _ in group {
+                    index += 1
+                    let progress = Double(index) / Double(total)
+                    try progressBar.updateProgress(progress)
+                }
+                progressBar.succeed()
+            } else {
+                try await group.waitForAll()
             }
         })
+    }
+}
+
+extension ActivityIndicator where A == ProgressBar {
+    func updateProgress(_ progress: Double) throws {
+        self.activity.currentProgress = progress
+        let progressDesc = String(format: "%d%%", arguments: [Int(self.activity.currentProgress * 100)])
+        var title = self.activity.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        let range = NSRange(location: 0, length: title.count)
+        let regex = try NSRegularExpression(pattern: "\\d+%$")
+        if let _ = regex.firstMatch(in: title, range: range) {
+            title = regex.stringByReplacingMatches(in: title, range: range, withTemplate: progressDesc)
+        } else {
+            title.append(" ")
+            title.append(progressDesc)
+        }
+        self.activity.title = title
     }
 }

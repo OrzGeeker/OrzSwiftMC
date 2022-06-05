@@ -37,11 +37,9 @@ struct PluginCommand: AsyncCommand {
                 console.error("未指定文件存放路径")
                 return
             }
-            let loading = Platform.console.loadingBar(title: "正在下载插件")
-            loading.start()
             let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
-            try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL))
-            loading.succeed()
+            let progressBar = Platform.console.progressBar(title: "正在下载插件")
+            try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL), progressBar: progressBar)
             console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
         }
     }

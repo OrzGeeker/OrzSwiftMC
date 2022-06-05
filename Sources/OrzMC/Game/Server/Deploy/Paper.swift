@@ -62,11 +62,8 @@ struct PaperServer: Server {
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
         let serverJarFileItem = DownloadItemInfo(sourceURL: downloadURL, dstFileURL: serverJarFileURL, hash: application.sha256, hashType: .sha256)
         
-        let loading = Platform.console.loadingBar(title: "正在下载服务端文件")
-        loading.start()
-        try await Downloader.download(serverJarFileItem)
-        loading.succeed()
-                
+        let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
+        try await Downloader.download(serverJarFileItem, progressBar: progressBar)
         try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
     }
 }

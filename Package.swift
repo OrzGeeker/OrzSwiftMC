@@ -29,6 +29,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux])),
                 "Alamofire",
+                .product(name: "ConsoleKit", package: "console-kit"),
             ]
         ),
         .testTarget(
@@ -49,7 +50,6 @@ let package = Package(
             name: "OrzMC",
             dependencies: [
                 "Mojang",
-                .product(name: "ConsoleKit", package: "console-kit"),
                 "PaperMC",
                 "Fabric"
             ]

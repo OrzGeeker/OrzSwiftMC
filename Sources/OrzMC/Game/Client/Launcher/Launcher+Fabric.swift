@@ -34,16 +34,14 @@ extension Launcher {
         guard let libraries = self.clientInfo.fabricModel?.libraries else {
             return
         }
-        let loading = Platform.console.loadingBar(title: "开始下载Fabric库文件")
-        loading.start()
         let downloadItemInfos = libraries.map { lib -> DownloadItemInfo in
             let fileName = lib.downloadURL.lastPathComponent
             let dstFilePath = dstDir.filePath(fileName)
             let dstFileURL = URL(fileURLWithPath: dstFilePath)
             return DownloadItemInfo(sourceURL: lib.downloadURL, dstFileURL: dstFileURL)
         }
-        try await Downloader.download(downloadItemInfos)
-        loading.succeed()
+        let progressBar = Platform.console.progressBar(title: "开始下载Fabric库文件")
+        try await Downloader.download(downloadItemInfos, progressBar: progressBar)
         Platform.console.output("下载Fabric库文件完成".consoleText(.success))
     }
 }
