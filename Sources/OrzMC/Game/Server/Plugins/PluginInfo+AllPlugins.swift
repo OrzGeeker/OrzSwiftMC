@@ -122,7 +122,7 @@ extension PluginInfo {
             PluginInfo(
                 name: "LuckPerms",
                 desc: "玩家权限管理",
-                url:  "https://ci.lucko.me/job/LuckPerms/1423/artifact/bukkit/loader/build/libs/LuckPerms-Bukkit-5.4.15.jar",
+                url:  "https://download.luckperms.net/1438/bukkit/loader/LuckPerms-Bukkit-5.4.30.jar",
                 type: .bukkit,
                 site: "https://luckperms.net/",
                 docs: "https://luckperms.net/wiki/Home",
@@ -138,7 +138,7 @@ extension PluginInfo {
             PluginInfo(
                 name: "ViaVersion",
                 desc: "老版服务器兼容新版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=443043",
+                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=455064",
                 type: .spigot,
                 site: "https://www.spigotmc.org/resources/viaversion.19254/",
                 docs: "https://viaversion.atlassian.net/wiki/spaces/VIAVERSION/overview",
@@ -146,7 +146,7 @@ extension PluginInfo {
             PluginInfo(
                 name: "ViaBackwards",
                 desc: "服务端兼容旧版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=445618",
+                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=454973",
                 type: .spigot,
                 site: "https://www.spigotmc.org/resources/viabackwards.27448/",
                 docs: nil,
