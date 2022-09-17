@@ -57,8 +57,8 @@ final class JokerKitsTests: XCTestCase {
     }
     
     func testAsyncShell() async throws {
-        let process = try await Shell.runCommand(with: ["which", "bash"])
-        XCTAssertEqual(process.terminationStatus, 0)
+        let ret = await Shell.runCommand(with: ["which", "bash"])
+        XCTAssertEqual(ret, true)
     }
     
     func testCallbackShell() throws {

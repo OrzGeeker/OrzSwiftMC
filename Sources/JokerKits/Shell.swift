@@ -60,8 +60,8 @@ public struct Shell {
     
 
     @discardableResult
-    public static func run(path: String, args: [String], workDirectory: String? = nil) async throws -> Process {
-        return try await withCheckedThrowingContinuation { continuation in
+    public static func run(path: String, args: [String], workDirectory: String? = nil) async -> Bool {
+        return await withCheckedContinuation({ continuation in
             let fileURL = URL(fileURLWithPath: path)
             let process = Process()
             process.executableURL = fileURL
@@ -70,22 +70,22 @@ public struct Shell {
             if let workDirectory = workDirectory {
                 process.currentDirectoryURL = URL(fileURLWithPath: workDirectory)
             }
-            process.terminationHandler =  { process -> Void in
-                continuation.resume(returning: process)
+            process.terminationHandler = { process -> Void in
+                continuation.resume(returning: true)
             }
             do {
                 try process.run()
             }
-            catch let error {
-                continuation.resume(throwing: error)
+            catch {
+                continuation.resume(returning: false)
             }
-        }
+        })
     }
     
     
     @discardableResult
-    public static func runCommand(with args: [String], workDirectory: String? = nil) async throws -> Process {
-        return try await self.run(path: envPath, args: args, workDirectory: workDirectory)
+    public static func runCommand(with args: [String], workDirectory: String? = nil) async -> Bool {
+        return await self.run(path: envPath, args: args, workDirectory: workDirectory)
     }
     
     @discardableResult

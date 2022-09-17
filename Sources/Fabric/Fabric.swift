@@ -17,7 +17,7 @@ public struct Fabric {
         case server
     }
     public static func installFabric(_ installType: InstallType, installerFileURL: URL, installDir: String, version: String) async throws {
-        try await Shell.runCommand(with: [
+        await Shell.runCommand(with: [
             "java", "-jar" , "\(installerFileURL.path)",
             "\(installType == .client ? "client" : "server")",
             "-mcversion", "\(version)",
