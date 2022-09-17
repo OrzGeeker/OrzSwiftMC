@@ -32,44 +32,21 @@ extension Server {
             }
         }
         
+        guard await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
+        else {
+            try await launchServer(filePath, workDirectory: workDirectory)
+            return
+        }
+        Platform.console.info("服务端正在运行中...")
         let eulaFilePath = workDirectory.filePath("eula.txt")
-        if let eulaFileContent = try? String(contentsOfFile: eulaFilePath) {
-            
-            // 修改ELUA协议
-            Platform.console.pushEphemeral()
-            Platform.console.warning("首次启动，未同意EULA协议")
-            try eulaFileContent.replacingOccurrences(of: "eula=false", with: "eula=true")
-                .write(toFile: eulaFilePath, atomically: false, encoding: .utf8)
-            Platform.console.popEphemeral()
-            Platform.console.success("已同意EULA协议")
-            
-            // 修改服务器属性
-            let propertiesFilePath = workDirectory.filePath("server.properties")
-            if let propertiesFileConent = try? String(contentsOfFile: propertiesFilePath) {
-                Platform.console.pushEphemeral()
-                try propertiesFileConent.replacingOccurrences(of: "online-mode=true", with: "online-mode=false")
-                    .write(toFile: propertiesFilePath, atomically: false, encoding: .utf8)
-                Platform.console.popEphemeral()
-                Platform.console.success("服务器运行为离线模式")
-            }
-            
-            Platform.console.info("服务端正在运行中...")
-            
+        let propertiesFilePath = workDirectory.filePath("server.properties")
+        if try modifyEULA(at: eulaFilePath), try modifyProperties(at: propertiesFilePath) {
             guard await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
             else {
                 Platform.console.output("服务端异常退出", style: .error)
                 return
             }
-            Platform.console.output("服务端正常退出", style: .success)
-
         }
-        else {
-            guard await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
-            else {
-                try await launchServer(filePath, workDirectory: workDirectory)
-                return
-            }
-            Platform.console.output("服务端正常退出", style: .success)
-        }
+        Platform.console.output("服务端正常退出", style: .success)
     }
 }

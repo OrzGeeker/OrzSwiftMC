@@ -71,7 +71,8 @@ public struct Shell {
                 process.currentDirectoryURL = URL(fileURLWithPath: workDirectory)
             }
             process.terminationHandler = { process -> Void in
-                continuation.resume(returning: true)
+                let ret = process.terminationStatus == 0
+                continuation.resume(returning: ret)
             }
             do {
                 try process.run()
