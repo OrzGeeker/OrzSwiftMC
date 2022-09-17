@@ -34,9 +34,9 @@ public struct Downloader {
     
     public static func download(_ sourceURL: URL) -> (DownloadTask<URL>, StreamOf<Progress>) {
         let retryPolicy = RetryPolicy(
-            retryLimit: 3,
+            retryLimit: 5,
             exponentialBackoffBase: 2,
-            exponentialBackoffScale: 5)
+            exponentialBackoffScale: 1)
         let request = AF.download(sourceURL, interceptor: retryPolicy)
         return (request.serializingDownloadedFileURL(), request.downloadProgress())
     }
