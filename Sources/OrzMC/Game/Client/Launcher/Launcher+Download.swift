@@ -23,6 +23,8 @@ extension Launcher {
         Platform.console.output("下载客户端文件完成", style: .success)
     }
     
+    /// 从客户端版本清单文件中分析出要下载的资源信息
+    /// - Returns: 需要下载的资源信息数组
     private func generateDownloadItemInfos() async throws -> [DownloadItemInfo] {
         var downloadItems = [DownloadItemInfo]()
         
