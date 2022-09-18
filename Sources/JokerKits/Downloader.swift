@@ -42,6 +42,7 @@ public struct Downloader {
     }
     
     public static func download(_ item: DownloadItemInfo, progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
+        progressBar?.start(refreshRate: 100)
         if let hash = item.hash, let hashType = item.hashType, item.dstFileURL.path.isExist() {
             var hashValue: String? = nil
             switch hashType {
@@ -51,12 +52,12 @@ public struct Downloader {
                 hashValue = try item.dstFileURL.fileSHA256Value
             }
             guard hashValue != hash else {
+                progressBar?.succeed()
                 return
             }
         }
         let (downloadURLTask, downloadProgressStream) = Downloader.download(item.sourceURL)
         if let progressBar = progressBar {
-            progressBar.start(refreshRate: 100)
             for try await progress in downloadProgressStream {
                 try progressBar.updateProgress(progress.fractionCompleted)
             }

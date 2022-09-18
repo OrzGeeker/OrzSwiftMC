@@ -32,6 +32,12 @@ struct ServerCommand: AsyncCommand {
         
         @Option(name: "mx", short: "x", help: "客户端运行使用的最大内存，默认为：2G")
         var maxMem: String?
+        
+        @Option(name: "online-mode", short: "o", help: "服务端运行时是否使用Online模式，默认为：false")
+        var onlineMode: Bool?
+        
+        @Flag(name: "jar-help", short: "j", help: "查看服务端Jar包的帮助信息")
+        var jarHelp: Bool
     }
     
     var help: String = "服务端相关"
@@ -41,7 +47,9 @@ struct ServerCommand: AsyncCommand {
         let debug = signature.debug
         let minMem = signature.minMem ?? "512M"
         let maxMem = signature.maxMem ?? "2G"
+        let onlineMode = signature.onlineMode ?? false
         let forceUpgrade = signature.forceUpgrade
+        let jarHelp = signature.jarHelp
         
         let serverInfo = ServerInfo(
             version:version.id,
@@ -49,9 +57,11 @@ struct ServerCommand: AsyncCommand {
             debug: debug,
             forceUpgrade: forceUpgrade,
             minMem: minMem,
-            maxMem: maxMem
+            maxMem: maxMem,
+            onlineMode: onlineMode,
+            showJarHelpInfo: jarHelp
         )
-        
+
         if let type = GameType(rawValue: signature.type ?? GameType.paper.rawValue) {
             Platform.console.success("服务器类型: \(type)")
             switch type {

@@ -9,8 +9,9 @@ import Foundation
 import JokerKits
 
 extension Server {
-    
+
     func launchServer(_ filePath: String, workDirectory: GameDir) async throws {
+        
         var args = [
             "-Xms" + serverInfo.minMem,
             "-Xmx" + serverInfo.maxMem,
@@ -18,12 +19,22 @@ extension Server {
             filePath
         ]
         
-        if !serverInfo.gui {
-            args.append("--nogui")
+        if serverInfo.showJarHelpInfo {
+            args.append("--help")
         }
-        
-        if serverInfo.forceUpgrade {
-            args.append("--forceUpgrade")
+        else {
+            
+            if serverInfo.onlineMode {
+                args.append("--online-mode \(serverInfo.onlineMode)")
+            }
+            
+            if serverInfo.forceUpgrade {
+                args.append("--forceUpgrade")
+            }
+            
+            if !serverInfo.gui {
+                args.append("--nogui")
+            }
         }
         
         if serverInfo.debug {
