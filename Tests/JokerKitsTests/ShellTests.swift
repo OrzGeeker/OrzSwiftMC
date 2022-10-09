@@ -10,23 +10,30 @@ import XCTest
 
 final class ShellTests: XCTestCase {
 
-    func testSyncShell() throws {
+    func testShellSyncExecSuccess() throws {
         let ret = try Shell.runCommand(with: ["which", "bash"])
         XCTAssertEqual(ret, "/bin/bash\n")
     }
     
-    func testAsyncShell() async throws {
-        let ret = await Shell.runCommand(with: ["which", "bash"])
-        XCTAssertEqual(ret, true)
+    func testShellSyncExecFailed() throws {
+        let ret = try Shell.runCommand(with: ["which", "invalidCmd"])
+        XCTAssertEqual(ret, "")
     }
     
-    func testCallbackShell() throws {
-        let stopGroup = DispatchGroup()
-        stopGroup.enter()
+    func testShellAsyncExecWithCallback() throws {
+        let expectation = XCTestExpectation(description: "Shell Async Exec Completed")
+
         try Shell.runCommand(with: ["which","bash"]) { process in
             XCTAssertEqual(process.terminationStatus, 0)
-            stopGroup.leave()
+            
+            expectation.fulfill()
         }
-        stopGroup.wait()
+        
+        wait(for: [expectation], timeout: 10)
+    }
+    
+    func testShellAsyncExecWithAsyncAwait() async throws {
+        let ret = await Shell.runCommand(with: ["which", "bash"])
+        XCTAssertEqual(ret, true)
     }
 }
