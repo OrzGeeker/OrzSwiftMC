@@ -15,62 +15,6 @@ import FoundationNetworking
 
 final class JokerKitsTests: XCTestCase {
     
-    func testJSON() throws {
-        
-        // 测试解码
-        let jsonString = """
-        {
-            "camelCase": "camel case value",
-            "snake_case": "snake case value",
-            "kebab-case": "kebab case value",
-        }
-        """
-        
-        struct TestModel: Codable, JsonRepresentable {
-            let camelCase: String
-            let snakeCase: String
-            let kebabCase: String
-        }
-        
-        let model = try JSON.decoder.decode(TestModel.self, from: jsonString.data(using: .utf8)!)
-        XCTAssertEqual(model.camelCase, "camel case value")
-        XCTAssertEqual(model.snakeCase, "snake case value")
-        XCTAssertEqual(model.kebabCase, "kebab case value")
-        
-        // 测试编码
-        let expectResult = """
-        {
-          "camel_case" : "camel case value",
-          "kebab_case" : "kebab case value",
-          "snake_case" : "snake case value"
-        }
-        """
-        let data = try JSON.encoder.encode(model)
-        let jsonContent = String(data: data, encoding: .utf8)!
-        XCTAssertEqual(jsonContent, expectResult)
-        XCTAssertEqual(try model.jsonRepresentation(), expectResult)
-    }
-    
-    func testSyncShell() throws {
-        let ret = try Shell.runCommand(with: ["which", "bash"])
-        XCTAssertEqual(ret, "/bin/bash\n")
-    }
-    
-    func testAsyncShell() async throws {
-        let ret = await Shell.runCommand(with: ["which", "bash"])
-        XCTAssertEqual(ret, true)
-    }
-    
-    func testCallbackShell() throws {
-        let stopGroup = DispatchGroup()
-        stopGroup.enter()
-        try Shell.runCommand(with: ["which","bash"]) { process in
-            XCTAssertEqual(process.terminationStatus, 0)
-            stopGroup.leave()
-        }
-        stopGroup.wait()
-    }
-    
     func testDirOperations() throws {
         
         let tempDir = NSTemporaryDirectory()

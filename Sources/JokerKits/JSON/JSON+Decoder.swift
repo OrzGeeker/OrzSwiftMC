@@ -2,7 +2,7 @@
 //  File.swift
 //  
 //
-//  Created by wangzhizhou on 2021/12/26.
+//  Created by joker on 2022/10/9.
 //
 
 import Foundation
@@ -48,39 +48,5 @@ extension JSONDecoder.KeyDecodingStrategy {
             self.intValue = intValue
             self.stringValue = "\(intValue)"
         }
-    }
-}
-
-public struct JSON {
-    public static let decoder: JSONDecoder = {
-        let decoder = JSONDecoder()
-        decoder.keyDecodingStrategy = .convertFromKebabCaseOrSnakeCase
-        return decoder
-    }()
-    
-    public static let encoder: JSONEncoder = {
-        let encoder = JSONEncoder()
-        encoder.outputFormatting = [
-            .prettyPrinted,
-            .sortedKeys,
-            .withoutEscapingSlashes
-        ]
-        encoder.keyEncodingStrategy = .convertToSnakeCase
-        return encoder
-    }()
-}
-
-public protocol JsonRepresentable where Self: Encodable {
-    func jsonRepresentation(_ keyCodingStrategy: JSONEncoder.KeyEncodingStrategy?) throws -> String?
-}
-
-public extension JsonRepresentable {
-    func jsonRepresentation(_ keyCodingStrategy: JSONEncoder.KeyEncodingStrategy? = nil) throws -> String? {
-        let encoder = JSON.encoder
-        if let strategy = keyCodingStrategy {
-            encoder.keyEncodingStrategy = strategy
-        }
-        let data = try encoder.encode(self)
-        return String(data: data, encoding: .utf8)
     }
 }
