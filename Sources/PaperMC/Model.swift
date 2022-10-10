@@ -4,6 +4,7 @@
 //
 //  Created by joker on 2022/10/10.
 //
+//  [PaperMC API v2](https://papermc.io/api/docs/swagger-ui/index.html?configUrl=/api/openapi/swagger-config)
 
 import Foundation
 

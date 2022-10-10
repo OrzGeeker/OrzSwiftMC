@@ -8,12 +8,12 @@
 import Foundation
 import JokerKits
 
-/// ![PaperMC](https://papermc.io/)
+/// [PaperMC](https://papermc.io/)
 public struct PaperMC {
     
     public static var api = API()
     
-    /// ![PaperMC API v2](https://papermc.io/api/docs/swagger-ui/index.html?configUrl=/api/openapi/swagger-config)
+    /// [PaperMC API v2](https://papermc.io/api/docs/swagger-ui/index.html?configUrl=/api/openapi/swagger-config)
     public struct API {
         
         public lazy var jsonDecoder: JSONDecoder = {
