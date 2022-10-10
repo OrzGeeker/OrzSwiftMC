@@ -31,9 +31,9 @@ struct PaperServer: Server {
         }
         
         let decoder = PaperMC.api.jsonDecoder
-        let version = try decoder.decode(BuildsResponse.self, from: versionData)
+        let version = try decoder.decode(VersionResponse.self, from: versionData)
         
-        guard let latestBuild = (version.builds.last as NSNumber?)?.stringValue
+        guard let latestBuild = version.builds.last
         else {
             throw PaperServerError.convertBuildStringFailed
         }

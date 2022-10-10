@@ -24,7 +24,7 @@ public struct BuildsResponse: Codable {
     public let projectId: String
     public let projectName: String
     public let version: String
-    public let builds: [Int32]
+    public let builds: [VersionBuild]
 }
 
 public struct Change: Codable {

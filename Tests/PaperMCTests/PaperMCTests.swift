@@ -5,12 +5,18 @@ final class PaperMCTests: XCTestCase {
     
     let jsonDecoder = PaperMC.api.jsonDecoder
     
+    let testVersion = "1.19.2"
+    
+    let testBuild: Int32 = 200
+    
+    let testVersionFamily = "1.19"
+    
     func testProjects() async throws {
         let data = try await PaperMC.api.projects().getData
         XCTAssertNotNil(data)
         
         let projectsResponse = try jsonDecoder.decode(ProjectsResponse.self, from: data!)
-        XCTAssert(projectsResponse.projects.count == 4)
+        XCTAssertTrue(projectsResponse.projects.count == 4)
     }
     
     func testPaperProject() async throws {
@@ -18,94 +24,83 @@ final class PaperMCTests: XCTestCase {
         XCTAssertNotNil(data)
         
         let projectResponse = try jsonDecoder.decode(ProjectResponse.self, from: data!)
-        XCTAssert(projectResponse.projectId == "paper")
-        XCTAssert(projectResponse.projectName == "Paper")
-        XCTAssert(!projectResponse.versionGroups.isEmpty)
-        XCTAssert(!projectResponse.versions.isEmpty)
+        XCTAssertTrue(projectResponse.projectId == "paper")
+        XCTAssertTrue(projectResponse.projectName == "Paper")
+        XCTAssertTrue(!projectResponse.versionGroups.isEmpty)
+        XCTAssertTrue(!projectResponse.versions.isEmpty)
     }
     
     func testPaperProjectVersion() async throws {
-        let version = "1.19.2"
-        let data = try await PaperMC.api.projects("paper").versions(version).getData
+        let data = try await PaperMC.api.projects("paper").versions(testVersion).getData
+        XCTAssertNotNil(data)
+        
+        let versionResponse = try jsonDecoder.decode(VersionResponse.self, from: data!)
+        
+        XCTAssertTrue(versionResponse.projectId == "paper")
+        XCTAssertTrue(versionResponse.projectName == "Paper")
+        XCTAssertTrue(versionResponse.version == testVersion)
+        XCTAssertTrue(!versionResponse.builds.isEmpty)
+    }
+     
+    func testPaperProjectVersionBuilds() async throws {
+        let data = try await PaperMC.api.projects("paper").versions(testVersion).builds().getData
         XCTAssertNotNil(data)
         
         let buildsResponse = try jsonDecoder.decode(BuildsResponse.self, from: data!)
         
-        XCTAssert(buildsResponse.projectId == "paper")
-        XCTAssert(buildsResponse.projectName == "Paper")
-        XCTAssert(buildsResponse.version == version)
-        XCTAssert(!buildsResponse.builds.isEmpty)
-    }
-     
-    func testPaperProjectVersionBuilds() async throws {
-        
+        XCTAssertTrue(buildsResponse.projectId == "paper")
+        XCTAssertTrue(buildsResponse.projectName == "Paper")
+        XCTAssertTrue(buildsResponse.version == testVersion)
+        XCTAssertTrue(!buildsResponse.builds.isEmpty)
     }
     
     func testPaperProjectVersionBuild() async throws {
+        let data = try await PaperMC.api.projects("paper").versions(testVersion).builds(testBuild).getData
+        XCTAssertNotNil(data)
         
+        let buildResponse = try jsonDecoder.decode(BuildResponse.self, from: data!)
+        
+        XCTAssertTrue(buildResponse.projectId == "paper")
+        XCTAssertTrue(buildResponse.projectName == "Paper")
+        XCTAssertTrue(buildResponse.version == testVersion)
+        XCTAssertTrue(buildResponse.build == testBuild)
+        XCTAssertTrue(!buildResponse.changes.isEmpty)
+        XCTAssertTrue(!buildResponse.downloads.isEmpty)
     }
     
     func testPaperProjectVersionBuildDownload() async throws {
+        let data = try await PaperMC.api.projects("paper").versions(testVersion).builds(testBuild).downloads("paper-\(testVersion)-\(testBuild).jar").getData
+        XCTAssertNotNil(data)
+        
+        let bytes = data!.count
+        let sizeMB = bytes / 1024 / 1024
+        
+        XCTAssertTrue(sizeMB > 30)
         
     }
     
     func testPaperProjectVersionFamily() async throws {
+        let data = try await PaperMC.api.projects("paper").versionFamily(testVersionFamily).getData
+        XCTAssertNotNil(data)
         
+        let versionFamilyResponse = try jsonDecoder.decode(VersionFamilyResponse.self, from: data!)
+        
+        XCTAssertTrue(versionFamilyResponse.projectId == "paper")
+        XCTAssertTrue(versionFamilyResponse.projectName == "Paper")
+        XCTAssertTrue(versionFamilyResponse.versionGroup == testVersionFamily)
+        XCTAssertTrue(!versionFamilyResponse.versionGroup.isEmpty)
     }
     
     func testPaperProjectVersionFamilyBuilds() async throws {
-        
-    }
-    
-    func testPaper() async throws {
-        let paperAPI = PaperMC.api.projects("paper")
-        let data = try await paperAPI.getData
+        let data = try await PaperMC.api.projects("paper").versionFamilyBuilds(testVersionFamily).getData
         XCTAssertNotNil(data)
-        if let data = data {
-            let paper = try jsonDecoder.decode(ProjectResponse.self, from: data)
-            XCTAssertNotNil(paper)
-            XCTAssert(paper.versions.count > 0)
-            let paperVersionAPI = paperAPI.versions(paper.versions.last)
-            let data = try await paperVersionAPI.getData
-            XCTAssertNotNil(data)
-            if let data = data {
-                let paperVersion = try jsonDecoder.decode(BuildsResponse.self, from: data)
-                XCTAssertNotNil(paperVersion)
-                XCTAssert(paperVersion.builds.count > 0)
-                
-                let paperVersionBuildAPI = paperVersionAPI.builds("\(paperVersion.builds.last!)")
-                let data = try await paperVersionBuildAPI.getData
-                XCTAssertNotNil(data)
-                if let data = data {
-                    let build = try jsonDecoder.decode(BuildResponse.self, from: data)
-                    XCTAssertNotNil(build)
-                    XCTAssert(build.downloads.count > 0)
-                    
-                    if let name = build.downloads.values.first?.name {
-                        let paperVersionBuildDownloadAPI = paperVersionBuildAPI.downloads(name)
-                        let data = try await paperVersionBuildDownloadAPI.getData
-                        XCTAssertNotNil(data)
-                    }
-                }
-            }
-            
-            let paperVersionFamilyAPI = paperAPI.versionFamily("1.18")
-            let familyData = try await paperVersionFamilyAPI.getData
-            XCTAssertNotNil(familyData)
-            if let familyData = familyData {
-                let versionFamily = try jsonDecoder.decode(VersionFamilyResponse.self, from: familyData)
-                XCTAssertNotNil(versionFamily)
-                XCTAssert(versionFamily.versions.count > 0)
-            }
-            
-            let paperVersionFamilyBuildsAPI = paperAPI.versionFamilyBuilds("1.18")
-            let familyBuildsData = try await paperVersionFamilyBuildsAPI.getData
-            XCTAssertNotNil(familyBuildsData)
-            if let familyBuildsData = familyBuildsData {
-                let versionFamilyBuilds = try jsonDecoder.decode(VersionFamilyBuildsResponse.self, from: familyBuildsData)
-                XCTAssertNotNil(versionFamilyBuilds)
-                XCTAssert(versionFamilyBuilds.builds.count > 0)
-            }
-        }
+        
+        let versionFamilyBuildsResponse = try jsonDecoder.decode(VersionFamilyBuildsResponse.self, from: data!)
+        
+        XCTAssertTrue(versionFamilyBuildsResponse.projectId == "paper")
+        XCTAssertTrue(versionFamilyBuildsResponse.projectName == "Paper")
+        XCTAssertTrue(versionFamilyBuildsResponse.versionGroup == testVersionFamily)
+        XCTAssertTrue(!versionFamilyBuildsResponse.versions.isEmpty)
+        XCTAssertTrue(!versionFamilyBuildsResponse.builds.isEmpty)
     }
 }
