@@ -9,7 +9,7 @@ final class PaperMCTests: XCTestCase {
         let data = try await PaperMC.api.projects().getData
         XCTAssertNotNil(data)
         if let data = data {
-            XCTAssertNoThrow(try jsonDecoder.decode(Projects.self, from: data))
+            XCTAssertNoThrow(try jsonDecoder.decode(ProjectsResponse.self, from: data))
         }
     }
     
@@ -18,14 +18,14 @@ final class PaperMCTests: XCTestCase {
         let data = try await paperAPI.getData
         XCTAssertNotNil(data)
         if let data = data {
-            let paper = try jsonDecoder.decode(Project.self, from: data)
+            let paper = try jsonDecoder.decode(ProjectResponse.self, from: data)
             XCTAssertNotNil(paper)
             XCTAssert(paper.versions.count > 0)
             let paperVersionAPI = paperAPI.versions(paper.versions.last)
             let data = try await paperVersionAPI.getData
             XCTAssertNotNil(data)
             if let data = data {
-                let paperVersion = try jsonDecoder.decode(Version.self, from: data)
+                let paperVersion = try jsonDecoder.decode(BuildsResponse.self, from: data)
                 XCTAssertNotNil(paperVersion)
                 XCTAssert(paperVersion.builds.count > 0)
                 
@@ -33,7 +33,7 @@ final class PaperMCTests: XCTestCase {
                 let data = try await paperVersionBuildAPI.getData
                 XCTAssertNotNil(data)
                 if let data = data {
-                    let build = try jsonDecoder.decode(Build.self, from: data)
+                    let build = try jsonDecoder.decode(BuildResponse.self, from: data)
                     XCTAssertNotNil(build)
                     XCTAssert(build.downloads.count > 0)
                     
@@ -49,7 +49,7 @@ final class PaperMCTests: XCTestCase {
             let familyData = try await paperVersionFamilyAPI.getData
             XCTAssertNotNil(familyData)
             if let familyData = familyData {
-                let versionFamily = try jsonDecoder.decode(VersionFamily.self, from: familyData)
+                let versionFamily = try jsonDecoder.decode(VersionFamilyResponse.self, from: familyData)
                 XCTAssertNotNil(versionFamily)
                 XCTAssert(versionFamily.versions.count > 0)
             }
@@ -58,7 +58,7 @@ final class PaperMCTests: XCTestCase {
             let familyBuildsData = try await paperVersionFamilyBuildsAPI.getData
             XCTAssertNotNil(familyBuildsData)
             if let familyBuildsData = familyBuildsData {
-                let versionFamilyBuilds = try jsonDecoder.decode(VersionFamilyBuilds.self, from: familyBuildsData)
+                let versionFamilyBuilds = try jsonDecoder.decode(VersionFamilyBuildsResponse.self, from: familyBuildsData)
                 XCTAssertNotNil(versionFamilyBuilds)
                 XCTAssert(versionFamilyBuilds.builds.count > 0)
             }

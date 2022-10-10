@@ -31,7 +31,7 @@ struct PaperServer: Server {
         }
         
         let decoder = PaperMC.api.jsonDecoder
-        let version = try decoder.decode(Version.self, from: versionData)
+        let version = try decoder.decode(BuildsResponse.self, from: versionData)
         
         guard let latestBuild = (version.builds.last as NSNumber?)?.stringValue
         else {
@@ -43,7 +43,7 @@ struct PaperServer: Server {
             throw PaperServerError.buildRespFailed
         }
         
-        let build = try decoder.decode(Build.self, from: buildData)
+        let build = try decoder.decode(BuildResponse.self, from: buildData)
         
         
         guard let application = build.downloads["application"]
