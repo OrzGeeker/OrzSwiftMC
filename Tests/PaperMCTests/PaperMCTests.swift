@@ -4,13 +4,57 @@ import XCTest
 final class PaperMCTests: XCTestCase {
     
     let jsonDecoder = PaperMC.api.jsonDecoder
-        
+    
     func testProjects() async throws {
         let data = try await PaperMC.api.projects().getData
         XCTAssertNotNil(data)
-        if let data = data {
-            XCTAssertNoThrow(try jsonDecoder.decode(ProjectsResponse.self, from: data))
-        }
+        
+        let projectsResponse = try jsonDecoder.decode(ProjectsResponse.self, from: data!)
+        XCTAssert(projectsResponse.projects.count == 4)
+    }
+    
+    func testPaperProject() async throws {
+        let data = try await PaperMC.api.projects("paper").getData
+        XCTAssertNotNil(data)
+        
+        let projectResponse = try jsonDecoder.decode(ProjectResponse.self, from: data!)
+        XCTAssert(projectResponse.projectId == "paper")
+        XCTAssert(projectResponse.projectName == "Paper")
+        XCTAssert(!projectResponse.versionGroups.isEmpty)
+        XCTAssert(!projectResponse.versions.isEmpty)
+    }
+    
+    func testPaperProjectVersion() async throws {
+        let version = "1.19.2"
+        let data = try await PaperMC.api.projects("paper").versions(version).getData
+        XCTAssertNotNil(data)
+        
+        let buildsResponse = try jsonDecoder.decode(BuildsResponse.self, from: data!)
+        
+        XCTAssert(buildsResponse.projectId == "paper")
+        XCTAssert(buildsResponse.projectName == "Paper")
+        XCTAssert(buildsResponse.version == version)
+        XCTAssert(!buildsResponse.builds.isEmpty)
+    }
+     
+    func testPaperProjectVersionBuilds() async throws {
+        
+    }
+    
+    func testPaperProjectVersionBuild() async throws {
+        
+    }
+    
+    func testPaperProjectVersionBuildDownload() async throws {
+        
+    }
+    
+    func testPaperProjectVersionFamily() async throws {
+        
+    }
+    
+    func testPaperProjectVersionFamilyBuilds() async throws {
+        
     }
     
     func testPaper() async throws {
