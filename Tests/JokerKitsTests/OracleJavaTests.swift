@@ -6,7 +6,7 @@
 //
 
 import XCTest
-import JokerKits
+@testable import JokerKits
 
 class OracleJavaTests: XCTestCase {
 
