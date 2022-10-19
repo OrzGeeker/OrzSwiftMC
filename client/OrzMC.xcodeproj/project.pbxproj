@@ -16,6 +16,8 @@
 		2B1C79AD28FEAB0700D53658 /* OrzMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79AC28FEAB0700D53658 /* OrzMCTests.swift */; };
 		2B1C79B728FEAB0700D53658 /* OrzMCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */; };
 		2B1C79B928FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */; };
+		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; };
+		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +52,8 @@
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2B1C79C628FEBC8E00D53658 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
+		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
+		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
 				2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */,
 				2B1C79A128FEAB0700D53658 /* Preview Content */,
+				2BD301F029000B3E00993823 /* Launcher */,
 			);
 			path = OrzMC;
 			sourceTree = "<group>";
@@ -143,6 +148,15 @@
 				2B1C79C628FEBC8E00D53658 /* swift */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		2BD301F029000B3E00993823 /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
+				2BD301F129001CD000993823 /* LauncherModel.swift */,
+			);
+			path = Launcher;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,7 +292,9 @@
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */,
+				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
+				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
