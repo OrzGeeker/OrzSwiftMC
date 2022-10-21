@@ -17,7 +17,6 @@ struct OrzMCApp: App {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             LauncherUI().fixedSize(horizontal: false, vertical: true)
-                
         }
     }
 }

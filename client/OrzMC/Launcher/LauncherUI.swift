@@ -26,3 +26,4 @@ struct LauncherUI_Previews: PreviewProvider {
             .frame(width: 3840.0/3.0, height: 1712.0/3.0)
     }
 }
+ 

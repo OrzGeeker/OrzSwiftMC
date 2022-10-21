@@ -55,13 +55,13 @@
 		2B1C79B228FEAB0700D53658 /* OrzMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrzMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2B1C79C628FEBC8E00D53658 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVersionPickerView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BA549C02902809700F4D6A6 /* UserLoginArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginArea.swift; sourceTree = "<group>"; };
 		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
+		F306EFD92903692D00D798F5 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C79AB28FEAB0700D53658 /* OrzMCTests */,
 				2B1C79B528FEAB0700D53658 /* OrzMCUITests */,
-				2B1C79C528FEBC8E00D53658 /* Packages */,
+				F306EFD82903692D00D798F5 /* Packages */,
 				2B1C799328FEAB0600D53658 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -150,14 +150,6 @@
 			path = OrzMCUITests;
 			sourceTree = "<group>";
 		};
-		2B1C79C528FEBC8E00D53658 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				2B1C79C628FEBC8E00D53658 /* swift */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		2BD301F029000B3E00993823 /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +161,14 @@
 				2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */,
 			);
 			path = Launcher;
+			sourceTree = "<group>";
+		};
+		F306EFD82903692D00D798F5 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				F306EFD92903692D00D798F5 /* swift */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,7 +488,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -532,7 +532,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
