@@ -16,6 +16,10 @@
 		2B1C79AD28FEAB0700D53658 /* OrzMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79AC28FEAB0700D53658 /* OrzMCTests.swift */; };
 		2B1C79B728FEAB0700D53658 /* OrzMCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */; };
 		2B1C79B928FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */; };
+		2BA5439D2902620900F4D6A6 /* GameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */; };
+		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; };
+		2BA549C12902809700F4D6A6 /* UserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C02902809700F4D6A6 /* UserLoginArea.swift */; };
+		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; };
 /* End PBXBuildFile section */
@@ -52,6 +56,10 @@
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2B1C79C628FEBC8E00D53658 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
+		2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVersionPickerView.swift; sourceTree = "<group>"; };
+		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
+		2BA549C02902809700F4D6A6 /* UserLoginArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginArea.swift; sourceTree = "<group>"; };
+		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -155,6 +163,10 @@
 			children = (
 				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
 				2BD301F129001CD000993823 /* LauncherModel.swift */,
+				2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */,
+				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
+				2BA549C02902809700F4D6A6 /* UserLoginArea.swift */,
+				2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -290,9 +302,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
+				2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */,
+				2BA5439D2902620900F4D6A6 /* GameVersionPickerView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */,
+				2BA549C12902809700F4D6A6 /* UserLoginArea.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
+				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 			);
