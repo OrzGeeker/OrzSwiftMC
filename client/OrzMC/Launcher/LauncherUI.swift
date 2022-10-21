@@ -10,6 +10,7 @@ import SwiftUI
 struct LauncherUI: View {
     var body: some View {
         LauncherUIBackground()
+            .frame(width: 3840.0/3.0, height: 1712.0/3.0)
             .overlay(Rectangle().foregroundColor(.black).blur(radius: 5).opacity(0.2))
             .overlay(GameVersionPickerView(), alignment: .bottomLeading)
             .overlay(LauncherUIButton(title:"关闭", imageSystemName: "power.circle") {
