@@ -10,13 +10,25 @@ import SwiftUI
 struct LauncherUI: View {
     var body: some View {
         LauncherUIBackground()
+            .overlay {
+                Rectangle()
+                    .foregroundColor(.black)
+                    .blur(radius: 5)
+                    .opacity(0.2)
+            }
+            .overlay(alignment: .topTrailing) {
+                LauncherUIButton(title:"关闭", imageSystemName: "power.circle") {
+                    exit(0)
+                }
+                .padding()
+            }
+            .overlay(alignment: .topLeading) {
+                LauncherUserLoginArea()
+            }
+            .overlay(alignment: .bottomLeading) {
+                LauncherGameVersionPickerView()
+            }
             .frame(width: 3840.0/3.0, height: 1712.0/3.0)
-            .overlay(Rectangle().foregroundColor(.black).blur(radius: 5).opacity(0.2))
-            .overlay(GameVersionPickerView(), alignment: .bottomLeading)
-            .overlay(LauncherUIButton(title:"关闭", imageSystemName: "power.circle") {
-                exit(0)
-            }.padding(), alignment: .topTrailing)
-            .overlay(UserLoginArea(), alignment: .topLeading)
     }
 }
 
@@ -26,4 +38,4 @@ struct LauncherUI_Previews: PreviewProvider {
             .frame(width: 3840.0/3.0, height: 1712.0/3.0)
     }
 }
- 
+

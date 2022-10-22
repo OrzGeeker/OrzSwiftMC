@@ -16,13 +16,14 @@
 		2B1C79AD28FEAB0700D53658 /* OrzMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79AC28FEAB0700D53658 /* OrzMCTests.swift */; };
 		2B1C79B728FEAB0700D53658 /* OrzMCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */; };
 		2B1C79B928FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */; };
-		2BA5439D2902620900F4D6A6 /* GameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; };
-		2BA549C12902809700F4D6A6 /* UserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C02902809700F4D6A6 /* UserLoginArea.swift */; };
 		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; };
 		F339F6202903864A003CB50C /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = F339F61F2903864A003CB50C /* Game */; };
+		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; };
+		F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */; };
+		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,14 +57,15 @@
 		2B1C79B228FEAB0700D53658 /* OrzMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrzMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameVersionPickerView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
-		2BA549C02902809700F4D6A6 /* UserLoginArea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLoginArea.swift; sourceTree = "<group>"; };
 		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		F306EFD92903692D00D798F5 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherUserLoginArea.swift; sourceTree = "<group>"; };
+		F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionPickerView.swift; sourceTree = "<group>"; };
+		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,11 +161,8 @@
 			isa = PBXGroup;
 			children = (
 				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
-				2BD301F129001CD000993823 /* LauncherModel.swift */,
-				2BA5439C2902620900F4D6A6 /* GameVersionPickerView.swift */,
-				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
-				2BA549C02902809700F4D6A6 /* UserLoginArea.swift */,
-				2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */,
+				F339F6282903A755003CB50C /* Models */,
+				F339F6292903A76F003CB50C /* Views */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -174,6 +173,26 @@
 				F306EFD92903692D00D798F5 /* swift */,
 			);
 			name = Packages;
+			sourceTree = "<group>";
+		};
+		F339F6282903A755003CB50C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2BD301F129001CD000993823 /* LauncherModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F339F6292903A76F003CB50C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */,
+				2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */,
+				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
+				F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */,
+				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		F370F74029037521005497A1 /* Frameworks */ = {
@@ -317,13 +336,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
+				F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */,
 				2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */,
-				2BA5439D2902620900F4D6A6 /* GameVersionPickerView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */,
-				2BA549C12902809700F4D6A6 /* UserLoginArea.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
+				F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */,
+				F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 			);

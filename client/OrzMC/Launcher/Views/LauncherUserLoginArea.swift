@@ -1,5 +1,5 @@
 //
-//  UserLoginArea.swift
+//  LauncherUserLoginArea.swift
 //  OrzMC
 //
 //  Created by joker on 2022/10/21.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct UserLoginArea: View {
+struct LauncherUserLoginArea: View {
     @EnvironmentObject private var appModel: LauncherModel
     @State var showAlert: Bool = false
     var body: some View {
@@ -29,6 +29,6 @@ struct UserLoginArea: View {
 
 struct UserLoginArea_Previews: PreviewProvider {
     static var previews: some View {
-        UserLoginArea()
+        LauncherUserLoginArea()
     }
 }
