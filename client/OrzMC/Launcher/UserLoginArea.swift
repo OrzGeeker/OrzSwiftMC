@@ -8,16 +8,22 @@
 import SwiftUI
 
 struct UserLoginArea: View {
-    @State private var username: String = "joker"
+    @EnvironmentObject private var appModel: LauncherModel
+    @State var showAlert: Bool = false
     var body: some View {
         VStack(alignment: .leading) {
-            LauncherUIButton(title:"登录")
+            LauncherUIButton(title:"登录") {
+                Task {
+                    try await appModel.launch()
+                }
+            }
             HStack {
-                Text("用户名")
-                TextField("请输入一个用户名作为游戏ID", text: $username)
+                Text("玩家ID")
+                TextField("请输入一个用户名作为游戏ID", text: $appModel.username)
                     .frame(maxWidth: 200)
             }
-        }.padding()
+        }
+        .padding()
     }
 }
 

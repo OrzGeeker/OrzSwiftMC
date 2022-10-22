@@ -21,4 +21,9 @@ final class MojangTests: XCTestCase {
         XCTAssertNotNil(assetInfo, "Game Asset Info Fetch Failed!")
                 
     }
+    
+    func testReleases() async throws {
+        let releases = await Mojang.releases()
+        XCTAssertFalse(releases.isEmpty)
+    }
 }

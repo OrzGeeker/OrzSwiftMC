@@ -29,7 +29,19 @@ public struct ClientInfo {
     // Fabric
     var fabricModel: FabricModel?
     
-    public init(version: Version, username: String, debug: Bool, authenticate: Bool, launcherProfile: LauncherProfile? = nil, accountName: String? = nil, accountPassword: String? = nil, accessToken: String? = nil, clientToken: String? = nil, minMem: String, maxMem: String, fabricModel: FabricModel? = nil) {
+    public init(
+        version: Version,
+        username: String,
+        debug: Bool = false,
+        authenticate: Bool = false,
+        launcherProfile: LauncherProfile? = nil,
+        accountName: String? = nil,
+        accountPassword: String? = nil,
+        accessToken: String? = nil,
+        clientToken: String? = nil,
+        minMem: String,
+        maxMem: String,
+        fabricModel: FabricModel? = nil) {
         self.version = version
         self.username = username
         self.debug = debug

@@ -9,21 +9,31 @@ import SwiftUI
 
 struct GameVersionPickerView: View {
     
-    @EnvironmentObject var appModel: LauncherModel
+    @EnvironmentObject private var appModel: LauncherModel
     
     var body: some View {
         HStack {
             VStack(alignment: .leading){
                 if !appModel.versions.isEmpty {
-                    Picker(selection: $appModel.selectedVersion, label: Text("游戏版本").bold()) {
-                        ForEach(appModel.versions, id: \.self) {
-                            Text($0).tag($0)
+                    HStack {
+                        Picker(selection: $appModel.selectedVersion, label: Text("游戏版本").bold()) {
+                            ForEach(appModel.versions, id: \.self) {
+                                Text($0).tag($0)
+                            }
+                        }
+                        .frame(maxWidth: 200)
+                        LauncherUIButton(imageSystemName: "arrow.clockwise") {
+                            Task {
+                                await appModel.fetchGameVersions()
+                            }
                         }
                     }
-                    .frame(maxWidth: 200)
                 }
                 LauncherUIButton(title:"设置", imageSystemName: "gearshape")
             }.padding()
+        }
+        .task {
+            await appModel.fetchGameVersions()
         }
     }
 }

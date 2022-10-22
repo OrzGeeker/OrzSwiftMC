@@ -22,6 +22,7 @@
 		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; };
+		F339F6202903864A003CB50C /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = F339F61F2903864A003CB50C /* Game */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		F306EFD92903692D00D798F5 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
+		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F339F6202903864A003CB50C /* Game in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,6 +117,7 @@
 		2B1C799428FEAB0600D53658 /* OrzMC */ = {
 			isa = PBXGroup;
 			children = (
+				F339F62129038E60003CB50C /* Info.plist */,
 				2B1C799528FEAB0600D53658 /* OrzMCApp.swift */,
 				2B1C799728FEAB0600D53658 /* Persistence.swift */,
 				2B1C799C28FEAB0600D53658 /* ContentView.swift */,
@@ -196,6 +200,7 @@
 			);
 			name = OrzMC;
 			packageProductDependencies = (
+				F339F61F2903864A003CB50C /* Game */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -483,6 +488,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OrzMC/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -526,6 +532,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = OrzMC/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -688,6 +695,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F339F61F2903864A003CB50C /* Game */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Game;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */ = {
