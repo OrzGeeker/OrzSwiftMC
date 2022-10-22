@@ -11,16 +11,16 @@ struct LauncherUserLoginArea: View {
     @EnvironmentObject private var appModel: LauncherModel
     @State var showAlert: Bool = false
     var body: some View {
-        VStack(alignment: .leading) {
+        HStack {
+            HStack {
+                Text("玩家ID")
+                TextField("请输入一个用户名作为游戏ID", text: $appModel.username)
+                    .frame(maxWidth: 120)
+            }
             LauncherUIButton(title:"登录") {
                 Task {
                     try await appModel.launch()
                 }
-            }
-            HStack {
-                Text("玩家ID")
-                TextField("请输入一个用户名作为游戏ID", text: $appModel.username)
-                    .frame(maxWidth: 200)
             }
         }
         .padding()
