@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import ConsoleKit
+import Combine
 
 public struct DownloadItemInfo {
     
@@ -66,7 +67,11 @@ public struct Downloader {
         try FileManager.moveFile(fromFilePath: try await downloadURLTask.value.path, toFilePath: item.dstFileURL.path, overwrite: true)
     }
     
-    public static func download(_ items: [DownloadItemInfo], progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
+    public static func download(
+        _ items: [DownloadItemInfo],
+        progressBar: ActivityIndicator<ProgressBar>? = nil,
+        progressSubject: PassthroughSubject<Double, Never>? = nil) async throws {
+            
         try await withThrowingTaskGroup(of: Void.self, body: { group in
             
             // 资源信息转获为下载任务，添加到下载任务组中，下载任务并发进行
@@ -75,20 +80,20 @@ public struct Downloader {
                     try await Downloader.download(item)
                 }
             }
-            
+            let showProgress = ((progressBar == nil) || (progressSubject == nil))
             // 要显示进度时
-            if let progressBar = progressBar {
+            if showProgress {
                 let total = items.count
                 var index = 0
-                progressBar.start(refreshRate: 100)
-                
+                progressBar?.start(refreshRate: 100)
                 // 更新进度条显示资源下载进度
                 for try await _ in group {
                     index += 1
                     let progress = Double(index) / Double(total)
-                    try progressBar.updateProgress(progress)
+                    try progressBar?.updateProgress(progress)
+                    progressSubject?.send(progress)
                 }
-                progressBar.succeed()
+                progressBar?.succeed()
             }
             
             // 不显示进度时

@@ -6,7 +6,6 @@
 //
 
 import ConsoleKit
-import Dispatch
 import JokerKits
 import Game
 
@@ -70,6 +69,7 @@ struct ClientCommand: AsyncCommand {
             maxMem: maxMem
         )
         
-        try await Launcher(clientInfo: clientInfo).start()
+        var laucher = CLILauncher(clientInfo: clientInfo)
+        try await laucher.start()
     }
 }

@@ -7,33 +7,50 @@
 
 import Foundation
 import Game
+import Combine
 
-let mockAppModel = LauncherModel()
+let model = LauncherModel()
+let mockModel = LauncherModel()
 
 class LauncherModel: ObservableObject {
-    
-    /// 所有可选游戏版本号
-    @Published var versions = [String]()
-    
-    /// 当前选中的游戏版本号
-    @Published var selectedVersion: String = ""
     
     /// 当前玩家ID
     @Published var username: String = ""
     
+    /// 当前选中的游戏版本号
+    @Published var selectedVersion: String = ""
+    
+    /// 所有可选游戏版本号
+    @Published var versions = [String]()
+    
+    /// 当前选中的启动方式
+    @Published var selectedProfileItem: String = ""
+    
+    /// 客户端启动方式
+    @Published var profileItems = [String]()
+    
     /// 是否显示提醒Alert
     @Published var showAlert: Bool = false
+        
+    /// 启动器进度条进度值，取值 [0-1]
+    @Published var launcherProgress: Double = 0
+    
+    /// 绑定下载进度条
+    var disposable: AnyCancellable? = nil
+    lazy var progressSubject: PassthroughSubject<Double, Never> = {
+        let subject = PassthroughSubject<Double, Never>()
+        self.disposable = subject.receive(on: RunLoop.main).assign(to: \Self.launcherProgress, on: self)
+        return subject
+    }()
+    
+    /// 当前客户端的启动信息
+    var clientInfo: ClientInfo? = nil
     
     /// 提醒消息
     var alertMessage: String? = nil
     
     /// 提醒按钮文案
     var alertActionTip: String = "确定"
-    
-    
-    /// 启动器进度条进度值，取值 [0-1]
-    @Published var launcherProgress: Float = 0.5
-    
 }
 
 // MARK: Alert
@@ -65,13 +82,20 @@ extension LauncherModel {
             await showAlert("没有选择游戏版本", actionTip: "到左下解选择游戏版本")
             return
         }
-        let clientInfo = ClientInfo(
+        
+        self.clientInfo = ClientInfo(
             version: gameVersion,
             username: username,
             minMem: "512M",
             maxMem: "2G"
         )
-        try await Launcher(clientInfo: clientInfo).start()
+        
+        guard let clientInfo = self.clientInfo else {
+            return
+        }
+        
+        var launcher = GUILauncher(clientInfo: clientInfo)
+        try await launcher.start()
     }
     
     /// 获取客户端所有可用Release版本
@@ -81,7 +105,26 @@ extension LauncherModel {
             self.versions = versions
             if let firstVersion = self.versions.first {
                 self.selectedVersion = firstVersion
+                
+                if let profileItems = try? GUILauncher.launcherProfileItems(for: self.selectedVersion) {
+                    self.profileItems = profileItems
+                }
             }
         }
+    }
+    
+    func refreshProfileItems(for version: String) async throws {
+        let profileItems = try GUILauncher.launcherProfileItems(for: version)
+        await MainActor.run {
+            self.profileItems = profileItems
+            if let firstItem = self.profileItems.first {
+                self.selectedProfileItem = firstItem
+            }
+        }
+    }
+    
+    func chooseProfileItem(_ chooseItem: String) {
+        self.selectedProfileItem = chooseItem
+        _ = try? GUILauncher.saveSelectedProfile(for: self.selectedVersion, with: self.selectedProfileItem)
     }
 }

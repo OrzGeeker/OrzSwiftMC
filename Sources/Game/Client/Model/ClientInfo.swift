@@ -10,7 +10,7 @@ import Mojang
 import Fabric
 
 public struct ClientInfo {
-    var version: Version
+    public var version: Version
     var username: String
     var debug: Bool
     var authenticate: Bool

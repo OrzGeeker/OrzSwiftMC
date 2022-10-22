@@ -2,20 +2,17 @@
 //  File.swift
 //  
 //
-//  Created by joker on 2022/1/5.
+//  Created by joker on 2022/10/22.
 //
 
 import Foundation
 import JokerKits
 
-extension Launcher {
-    
-    /// 启动客户端
-    func launch() async throws {
-        
+extension Client {
+    public mutating func parseBootArgs() async throws -> [String]? {
         guard let gameInfo = try await self.clientInfo.version.gameInfo
         else {
-            return
+            return nil
         }
         
         let jarExt = "jar"
@@ -134,15 +131,6 @@ extension Launcher {
                 print(arg)
             }
         }
-        
-        Platform.console.output("客户端正在启动，请稍等......", style: .success)
-        // 客户端启动后，可以从UI界面关闭，所以可以异步启动
-        try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: gameDir, terminationHandler: { process in
-            guard process.terminationStatus == 0 else {
-                Platform.console.output("客户端异常退出", style: .error)
-                return
-            }
-            Platform.console.output("客户端正常", style: .success)
-        })
+        return args
     }
 }

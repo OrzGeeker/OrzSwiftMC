@@ -10,10 +10,10 @@ import SwiftUI
 struct LauncherProgressView: View {
     
     @EnvironmentObject private var appModel: LauncherModel
-
+    
     var body: some View {
         HStack {
-            Text("游戏加载进度: \(Int(appModel.launcherProgress * 100))%")
+            Text("游戏下载进度: \(Int(appModel.launcherProgress * 100))%")
             ProgressView(value: appModel.launcherProgress)
                 .progressViewStyle(LauncherProgressViewStyle())
         }

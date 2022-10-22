@@ -2,21 +2,18 @@
 //  File.swift
 //  
 //
-//  Created by joker on 2022/1/9.
+//  Created by joker on 2022/10/22.
 //
+
 import Foundation
-import JokerKits
 import Mojang
 
-
-extension Launcher {
-    
+extension Client {
     /// 授权验证
-    func authenticate() async throws {
-        
+    public mutating func auth() async throws -> Bool {
         guard let accountName = clientInfo.accountName, let accountPassword = self.clientInfo.accountPassword
         else {
-            return
+            return false
         }
         
         let authParam =  Mojang.AuthAPI.AuthReqParam.init(
@@ -26,12 +23,13 @@ extension Launcher {
         )
         guard let data = try await Mojang.AuthAPI.authenticate(reqParam: authParam).data
         else {
-            return
+            return false
         }
         
         let authResp = try JSONDecoder().decode(Mojang.AuthAPI.AuthRespone.self, from: data)
         self.clientInfo.clientToken = authResp.clientToken
         self.clientInfo.accessToken = authResp.accessToken
-        Platform.console.output("验证账号密码为正版用户", style: .success)
+        
+        return true
     }
 }

@@ -2,15 +2,15 @@
 //  File.swift
 //  
 //
-//  Created by joker on 2022/4/5.
+//  Created by joker on 2022/10/22.
 //
 
 import Foundation
-import JokerKits
 import Fabric
+import JokerKits
 
-extension Launcher {
-    func fabricClientVersionProfileLibrariesDir() throws -> GameDir? {
+extension Client {
+    mutating func fabricClientVersionProfileLibrariesDir() throws -> GameDir? {
         guard let launcherProfile = self.clientInfo.launcherProfile, launcherProfile.selectedProfile.contains("fabric"), let lastVersionId = launcherProfile.profiles[launcherProfile.selectedProfile]?.lastVersionId else {
             return nil
         }
@@ -27,12 +27,12 @@ extension Launcher {
     func fabricClientMainClass() -> String? {
         return self.clientInfo.fabricModel?.mainClass
     }
-    func downloadFabric() async throws {
+    public mutating func fabricDownloadItems() throws -> [DownloadItemInfo]? {
         guard let dstDir = try self.fabricClientVersionProfileLibrariesDir() else {
-            return
+            return nil
         }
         guard let libraries = self.clientInfo.fabricModel?.libraries else {
-            return
+            return nil
         }
         let downloadItemInfos = libraries.map { lib -> DownloadItemInfo in
             let fileName = lib.downloadURL.lastPathComponent
@@ -40,8 +40,7 @@ extension Launcher {
             let dstFileURL = URL(fileURLWithPath: dstFilePath)
             return DownloadItemInfo(sourceURL: lib.downloadURL, dstFileURL: dstFileURL)
         }
-        let progressBar = Platform.console.progressBar(title: "开始下载Fabric库文件")
-        try await Downloader.download(downloadItemInfos, progressBar: progressBar)
-        Platform.console.output("下载Fabric库文件完成".consoleText(.success))
+        return downloadItemInfos
     }
+    
 }

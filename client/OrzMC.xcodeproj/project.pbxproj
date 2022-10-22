@@ -25,6 +25,7 @@
 		F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */; };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; };
+		F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6312903FF65003CB50C /* GUILauncher.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionPickerView.swift; sourceTree = "<group>"; };
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
+		F339F6312903FF65003CB50C /* GUILauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUILauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
+				F339F6302903FF53003CB50C /* Controller */,
 				F339F6282903A755003CB50C /* Models */,
 				F339F6292903A76F003CB50C /* Views */,
 			);
@@ -196,6 +199,14 @@
 				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F339F6302903FF53003CB50C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F339F6312903FF65003CB50C /* GUILauncher.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		F370F74029037521005497A1 /* Frameworks */ = {
@@ -346,6 +357,7 @@
 				2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
+				F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */,
 				F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */,
 				F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,

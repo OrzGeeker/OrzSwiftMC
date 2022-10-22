@@ -2,30 +2,17 @@
 //  File.swift
 //  
 //
-//  Created by joker on 2022/1/3.
+//  Created by joker on 2022/10/22.
 //
 
+import Foundation
 import Mojang
 import JokerKits
-import Foundation
-import ConsoleKit
 
-
-extension Launcher {
-    
-    /// 下载启动器启动需要的文件
-    public func download() async throws {
-        Platform.console.pushEphemeral()
-        let downloadItems = try await generateDownloadItemInfos()
-        let progressBar = Platform.console.progressBar(title: "正在下载客户端文件")
-        try await Downloader.download(downloadItems, progressBar: progressBar)
-        Platform.console.popEphemeral()
-        Platform.console.output("下载客户端文件完成", style: .success)
-    }
-    
+public extension Client {
     /// 从客户端版本清单文件中分析出要下载的资源信息
     /// - Returns: 需要下载的资源信息数组
-    private func generateDownloadItemInfos() async throws -> [DownloadItemInfo] {
+    func generateDownloadItemInfos() async throws -> [DownloadItemInfo] {
         var downloadItems = [DownloadItemInfo]()
         
         let gameInfo = try await self.clientInfo.version.gameInfo
