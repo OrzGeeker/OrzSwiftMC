@@ -14,7 +14,7 @@ struct LauncherUserLoginArea: View {
         HStack {
             HStack {
                 Text("玩家ID")
-                TextField("请输入一个用户名作为游戏ID", text: $appModel.username)
+                TextField("输入游戏用户名", text: $appModel.username)
                     .frame(maxWidth: 120)
             }
             LauncherUIButton(title:"登录") {
