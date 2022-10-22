@@ -24,6 +24,7 @@
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; };
 		F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */; };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; };
+		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherUserLoginArea.swift; sourceTree = "<group>"; };
 		F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionPickerView.swift; sourceTree = "<group>"; };
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
+		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +193,7 @@
 				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
 				F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */,
 				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
+				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
+				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
 				F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */,
 				2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
