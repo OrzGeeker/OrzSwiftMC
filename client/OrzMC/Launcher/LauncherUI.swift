@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct LauncherUI: View {
+    
+    @EnvironmentObject private var appModel: LauncherModel
+    
     var body: some View {
         LauncherUIBackground()
             .overlay {
                 Rectangle()
                     .foregroundColor(.black)
-                    .blur(radius: 5)
+                    .blur(radius: 10)
                     .opacity(0.2)
             }
             .overlay(alignment: .topTrailing) {
@@ -28,14 +31,13 @@ struct LauncherUI: View {
             .overlay(alignment: .bottomLeading) {
                 LauncherGameVersionPickerView()
             }
-            .frame(width: 3840.0/3.0, height: 1712.0/3.0)
+            .frame(width: appModel.windowSize.width, height: appModel.windowSize.height)
     }
 }
 
 struct LauncherUI_Previews: PreviewProvider {
     static var previews: some View {
         LauncherUI()
-            .frame(width: 3840.0/3.0, height: 1712.0/3.0)
     }
 }
 

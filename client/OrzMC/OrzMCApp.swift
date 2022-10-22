@@ -9,7 +9,6 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-    let divide = 5.0
     @StateObject var appModel = model
     let persistenceController = PersistenceController.shared
     var body: some Scene {

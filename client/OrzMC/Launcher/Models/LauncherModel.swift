@@ -51,6 +51,9 @@ class LauncherModel: ObservableObject {
     
     /// 提醒按钮文案
     var alertActionTip: String = "确定"
+    
+    /// 窗口大小
+    let windowSize = CGSize(width: 3840.0/5.0, height: 1712.0/5.0)
 }
 
 // MARK: Alert
