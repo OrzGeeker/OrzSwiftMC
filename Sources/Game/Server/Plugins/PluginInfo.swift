@@ -8,7 +8,7 @@
 import Foundation
 import JokerKits
 
-struct PluginInfo: Codable, JsonRepresentable {
+public struct PluginInfo: Codable, JsonRepresentable {
     let name: String
     let desc: String
     let url: String

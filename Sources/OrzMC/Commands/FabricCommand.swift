@@ -7,8 +7,9 @@
 
 import Foundation
 import ConsoleKit
-import Fabric
 import JokerKits
+import Fabric
+import Game
 
 struct FabricCommand: AsyncCommand {
     var help: String = "安装Fabric"

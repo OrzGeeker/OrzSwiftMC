@@ -9,7 +9,7 @@ import Foundation
 import JokerKits
 
 extension Server {
-
+    
     func launchServer(_ filePath: String, workDirectory: GameDir) async throws {
         
         var args = [
@@ -43,7 +43,7 @@ extension Server {
             }
         }
         
-        guard await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
+        guard await Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath)
         else {
             try await launchServer(filePath, workDirectory: workDirectory)
             return
@@ -52,7 +52,7 @@ extension Server {
         let eulaFilePath = workDirectory.filePath("eula.txt")
         let propertiesFilePath = workDirectory.filePath("server.properties")
         if try modifyEULA(at: eulaFilePath), try modifyProperties(at: propertiesFilePath) {
-            guard await Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: workDirectory.dirPath)
+            guard await Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath)
             else {
                 Platform.console.output("服务端异常退出", style: .error)
                 return

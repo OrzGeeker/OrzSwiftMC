@@ -7,6 +7,7 @@
 
 import JokerKits
 import ConsoleKit
+import Game
 
 extension OrzMC {
     static func userInput(hint: String, completedHint: String? = nil) -> String {

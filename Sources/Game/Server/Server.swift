@@ -7,7 +7,5 @@
 
 protocol Server {
     var serverInfo: ServerInfo { get }
-    
     func start() async throws
-    func launchServer(_ filePath: String, workDirectory: GameDir) async throws
 }

@@ -10,6 +10,7 @@ let package = Package(
     ],
     products: [
         .executable(name: "orzmc", targets: ["OrzMC"]),
+        .library(name: "Game", targets: ["Game"]),
         .library(name: "JokerKits", targets: ["JokerKits"]),
         .library(name: "Mojang", targets: ["Mojang"]),
         .library(name: "PaperMC", targets: ["PaperMC"]),
@@ -36,7 +37,6 @@ let package = Package(
             name: "JokerKitsTests",
             dependencies: ["JokerKits"]
         ),
-        
         .target(
             name: "Mojang",
             dependencies: ["JokerKits"]
@@ -45,20 +45,19 @@ let package = Package(
             name: "MojangTests",
             dependencies: ["Mojang"]
         ),
-        
+        .target(name: "Game", dependencies: [
+            "Mojang",
+            "PaperMC",
+            "Fabric"
+        ]),
         .executableTarget(
             name: "OrzMC",
-            dependencies: [
-                "Mojang",
-                "PaperMC",
-                "Fabric"
-            ]
+            dependencies: ["Game"]
         ),
         .testTarget(
             name: "OrzMCTests",
             dependencies: ["OrzMC"]
         ),
-        
         .target(
             name: "PaperMC",
             dependencies: ["JokerKits"]
@@ -67,7 +66,6 @@ let package = Package(
             name: "PaperMCTests",
             dependencies: ["PaperMC"]
         ),
-        
         .target(
             name: "Fabric",
             dependencies: ["JokerKits"]
@@ -76,7 +74,6 @@ let package = Package(
             name: "FabricTests",
             dependencies: ["Fabric"]
         )
-        
     ],
     swiftLanguageVersions: [.v5]
 )

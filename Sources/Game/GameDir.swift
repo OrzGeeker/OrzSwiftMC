@@ -9,35 +9,18 @@ import Foundation
 import JokerKits
 import ConsoleKit
 
-extension Platform {
-    func platformName() -> String {
-        switch self {
-        case .linux:
-            return "linux"
-        case .windows:
-            return "windows"
-        case .macosx:
-            return "osx"
-        default:
-            return "unsupported"
-        }
-    }
-    
-    static let console = Terminal()
-}
-
-enum GameType: String {
+public enum GameType: String {
     case vanilla
     case paper
 }
 
-enum GameError: Error {
+public enum GameError: Error {
     case noGameVersions
 }
 
-enum GameDir {
+public enum GameDir {
     
-    private static let defaultClientType = GameType.vanilla.rawValue
+    public static let defaultClientType = GameType.vanilla.rawValue
 
     case home
     case minecraft
@@ -94,11 +77,11 @@ enum GameDir {
         }
     }
     
-    var dirPath: String {
+    public var dirPath: String {
         return NSString.path(withComponents: self.pathComponents)
     }
     
-    func filePath(_ filename: String) -> String {
+    public func filePath(_ filename: String) -> String {
         return NSString.path(withComponents: self.pathComponents + [filename])
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 import JokerKits
 
-struct LauncherProfile: JsonRepresentable, Decodable {
+public struct LauncherProfile: JsonRepresentable, Decodable {
     let profiles: [String: Version]
     var selectedProfile: String
     let authenticationDatabase: AuthenticationDataBase

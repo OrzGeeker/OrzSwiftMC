@@ -137,7 +137,7 @@ extension Launcher {
         
         Platform.console.output("客户端正在启动，请稍等......", style: .success)
         // 客户端启动后，可以从UI界面关闭，所以可以异步启动
-        try Shell.run(path: try OrzMC.javaPath(), args: args, workDirectory: gameDir, terminationHandler: { process in
+        try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: gameDir, terminationHandler: { process in
             guard process.terminationStatus == 0 else {
                 Platform.console.output("客户端异常退出", style: .error)
                 return

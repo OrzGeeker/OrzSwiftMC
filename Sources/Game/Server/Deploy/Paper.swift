@@ -18,11 +18,15 @@ enum PaperServerError: Error {
     case downloadURLFailed
 }
 
-struct PaperServer: Server {
+public struct PaperServer: Server {
     
     let serverInfo: ServerInfo
+    
+    public init(serverInfo: ServerInfo) {
+        self.serverInfo = serverInfo
+    }
         
-    func start() async throws {
+    public func start() async throws {
         
         let versionAPI = PaperMC.api.projects("paper").versions(serverInfo.version)
         guard let versionData = try await versionAPI.getData

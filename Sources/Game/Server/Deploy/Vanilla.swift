@@ -25,11 +25,15 @@ enum VanillaServerError: Error {
 /// 2. [部署服务器百科文档](https://minecraft.fandom.com/wiki/Tutorials/Setting_up_a_server)
 ///
 /// 官方服务端文件下载速度太慢, 容易超时
-struct VanillaServer: Server {
+public struct VanillaServer: Server {
     
     let serverInfo: ServerInfo
     
-    func start() async throws {
+    public init(serverInfo: ServerInfo) {
+        self.serverInfo = serverInfo
+    }
+    
+    public func start() async throws {
         
         guard let serverVersion = try await Mojang.manifest?.versions.filter({ $0.id == serverInfo.version }).first?.gameInfo?.downloads.server
         else {

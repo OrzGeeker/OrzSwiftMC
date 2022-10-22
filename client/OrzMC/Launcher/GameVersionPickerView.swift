@@ -8,14 +8,20 @@
 import SwiftUI
 
 struct GameVersionPickerView: View {
+    
+    @EnvironmentObject var appModel: LauncherModel
+    
     var body: some View {
         HStack {
             VStack(alignment: .leading){
-                Picker(selection: /*@START_MENU_TOKEN@*/.constant(1)/*@END_MENU_TOKEN@*/, label: Text("游戏版本").bold()) {
-                    /*@START_MENU_TOKEN@*/Text("1").tag(1)/*@END_MENU_TOKEN@*/
-                    /*@START_MENU_TOKEN@*/Text("2").tag(2)/*@END_MENU_TOKEN@*/
+                if !appModel.versions.isEmpty {
+                    Picker(selection: $appModel.selectedVersion, label: Text("游戏版本").bold()) {
+                        ForEach(appModel.versions, id: \.self) {
+                            Text($0).tag($0)
+                        }
+                    }
+                    .frame(maxWidth: 200)
                 }
-                .frame(maxWidth: 200)
                 LauncherUIButton(title:"设置", imageSystemName: "gearshape")
             }.padding()
         }
@@ -25,5 +31,6 @@ struct GameVersionPickerView: View {
 struct GameVersionPickerView_Previews: PreviewProvider {
     static var previews: some View {
         GameVersionPickerView()
+            .environmentObject(mockAppModel)
     }
 }

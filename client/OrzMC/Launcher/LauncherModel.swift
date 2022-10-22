@@ -8,5 +8,13 @@
 import Foundation
 
 class LauncherModel: ObservableObject {
+    @Published var versions = [String]()
+    @Published var selectedVersion: String = ""
     
+    func fetchGameVersions() async throws {
+        
+    }
 }
+
+
+let mockAppModel = LauncherModel()

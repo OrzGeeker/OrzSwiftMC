@@ -9,14 +9,15 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-    let persistenceController = PersistenceController.shared
-
     let divide = 5.0
+    let appModel = LauncherModel()
+    let persistenceController = PersistenceController.shared
     var body: some Scene {
         WindowGroup {
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
-            LauncherUI().fixedSize(horizontal: false, vertical: true)
+            LauncherUI()
+                .environmentObject(appModel)
         }
     }
 }

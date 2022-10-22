@@ -8,7 +8,7 @@
 import JokerKits
 import Foundation
 
-extension PluginInfo {
+public extension PluginInfo {
     static func allPlugins() -> [PluginInfo] {
         return [
             PluginInfo(

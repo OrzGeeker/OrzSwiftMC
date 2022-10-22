@@ -8,6 +8,7 @@
 import ConsoleKit
 import Dispatch
 import JokerKits
+import Game
 
 struct ServerCommand: AsyncCommand {
     
