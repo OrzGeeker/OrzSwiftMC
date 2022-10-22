@@ -10,7 +10,6 @@
 		2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799528FEAB0600D53658 /* OrzMCApp.swift */; };
 		2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799728FEAB0600D53658 /* Persistence.swift */; };
 		2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */; };
-		2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799C28FEAB0600D53658 /* ContentView.swift */; };
 		2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C799E28FEAB0700D53658 /* Assets.xcassets */; };
 		2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */; };
 		2B1C79AD28FEAB0700D53658 /* OrzMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79AC28FEAB0700D53658 /* OrzMCTests.swift */; };
@@ -50,7 +49,6 @@
 		2B1C799528FEAB0600D53658 /* OrzMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCApp.swift; sourceTree = "<group>"; };
 		2B1C799728FEAB0600D53658 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		2B1C799A28FEAB0600D53658 /* OrzMC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OrzMC.xcdatamodel; sourceTree = "<group>"; };
-		2B1C799C28FEAB0600D53658 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2B1C799E28FEAB0700D53658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrzMC.entitlements; sourceTree = "<group>"; };
 		2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -126,7 +124,6 @@
 				F339F62129038E60003CB50C /* Info.plist */,
 				2B1C799528FEAB0600D53658 /* OrzMCApp.swift */,
 				2B1C799728FEAB0600D53658 /* Persistence.swift */,
-				2B1C799C28FEAB0600D53658 /* ContentView.swift */,
 				2B1C799E28FEAB0700D53658 /* Assets.xcassets */,
 				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
 				2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */,
@@ -354,7 +351,6 @@
 				F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */,
 				2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
-				2B1C799D28FEAB0600D53658 /* ContentView.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
 				F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */,

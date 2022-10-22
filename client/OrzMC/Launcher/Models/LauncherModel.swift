@@ -8,6 +8,7 @@
 import Foundation
 import Game
 import Combine
+import CoreData
 
 let model = LauncherModel()
 let mockModel = LauncherModel()
@@ -54,6 +55,20 @@ class LauncherModel: ObservableObject {
     
     /// 窗口大小
     let windowSize = CGSize(width: 3840.0/5.0, height: 1712.0/5.0)
+    
+    /// 数据库CoreData托管
+    let persistenceController = PersistenceController.shared
+    
+    /// 从数据库中获取上次启动时的信息
+    lazy private var dbClientInfoItem: ClientInfoItem? = {
+        let fetchRequest = NSFetchRequest<ClientInfoItem>(entityName: "ClientInfoItem")
+        do {
+            let clientInfoItem = try persistenceController.container.viewContext.fetch(fetchRequest).first
+            return clientInfoItem
+        } catch {
+            return nil
+        }
+    }()
 }
 
 // MARK: Alert
@@ -81,6 +96,7 @@ extension LauncherModel {
             await showAlert("没有输入玩家ID", actionTip: "到左上角输入玩家ID")
             return
         }
+        
         guard let gameVersion = await GameUtils.releaseGameVersion(self.selectedVersion)?.first else {
             await showAlert("没有选择游戏版本", actionTip: "到左下解选择游戏版本")
             return
@@ -99,6 +115,33 @@ extension LauncherModel {
         
         var launcher = GUILauncher(clientInfo: clientInfo)
         try await launcher.start()
+        
+        // 保存上一次启动信息到数据库中
+        let viewContext = persistenceController.container.viewContext
+        do {
+            if let dbClientInfoItem = self.dbClientInfoItem {
+                dbClientInfoItem.username = clientInfo.username
+                dbClientInfoItem.gameVersion = clientInfo.version.id
+            } else {
+                NSEntityDescription.insertNewObject(forEntityName: "ClientInfoItem", into: viewContext)
+            }
+            try viewContext.save()
+        }
+        catch {
+            
+        }
+    }
+    
+    func loadDbClientInfoItem() {
+        guard let clientInfoItem = self.dbClientInfoItem else {
+            return
+        }
+        if let username = clientInfoItem.username {
+            self.username = username
+        }
+        if let gameVersion = clientInfoItem.gameVersion {
+            self.selectedVersion = gameVersion
+        }
     }
     
     /// 获取客户端所有可用Release版本

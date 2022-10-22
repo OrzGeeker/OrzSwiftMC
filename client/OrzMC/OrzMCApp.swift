@@ -10,11 +10,10 @@ import SwiftUI
 @main
 struct OrzMCApp: App {
     @StateObject var appModel = model
-    let persistenceController = PersistenceController.shared
+    @Environment(\.scenePhase) var scenePhase
+    static var appFirstLaunched = true
     var body: some Scene {
         WindowGroup {
-            //            ContentView()
-            //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
             LauncherUI()
                 .alert(appModel.alertMessage ?? "", isPresented: $appModel.showAlert) {
                     Button(appModel.alertActionTip) {
@@ -22,6 +21,13 @@ struct OrzMCApp: App {
                     }
                 }
                 .environmentObject(appModel)
+                .environment(\.managedObjectContext, appModel.persistenceController.container.viewContext)
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active && Self.appFirstLaunched {
+                appModel.loadDbClientInfoItem()
+                Self.appFirstLaunched = false
+            }
         }
     }
 }

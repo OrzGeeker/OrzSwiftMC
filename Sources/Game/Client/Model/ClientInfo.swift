@@ -11,7 +11,7 @@ import Fabric
 
 public struct ClientInfo {
     public var version: Version
-    var username: String
+    public var username: String
     var debug: Bool
     var authenticate: Bool
     var launcherProfile: LauncherProfile?
