@@ -48,7 +48,11 @@ class LauncherModel: ObservableObject {
     var clientInfo: ClientInfo? = nil
     
     /// 提醒消息
-    var alertMessage: String? = nil
+    var alertMessage: String? = nil {
+        didSet {
+            showAlert = true
+        }
+    }
     
     /// 提醒按钮文案
     var alertActionTip: String = "确定"
@@ -80,7 +84,6 @@ extension LauncherModel {
     ///   - actionTip: 按钮标题文案
     func showAlert(_ message: String, actionTip: String = "了解了") async {
         await MainActor.run {
-            showAlert = true
             alertMessage = message
             alertActionTip = actionTip
         }
