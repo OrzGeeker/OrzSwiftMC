@@ -62,9 +62,9 @@ struct LauncherGameVersionPickerView: View {
             }
         }
         .padding()
-        .task {
-            await appModel.fetchGameVersions()
-        }
+//        .task {
+//            await appModel.fetchGameVersions()
+//        }
     }
 }
 
