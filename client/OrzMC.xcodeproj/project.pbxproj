@@ -16,11 +16,11 @@
 		2B1C79B728FEAB0700D53658 /* OrzMCUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */; };
 		2B1C79B928FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
+		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
 		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; platformFilters = (macos, ); };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
-		F339F6202903864A003CB50C /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = F339F61F2903864A003CB50C /* Game */; };
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
 		F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */; platformFilters = (macos, ); };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
@@ -58,12 +58,12 @@
 		2B1C79B228FEAB0700D53658 /* OrzMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrzMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2B797D9829071FE6000C21A1 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
-		F306EFD92903692D00D798F5 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherUserLoginArea.swift; sourceTree = "<group>"; };
 		F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionPickerView.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F339F6202903864A003CB50C /* Game in Frameworks */,
+				2B79FC4C2906A791000C21A1 /* Game in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,10 +101,10 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
+				2B797D9729071FE6000C21A1 /* Packages */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C79AB28FEAB0700D53658 /* OrzMCTests */,
 				2B1C79B528FEAB0700D53658 /* OrzMCUITests */,
-				F306EFD82903692D00D798F5 /* Packages */,
 				2B1C799328FEAB0600D53658 /* Products */,
 				F370F74029037521005497A1 /* Frameworks */,
 			);
@@ -161,6 +161,14 @@
 			path = OrzMCUITests;
 			sourceTree = "<group>";
 		};
+		2B797D9729071FE6000C21A1 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2B797D9829071FE6000C21A1 /* swift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		2B79D9E129066171000C21A1 /* Shapes */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,14 +193,6 @@
 				F339F6292903A76F003CB50C /* Views */,
 			);
 			path = "Launcher(MacOS)";
-			sourceTree = "<group>";
-		};
-		F306EFD82903692D00D798F5 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				F306EFD92903692D00D798F5 /* swift */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		F339F6282903A755003CB50C /* Models */ = {
@@ -249,7 +249,7 @@
 			);
 			name = OrzMC;
 			packageProductDependencies = (
-				F339F61F2903864A003CB50C /* Game */,
+				2B79FC4B2906A791000C21A1 /* Game */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -747,7 +747,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		F339F61F2903864A003CB50C /* Game */ = {
+		2B79FC4B2906A791000C21A1 /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
 		};
