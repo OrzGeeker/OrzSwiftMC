@@ -9,33 +9,17 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-#if os(macOS)
-    @StateObject var appModel = model
-#endif
-    @Environment(\.scenePhase) var scenePhase
-    static var appFirstLaunched = true
     var body: some Scene {
         WindowGroup {
+            VStack {
 #if os(macOS)
-            LauncherUI()
-                .alert(appModel.alertMessage ?? "", isPresented: $appModel.showAlert) {
-                    Button(appModel.alertActionTip) {
-                        
-                    }
-                }
-                .environmentObject(appModel)
-                .environment(\.managedObjectContext, appModel.persistenceController.container.viewContext)
+                LauncherUI().environmentObject(LauncherModel.shared)
+                
 #elseif os(iOS)
-            ContentView()
+                ContentView().environmentObject(Model.shared)
 #endif
-        }
-        .onChange(of: scenePhase) { phase in
-            if phase == .active && Self.appFirstLaunched {
-#if os(macOS)
-                appModel.loadDbClientInfoItem()
-#endif
-                Self.appFirstLaunched = false
             }
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
     }
 }

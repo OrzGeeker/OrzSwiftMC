@@ -62,15 +62,15 @@ struct LauncherGameVersionPickerView: View {
             }
         }
         .padding()
-//        .task {
-//            await appModel.fetchGameVersions()
-//        }
+        .task {
+            await appModel.fetchGameVersions()
+        }
     }
 }
 
 struct GameVersionPickerView_Previews: PreviewProvider {
     static var previews: some View {
         LauncherGameVersionPickerView()
-            .environmentObject(mockModel)
+            .environmentObject(LauncherModel.mockModel)
     }
 }

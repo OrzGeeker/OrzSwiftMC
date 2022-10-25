@@ -26,7 +26,7 @@ struct GUILauncher: Client  {
     /// 下载启动器启动需要的文件
     mutating func download() async throws {
         let downloadItems = try await generateDownloadItemInfos()
-        try await Downloader.download(downloadItems, progressSubject: model.progressSubject)
+        try await Downloader.download(downloadItems, progressSubject: LauncherModel.shared.progressSubject)
     }
     
     /// 启动客户端

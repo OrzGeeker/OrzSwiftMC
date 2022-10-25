@@ -10,10 +10,10 @@ import Game
 import Combine
 import CoreData
 
-let model = LauncherModel()
-let mockModel = LauncherModel()
-
 class LauncherModel: ObservableObject {
+    static let shared = LauncherModel()
+    static let mockModel = LauncherModel()
+    private init() {}
     
     /// 当前玩家ID
     @Published var username: String = ""

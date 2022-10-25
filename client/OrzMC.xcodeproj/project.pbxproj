@@ -19,6 +19,7 @@
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
 		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; platformFilters = (macos, ); };
+		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
@@ -62,6 +63,7 @@
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
+		2BD03D782907F93200BE1D1F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
 		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -101,12 +103,12 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
-				2B797D9729071FE6000C21A1 /* Packages */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C79AB28FEAB0700D53658 /* OrzMCTests */,
 				2B1C79B528FEAB0700D53658 /* OrzMCUITests */,
 				2B1C799328FEAB0600D53658 /* Products */,
 				F370F74029037521005497A1 /* Frameworks */,
+				2B797D9729071FE6000C21A1 /* Packages */,
 			);
 			sourceTree = "<group>";
 		};
@@ -180,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				2B79DCF529066BBC000C21A1 /* ContentView.swift */,
+				2BD03D782907F93200BE1D1F /* Model.swift */,
 			);
 			path = "MobileHelper(iOS)";
 			sourceTree = "<group>";
@@ -372,6 +375,7 @@
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
+				2BD03D792907F93200BE1D1F /* Model.swift in Sources */,
 				F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */,
 				F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */,
 				F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */,
