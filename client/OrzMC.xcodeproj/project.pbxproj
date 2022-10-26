@@ -19,7 +19,7 @@
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
 		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; platformFilters = (macos, ); };
-		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; };
+		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
