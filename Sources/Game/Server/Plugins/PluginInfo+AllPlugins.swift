@@ -68,14 +68,6 @@ public extension PluginInfo {
                 docs: nil,
                 repo: "https://github.com/apavarino/Deadchest"),
             PluginInfo(
-                name: "HolographicDisplays",
-                desc: "全息显示",
-                url:  "https://dev.bukkit.org/projects/holographic-displays/files/latest",
-                type: .bukkit,
-                site: "https://dev.bukkit.org/projects/holographic-displays",
-                docs: "https://filoghost.me/docs/holographic-displays",
-                repo: "https://github.com/filoghost/HolographicDisplays"),
-            PluginInfo(
                 name: "GeyserMC",
                 desc: "基岩版客户端联机Java版服务器",
                 url:  "https://ci.opencollab.dev/job/GeyserMC/job/Geyser/job/master/lastSuccessfulBuild/artifact/bootstrap/spigot/target/Geyser-Spigot.jar",
@@ -185,6 +177,15 @@ public extension PluginInfo {
                 site: "https://geysermc.org/",
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser",
+                enable: false),
+            PluginInfo(
+                name: "HolographicDisplays",
+                desc: "全息显示",
+                url:  "https://dev.bukkit.org/projects/holographic-displays/files/latest",
+                type: .bukkit,
+                site: "https://dev.bukkit.org/projects/holographic-displays",
+                docs: "https://filoghost.me/docs/holographic-displays",
+                repo: "https://github.com/filoghost/HolographicDisplays",
                 enable: false),
         ].filter { $0.enable && $0.url.count > 0 }
     }
