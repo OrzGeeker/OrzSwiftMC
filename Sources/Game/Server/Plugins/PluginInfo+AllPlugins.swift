@@ -122,7 +122,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "LuckPerms",
                 desc: "玩家权限管理",
-                url:  "https://download.luckperms.net/1449/bukkit/loader/LuckPerms-Bukkit-5.4.41.jar",
+                url:  "https://download.luckperms.net/1463/bukkit/loader/LuckPerms-Bukkit-5.4.55.jar",
                 type: .bukkit,
                 site: "https://luckperms.net/",
                 docs: "https://luckperms.net/wiki/Home",
@@ -130,7 +130,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "BlueMap",
                 desc: "Web端服务器地图3D浏览",
-                url:  "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v3.3/BlueMap-3.3-spigot.jar",
+                url:  "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v3.7/BlueMap-3.7-spigot.jar",
                 type: .spigot,
                 site: "https://bluemap.bluecolored.de/",
                 docs: "https://bluemap.bluecolored.de/wiki/",
@@ -138,7 +138,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "ViaVersion",
                 desc: "老版服务器兼容新版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=466457",
+                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=477976",
                 type: .spigot,
                 site: "https://www.spigotmc.org/resources/viaversion.19254/",
                 docs: "https://viaversion.atlassian.net/wiki/spaces/VIAVERSION/overview",
@@ -146,7 +146,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "ViaBackwards",
                 desc: "服务端兼容旧版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=466459",
+                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=477967",
                 type: .spigot,
                 site: "https://www.spigotmc.org/resources/viabackwards.27448/",
                 docs: nil,

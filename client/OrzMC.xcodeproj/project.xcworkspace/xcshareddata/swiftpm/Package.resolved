@@ -19,15 +19,6 @@
       }
     },
     {
-      "identity" : "orzswiftmc",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "c8692322099bcdc677d2495233c22b5010db5679"
-      }
-    },
-    {
       "identity" : "swift-crypto",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",

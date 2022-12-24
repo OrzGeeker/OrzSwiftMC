@@ -59,6 +59,7 @@
 		2B1C79B228FEAB0700D53658 /* OrzMCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OrzMCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C79B628FEAB0700D53658 /* OrzMCUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITests.swift; sourceTree = "<group>"; };
 		2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2B43ED082956AF6F00117DD2 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
@@ -102,6 +103,7 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
+				2B43ED072956AF6E00117DD2 /* Packages */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C79AB28FEAB0700D53658 /* OrzMCTests */,
 				2B1C79B528FEAB0700D53658 /* OrzMCUITests */,
@@ -159,6 +161,14 @@
 				2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */,
 			);
 			path = OrzMCUITests;
+			sourceTree = "<group>";
+		};
+		2B43ED072956AF6E00117DD2 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2B43ED082956AF6F00117DD2 /* swift */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		2B79D9E129066171000C21A1 /* Shapes */ = {
@@ -317,7 +327,6 @@
 			);
 			mainGroup = 2B1C798928FEAB0600D53658;
 			packageReferences = (
-				2B292E1E2926A48500D1357F /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -742,17 +751,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		2B292E1E2926A48500D1357F /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftMC.git";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		2B79FC4B2906A791000C21A1 /* Game */ = {
