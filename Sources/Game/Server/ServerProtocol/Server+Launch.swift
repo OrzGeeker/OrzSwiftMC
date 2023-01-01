@@ -15,6 +15,7 @@ extension Server {
         var args = [
             "-Xms" + serverInfo.minMem,
             "-Xmx" + serverInfo.maxMem,
+            "-Dterminal.jline=false",
             "-jar",
             filePath
         ]
