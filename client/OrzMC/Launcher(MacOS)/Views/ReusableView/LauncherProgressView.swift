@@ -9,12 +9,18 @@ import SwiftUI
 
 struct LauncherProgressView: View {
     
-    @EnvironmentObject private var appModel: LauncherModel
+    let title: String
+    
+    let progress: Double
     
     var body: some View {
         HStack {
-            Text("游戏下载进度: \(Int(appModel.launcherProgress * 100))%")
-            ProgressView(value: appModel.launcherProgress)
+            if title.isEmpty {
+                Text("\(Int(progress * 100))%")
+            } else {
+                Text("\(title)(\(Int(progress * 100))%)")
+            }
+            ProgressView(value: progress)
                 .progressViewStyle(LauncherProgressViewStyle())
         }
     }
@@ -29,6 +35,9 @@ struct LauncherProgressViewStyle: ProgressViewStyle {
 
 struct LauncherProgressView_Previews: PreviewProvider {
     static var previews: some View {
-        LauncherProgressView()
+        Group {
+            LauncherProgressView(title: "进度条", progress: 0.2)
+            LauncherProgressView(title: "", progress: 0.5)
+        }.padding()
     }
 }

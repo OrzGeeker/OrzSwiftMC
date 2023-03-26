@@ -11,11 +11,11 @@ typealias LauncherUIButtonAction = () -> Void
 
 struct LauncherUIButton: View {
     
-    var title: String? = nil
+    var title: String?
     
-    var imageSystemName: String? = nil
+    var imageSystemName: String?
     
-    var action: LauncherUIButtonAction? = nil
+    var action: LauncherUIButtonAction?
     
     var body: some View {
         Button(action: {
@@ -35,11 +35,14 @@ struct LauncherUIButton: View {
 
 struct LauncherUIButton_Previews: PreviewProvider {
     static var previews: some View {
-        LauncherUIButton(title:"登录")
-            .previewDisplayName("仅标题")
-        LauncherUIButton(imageSystemName: "gearshape")
-            .previewDisplayName("仅图标")
-        LauncherUIButton(title:"关闭", imageSystemName: "power.circle")
-            .previewDisplayName("图标+标题")
+        Group {
+            LauncherUIButton(title:"登录")
+                .previewDisplayName("仅标题")
+            LauncherUIButton(imageSystemName: "gearshape")
+                .previewDisplayName("仅图标")
+            LauncherUIButton(title:"关闭", imageSystemName: "power.circle")
+                .previewDisplayName("图标+标题")
+        }
+        .padding()
     }
 }

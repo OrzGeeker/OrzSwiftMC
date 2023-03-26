@@ -19,13 +19,27 @@ class LauncherModel: ObservableObject {
     @Published var username: String = ""
     
     /// 当前选中的游戏版本号
-    @Published var selectedVersion: String = ""
+    @Published var selectedVersion: String = "" {
+        willSet {
+            guard newValue != selectedVersion else {
+                return
+            }
+            
+            Task {
+                try await refreshProfileItems(for: selectedVersion)
+            }
+        }
+    }
     
     /// 所有可选游戏版本号
     @Published var versions = [String]()
     
     /// 当前选中的启动方式
-    @Published var selectedProfileItem: String = ""
+    @Published var selectedProfileItem: String = "" {
+        didSet {
+            _ = try? GUILauncher.saveSelectedProfile(for: selectedVersion, with: selectedProfileItem)
+        }
+    }
     
     /// 客户端启动方式
     @Published var profileItems = [String]()
@@ -35,6 +49,9 @@ class LauncherModel: ObservableObject {
         
     /// 启动器进度条进度值，取值 [0-1]
     @Published var launcherProgress: Double = 0
+    
+    /// 当前正在执行加载操作的源个数
+    @Published private(set) var loadingItemCount: UInt = 0
     
     /// 绑定下载进度条
     var disposable: AnyCancellable? = nil
@@ -117,7 +134,9 @@ extension LauncherModel {
         }
         
         var launcher = GUILauncher(clientInfo: clientInfo)
+        await loadingItemStart()
         try await launcher.start()
+        await loadingItemEnd()
         
         // 保存上一次启动信息到数据库中
         let viewContext = persistenceController.container.viewContext
@@ -149,6 +168,7 @@ extension LauncherModel {
     
     /// 获取客户端所有可用Release版本
     func fetchGameVersions() async {
+        await loadingItemStart()
         let versions = Array(await GameUtils.releases()[0..<10])
         await MainActor.run {
             self.versions = versions
@@ -160,6 +180,7 @@ extension LauncherModel {
                 }
             }
         }
+        await loadingItemEnd()
     }
     
     func refreshProfileItems(for version: String) async throws {
@@ -172,8 +193,16 @@ extension LauncherModel {
         }
     }
     
-    func chooseProfileItem(_ chooseItem: String) {
-        self.selectedProfileItem = chooseItem
-        _ = try? GUILauncher.saveSelectedProfile(for: self.selectedVersion, with: self.selectedProfileItem)
+    func loadingItemStart() async {
+        await MainActor.run {
+            loadingItemCount += 1;
+        }
+        
+    }
+    
+    func loadingItemEnd() async {
+        await MainActor.run {
+            loadingItemCount -= 1;
+        }
     }
 }

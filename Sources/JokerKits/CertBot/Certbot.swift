@@ -7,9 +7,8 @@
 
 import Foundation
 
-
 /// [Certbot Doc](https://eff-certbot.readthedocs.io/en/stable/index.html)
 /// [Snap](https://certbot.eff.org/instructions)
-struct Certbot {
-    
+public protocol Certbot {
+    static func cert();
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B00920229D02B25002637E3 /* LaundherTerminateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */; };
+		2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */; };
 		2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799528FEAB0600D53658 /* OrzMCApp.swift */; };
 		2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799728FEAB0600D53658 /* Persistence.swift */; };
 		2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */; };
@@ -18,12 +20,11 @@
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
-		2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */; platformFilters = (macos, ); };
+		2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */; };
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
-		F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */; platformFilters = (macos, ); };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6312903FF65003CB50C /* GUILauncher.swift */; platformFilters = (macos, ); };
@@ -47,6 +48,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaundherTerminateButton.swift; sourceTree = "<group>"; };
+		2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherBackgroundView.swift; sourceTree = "<group>"; };
 		2B1C799228FEAB0600D53658 /* OrzMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrzMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C799528FEAB0600D53658 /* OrzMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCApp.swift; sourceTree = "<group>"; };
 		2B1C799728FEAB0600D53658 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -62,13 +65,12 @@
 		2B43ED082956AF6F00117DD2 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
-		2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIBackground.swift; sourceTree = "<group>"; };
+		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
 		2BD03D782907F93200BE1D1F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
-		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherUserLoginArea.swift; sourceTree = "<group>"; };
-		F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionPickerView.swift; sourceTree = "<group>"; };
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 		F339F6312903FF65003CB50C /* GUILauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUILauncher.swift; sourceTree = "<group>"; };
@@ -100,6 +102,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B0091FB29D0263A002637E3 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				F339F62129038E60003CB50C /* Info.plist */,
+				2B1C799E28FEAB0700D53658 /* Assets.xcassets */,
+				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		2B0091FC29D0275B002637E3 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				2B0091FD29D0276F002637E3 /* CoreData */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		2B0091FD29D0276F002637E3 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		2B0091FE29D02A0F002637E3 /* ToolsView */ = {
+			isa = PBXGroup;
+			children = (
+				2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */,
+				2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */,
+				F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */,
+				2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */,
+			);
+			path = ToolsView;
+			sourceTree = "<group>";
+		};
+		2B00920329D02B4B002637E3 /* ReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				2B79D9E129066171000C21A1 /* Shapes */,
+				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
+				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
+				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
+			);
+			path = ReusableView;
+			sourceTree = "<group>";
+		};
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
@@ -125,15 +175,13 @@
 		2B1C799428FEAB0600D53658 /* OrzMC */ = {
 			isa = PBXGroup;
 			children = (
-				F339F62129038E60003CB50C /* Info.plist */,
 				2B1C799528FEAB0600D53658 /* OrzMCApp.swift */,
 				2B1C799728FEAB0600D53658 /* Persistence.swift */,
-				2B1C799E28FEAB0700D53658 /* Assets.xcassets */,
-				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
-				2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */,
-				2B1C79A128FEAB0700D53658 /* Preview Content */,
-				2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */,
+				2B0091FB29D0263A002637E3 /* Common */,
+				2B0091FC29D0275B002637E3 /* Database */,
 				2BD301F029000B3E00993823 /* Launcher(MacOS) */,
+				2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */,
+				2B1C79A128FEAB0700D53658 /* Preview Content */,
 			);
 			path = OrzMC;
 			sourceTree = "<group>";
@@ -190,7 +238,6 @@
 		2BD301F029000B3E00993823 /* Launcher(MacOS) */ = {
 			isa = PBXGroup;
 			children = (
-				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
 				F339F6302903FF53003CB50C /* Controller */,
 				F339F6282903A755003CB50C /* Models */,
 				F339F6292903A76F003CB50C /* Views */,
@@ -209,13 +256,9 @@
 		F339F6292903A76F003CB50C /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				2B79D9E129066171000C21A1 /* Shapes */,
-				F339F6262903A734003CB50C /* LauncherGameVersionPickerView.swift */,
-				2BA549C22902814E00F4D6A6 /* LauncherUIBackground.swift */,
-				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
-				F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */,
-				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
-				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
+				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
+				2B0091FE29D02A0F002637E3 /* ToolsView */,
+				2B00920329D02B4B002637E3 /* ReusableView */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -370,10 +413,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B00920229D02B25002637E3 /* LaundherTerminateButton.swift in Sources */,
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
-				F339F6272903A734003CB50C /* LauncherGameVersionPickerView.swift in Sources */,
-				2BA549C32902814E00F4D6A6 /* LauncherUIBackground.swift in Sources */,
+				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
@@ -384,6 +427,7 @@
 				2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
+				2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -542,7 +586,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = OrzMC/OrzMC.entitlements;
+				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -553,7 +597,7 @@
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OrzMC/Info.plist;
+				INFOPLIST_FILE = OrzMC/Common/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -566,8 +610,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -586,7 +632,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = OrzMC/OrzMC.entitlements;
+				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
 				CODE_SIGN_IDENTITY = "-";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
@@ -597,7 +643,7 @@
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = OrzMC/Info.plist;
+				INFOPLIST_FILE = OrzMC/Common/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -610,8 +656,10 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -635,6 +683,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMCTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -657,6 +707,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMCTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -678,6 +730,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMCUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -699,6 +753,8 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2N62934Y28;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMCUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
