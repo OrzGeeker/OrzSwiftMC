@@ -9,9 +9,12 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        TabView {
-            Text("Tab Content 1").tabItem { Text("Tab Label 1") }.tag(1)
-            Text("Tab Content 2").tabItem { Text("Tab Label 2") }.tag(2)
+        NavigationSplitView {
+            Text("Side Bar")
+        } content: {
+            Text("Content View")
+        } detail: {
+            Text("Detail View")
         }
     }
 }
