@@ -52,12 +52,15 @@ struct LauncherGameVersionSelector: View {
             
             if gameVersionDownloadProgress.isZero {
                 // Do nothing
-            }
-            else if gameVersionDownloadProgress > 0, gameVersionDownloadProgress < 1 {
+            } else if gameVersionDownloadProgress > 0, gameVersionDownloadProgress < 1 {
                 Divider().frame(height: 10)
                 LauncherProgressView(title: "游戏下载进度", progress: gameVersionDownloadProgress)
             } else {
+                Divider().frame(height: 10)
                 Text("资源已下载完成，游戏启动中，请稍等......")
+                    .bold()
+                    .font(.title3)
+                    .foregroundColor(.yellow)
             }
         }
         .padding()
