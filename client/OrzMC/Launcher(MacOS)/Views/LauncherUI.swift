@@ -13,56 +13,26 @@ struct LauncherUI: View {
     
     @Environment(\.scenePhase) var scenePhase
     
-    static var appFirstLaunched = true
+    static private var appFirstLaunched = true
+    
+    @State private var path = NavigationPath()
     
     var body: some View {
-        LauncherBackgroundView()
-            .overlay(alignment: .topLeading) {
-                LauncherUserLoginArea(username: $appModel.username) {
-                    Task {
-                        try await appModel.launch()
-                    }
-                }
+        
+        NavigationStack(path: $path) {
+            MainView()
+        }
+        .alert(appModel.alertMessage ?? "", isPresented: $appModel.showAlert) {
+            Button(appModel.alertActionTip) {
             }
-            .overlay(alignment: .topTrailing) {
-                LauncherUIButton(title:"设置", imageSystemName: "gearshape") {
-                    // 跳转设置页
-                }
-                .padding()
+        }
+        .onChange(of: scenePhase) { phase in
+            if phase == .active && Self.appFirstLaunched {
+                appModel.loadDbClientInfoItem()
+                Self.appFirstLaunched = false
             }
-            .overlay(alignment: .bottomLeading) {
-                LauncherGameVersionSelector(
-                    versions: appModel.versions,
-                    selectedVersion: $appModel.selectedVersion,
-                    profiles: appModel.profileItems,
-                    selectedProfile: $appModel.selectedProfileItem,
-                    gameVersionDownloadProgress: appModel.launcherProgress) {
-                        Task {
-                            await appModel.fetchGameVersions()
-                        }
-                    }
-            }
-            .overlay(alignment: .bottomTrailing, content: {
-                
-            })
-            .overlay(alignment: .center) {
-                if appModel.loadingItemCount > 0 {
-                    ProgressView()
-                }
-            }
-            .task {
-                await appModel.fetchGameVersions()
-            }
-            .alert(appModel.alertMessage ?? "", isPresented: $appModel.showAlert) {
-                Button(appModel.alertActionTip) {
-                }
-            }
-            .onChange(of: scenePhase) { phase in
-                if phase == .active && Self.appFirstLaunched {
-                    appModel.loadDbClientInfoItem()
-                    Self.appFirstLaunched = false
-                }
-            }
+        }
+        .frame(width: appModel.windowSize.width, height: appModel.windowSize.height)
     }
 }
 

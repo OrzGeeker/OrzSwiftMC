@@ -17,10 +17,12 @@ struct LauncherUserLoginArea: View {
         HStack {
             HStack {
                 Text("玩家ID")
+                    .bold()
                 TextField("输入游戏用户名", text: $username)
-                .frame(maxWidth: 120)
+                    .bold()
+                    .frame(maxWidth: 150)
             }
-            LauncherUIButton(title:"登录", action: loginAction)
+            LauncherUIButton(title:"登录", imageSystemName: "person.circle", action: loginAction)
         }
         .padding()
     }

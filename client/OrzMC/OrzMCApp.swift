@@ -14,7 +14,6 @@ struct OrzMCApp: App {
             VStack {
 #if os(macOS)
                 LauncherUI().environmentObject(LauncherModel.shared)
-                    .frame(width: LauncherModel.shared.windowSize.width, height: LauncherModel.shared.windowSize.height)
 #elseif os(iOS)
                 ContentView().environmentObject(Model.shared)
 #endif
@@ -22,8 +21,8 @@ struct OrzMCApp: App {
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
 #if os(macOS)
-        .windowResizability(.contentSize)
         .windowStyle(.hiddenTitleBar)
+        .windowResizability(.contentSize)
 #elseif os(iOS)
 #endif
     }
