@@ -15,14 +15,18 @@ struct MainView: View {
     
     @EnvironmentObject private var appModel: LauncherModel
     
+    @FocusState private var focusState: Bool
+    
     var body: some View {
         LauncherBackgroundView()
             .overlay(alignment: .topLeading) {
-                LauncherUserLoginArea(username: $appModel.username) {
+                LauncherUserLoginArea(username: $appModel.username,
+                                      disableLoginButton: appModel.loadingItemCount != 0) {
                     Task {
                         try await appModel.launch()
+                        focusState = false
                     }
-                }
+                }.focused($focusState)
             }
             .overlay(alignment: .topTrailing) {
                 NavigationLink(value: Page.settings) {
