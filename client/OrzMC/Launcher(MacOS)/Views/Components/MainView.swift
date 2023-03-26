@@ -20,13 +20,14 @@ struct MainView: View {
     var body: some View {
         LauncherBackgroundView()
             .overlay(alignment: .topLeading) {
-                LauncherUserLoginArea(username: $appModel.username,
-                                      disableLoginButton: appModel.loadingItemCount != 0) {
+                LauncherUserLoginArea(username: $appModel.username) {
                     Task {
                         try await appModel.launch()
                         focusState = false
                     }
-                }.focused($focusState)
+                }
+                .focused($focusState)
+                .disabled(appModel.showLoading)
             }
             .overlay(alignment: .topTrailing) {
                 NavigationLink(value: Page.settings) {
@@ -52,7 +53,7 @@ struct MainView: View {
                 
             })
             .overlay(alignment: .center) {
-                if appModel.loadingItemCount > 0 {
+                if appModel.showLoading {
                     ProgressView()
                 }
             }

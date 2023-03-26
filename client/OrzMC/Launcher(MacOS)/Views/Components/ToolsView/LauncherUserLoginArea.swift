@@ -11,8 +11,6 @@ struct LauncherUserLoginArea: View {
     
     @Binding var username: String
     
-    var disableLoginButton: Bool = false
-    
     var loginAction: LauncherUIButtonAction?
     
     var body: some View {
@@ -23,10 +21,8 @@ struct LauncherUserLoginArea: View {
                 TextField("输入游戏用户名", text: $username)
                     .bold()
                     .frame(maxWidth: 150)
-                    .disabled(disableLoginButton)
             }
             LauncherUIButton(title:"登录", imageSystemName: "person.circle", action: loginAction)
-                .disabled(disableLoginButton)
         }
         .padding()
     }

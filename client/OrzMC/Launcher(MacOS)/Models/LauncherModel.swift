@@ -53,6 +53,8 @@ class LauncherModel: ObservableObject {
     /// 当前正在执行加载操作的源个数
     @Published private(set) var loadingItemCount: UInt = 0
     
+    var showLoading: Bool { loadingItemCount > 0 }
+    
     /// 绑定下载进度条
     var disposable: AnyCancellable? = nil
     lazy var progressSubject: PassthroughSubject<Double, Never> = {
