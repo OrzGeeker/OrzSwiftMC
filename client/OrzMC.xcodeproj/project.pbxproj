@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2B00920229D02B25002637E3 /* LaundherTerminateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */; };
+		2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920129D02B25002637E3 /* LauncherTerminateButton.swift */; platformFilters = (macos, ); };
 		2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */; };
 		2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799528FEAB0600D53658 /* OrzMCApp.swift */; };
 		2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799728FEAB0600D53658 /* Persistence.swift */; };
@@ -20,8 +20,8 @@
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
-		2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */; };
-		2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AF29D065D300DB1E68 /* MainView.swift */; };
+		2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */; platformFilters = (macos, ); };
+		2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AF29D065D300DB1E68 /* MainView.swift */; platformFilters = (macos, ); };
 		2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2B129D06ACB00DB1E68 /* SettingsView.swift */; };
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
@@ -50,7 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaundherTerminateButton.swift; sourceTree = "<group>"; };
+		2B00920129D02B25002637E3 /* LauncherTerminateButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherTerminateButton.swift; sourceTree = "<group>"; };
 		2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherBackgroundView.swift; sourceTree = "<group>"; };
 		2B1C799228FEAB0600D53658 /* OrzMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrzMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C799528FEAB0600D53658 /* OrzMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCApp.swift; sourceTree = "<group>"; };
@@ -138,7 +138,7 @@
 				2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */,
 				2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */,
 				F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */,
-				2B00920129D02B25002637E3 /* LaundherTerminateButton.swift */,
+				2B00920129D02B25002637E3 /* LauncherTerminateButton.swift */,
 			);
 			path = ToolsView;
 			sourceTree = "<group>";
@@ -427,7 +427,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B00920229D02B25002637E3 /* LaundherTerminateButton.swift in Sources */,
+				2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */,
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
 				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,

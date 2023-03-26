@@ -1,5 +1,5 @@
 //
-//  LaundherTerminateButton.swift
+//  LauncherTerminateButton.swift
 //  OrzMC
 //
 //  Created by joker on 2023/3/26.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct LaundherTerminateButton: View {
+struct LauncherTerminateButton: View {
     var body: some View {
         LauncherUIButton(
             title:"关闭",
@@ -20,6 +20,6 @@ struct LaundherTerminateButton: View {
 
 struct TerminateButton_Previews: PreviewProvider {
     static var previews: some View {
-        LaundherTerminateButton()
+        LauncherTerminateButton()
     }
 }
