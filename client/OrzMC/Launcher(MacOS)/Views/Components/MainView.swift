@@ -30,6 +30,7 @@ struct MainView: View {
                 .disabled(appModel.showLoading)
             }
             .overlay(alignment: .topTrailing) {
+                
                 NavigationLink(value: Page.settings) {
                     LauncherUIButton(title: "设置",imageSystemName: "gearshape")
                         .buttonStyle(.borderless)
@@ -49,9 +50,6 @@ struct MainView: View {
                         }
                     }
             }
-            .overlay(alignment: .bottomTrailing, content: {
-                
-            })
             .overlay(alignment: .center) {
                 if appModel.showLoading {
                     ProgressView()

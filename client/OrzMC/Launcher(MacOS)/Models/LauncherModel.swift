@@ -208,3 +208,17 @@ extension LauncherModel {
         }
     }
 }
+
+
+extension LauncherModel {
+    var externalLinks: [(title: String, link:URL)] {
+        [
+            "Joker@Minecraft": "minecraft",
+        ].compactMap({ (title: String, domain: String) in
+            guard let linkURL = URL(string: "https://\(domain).jokerhub.cn") else {
+                return nil
+            }
+            return (title: title, link: linkURL)
+        })
+    }
+}

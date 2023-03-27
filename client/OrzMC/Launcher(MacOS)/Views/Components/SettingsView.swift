@@ -8,9 +8,16 @@
 import SwiftUI
 
 struct SettingsView: View {
+    
+    @EnvironmentObject private var appModel: LauncherModel
+    
     var body: some View {
         VStack {
-            Text("Minecraft Settings Page")
+            ForEach(appModel.externalLinks, id: \.title) { linkInfo in
+                Link(linkInfo.title, destination: linkInfo.link)
+                    .bold()
+                    .foregroundColor(.yellow)
+            }
         }
     }
 }
@@ -18,5 +25,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(LauncherModel.mockModel)
     }
 }
