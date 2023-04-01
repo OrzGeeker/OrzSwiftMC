@@ -83,26 +83,6 @@ public extension PluginInfo {
                 site: "https://geysermc.org/",
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser"),
-            PluginInfo(
-                name: "SimpleVoiceChat",
-                desc: "语音聊天",
-                url:  "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat/download/4438347",
-                type: .bukkit,
-                downloadType: .manual,
-                site: "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat",
-                docs: "https://modrepo.de/minecraft/voicechat/wiki",
-                repo: "https://github.com/henkelmax/simple-voice-chat",
-                enable: false),
-            // MARK: 不在被维护
-            PluginInfo(
-                name: "PlugMan",
-                desc: "服务端插件管理器，无需重启服务器",
-                url:  "https://dev.bukkit.org/projects/plugman/files/latest",
-                type: .bukkit,
-                downloadType: .automatic,
-                site: "https://dev.bukkit.org/projects/plugman",
-                docs: "https://github.com/ryan-clancy/PlugMan/blob/master/README.md",
-                repo: "https://github.com/ryan-clancy/PlugMan"),
             // MARK: 没有源码
             PluginInfo(
                 name: "BackOnDeath",
@@ -168,8 +148,17 @@ public extension PluginInfo {
                 site: "https://www.spigotmc.org/resources/vault.34315/",
                 docs: nil,
                 repo: "https://github.com/milkbowl/Vault"),
-            
             // MARK: 下面是暂时不用的插件
+            PluginInfo(
+                name: "SimpleVoiceChat",
+                desc: "语音聊天",
+                url:  "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat/download/4438347",
+                type: .bukkit,
+                downloadType: .manual,
+                site: "https://www.curseforge.com/minecraft/bukkit-plugins/simple-voice-chat",
+                docs: "https://modrepo.de/minecraft/voicechat/wiki",
+                repo: "https://github.com/henkelmax/simple-voice-chat",
+                enable: false),
             PluginInfo(
                 name: "PlasmoVoice",
                 desc: "游戏语音通话",
@@ -209,6 +198,18 @@ public extension PluginInfo {
                 site: "https://dev.bukkit.org/projects/holographic-displays",
                 docs: "https://filoghost.me/docs/holographic-displays",
                 repo: "https://github.com/filoghost/HolographicDisplays",
+                enable: false),
+            // MARK: 不在被维护
+            PluginInfo(
+                name: "PlugMan",
+                desc: "服务端插件管理器，无需重启服务器",
+                url:  "https://dev.bukkit.org/projects/plugman/files/latest",
+                type: .bukkit,
+                downloadType: .automatic,
+                status: .deprecated,
+                site: "https://dev.bukkit.org/projects/plugman",
+                docs: "https://github.com/ryan-clancy/PlugMan/blob/master/README.md",
+                repo: "https://github.com/ryan-clancy/PlugMan",
                 enable: false),
         ].filter { $0.enable && $0.url.count > 0 }
     }

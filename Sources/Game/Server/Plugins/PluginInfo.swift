@@ -14,6 +14,7 @@ public struct PluginInfo: Codable, JsonRepresentable {
     let url: String
     var type: PluginType
     var downloadType: PluginDownloadType
+    var status: PluginStatus = .available
     let site: String?
     let docs: String?
     let repo: String?
@@ -28,5 +29,11 @@ public struct PluginInfo: Codable, JsonRepresentable {
     enum PluginDownloadType: String, Codable {
         case automatic
         case manual
+    }
+    
+    enum PluginStatus: String, Codable {
+        case available
+        case deprecated
+        case unavailable
     }
 }
