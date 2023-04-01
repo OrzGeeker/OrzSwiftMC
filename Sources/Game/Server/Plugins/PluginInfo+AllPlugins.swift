@@ -106,7 +106,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "LoginSecurity",
                 desc: "离线服帐号管理",
-                url:  "https://github.com/lenis0012/LoginSecurity-2/releases/download/v3.1/LoginSecurity-3.1-Spigot.jar",
+                url:  "https://github.com/lenis0012/LoginSecurity-2/releases/download/v3.1.1/LoginSecurity-3.1.1-Spigot.jar",
                 type: .spigot,
                 downloadType: .manual,
                 site: "https://www.spigotmc.org/resources/loginsecurity.19362/",
