@@ -39,6 +39,9 @@ struct ServerCommand: AsyncCommand {
         
         @Flag(name: "jar-help", short: "j", help: "查看服务端Jar包的帮助信息")
         var jarHelp: Bool
+        
+        @Option(name: "jar-opts", short: "e", help: "jar文件运行时额外选项, 字符串参数以 a: 开头，例如：--jar-opts \"a:--help\"")
+        var jarOpts: String?
     }
     
     var help: String = "服务端相关"
@@ -51,6 +54,7 @@ struct ServerCommand: AsyncCommand {
         let onlineMode = signature.onlineMode ?? false
         let forceUpgrade = signature.forceUpgrade
         let jarHelp = signature.jarHelp
+        let jarOpts = signature.jarOpts
         
         let serverInfo = ServerInfo(
             version:version.id,
@@ -60,7 +64,8 @@ struct ServerCommand: AsyncCommand {
             minMem: minMem,
             maxMem: maxMem,
             onlineMode: onlineMode,
-            showJarHelpInfo: jarHelp
+            showJarHelpInfo: jarHelp,
+            jarOptions: jarOpts
         )
 
         if let type = GameType(rawValue: signature.type ?? GameType.paper.rawValue) {

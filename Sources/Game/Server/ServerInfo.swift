@@ -21,7 +21,10 @@ public struct ServerInfo {
     var onlineMode: Bool // 是否以online模式运行服务端
     var showJarHelpInfo: Bool // 显示服务端Jar包帮助信息
     
-    public init(version: String, gui: Bool, debug: Bool, forceUpgrade: Bool, minMem: String, maxMem: String, onlineMode: Bool, showJarHelpInfo: Bool) {
+    // Jar包对应的参数
+    var jarOptions: String?
+    
+    public init(version: String, gui: Bool, debug: Bool, forceUpgrade: Bool, minMem: String, maxMem: String, onlineMode: Bool, showJarHelpInfo: Bool, jarOptions: String?) {
         self.version = version
         self.gui = gui
         self.debug = debug
@@ -30,5 +33,6 @@ public struct ServerInfo {
         self.maxMem = maxMem
         self.onlineMode = onlineMode
         self.showJarHelpInfo = showJarHelpInfo
+        self.jarOptions = jarOptions
     }
 }

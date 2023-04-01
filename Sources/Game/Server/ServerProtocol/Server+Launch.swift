@@ -22,8 +22,7 @@ extension Server {
         
         if serverInfo.showJarHelpInfo {
             args.append("--help")
-        }
-        else {
+        } else {
             
             if serverInfo.onlineMode {
                 args.append("--online-mode \(serverInfo.onlineMode)")
@@ -31,6 +30,10 @@ extension Server {
             
             if serverInfo.forceUpgrade {
                 args.append("--forceUpgrade")
+            }
+            
+            if let jarOpts = serverInfo.jarOptions {
+                args.append(jarOpts.replacingOccurrences(of: "a:", with: ""))
             }
             
             if !serverInfo.gui {
