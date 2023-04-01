@@ -13,6 +13,7 @@ public struct PluginInfo: Codable, JsonRepresentable {
     let desc: String
     let url: String
     var type: PluginType
+    var downloadType: PluginDownloadType
     let site: String?
     let docs: String?
     let repo: String?
@@ -22,5 +23,10 @@ public struct PluginInfo: Codable, JsonRepresentable {
         case bukkit
         case spigot
         case paper
+    }
+    
+    enum PluginDownloadType: String, Codable {
+        case automatic
+        case manual
     }
 }
