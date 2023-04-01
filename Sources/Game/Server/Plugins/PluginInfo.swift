@@ -29,6 +29,7 @@ public struct PluginInfo: Codable, JsonRepresentable {
     enum PluginDownloadType: String, Codable {
         case automatic
         case manual
+        case needAuth
     }
     
     enum PluginStatus: String, Codable {

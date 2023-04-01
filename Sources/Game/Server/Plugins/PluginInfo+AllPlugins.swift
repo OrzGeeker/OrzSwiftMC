@@ -126,7 +126,7 @@ public extension PluginInfo {
                 desc: "老版服务器兼容新版本客户端登录",
                 url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=490552",
                 type: .spigot,
-                downloadType: .manual,
+                downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/viaversion.19254/",
                 docs: "https://viaversion.atlassian.net/wiki/spaces/VIAVERSION/overview",
                 repo: "https://github.com/ViaVersion/ViaVersion"),
@@ -135,7 +135,7 @@ public extension PluginInfo {
                 desc: "服务端兼容旧版本客户端登录",
                 url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=489430",
                 type: .spigot,
-                downloadType: .manual,
+                downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/viabackwards.27448/",
                 docs: nil,
                 repo: "https://github.com/ViaVersion/ViaBackwards"),
@@ -144,7 +144,7 @@ public extension PluginInfo {
                 desc: "提供权限、聊天、经济API供其它插件使用",
                 url:  "https://www.spigotmc.org/resources/vault.34315/download?version=344916",
                 type: .spigot,
-                downloadType: .manual,
+                downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/vault.34315/",
                 docs: nil,
                 repo: "https://github.com/milkbowl/Vault"),
@@ -164,7 +164,7 @@ public extension PluginInfo {
                 desc: "游戏语音通话",
                 url:  "https://www.spigotmc.org/resources/plasmo-voice-server.91064/download?version=491553",
                 type: .spigot,
-                downloadType: .manual,
+                downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/plasmo-voice-server.91064/",
                 docs: "https://github.com/plasmoapp/plasmo-voice/wiki/",
                 repo: "https://github.com/plasmoapp/plasmo-voice",
@@ -211,7 +211,7 @@ public extension PluginInfo {
                 docs: "https://github.com/ryan-clancy/PlugMan/blob/master/README.md",
                 repo: "https://github.com/ryan-clancy/PlugMan",
                 enable: false),
-        ].filter { $0.enable && $0.url.count > 0 }
+        ].filter { $0.enable && !$0.url.isEmpty && $0.downloadType != .needAuth }
     }
     
     static func downloadItemInfos(of outputDirURL: URL) -> [DownloadItemInfo] {
