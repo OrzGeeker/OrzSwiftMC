@@ -83,6 +83,15 @@ public extension PluginInfo {
                 site: "https://geysermc.org/",
                 docs: "https://wiki.geysermc.org/geyser/",
                 repo: "https://github.com/GeyserMC/Geyser"),
+            PluginInfo(
+                name: "spark",
+                desc: "适用于Mincraft客户端、服务端、代理的性能分析工具",
+                url: "https://ci.lucko.me/job/spark/375/artifact/spark-bukkit/build/libs/spark-1.10.37-bukkit.jar",
+                type: .bukkit,
+                downloadType: .manual,
+                site: "https://spark.lucko.me/",
+                docs: "https://spark.lucko.me/docs",
+                repo: "https://github.com/lucko/spark"),
             // MARK: 没有源码
             PluginInfo(
                 name: "BackOnDeath",
