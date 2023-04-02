@@ -41,6 +41,7 @@ struct ServerView: View {
                             if !appModel.isPluginsDownloading, let outpuFileDirURL = URL(string: "\(NSHomeDirectory())/Downloads/plugins") {
                                 appModel.isPluginsDownloading = true
                                 try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL))
+                                await Shell.runCommand(with: ["open", "\(outpuFileDirURL.path)"])
                                 appModel.isPluginsDownloading = false
                             }
                         }
