@@ -92,6 +92,8 @@ class LauncherModel: ObservableObject {
             return nil
         }
     }()
+    
+    @Published var isPluginsDownloading: Bool = false
 }
 
 // MARK: Alert
@@ -211,14 +213,17 @@ extension LauncherModel {
 
 
 extension LauncherModel {
-    var externalLinks: [(title: String, link:URL)] {
-        [
-            "Joker@Minecraft": "minecraft",
-        ].compactMap({ (title: String, domain: String) in
-            guard let linkURL = URL(string: "https://\(domain).jokerhub.cn") else {
-                return nil
-            }
-            return (title: title, link: linkURL)
-        })
+    var externalLinks: [(title: String, systemImageName: String, link:URL)] {
+        return [
+            (title: "主页", systemImageName: "house.fill", "minecraft".jokerhubURL),
+            (title: "地图", systemImageName: "map.fill", "world".jokerhubURL),
+            (title: "自研插件", systemImageName: "powerplug.fill", URL(string: "https://github.com/OrzGeeker/OrzMCPlugin")!),
+        ]
+    }
+}
+
+extension String {
+    var jokerhubURL: URL {
+        return URL(string: "https://\(self).jokerhub.cn")!
     }
 }

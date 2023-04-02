@@ -23,12 +23,10 @@ struct LauncherUIButton: View {
                 action()
             }
         }, label: {
-            if let imageSystemName = imageSystemName {
-                Image(systemName: imageSystemName)
-            }
-            if let title = title {
-                Text(title).bold()
-            }
+            ImageTitleText(
+                title: title,
+                imageSystemName: imageSystemName)
+            .padding(.vertical)
         })
     }
 }
@@ -43,6 +41,5 @@ struct LauncherUIButton_Previews: PreviewProvider {
             LauncherUIButton(title:"关闭", imageSystemName: "power.circle")
                 .previewDisplayName("图标+标题")
         }
-        .padding()
     }
 }

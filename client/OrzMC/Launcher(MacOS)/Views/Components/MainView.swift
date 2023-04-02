@@ -8,6 +8,7 @@
 import SwiftUI
 
 enum Page {
+    case server
     case settings
 }
 
@@ -30,11 +31,17 @@ struct MainView: View {
                 .disabled(appModel.showLoading)
             }
             .overlay(alignment: .topTrailing) {
-                
-                NavigationLink(value: Page.settings) {
-                    LauncherUIButton(title: "设置",imageSystemName: "gearshape")
-                        .buttonStyle(.borderless)
-                        .disabled(true)
+                HStack {
+                    NavigationLink(value: Page.server) {
+                        ImageTitleText(
+                            title: "服务器",
+                            imageSystemName: "externaldrive.badge.icloud")
+                    }
+                    NavigationLink(value: Page.settings) {
+                        ImageTitleText(
+                            title: "设置",
+                            imageSystemName: "gearshape")
+                    }
                 }
                 .padding()
             }
@@ -60,6 +67,8 @@ struct MainView: View {
             }
             .navigationDestination(for: Page.self) { page in
                 switch page {
+                case .server:
+                    ServerView()
                 case .settings:
                     SettingsView()
                 }

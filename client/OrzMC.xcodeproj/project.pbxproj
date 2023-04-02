@@ -30,6 +30,8 @@
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6312903FF65003CB50C /* GUILauncher.swift */; platformFilters = (macos, ); };
+		F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422B829D92C4100997DA9 /* ServerView.swift */; };
+		F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +80,8 @@
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 		F339F6312903FF65003CB50C /* GUILauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUILauncher.swift; sourceTree = "<group>"; };
+		F3C422B829D92C4100997DA9 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
+		F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +154,7 @@
 				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
 				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
 				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
+				F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */,
 			);
 			path = ReusableView;
 			sourceTree = "<group>";
@@ -235,6 +240,7 @@
 			isa = PBXGroup;
 			children = (
 				2BADE2AF29D065D300DB1E68 /* MainView.swift */,
+				F3C422B829D92C4100997DA9 /* ServerView.swift */,
 				2BADE2B129D06ACB00DB1E68 /* SettingsView.swift */,
 				2B0091FE29D02A0F002637E3 /* ToolsView */,
 			);
@@ -429,6 +435,7 @@
 			files = (
 				2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */,
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
+				F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
 				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
@@ -440,6 +447,7 @@
 				2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */,
 				F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */,
 				F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */,
+				F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */,
 				2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,

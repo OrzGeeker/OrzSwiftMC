@@ -9,30 +9,30 @@ import Foundation
 import JokerKits
 
 public struct PluginInfo: Codable, JsonRepresentable {
-    let name: String
-    let desc: String
-    let url: String
-    var type: PluginType
-    var downloadType: PluginDownloadType
-    var status: PluginStatus = .available
-    let site: String?
-    let docs: String?
-    let repo: String?
-    var enable: Bool = true
+    public let name: String
+    public let desc: String
+    public let url: String
+    public var type: PluginType
+    public var downloadType: PluginDownloadType
+    public var status: PluginStatus = .available
+    public let site: String?
+    public let docs: String?
+    public let repo: String?
+    public var enable: Bool = true
     
-    enum PluginType: String, Codable {
+    public enum PluginType: String, Codable {
         case bukkit
         case spigot
         case paper
     }
     
-    enum PluginDownloadType: String, Codable {
+    public enum PluginDownloadType: String, Codable {
         case automatic
         case manual
         case needAuth
     }
     
-    enum PluginStatus: String, Codable {
+    public enum PluginStatus: String, Codable {
         case available
         case deprecated
         case unavailable
