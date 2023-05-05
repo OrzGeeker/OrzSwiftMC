@@ -13,9 +13,9 @@ extension Server {
     func launchServer(_ filePath: String, workDirectory: GameDir) async throws {
         
         var args = [
+            "-server",
             "-Xms" + serverInfo.minMem,
             "-Xmx" + serverInfo.maxMem,
-            "-Dterminal.jline=false",
             "-jar",
             filePath
         ]
