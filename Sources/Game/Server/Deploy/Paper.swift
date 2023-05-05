@@ -68,6 +68,9 @@ public struct PaperServer: Server {
         
         let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)
-        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
+        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath, jarArgs: [
+            "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
+            "--noconsole"
+        ])
     }
 }

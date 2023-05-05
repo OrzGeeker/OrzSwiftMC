@@ -22,7 +22,7 @@ struct ServerCommand: AsyncCommand {
         @Flag(name: "force_upgrade", short: "f", help: "强制升级地图")
         var forceUpgrade: Bool
         
-        @Option(name: "type", short: "t", help: "服务器类型")
+        @Option(name: "type", short: "t", help: "服务器类型: paper/vanilla, 默认：paper")
         var type: String?
         
         @Option(name: "version", short: "v", help: "游戏版本号")

@@ -10,16 +10,16 @@ import JokerKits
 
 extension Server {
     
-    func launchServer(_ filePath: String, workDirectory: GameDir) async throws {
+    func launchServer(_ filePath: String, workDirectory: GameDir, jarArgs: [String] = []) async throws {
         
         var args = [
             "-server",
             "-Xms" + serverInfo.minMem,
             "-Xmx" + serverInfo.maxMem,
             "-jar",
-            filePath
+            filePath,
         ]
-        
+                
         if serverInfo.showJarHelpInfo {
             args.append("--help")
         } else {
@@ -30,6 +30,10 @@ extension Server {
             
             if serverInfo.forceUpgrade {
                 args.append("--forceUpgrade")
+            }
+            
+            if !jarArgs.isEmpty {
+                args += jarArgs
             }
             
             if let jarOpts = serverInfo.jarOptions {
