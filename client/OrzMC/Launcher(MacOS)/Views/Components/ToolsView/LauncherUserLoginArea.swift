@@ -22,7 +22,7 @@ struct LauncherUserLoginArea: View {
                     .bold()
                     .frame(maxWidth: 150)
             }
-            LauncherUIButton(title:"登录", imageSystemName: "person.circle", action: loginAction)
+            LauncherUIButton(title:"启动客户端", action: loginAction)
         }
         .padding()
     }

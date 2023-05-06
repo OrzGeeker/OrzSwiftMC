@@ -30,7 +30,7 @@
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6312903FF65003CB50C /* GUILauncher.swift */; platformFilters = (macos, ); };
-		F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422B829D92C4100997DA9 /* ServerView.swift */; };
+		F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422B829D92C4100997DA9 /* ServerView.swift */; platformFilters = (macos, ); };
 		F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */; };
 /* End PBXBuildFile section */
 
