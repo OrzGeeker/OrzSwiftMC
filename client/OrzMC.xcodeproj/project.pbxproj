@@ -30,6 +30,26 @@
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6312903FF65003CB50C /* GUILauncher.swift */; platformFilters = (macos, ); };
+		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; };
+		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; };
+		F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */; };
+		F3B4D0D02A1A776A0095B108 /* MCRCONError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BE2A1A776A0095B108 /* MCRCONError.swift */; };
+		F3B4D0D12A1A776A0095B108 /* MCSLPPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C02A1A776A0095B108 /* MCSLPPacket.swift */; };
+		F3B4D0D22A1A776A0095B108 /* MCSLPStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C12A1A776A0095B108 /* MCSLPStatus.swift */; };
+		F3B4D0D32A1A776A0095B108 /* String+base64Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C22A1A776A0095B108 /* String+base64Image.swift */; };
+		F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C32A1A776A0095B108 /* MCSLP.swift */; };
+		F3B4D0D52A1A776A0095B108 /* MCSLPError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C42A1A776A0095B108 /* MCSLPError.swift */; };
+		F3B4D0D62A1A776A0095B108 /* Array+UInt8.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C62A1A776A0095B108 /* Array+UInt8.swift */; };
+		F3B4D0D72A1A776A0095B108 /* MCServerStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C72A1A776A0095B108 /* MCServerStatus.swift */; };
+		F3B4D0D82A1A776A0095B108 /* MCQueryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C82A1A776A0095B108 /* MCQueryError.swift */; };
+		F3B4D0D92A1A776A0095B108 /* MCQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0C92A1A776A0095B108 /* MCQuery.swift */; };
+		F3B4D0DA2A1A776A0095B108 /* Int32+BigEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0CA2A1A776A0095B108 /* Int32+BigEndianBytes.swift */; };
+		F3B4D0DB2A1A776A0095B108 /* MCQuery+Packet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0CB2A1A776A0095B108 /* MCQuery+Packet.swift */; };
+		F3B4D0DC2A1A776A0095B108 /* String+MOTD.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0CC2A1A776A0095B108 /* String+MOTD.swift */; };
+		F3B4D0DF2A1A777A0095B108 /* MCServerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0DD2A1A777A0095B108 /* MCServerInfo.swift */; };
+		F3B4D0E02A1A777A0095B108 /* MCServerStatusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0DE2A1A777A0095B108 /* MCServerStatusInfo.swift */; };
+		F3B4D0E52A1A79390095B108 /* Socket in Frameworks */ = {isa = PBXBuildFile; productRef = F3B4D0E42A1A79390095B108 /* Socket */; };
+		F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0E62A1A7BEB0095B108 /* MCServerInfo+Equatable.swift */; };
 		F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422B829D92C4100997DA9 /* ServerView.swift */; platformFilters = (macos, ); };
 		F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */; };
 /* End PBXBuildFile section */
@@ -80,6 +100,25 @@
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 		F339F6312903FF65003CB50C /* GUILauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUILauncher.swift; sourceTree = "<group>"; };
+		F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+littleEndianBytes.swift"; sourceTree = "<group>"; };
+		F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRCON.swift; sourceTree = "<group>"; };
+		F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCONPacket.swift; sourceTree = "<group>"; };
+		F3B4D0BE2A1A776A0095B108 /* MCRCONError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRCONError.swift; sourceTree = "<group>"; };
+		F3B4D0C02A1A776A0095B108 /* MCSLPPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSLPPacket.swift; sourceTree = "<group>"; };
+		F3B4D0C12A1A776A0095B108 /* MCSLPStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSLPStatus.swift; sourceTree = "<group>"; };
+		F3B4D0C22A1A776A0095B108 /* String+base64Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+base64Image.swift"; sourceTree = "<group>"; };
+		F3B4D0C32A1A776A0095B108 /* MCSLP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSLP.swift; sourceTree = "<group>"; };
+		F3B4D0C42A1A776A0095B108 /* MCSLPError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCSLPError.swift; sourceTree = "<group>"; };
+		F3B4D0C62A1A776A0095B108 /* Array+UInt8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+UInt8.swift"; sourceTree = "<group>"; };
+		F3B4D0C72A1A776A0095B108 /* MCServerStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCServerStatus.swift; sourceTree = "<group>"; };
+		F3B4D0C82A1A776A0095B108 /* MCQueryError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCQueryError.swift; sourceTree = "<group>"; };
+		F3B4D0C92A1A776A0095B108 /* MCQuery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCQuery.swift; sourceTree = "<group>"; };
+		F3B4D0CA2A1A776A0095B108 /* Int32+BigEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+BigEndianBytes.swift"; sourceTree = "<group>"; };
+		F3B4D0CB2A1A776A0095B108 /* MCQuery+Packet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MCQuery+Packet.swift"; sourceTree = "<group>"; };
+		F3B4D0CC2A1A776A0095B108 /* String+MOTD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+MOTD.swift"; sourceTree = "<group>"; };
+		F3B4D0DD2A1A777A0095B108 /* MCServerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCServerInfo.swift; sourceTree = "<group>"; };
+		F3B4D0DE2A1A777A0095B108 /* MCServerStatusInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCServerStatusInfo.swift; sourceTree = "<group>"; };
+		F3B4D0E62A1A7BEB0095B108 /* MCServerInfo+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MCServerInfo+Equatable.swift"; sourceTree = "<group>"; };
 		F3C422B829D92C4100997DA9 /* ServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerView.swift; sourceTree = "<group>"; };
 		F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleText.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B79FC4C2906A791000C21A1 /* Game in Frameworks */,
+				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,8 +270,8 @@
 		2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */ = {
 			isa = PBXGroup;
 			children = (
-				2B79DCF529066BBC000C21A1 /* ContentView.swift */,
-				2BD03D782907F93200BE1D1F /* Model.swift */,
+				F3B4D0E12A1A778B0095B108 /* App */,
+				F3B4D0B92A1A776A0095B108 /* Protocol */,
 			);
 			path = "MobileHelper(iOS)";
 			sourceTree = "<group>";
@@ -298,6 +338,89 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F3B4D0B72A1A76E70095B108 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0DD2A1A777A0095B108 /* MCServerInfo.swift */,
+				F3B4D0E62A1A7BEB0095B108 /* MCServerInfo+Equatable.swift */,
+				F3B4D0DE2A1A777A0095B108 /* MCServerStatusInfo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F3B4D0B82A1A76EF0095B108 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B79DCF529066BBC000C21A1 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F3B4D0B92A1A776A0095B108 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0B72A1A76E70095B108 /* Models */,
+				F3B4D0E22A1A77CB0095B108 /* Utils */,
+				F3B4D0BA2A1A776A0095B108 /* RCON */,
+				F3B4D0BF2A1A776A0095B108 /* ServerListPing */,
+				F3B4D0C52A1A776A0095B108 /* Query */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F3B4D0BA2A1A776A0095B108 /* RCON */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */,
+				F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */,
+				F3B4D0BE2A1A776A0095B108 /* MCRCONError.swift */,
+			);
+			path = RCON;
+			sourceTree = "<group>";
+		};
+		F3B4D0BF2A1A776A0095B108 /* ServerListPing */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0C02A1A776A0095B108 /* MCSLPPacket.swift */,
+				F3B4D0C12A1A776A0095B108 /* MCSLPStatus.swift */,
+				F3B4D0C32A1A776A0095B108 /* MCSLP.swift */,
+				F3B4D0C42A1A776A0095B108 /* MCSLPError.swift */,
+			);
+			path = ServerListPing;
+			sourceTree = "<group>";
+		};
+		F3B4D0C52A1A776A0095B108 /* Query */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0C72A1A776A0095B108 /* MCServerStatus.swift */,
+				F3B4D0C82A1A776A0095B108 /* MCQueryError.swift */,
+				F3B4D0C92A1A776A0095B108 /* MCQuery.swift */,
+				F3B4D0CB2A1A776A0095B108 /* MCQuery+Packet.swift */,
+			);
+			path = Query;
+			sourceTree = "<group>";
+		};
+		F3B4D0E12A1A778B0095B108 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				2BD03D782907F93200BE1D1F /* Model.swift */,
+				F3B4D0B82A1A76EF0095B108 /* Views */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		F3B4D0E22A1A77CB0095B108 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F3B4D0CA2A1A776A0095B108 /* Int32+BigEndianBytes.swift */,
+				F3B4D0CC2A1A776A0095B108 /* String+MOTD.swift */,
+				F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */,
+				F3B4D0C22A1A776A0095B108 /* String+base64Image.swift */,
+				F3B4D0C62A1A776A0095B108 /* Array+UInt8.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -316,6 +439,7 @@
 			name = OrzMC;
 			packageProductDependencies = (
 				2B79FC4B2906A791000C21A1 /* Game */,
+				F3B4D0E42A1A79390095B108 /* Socket */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -390,6 +514,7 @@
 			);
 			mainGroup = 2B1C798928FEAB0600D53658;
 			packageReferences = (
+				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -434,24 +559,43 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */,
+				F3B4D0D02A1A776A0095B108 /* MCRCONError.swift in Sources */,
+				F3B4D0D72A1A776A0095B108 /* MCServerStatus.swift in Sources */,
 				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
+				F3B4D0D32A1A776A0095B108 /* String+base64Image.swift in Sources */,
+				F3B4D0D12A1A776A0095B108 /* MCSLPPacket.swift in Sources */,
 				F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */,
+				F3B4D0DC2A1A776A0095B108 /* String+MOTD.swift in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
 				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
+				F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */,
 				2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */,
+				F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
+				F3B4D0D62A1A776A0095B108 /* Array+UInt8.swift in Sources */,
+				F3B4D0D92A1A776A0095B108 /* MCQuery.swift in Sources */,
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
 				2BD03D792907F93200BE1D1F /* Model.swift in Sources */,
 				F339F6322903FF65003CB50C /* GUILauncher.swift in Sources */,
+				F3B4D0E02A1A777A0095B108 /* MCServerStatusInfo.swift in Sources */,
 				2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */,
+				F3B4D0D52A1A776A0095B108 /* MCSLPError.swift in Sources */,
+				F3B4D0D22A1A776A0095B108 /* MCSLPStatus.swift in Sources */,
+				F3B4D0DA2A1A776A0095B108 /* Int32+BigEndianBytes.swift in Sources */,
 				F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */,
+				F3B4D0DF2A1A777A0095B108 /* MCServerInfo.swift in Sources */,
 				F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */,
 				F3C422B929D92C4100997DA9 /* ServerView.swift in Sources */,
 				2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */,
+				F3B4D0DB2A1A776A0095B108 /* MCQuery+Packet.swift in Sources */,
+				F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */,
+				F3B4D0D82A1A776A0095B108 /* MCQueryError.swift in Sources */,
 				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
+				F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */,
 				2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */,
+				F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -832,10 +976,26 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Kitura/BlueSocket.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		2B79FC4B2906A791000C21A1 /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
+		};
+		F3B4D0E42A1A79390095B108 /* Socket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */;
+			productName = Socket;
 		};
 /* End XCSwiftPackageProductDependency section */
 

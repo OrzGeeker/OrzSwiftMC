@@ -78,11 +78,14 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     
-    static let mockModel = LauncherModel.mockModel
+    static let model = LauncherModel()
     
     static var previews: some View {
         MainView()
-            .environmentObject(mockModel)
-            .previewLayout(.fixed(width: mockModel.windowSize.width, height: mockModel.windowSize.height))
+            .environmentObject(model)
+            .previewLayout(.fixed(
+                width: model.windowSize.width,
+                height: model.windowSize.height)
+            )
     }
 }
