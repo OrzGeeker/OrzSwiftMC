@@ -16,6 +16,7 @@ final class PaperMCTests: XCTestCase {
         XCTAssertNotNil(data)
         
         let projectsResponse = try jsonDecoder.decode(ProjectsResponse.self, from: data!)
+        print(projectsResponse)
         XCTAssertTrue(projectsResponse.projects.count == 4)
     }
     
