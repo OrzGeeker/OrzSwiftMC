@@ -8,7 +8,4 @@
 import Foundation
 
 class Model: ObservableObject {
-    static let shared = Model()
-    static let mock = Model()
-    private init() {}
 }

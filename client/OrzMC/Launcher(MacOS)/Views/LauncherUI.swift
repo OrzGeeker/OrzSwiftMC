@@ -39,7 +39,7 @@ struct LauncherUI: View {
 struct LauncherUI_Previews: PreviewProvider {
     static var previews: some View {
         LauncherUI()
-            .environmentObject(LauncherModel.mockModel)
+            .environmentObject(LauncherModel())
     }
 }
 

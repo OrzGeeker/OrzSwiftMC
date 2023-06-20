@@ -77,6 +77,6 @@ struct ServerView_Previews: PreviewProvider {
     static var previews: some View {
         ServerView()
             .frame(width: 400, height: 200)
-            .environmentObject(LauncherModel.mockModel)
+            .environmentObject(LauncherModel())
     }
 }

@@ -9,15 +9,25 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
+    
+#if os(macOS)
+    @StateObject var model = LauncherModel()
+#endif
+    
+#if os(iOS)
+    @StateObject var model = Model()
+#endif
+    
     var body: some Scene {
         WindowGroup {
             VStack {
 #if os(macOS)
-                LauncherUI().environmentObject(LauncherModel.shared)
+                LauncherUI()
 #elseif os(iOS)
-                ContentView().environmentObject(Model.shared)
+                ContentView()
 #endif
             }
+            .environmentObject(model)
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
         }
 #if os(macOS)

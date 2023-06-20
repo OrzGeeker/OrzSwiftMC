@@ -11,9 +11,8 @@ import Combine
 import CoreData
 
 class LauncherModel: ObservableObject {
-    static let shared = LauncherModel()
-    static let mockModel = LauncherModel()
-    private init() {}
+    
+    static let shared =  LauncherModel()
     
     /// 当前玩家ID
     @Published var username: String = ""
@@ -59,7 +58,9 @@ class LauncherModel: ObservableObject {
     var disposable: AnyCancellable? = nil
     lazy var progressSubject: PassthroughSubject<Double, Never> = {
         let subject = PassthroughSubject<Double, Never>()
-        self.disposable = subject.receive(on: RunLoop.main).assign(to: \Self.launcherProgress, on: self)
+        self.disposable = subject
+            .receive(on: RunLoop.main)
+            .assign(to: \Self.launcherProgress, on: self)
         return subject
     }()
     
