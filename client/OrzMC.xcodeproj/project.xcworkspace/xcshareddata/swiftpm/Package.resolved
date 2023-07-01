@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
-        "version" : "5.6.4"
+        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+        "version" : "5.7.1"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mattpolzin/OpenAPIKit.git",
       "state" : {
-        "revision" : "d40e6c3d57b1b27ac2114861d5a83cf8ee9d206d",
-        "version" : "3.0.0-alpha.6"
+        "revision" : "84f6702500fb00476d74420c1a0df64cddd3993e",
+        "version" : "3.0.0-alpha.7"
       }
     },
     {
@@ -95,8 +95,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-openapi-generator.git",
       "state" : {
-        "revision" : "f530c906215528a7450fc7602b9f93d9236eb4c0",
-        "version" : "0.1.2"
+        "branch" : "main",
+        "revision" : "ec7a1c5b37df0fc20fc5033717c09315a4d40fc3"
       }
     },
     {

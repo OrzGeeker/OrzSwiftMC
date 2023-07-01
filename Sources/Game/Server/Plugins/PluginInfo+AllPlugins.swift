@@ -115,7 +115,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "LuckPerms",
                 desc: "玩家权限管理",
-                url:  "https://download.luckperms.net/1480/bukkit/loader/LuckPerms-Bukkit-5.4.69.jar",
+                url:  "https://download.luckperms.net/1512/bukkit/loader/LuckPerms-Bukkit-5.4.98.jar",
                 type: .bukkit,
                 downloadType: .manual,
                 site: "https://luckperms.net/",
@@ -124,7 +124,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "BlueMap",
                 desc: "Web端服务器地图3D浏览",
-                url:  "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v3.12/BlueMap-3.12-spigot.jar",
+                url:  "https://github.com/BlueMap-Minecraft/BlueMap/releases/download/v3.14/BlueMap-3.14-spigot.jar",
                 type: .spigot,
                 downloadType: .manual,
                 site: "https://bluemap.bluecolored.de/",
@@ -133,7 +133,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "ViaVersion",
                 desc: "老版服务器兼容新版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=490552",
+                url:  "https://www.spigotmc.org/resources/viaversion.19254/download?version=499424",
                 type: .spigot,
                 downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/viaversion.19254/",
@@ -142,7 +142,7 @@ public extension PluginInfo {
             PluginInfo(
                 name: "ViaBackwards",
                 desc: "服务端兼容旧版本客户端登录",
-                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=489430",
+                url:  "https://www.spigotmc.org/resources/viabackwards.27448/download?version=499649",
                 type: .spigot,
                 downloadType: .needAuth,
                 site: "https://www.spigotmc.org/resources/viabackwards.27448/",

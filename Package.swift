@@ -21,9 +21,8 @@ let package = Package(
         .package(url: "https://github.com/vapor/console-kit.git", from: "4.4.0"),
         .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "2.0.0")),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1")),
-//        .package(url: "https://github.com/apple/swift-openapi-generator.git", from: "0.1.2"),
-        .package(url: "https://github.com/apple/swift-openapi-generator.git", branch: "main"),
-        .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "0.1.3"),
+        .package(url: "https://github.com/apple/swift-openapi-generator.git", branch: "0.1.3"),
+        .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "0.1.4"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "0.1.1")
     ],
     targets: [
@@ -74,13 +73,13 @@ let package = Package(
                      name: "OpenAPIURLSession",
                      package: "swift-openapi-urlsession"
                  ),
-            ]
-//            plugins: [
+            ],
+            plugins: [
 //                .plugin(
 //                    name: "OpenAPIGenerator",
 //                    package: "swift-openapi-generator"
 //                )
-//            ]
+            ]
         ),
         .testTarget(
             name: "PaperMCTests",
