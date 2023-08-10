@@ -190,7 +190,6 @@
 		2B00920329D02B4B002637E3 /* ReusableView */ = {
 			isa = PBXGroup;
 			children = (
-				2B79D9E129066171000C21A1 /* Shapes */,
 				2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */,
 				F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */,
 				F339F62E2903CF61003CB50C /* CircleAnimationView.swift */,
@@ -258,13 +257,6 @@
 				2B1C79B828FEAB0700D53658 /* OrzMCUITestsLaunchTests.swift */,
 			);
 			path = OrzMCUITests;
-			sourceTree = "<group>";
-		};
-		2B79D9E129066171000C21A1 /* Shapes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Shapes;
 			sourceTree = "<group>";
 		};
 		2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */ = {

@@ -18,12 +18,12 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/vapor/console-kit.git", from: "4.4.0"),
-        .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "2.0.0")),
+        .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.4.0")),
+        .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "2.6.0")),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1")),
-        .package(url: "https://github.com/apple/swift-openapi-generator.git", branch: "0.1.3"),
-        .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "0.1.4"),
-        .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "0.1.1")
+        .package(url: "https://github.com/apple/swift-openapi-generator.git", .upToNextMajor(from:"0.1.8")),
+        .package(url: "https://github.com/apple/swift-openapi-runtime.git", .upToNextMajor(from:"0.1.8")),
+        .package(url: "https://github.com/apple/swift-openapi-urlsession.git", .upToNextMajor(from:"0.1.2"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -66,20 +66,21 @@ let package = Package(
             dependencies: [
                 "JokerKits",
                 .product(
-                     name: "OpenAPIRuntime",
-                     package: "swift-openapi-runtime"
-                 ),
-                 .product(
-                     name: "OpenAPIURLSession",
-                     package: "swift-openapi-urlsession"
-                 ),
-            ],
-            plugins: [
+                    name: "OpenAPIRuntime",
+                    package: "swift-openapi-runtime"
+                ),
+                .product(
+                    name: "OpenAPIURLSession",
+                    package: "swift-openapi-urlsession"
+                ),
+            ]
+            //,
+//            plugins: [
 //                .plugin(
 //                    name: "OpenAPIGenerator",
 //                    package: "swift-openapi-generator"
 //                )
-            ]
+//            ]
         ),
         .testTarget(
             name: "PaperMCTests",
