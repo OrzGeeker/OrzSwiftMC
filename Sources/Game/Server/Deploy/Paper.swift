@@ -70,8 +70,8 @@ public struct PaperServer: Server {
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)
         try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
-            "--nojline",
-            "--noconsole"
+//            "--nojline",
+//            "--noconsole"
         ])
     }
 }

@@ -21,8 +21,10 @@ let package = Package(
         .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.4.0")),
         .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "2.6.0")),
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1")),
-        .package(url: "https://github.com/apple/swift-openapi-generator.git", .upToNextMajor(from:"0.1.8")),
-        .package(url: "https://github.com/apple/swift-openapi-runtime.git", .upToNextMajor(from:"0.1.8")),
+//        .package(url: "https://github.com/apple/swift-openapi-generator.git", .upToNextMajor(from:"0.1.11")),
+        .package(url: "https://github.com/czechboy0/swift-openapi-generator.git", branch: "hd-uri-encoder-integration"),
+//        .package(url: "https://github.com/apple/swift-openapi-runtime.git", .upToNextMajor(from:"0.1.10")),
+        .package(url: "https://github.com/czechboy0/swift-openapi-runtime.git", branch: "hd-uri-encoder-integration"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", .upToNextMajor(from:"0.1.2"))
     ],
     targets: [
@@ -74,13 +76,13 @@ let package = Package(
                     package: "swift-openapi-urlsession"
                 ),
             ]
-            //,
-//            plugins: [
-//                .plugin(
-//                    name: "OpenAPIGenerator",
-//                    package: "swift-openapi-generator"
-//                )
-//            ]
+            ,
+            plugins: [
+                .plugin(
+                    name: "OpenAPIGenerator",
+                    package: "swift-openapi-generator"
+                )
+            ]
         ),
         .testTarget(
             name: "PaperMCTests",

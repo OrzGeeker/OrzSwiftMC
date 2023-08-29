@@ -37,7 +37,7 @@ struct ServerCommand: AsyncCommand {
         @Option(name: "online-mode", short: "o", help: "服务端运行时是否使用Online模式，默认为：false")
         var onlineMode: Bool?
         
-        @Flag(name: "jar-help", short: "j", help: "查看服务端Jar包的帮助信息")
+        @Flag(name: "jar-help", short: "j", help: "查看服务端jar包的帮助信息")
         var jarHelp: Bool
         
         @Option(name: "jar-opts", short: "e", help: "jar文件运行时额外选项, 字符串参数以 a: 开头，例如：--jar-opts \"a:--help\"")
