@@ -19,7 +19,7 @@ final class CertbotTests: XCTestCase {
     }
 
     func testExample() throws {
-        try "brew info".exec()
+        _ = try "brew info".exec()
     }
 
     func testPerformanceExample() throws {

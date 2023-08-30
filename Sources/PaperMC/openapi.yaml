@@ -39,21 +39,17 @@ servers:
 - url: https://hangar.papermc.io
   description: Generated server url
 paths:
-  /api/v1/projects/{author}/{slug}/upload:
+  /api/v1/projects/{slug}/upload:
     post:
       tags:
       - Versions
       summary: Creates a new version and returns parts of its metadata
-      description: Creates a new version for a project. Requires the `create_version`
-        permission in the project or owning organization.
+      description: |-
+        Creates a new version for a project. Requires the `create_version` permission in the project or owning organization.
+        Make sure you provide the contents of this request as multipart/form-data.
+        You can find a simple example implementation written in Java here: https://gist.github.com/kennytv/a227d82249f54e0ad35005330256fee2
       operationId: uploadVersion
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return versions for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return versions for
@@ -99,6 +95,49 @@ paths:
       security:
       - HangarAuth:
         - create_version
+  /api/v1/projects/{author}/{slug}/upload:
+    post:
+      tags:
+      - Versions
+      operationId: uploadVersion_1
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to return versions for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return versions for
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              required:
+              - versionUpload
+              type: object
+              properties:
+                files:
+                  type: array
+                  description: "The version files in order of selected platforms,\
+                    \ if any"
+                  items:
+                    type: string
+                    format: binary
+                versionUpload:
+                  $ref: '#/components/schemas/VersionUpload'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UploadedVersion'
+      deprecated: true
   /api/v1/keys:
     get:
       tags:
@@ -224,7 +263,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ApiSession'
-  /api/v1/pages/editmain/{author}/{slug}:
+  /api/v1/pages/editmain/{slug}:
     patch:
       tags:
       - Pages
@@ -233,12 +272,6 @@ paths:
         in the project or owning organization.
       operationId: editMainPage
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to change the page for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to change the page for
@@ -261,7 +294,7 @@ paths:
       security:
       - HangarAuth:
         - edit_page
-  /api/v1/pages/edit/{author}/{slug}:
+  /api/v1/pages/edit/{slug}:
     patch:
       tags:
       - Pages
@@ -270,12 +303,6 @@ paths:
         in the project or owning organization.
       operationId: editPage
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to change the page for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to change the page for
@@ -592,10 +619,10 @@ paths:
         \ the `view_public_info` permission."
       operationId: getProjects
       parameters:
-      - name: orderWithRelevance
+      - name: prioritizeExactMatch
         in: query
-        description: Whether projects should be sorted by the relevance to the given
-          query
+        description: Whether to prioritize the project with an exact name match if
+          present
         required: false
         schema:
           type: boolean
@@ -685,7 +712,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}:
+  /api/v1/projects/{slug}:
     get:
       tags:
       - Projects
@@ -694,12 +721,6 @@ paths:
         permission.
       operationId: getProject
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return
@@ -728,7 +749,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/watchers:
+  /api/v1/projects/{slug}/watchers:
     get:
       tags:
       - Projects
@@ -737,12 +758,6 @@ paths:
         permission.
       operationId: getProjectWatchers
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return watchers for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return watchers for
@@ -777,7 +792,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/versions:
+  /api/v1/projects/{slug}/versions:
     get:
       tags:
       - Versions
@@ -786,12 +801,6 @@ paths:
         permission in the project or owning organization.
       operationId: listVersions
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return versions for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return versions for
@@ -844,7 +853,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/versions/{name}:
+  /api/v1/projects/{slug}/versions/{name}:
     get:
       tags:
       - Versions
@@ -853,12 +862,6 @@ paths:
         permission in the project or owning organization.
       operationId: showVersion
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return the version for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return the version for
@@ -893,7 +896,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/versions/{name}/{platform}/download:
+  /api/v1/projects/{slug}/versions/{name}/{platform}/download:
     get:
       tags:
       - Versions
@@ -902,12 +905,6 @@ paths:
         visibility of the project and version.
       operationId: downloadVersion
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to download the version from
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to download the version from
@@ -959,7 +956,7 @@ paths:
                 type: object
       security:
       - HangarAuth: []
-  /api/v1/projects/{author}/{slug}/versions/{name}/stats:
+  /api/v1/projects/{slug}/versions/{name}/stats:
     get:
       tags:
       - Versions
@@ -968,12 +965,6 @@ paths:
         date range. Requires the `is_subject_member` permission.
       operationId: showVersionStats
       parameters:
-      - name: author
-        in: path
-        description: The author of the version to return the stats for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return stats for
@@ -1028,7 +1019,7 @@ paths:
       security:
       - HangarAuth:
         - is_subject_member
-  /api/v1/projects/{author}/{slug}/stats:
+  /api/v1/projects/{slug}/stats:
     get:
       tags:
       - Projects
@@ -1037,12 +1028,6 @@ paths:
         a certain date range. Requires the `is_subject_member` permission.
       operationId: showProjectStats
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return stats for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return stats for
@@ -1091,7 +1076,7 @@ paths:
       security:
       - HangarAuth:
         - is_subject_member
-  /api/v1/projects/{author}/{slug}/stargazers:
+  /api/v1/projects/{slug}/stargazers:
     get:
       tags:
       - Projects
@@ -1100,12 +1085,6 @@ paths:
         permission.
       operationId: getProjectStargazers
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return stargazers for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return stargazers for
@@ -1140,7 +1119,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/members:
+  /api/v1/projects/{slug}/members:
     get:
       tags:
       - Projects
@@ -1149,12 +1128,6 @@ paths:
         permission.
       operationId: getProjectMembers
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return members for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return members for
@@ -1189,7 +1162,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/latestrelease:
+  /api/v1/projects/{slug}/latestrelease:
     get:
       tags:
       - Versions
@@ -1198,12 +1171,6 @@ paths:
         permission in the project or owning organizations.
       operationId: latestReleaseVersion
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return the latest version for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return the latest version for
@@ -1232,7 +1199,7 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
-  /api/v1/projects/{author}/{slug}/latest:
+  /api/v1/projects/{slug}/latest:
     get:
       tags:
       - Versions
@@ -1241,12 +1208,6 @@ paths:
         permission in the project or owning organization.
       operationId: latestVersion
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return the latest version for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return the latest version for
@@ -1281,6 +1242,214 @@ paths:
       security:
       - HangarAuth:
         - view_public_info
+  /api/v1/projects/{author}/{slug}/versions:
+    get:
+      tags:
+      - Versions
+      operationId: getVersions
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to return versions for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return versions for
+        required: true
+        schema:
+          type: string
+      - name: pagination
+        in: query
+        description: Pagination information
+        required: true
+        schema:
+          $ref: '#/components/schemas/RequestPagination'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedResultVersion'
+      deprecated: true
+  /api/v1/projects/{author}/{slug}/versions/{name}:
+    get:
+      tags:
+      - Versions
+      operationId: getVersion
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to return the version for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return the version for
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the version to return
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Version'
+      deprecated: true
+  /api/v1/projects/{author}/{slug}/versions/{name}/{platform}/download:
+    get:
+      tags:
+      - Versions
+      operationId: downloadVersion_1
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to download the version from
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to download the version from
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The name of the version to download
+        required: true
+        schema:
+          type: string
+      - name: platform
+        in: path
+        description: The platform of the version to download
+        required: true
+        schema:
+          $ref: '#/components/schemas/Platform'
+      responses:
+        "200":
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: object
+      deprecated: true
+  /api/v1/projects/{author}/{slug}/versions/{name}/stats:
+    get:
+      tags:
+      - Versions
+      operationId: getVersionStats
+      parameters:
+      - name: author
+        in: path
+        description: The author of the version to return the stats for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return stats for
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        description: The version to return the stats for
+        required: true
+        schema:
+          type: string
+      - name: fromDate
+        in: query
+        description: The first date to include in the result
+        required: true
+        schema:
+          type: string
+          format: date-time
+      - name: toDate
+        in: query
+        description: The last date to include in the result
+        required: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties:
+                  $ref: '#/components/schemas/VersionStats'
+      deprecated: true
+  /api/v1/projects/{author}/{slug}/latestrelease:
+    get:
+      tags:
+      - Versions
+      operationId: getLatestReleaseVersion
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to return the latest version for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return the latest version for
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: true
+  /api/v1/projects/{author}/{slug}/latest:
+    get:
+      tags:
+      - Versions
+      operationId: getLatestVersion
+      parameters:
+      - name: author
+        in: path
+        description: The author of the project to return the latest version for
+        required: true
+        schema:
+          type: string
+      - name: slug
+        in: path
+        description: The slug of the project to return the latest version for
+        required: true
+        schema:
+          type: string
+      - name: channel
+        in: query
+        description: The channel to return the latest version for
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            text/plain:
+              schema:
+                type: string
+      deprecated: true
   /api/v1/permissions:
     get:
       tags:
@@ -1289,13 +1458,6 @@ paths:
       description: Returns a list of permissions you have in the given context
       operationId: showPermissions
       parameters:
-      - name: author
-        in: query
-        description: The owner of the project to get the permissions for. Must not
-          be used together with `organizationName`
-        required: false
-        schema:
-          type: string
       - name: slug
         in: query
         description: The slug of the project get the permissions for. Must not be
@@ -1349,13 +1511,6 @@ paths:
           type: array
           items:
             $ref: '#/components/schemas/NamedPermission'
-      - name: author
-        in: query
-        description: The owner of the project to check permissions in. Must not be
-          used together with `organizationName
-        required: false
-        schema:
-          type: string
       - name: slug
         in: query
         description: The slug of the project to check permissions in. Must not be
@@ -1411,13 +1566,6 @@ paths:
           type: array
           items:
             $ref: '#/components/schemas/NamedPermission'
-      - name: author
-        in: query
-        description: The owner of the project to check permissions in. Must not be
-          used together with `organizationName`
-        required: false
-        schema:
-          type: string
       - name: slug
         in: query
         description: The project slug of the project to check permissions in. Must
@@ -1453,7 +1601,7 @@ paths:
                 $ref: '#/components/schemas/PermissionCheck'
       security:
       - HangarAuth: []
-  /api/v1/pages/page/{author}/{slug}:
+  /api/v1/pages/page/{slug}:
     get:
       tags:
       - Pages
@@ -1461,12 +1609,6 @@ paths:
       description: Returns a page of a project. Requires visibility of the page.
       operationId: getPage
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return the page for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return the page for
@@ -1498,7 +1640,7 @@ paths:
             text/plain:
               schema:
                 type: string
-  /api/v1/pages/main/{author}/{slug}:
+  /api/v1/pages/main/{slug}:
     get:
       tags:
       - Pages
@@ -1507,12 +1649,6 @@ paths:
         page.
       operationId: getMainPage
       parameters:
-      - name: author
-        in: path
-        description: The author of the project to return the page for
-        required: true
-        schema:
-          type: string
       - name: slug
         in: path
         description: The slug of the project to return the page for
@@ -1600,14 +1736,22 @@ components:
           maxItems: 3
           minItems: 1
           type: array
+          description: List of platforms this jar runs on
+          example: "[PAPER, WATERFALL, VELOCITY]"
           items:
             $ref: '#/components/schemas/Platform'
         externalUrl:
           type: string
-        url:
-          type: boolean
+          description: "External url to download the jar from if not provided via\
+            \ an attached jar, else null"
+          example: https://papermc.io/downloads
+      description: List of different jars/external links that are part of the version
     Platform:
+      maxLength: 3
+      minLength: 1
       type: string
+      description: Server platform
+      example: PAPER
       enum:
       - PAPER
       - WATERFALL
@@ -1617,21 +1761,20 @@ components:
       properties:
         name:
           type: string
+          description: "Name of the plugin dependency. For non-external dependencies,\
+            \ this should be the Hangar project name"
+          example: Maintenance
         required:
           type: boolean
-        namespace:
-          $ref: '#/components/schemas/ProjectNamespace'
+          description: Whether the dependency is required for the plugin to function
         externalUrl:
           type: string
+          description: "External url to download the dependency from if not a Hangar\
+            \ project, else null"
+          example: https://papermc.io/downloads
         platform:
           $ref: '#/components/schemas/Platform'
-    ProjectNamespace:
-      type: object
-      properties:
-        owner:
-          type: string
-        slug:
-          type: string
+      description: Map of each platform's plugin dependencies
     VersionUpload:
       required:
       - channel
@@ -1641,20 +1784,32 @@ components:
       properties:
         version:
           type: string
+          description: Version string of the version to be published
+          example: 1.0.0-SNAPSHOT+1
         pluginDependencies:
           type: object
           additionalProperties:
             uniqueItems: true
             type: array
+            description: Map of each platform's plugin dependencies
             items:
               $ref: '#/components/schemas/PluginDependency'
+          description: Map of each platform's plugin dependencies
         platformDependencies:
           type: object
           additionalProperties:
             uniqueItems: true
             type: array
+            description: Map of platforms and their versions this version runs on
+            example: "{PAPER: [\"1.12\", \"1.16-1.18.2\", \"1.20.x\"]}"
             items:
+              maxLength: 3
+              minLength: 1
               type: string
+              description: Map of platforms and their versions this version runs on
+              example: "{PAPER: [\"1.12\", \"1.16-1.18.2\", \"1.20.x\"]}"
+          description: Map of platforms and their versions this version runs on
+          example: "{PAPER: [\"1.12\", \"1.16-1.18.2\", \"1.20.x\"]}"
         description:
           type: string
         files:
@@ -1665,13 +1820,17 @@ components:
             $ref: '#/components/schemas/MultipartFileOrUrl'
         channel:
           type: string
-      description: "Version data. Note that platform versions accept version ranges,\
-        \ e.g. '1.16.4-1.19' and wildcards, e.g '1.19.x'"
+          description: Channel of the version to be published under
+          example: Release
+      description: Version data. See the VersionUpload schema for more info
     UploadedVersion:
       type: object
       properties:
         url:
           type: string
+          description: URL of the uploaded version
+          example: https://hangar.papermc.io/PaperMC/Debuggery/versions/1.0.0
+      description: A version that has been uploaded
     CreateAPIKeyForm:
       required:
       - name
@@ -1729,8 +1888,10 @@ components:
       properties:
         token:
           type: string
+          description: JWT used for authentication
         expiresIn:
           type: integer
+          description: Milliseconds this JWT expires in
           format: int64
     StringContent:
       required:
@@ -1739,6 +1900,7 @@ components:
       properties:
         content:
           type: string
+          description: "A non-null, non-empty string"
       description: The path and new contents of the page
     PageEditForm:
       required:
@@ -1841,11 +2003,11 @@ components:
       - views
       - newest
       - updated
-      - only_relevance
       - recent_views
       - recent_downloads
     Category:
       type: string
+      description: The category of the project
       enum:
       - admin_tools
       - chat
@@ -1875,6 +2037,7 @@ components:
           format: date-time
         name:
           type: string
+          description: The unique name of the project
         namespace:
           $ref: '#/components/schemas/ProjectNamespace'
         stats:
@@ -1883,11 +2046,23 @@ components:
           $ref: '#/components/schemas/Category'
         lastUpdated:
           type: string
+          description: The last time the project was updated
           format: date-time
         visibility:
           $ref: '#/components/schemas/Visibility'
         avatarUrl:
           type: string
+          description: The url to the project's icon
+    ProjectNamespace:
+      type: object
+      properties:
+        owner:
+          type: string
+        slug:
+          type: string
+          description: The unique name of a project
+          example: Maintenance
+      description: The namespace of the project
     ProjectStats:
       type: object
       properties:
@@ -1909,8 +2084,11 @@ components:
         watchers:
           type: integer
           format: int64
+      description: Stats of the project
     Visibility:
       type: string
+      description: The visibility of a project or version
+      example: PUBLIC
       enum:
       - public
       - new
@@ -1938,6 +2116,8 @@ components:
           format: int64
         type:
           type: string
+          description: Type of the link. Either SIDEBAR or TOP
+          example: TOP
         title:
           type: string
         links:
@@ -1961,6 +2141,7 @@ components:
           format: date-time
         name:
           type: string
+          description: The unique name of the project
         namespace:
           $ref: '#/components/schemas/ProjectNamespace'
         stats:
@@ -1969,13 +2150,16 @@ components:
           $ref: '#/components/schemas/Category'
         lastUpdated:
           type: string
+          description: The last time the project was updated
           format: date-time
         visibility:
           $ref: '#/components/schemas/Visibility'
         avatarUrl:
           type: string
+          description: The url to the project's icon
         description:
           type: string
+          description: The short description of the project
         userActions:
           $ref: '#/components/schemas/UserActions'
         settings:
@@ -2021,6 +2205,7 @@ components:
           type: string
         donation:
           $ref: '#/components/schemas/ProjectDonationSettings'
+      description: The settings of the project
     UserActions:
       type: object
       properties:
@@ -2030,12 +2215,14 @@ components:
           type: boolean
         flagged:
           type: boolean
+      description: Information about your interactions with the project
     ChannelFlag:
       type: string
       enum:
       - FROZEN
       - UNSTABLE
       - PINNED
+      - SENDS_NOTIFICATIONS
     Color:
       type: string
       enum:
@@ -2089,8 +2276,10 @@ components:
           $ref: '#/components/schemas/FileInfo'
         externalUrl:
           type: string
+          description: External download url if not directly uploaded to Hangar
         downloadUrl:
           type: string
+          description: Hangar download url if not an external download
     ProjectChannel:
       type: object
       properties:

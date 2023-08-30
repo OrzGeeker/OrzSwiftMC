@@ -84,19 +84,19 @@
     {
       "identity" : "swift-openapi-generator",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/czechboy0/swift-openapi-generator.git",
+      "location" : "https://github.com/apple/swift-openapi-generator.git",
       "state" : {
-        "branch" : "hd-uri-encoder-integration",
-        "revision" : "2b8f763cb60e83443b5776ef87ac711d7c270c56"
+        "revision" : "7ddef95a852300d82bfce9a1befb1e9feac7d156",
+        "version" : "0.1.13"
       }
     },
     {
       "identity" : "swift-openapi-runtime",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/czechboy0/swift-openapi-runtime.git",
+      "location" : "https://github.com/apple/swift-openapi-runtime.git",
       "state" : {
-        "branch" : "hd-uri-encoder-integration",
-        "revision" : "e94d59c91d7895f4d6c7b67c7bc7c21079a13043"
+        "revision" : "9d76a1d5b4975821b2c1bb045e6a09ee4023c27d",
+        "version" : "0.1.11"
       }
     },
     {

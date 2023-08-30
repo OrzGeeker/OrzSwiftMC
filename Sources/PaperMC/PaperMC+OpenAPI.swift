@@ -11,10 +11,11 @@ import OpenAPIURLSession
 
 extension PaperMC {
     
-    static private let client = Client(serverURL: try! Servers.server1(), transport: URLSessionTransport())
+    /// https://hangar.papermc.io/api-docs#/
+    static private let hangar = Client(serverURL: try! Servers.server1(), transport: URLSessionTransport())
     
     static func testAPI() async throws {
-        let response = try await client.latestVersion(.init(path: .init(author: "GeyserMC", slug: "Geyser"), query: .init(channel: "Release")))
-        print(response)
+        let resp = try await hangar.latestReleaseVersion(.init(path: .init(slug: "Geyser")))
+        print(resp)
     }
 }
