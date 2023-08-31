@@ -23,7 +23,7 @@ let package = Package(
         .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.6.1")),
         .package(url: "https://github.com/apple/swift-openapi-generator.git", .upToNextMajor(from:"0.1.13")),
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", .upToNextMajor(from:"0.1.11")),
-        .package(url: "https://github.com/apple/swift-openapi-urlsession.git", .upToNextMajor(from:"0.1.2"))
+        .package(url: "https://github.com/apple/swift-openapi-urlsession.git", .upToNextMajor(from:"0.1.3"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
