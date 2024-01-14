@@ -4,8 +4,8 @@
 //
 //  Created by joker on 2022/10/10.
 //
-
 import Foundation
+import JokerKits
 
 extension PaperMC {
     
@@ -66,7 +66,7 @@ extension PaperMC {
         
         // MARK: 辅助功能
         
-        public lazy var jsonDecoder: JSONDecoder = {
+        public static let jsonDecoder: JSONDecoder = {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return decoder

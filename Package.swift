@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "JokerKits", targets: ["JokerKits"]),
         .library(name: "Mojang", targets: ["Mojang"]),
         .library(name: "PaperMC", targets: ["PaperMC"]),
-        .library(name: "Fabric", targets: ["Fabric"])
+        .library(name: "Fabric", targets: ["Fabric"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -63,8 +63,15 @@ let package = Package(
         ),
         .target(
             name: "PaperMC",
+            dependencies: ["JokerKits", "PaperMCAPI", "HangarAPI"]
+        ),
+        .testTarget(
+            name: "PaperMCTests",
+            dependencies: ["PaperMC"]
+        ),
+        .target(
+            name: "PaperMCAPI",
             dependencies: [
-                "JokerKits",
                 .product(
                     name: "OpenAPIRuntime",
                     package: "swift-openapi-runtime"
@@ -81,9 +88,24 @@ let package = Package(
                 )
             ]
         ),
-        .testTarget(
-            name: "PaperMCTests",
-            dependencies: ["PaperMC"]
+        .target(
+            name: "HangarAPI",
+            dependencies: [
+                .product(
+                    name: "OpenAPIRuntime",
+                    package: "swift-openapi-runtime"
+                ),
+                .product(
+                    name: "OpenAPIURLSession",
+                    package: "swift-openapi-urlsession"
+                ),
+            ],
+            plugins: [
+                .plugin(
+                    name: "OpenAPIGenerator",
+                    package: "swift-openapi-generator"
+                )
+            ]
         ),
         .target(
             name: "Fabric",

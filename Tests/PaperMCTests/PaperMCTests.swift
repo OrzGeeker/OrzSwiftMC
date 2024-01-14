@@ -3,7 +3,7 @@ import XCTest
 
 final class PaperMCTests: XCTestCase {
     
-    let jsonDecoder = PaperMC.api.jsonDecoder
+    let jsonDecoder = PaperMC.APIv2.jsonDecoder
     
     let testVersion = "1.19.2"
     

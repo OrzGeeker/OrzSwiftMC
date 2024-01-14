@@ -34,7 +34,7 @@ public struct PaperServer: Server {
             throw PaperServerError.versionRespFailed
         }
         
-        let decoder = PaperMC.api.jsonDecoder
+        let decoder = PaperMC.APIv2.jsonDecoder
         let version = try decoder.decode(VersionResponse.self, from: versionData)
         
         guard let latestBuild = version.builds.last
