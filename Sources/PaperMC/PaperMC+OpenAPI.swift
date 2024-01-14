@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by joker on 2023/6/20.
 //
@@ -10,12 +10,35 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 extension PaperMC {
-    
+
     /// https://hangar.papermc.io/api-docs#/
     static private let hangar = Client(serverURL: try! Servers.server1(), transport: URLSessionTransport())
-    
-    static func testAPI() async throws {
-        let resp = try await hangar.latestReleaseVersion(.init(path: .init(slug: "Geyser")))
-        print(resp)
+
+    /// 调API前的授权接口
+    /// - Parameter apiKey: https://hangar.papermc.io/ 平台帐号申请的apiKey
+    /// - Returns: json web token
+    static func authenticate(with apiKey: String) async throws -> String? {
+        let response = try await hangar.authenticate(query: .init(apiKey: apiKey))
+        switch response {
+        case .ok(let output):
+            switch output.body {
+            case .json(let apiSession):
+                return apiSession.token
+            }
+        default:
+            return nil
+        }
+    }
+
+    static func latestVersion(for pluginName: String) async throws -> String? {
+        let response = try await hangar.latestReleaseVersion(.init(path: .init(slug: pluginName), headers: .init(accept: [.init(contentType: .plainText)])))
+        switch response {
+        case .ok(let output):
+            let plainText = try output.body.plainText
+            let ret = try await String(collecting: plainText, upTo: 2 * 1024 * 1024)
+            return ret
+        default:
+            return nil
+        }
     }
 }
