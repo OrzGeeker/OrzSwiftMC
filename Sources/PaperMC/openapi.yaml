@@ -57,6 +57,7 @@ paths:
         schema:
           type: string
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -114,6 +115,7 @@ paths:
         schema:
           type: string
       requestBody:
+        required: true
         content:
           multipart/form-data:
             schema:
@@ -692,13 +694,13 @@ paths:
         style: form
         schema:
           type: string
-      - name: q
-        in: query
-        description: "Deprecated: Use 'query' instead"
-        deprecated: true
-        style: form
-        schema:
-          type: string
+#      - name: q
+#        in: query
+#        description: "Deprecated: Use 'query' instead"
+#        deprecated: true
+#        style: form
+#        schema:
+#          type: string
       - name: query
         in: query
         description: The query to use when searching
