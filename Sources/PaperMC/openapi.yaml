@@ -1,4 +1,3 @@
-# Hangar API: https://hangar.papermc.io/v3/api-docs.yaml
 openapi: 3.0.1
 info:
   title: Hangar API
@@ -444,6 +443,19 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/RequestPagination'
+      - name: sort
+        in: query
+        description: Used to sort the result
+        style: form
+        schema:
+          type: string
+          enum:
+          - name
+          - createdAt
+          - projectCount
+          - locked
+          - org
+          - roles
       responses:
         "200":
           description: Ok
@@ -493,6 +505,19 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/RequestPagination'
+      - name: sort
+        in: query
+        description: Used to sort the result
+        style: form
+        schema:
+          type: string
+          enum:
+          - name
+          - createdAt
+          - projectCount
+          - locked
+          - org
+          - roles
       responses:
         "200":
           description: Ok
@@ -667,6 +692,13 @@ paths:
         schema:
           type: string
       - name: q
+        in: query
+        description: "Deprecated: Use 'query' instead"
+        deprecated: true
+        style: form
+        schema:
+          type: string
+      - name: query
         in: query
         description: The query to use when searching
         style: form
@@ -1514,14 +1546,14 @@ paths:
       - name: slug
         in: query
         description: The slug of the project to check permissions in. Must not be
-          used together with `organizationName`
+          used together with `organization`
         required: false
         schema:
           type: string
       - name: organization
         in: query
         description: The organization to check permissions in. Must not be used together
-          with `projectOwner` and `projectSlug`
+          with `slug`
         required: false
         schema:
           type: string
@@ -1733,8 +1765,6 @@ components:
       type: object
       properties:
         platforms:
-          maxItems: 3
-          minItems: 1
           type: array
           description: List of platforms this jar runs on
           example: "[PAPER, WATERFALL, VELOCITY]"
@@ -1747,8 +1777,6 @@ components:
           example: https://papermc.io/downloads
       description: List of different jars/external links that are part of the version
     Platform:
-      maxLength: 3
-      minLength: 1
       type: string
       description: Server platform
       example: PAPER
@@ -1778,7 +1806,6 @@ components:
     VersionUpload:
       required:
       - channel
-      - files
       - version
       type: object
       properties:
@@ -1803,8 +1830,6 @@ components:
             description: Map of platforms and their versions this version runs on
             example: "{PAPER: [\"1.12\", \"1.16-1.18.2\", \"1.20.x\"]}"
             items:
-              maxLength: 3
-              minLength: 1
               type: string
               description: Map of platforms and their versions this version runs on
               example: "{PAPER: [\"1.12\", \"1.16-1.18.2\", \"1.20.x\"]}"
@@ -1929,6 +1954,8 @@ components:
           description: Where to start searching
           format: int64
           example: 0
+    JsonNode:
+      type: object
     PaginatedResultUser:
       type: object
       properties:
@@ -1983,6 +2010,8 @@ components:
             $ref: '#/components/schemas/UserNameChange'
         avatarUrl:
           type: string
+        socials:
+          $ref: '#/components/schemas/JsonNode'
         isOrganization:
           type: boolean
     UserNameChange:
