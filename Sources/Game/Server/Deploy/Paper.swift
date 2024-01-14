@@ -27,48 +27,29 @@ public struct PaperServer: Server {
     }
         
     public func start() async throws {
-        
-        let versionAPI = PaperMC.api.projects("paper").versions(serverInfo.version)
-        guard let versionData = try await versionAPI.getData
-        else {
-            throw PaperServerError.versionRespFailed
-        }
-        
-        let decoder = PaperMC.APIv2.jsonDecoder
-        let version = try decoder.decode(VersionResponse.self, from: versionData)
-        
-        guard let latestBuild = version.builds.last
-        else {
-            throw PaperServerError.convertBuildStringFailed
-        }
-        let buildAPI = versionAPI.builds(latestBuild)
-        guard let buildData = try await buildAPI.getData
-        else {
-            throw PaperServerError.buildRespFailed
-        }
-        
-        let build = try decoder.decode(BuildResponse.self, from: buildData)
-        
-        
-        guard let application = build.downloads["application"]
-        else {
-            throw PaperServerError.applicationFailed
-        }
-        
-        guard let downloadURL = buildAPI.downloads(application.name).url
-        else {
-            throw PaperServerError.downloadURLFailed
-        }
-                
-        let serverJarFileName = downloadURL.lastPathComponent
-        let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
-        let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
-        let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
-        let serverJarFileItem = DownloadItemInfo(sourceURL: downloadURL, dstFileURL: serverJarFileURL, hash: application.sha256, hashType: .sha256)
-        
+        let workDirectory = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
+        let serverJarFileDirPath = workDirectory.dirPath
         let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
-        try await Downloader.download(serverJarFileItem, progressBar: progressBar)
-        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath, jarArgs: [
+        progressBar.start()
+        guard let (name, jar, total) = try await PaperMC.apiV2.downloadLatestBuild(project: .paper, version: serverInfo.version)
+        else {
+            progressBar.fail()
+            return
+        }
+        var jarData = Data()
+        for try await byteChunk in jar {
+            jarData.append(Data(byteChunk))
+            let progress = Double(jarData.count) / Double(total)
+            progressBar.activity.currentProgress = progress
+        }
+        progressBar.succeed()
+        let dirURL = URL(filePath: serverJarFileDirPath)
+        if !FileManager.default.fileExists(atPath: dirURL.path()) {
+            try FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true)
+        }
+        let jarFileURL = dirURL.appending(path: name)
+        try jarData.write(to: jarFileURL, options: .atomic)
+        try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
 //            "--nojline",
 //            "--noconsole"

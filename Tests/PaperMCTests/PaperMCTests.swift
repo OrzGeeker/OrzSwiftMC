@@ -11,13 +11,18 @@ final class PaperMCTests: XCTestCase {
     
     let testVersionFamily = "1.19"
     
-    func testProjects() async throws {
+    func testAllProjects() async throws {
         let data = try await PaperMC.api.projects().getData
         XCTAssertNotNil(data)
-        
         let projectsResponse = try jsonDecoder.decode(ProjectsResponse.self, from: data!)
-        print(projectsResponse)
-        XCTAssertTrue(projectsResponse.projects.count == 4)
+        let allProjects = [
+            "paper",
+            "travertine",
+            "waterfall",
+            "velocity",
+            "folia"
+        ]
+        XCTAssertTrue(projectsResponse.projects == allProjects)
     }
     
     func testPaperProject() async throws {

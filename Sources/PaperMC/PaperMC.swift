@@ -11,7 +11,7 @@ import HangarAPI
 /// [PaperMC](https://papermc.io/)
 public struct PaperMC {
     
-    public static let api = APIv2()
+    public static let api = PaperMC.APIv2()
 
     public static let apiV2 = PaperMCAPI()
 

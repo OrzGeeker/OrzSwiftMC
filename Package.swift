@@ -88,6 +88,9 @@ let package = Package(
                 )
             ]
         ),
+        .testTarget(
+            name: "PaperMCAPITests",
+            dependencies: ["PaperMCAPI"]),
         .target(
             name: "HangarAPI",
             dependencies: [
@@ -107,6 +110,9 @@ let package = Package(
                 )
             ]
         ),
+        .testTarget(
+            name: "HangarAPITests",
+            dependencies: ["HangarAPI"]),
         .target(
             name: "Fabric",
             dependencies: ["JokerKits"]
