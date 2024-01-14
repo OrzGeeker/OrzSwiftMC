@@ -90,35 +90,33 @@ public extension PaperMCAPI {
         }
     }
 
-    func downloadLatestBuild(project: Project, version: String) async throws -> (name:String, bytes: HTTPBody, totalBytes: Int64)? {
+    func downloadLatestBuild(
+        project: Project,
+        version: String,
+        build: Int32,
+        name: String) async throws -> (bytes: HTTPBody, totalBytes: Int64)? {
 
-        guard let (build, name, _) = try await latestBuildApplication(project: project, version: version)
-        else {
+            let response = try await client.download(.init(path: .init(project: project.name,
+                                                                       version: version,
+                                                                       build: build,
+                                                                       download: name)))
+
+            switch response {
+            case .ok(let output):
+                switch output.body {
+                case .json(let jsonObj):
+                    print(jsonObj)
+                case .application_java_hyphen_archive(let jar):
+                    switch jar.length {
+                    case .known(let total):
+                        return (jar, total)
+                    case .unknown:
+                        return nil
+                    }
+                }
+            default:
+                break
+            }
             return nil
         }
-
-        let response = try await client.download(
-            .init(path: .init(project: project.name,
-                              version: version,
-                              build: build,
-                              download: name)))
-
-        switch response {
-        case .ok(let output):
-            switch output.body {
-            case .json(let jsonObj):
-                print(jsonObj)
-            case .application_java_hyphen_archive(let jar):
-                switch jar.length {
-                case .known(let total):
-                    return (name, jar, total)
-                case .unknown:
-                    return nil
-                }
-            }
-        default:
-            break
-        }
-        return nil
-    }
 }
