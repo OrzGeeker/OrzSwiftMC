@@ -444,19 +444,19 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/RequestPagination'
-      - name: sort
-        in: query
-        description: Used to sort the result
-        style: form
-        schema:
-          type: string
-          enum:
-          - name
-          - createdAt
-          - projectCount
-          - locked
-          - org
-          - roles
+#      - name: sort
+#        in: query
+#        description: Used to sort the result
+#        style: form
+#        schema:
+#          type: string
+#          enum:
+#          - name
+#          - createdAt
+#          - projectCount
+#          - locked
+#          - org
+#          - roles
       responses:
         "200":
           description: Ok
@@ -506,19 +506,19 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/RequestPagination'
-      - name: sort
-        in: query
-        description: Used to sort the result
-        style: form
-        schema:
-          type: string
-          enum:
-          - name
-          - createdAt
-          - projectCount
-          - locked
-          - org
-          - roles
+#      - name: sort
+#        in: query
+#        description: Used to sort the result
+#        style: form
+#        schema:
+#          type: string
+#          enum:
+#          - name
+#          - createdAt
+#          - projectCount
+#          - locked
+#          - org
+#          - roles
       responses:
         "200":
           description: Ok
