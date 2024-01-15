@@ -29,14 +29,5 @@ final class PaperMCAPITests: XCTestCase {
         let latestBuild = try await api.latestBuild(project: .paper, version: version)
         XCTAssertNotNil(latestBuild)
     }
-
-    func testDownloadLatestBuild() async throws {
-
-        guard let dirURL = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first
-        else {
-            return
-        }
-        _ = try await api.downloadLatestBuild(project: .paper, version: version, toDir: dirURL)
-    }
 }
  

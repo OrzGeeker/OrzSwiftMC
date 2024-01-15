@@ -9,7 +9,6 @@
 
 import Foundation
 import JokerKits
-import Alamofire
 
 public struct Fabric {
     public enum InstallType {
