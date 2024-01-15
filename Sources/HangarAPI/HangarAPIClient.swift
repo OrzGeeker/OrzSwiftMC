@@ -1,5 +1,5 @@
 //
-//  HangarAPI.swift
+//  HangarAPIClient.swift
 //
 //
 //  Created by joker on 2023/6/20.
@@ -9,7 +9,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 
 /// https://hangar.papermc.io/api-docs#/
-public struct HangarAPI {
+public struct HangarAPIClient {
 
     public init() {}
 

@@ -1,5 +1,5 @@
 //
-//  PaperMCAPI.swift
+//  PaperMCAPIClient.swift
 //
 //
 //  Created by joker on 2024/1/14.
@@ -11,7 +11,7 @@ import OpenAPIURLSession
 
 /// [PaperMC API](https://api.papermc.io/docs/swagger-ui/index.html?configUrl=/openapi/swagger-config)
 /// [openapi.json](https://api.papermc.io/openapi)
-public struct PaperMCAPI {
+public struct PaperMCAPIClient {
 
     private let client = Client(
         serverURL: try! Servers.server1(),
@@ -22,7 +22,7 @@ public struct PaperMCAPI {
     public init() {}
 }
 
-public extension PaperMCAPI {
+public extension PaperMCAPIClient {
 
     enum Project: String, CaseIterable {
         case paper

@@ -13,8 +13,8 @@ public struct PaperMC {
     
     public static let api = PaperMC.APIv2()
 
-    public static let apiV2 = PaperMCAPI()
+    public static let apiV2 = PaperMCAPIClient()
 
-    public static let hanger = HangarAPI()
+    public static let hanger = HangarAPIClient()
 
 }

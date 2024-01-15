@@ -10,23 +10,23 @@ import XCTest
 
 final class PaperMCAPITests: XCTestCase {
 
-    let api = PaperMCAPI()
+    let client = PaperMCAPIClient()
 
     let version = "1.19.4"
 
     func testAllProjects() async throws {
-        let projects = try await api.allProjects()
+        let projects = try await client.allProjects()
         XCTAssertNotNil(projects)
 
         if let projects = projects {
-            let allProjects = PaperMCAPI.Project.allCases
+            let allProjects = PaperMCAPIClient.Project.allCases
             XCTAssertTrue(projects == allProjects)
         }
     }
 
     func testLatestBuild() async throws {
 
-        let latestBuild = try await api.latestBuild(project: .paper, version: version)
+        let latestBuild = try await client.latestBuild(project: .paper, version: version)
         XCTAssertNotNil(latestBuild)
     }
 }
