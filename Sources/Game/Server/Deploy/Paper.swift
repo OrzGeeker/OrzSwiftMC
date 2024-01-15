@@ -76,8 +76,8 @@ public struct PaperServer: Server {
         Platform.console.info("启动服务器")
         try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
-            //            "--nojline",
-            //            "--noconsole"
+            "--nojline",
+            "--noconsole"
         ])
     }
 }
