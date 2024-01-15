@@ -23,11 +23,7 @@ extension Server {
         if serverInfo.showJarHelpInfo {
             args.append("--help")
         } else {
-            
-            if serverInfo.onlineMode {
-                args.append("--online-mode \(serverInfo.onlineMode)")
-            }
-            
+        
             if serverInfo.forceUpgrade {
                 args.append("--forceUpgrade")
             }
@@ -44,28 +40,17 @@ extension Server {
                 args.append("--nogui")
             }
         }
+        if serverInfo.debug { print(args.joined(separator: " ")) }
         
-        if serverInfo.debug {
-            for arg in args {
-                print(arg)
-            }
-        }
-        
-        guard await Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath)
-        else {
-            try await launchServer(filePath, workDirectory: workDirectory)
-            return
-        }
-        Platform.console.info("服务端正在运行中...")
         let eulaFilePath = workDirectory.filePath("eula.txt")
         let propertiesFilePath = workDirectory.filePath("server.properties")
-        if try modifyEULA(at: eulaFilePath), try modifyProperties(at: propertiesFilePath) {
-            guard await Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath)
-            else {
-                Platform.console.output("服务端异常退出", style: .error)
-                return
-            }
+        if !FileManager.default.fileExists(atPath: eulaFilePath) || !FileManager.default.fileExists(atPath: propertiesFilePath) {
+            await Shell.run(path: try GameUtils.javaPath(), args: args + ["--initSettings"], workDirectory: workDirectory.dirPath)
         }
-        Platform.console.output("服务端正常退出", style: .success)
+        try modifyEULA(at: eulaFilePath)
+        try modifyProperties(at: propertiesFilePath)
+        Platform.console.success("后台服务端启动")
+        let process = try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath, terminationHandler: nil)
+        print(process.processIdentifier)
     }
 }

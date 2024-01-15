@@ -73,7 +73,7 @@ public struct PaperServer: Server {
             }
             try jarData.write(to: jarFileURL, options: .atomic)
         }
-        Platform.console.info("启动服务器")
+        
         try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
             "--nojline",

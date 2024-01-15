@@ -8,6 +8,8 @@
 import JokerKits
 
 extension Server {
+    
+    @discardableResult
     func modifyEULA(at filePath: String) throws -> Bool {
         let disagreeEULA = "eula=false"
         guard let eulaFileContent = try? String(contentsOfFile: filePath), eulaFileContent.contains(disagreeEULA)
@@ -27,6 +29,7 @@ extension Server {
         return true
     }
     
+    @discardableResult
     func modifyProperties(at filePath: String) throws -> Bool {
         let onlineModeContent = "online-mode=true"
         guard let propertiesFileConent = try? String(contentsOfFile: filePath), propertiesFileConent.contains(onlineModeContent)
