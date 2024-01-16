@@ -12,6 +12,7 @@ public struct ServerInfo {
     let gui: Bool
     let debug: Bool
     let forceUpgrade: Bool
+    let demo: Bool
     
     // JVM启动内存占用参数
     var minMem: String
@@ -24,11 +25,12 @@ public struct ServerInfo {
     // Jar包对应的参数
     var jarOptions: String?
     
-    public init(version: String, gui: Bool, debug: Bool, forceUpgrade: Bool, minMem: String, maxMem: String, onlineMode: Bool, showJarHelpInfo: Bool, jarOptions: String?) {
+    public init(version: String, gui: Bool, debug: Bool, forceUpgrade: Bool, demo: Bool, minMem: String, maxMem: String, onlineMode: Bool, showJarHelpInfo: Bool, jarOptions: String? = nil) {
         self.version = version
         self.gui = gui
         self.debug = debug
         self.forceUpgrade = forceUpgrade
+        self.demo = demo
         self.minMem = minMem
         self.maxMem = maxMem
         self.onlineMode = onlineMode

@@ -38,6 +38,10 @@ extension Server {
                 args.append("--forceUpgrade")
             }
 
+            if serverInfo.demo {
+                args.append("--demo")
+            }
+
             if !jarArgs.isEmpty {
                 args += jarArgs
             }
