@@ -87,12 +87,16 @@ extension Shell {
     ///   - args: 命令参数数组
     ///   - workDirectory: 运行命令时所在的目录
     /// - Returns: 是否执行成功
-    public static func run(path: String, args: [String], workDirectory: String? = nil) async -> Bool {
+    public static func run(path: String, args: [String], workDirectory: String? = nil, silent: Bool = false) async -> Bool {
         return await withCheckedContinuation({ continuation in
             let fileURL = URL(fileURLWithPath: path)
             let process = Process()
             process.executableURL = fileURL
             process.arguments = args
+
+            if silent {
+                process.standardOutput = FileHandle.nullDevice
+            }
 
             if let workDirectory = workDirectory {
                 process.currentDirectoryURL = URL(fileURLWithPath: workDirectory)

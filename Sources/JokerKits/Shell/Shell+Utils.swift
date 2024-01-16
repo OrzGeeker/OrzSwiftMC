@@ -16,8 +16,17 @@ public extension Shell {
     /// - Returns: 是否结束成功
     static func kill(with pid: String) async -> Bool {
 
-        let ret = await run(path: "/bin/kill", args: ["-9", pid])
-        
+        let ret = await run(path: "/bin/kill", args: ["-9", pid], silent: true)
+
+        return ret
+    }
+
+    @discardableResult
+    /// 判断pid对应的进程是否存在
+    /// - Parameter pid: 进程PID
+    /// - Returns: 进程是否存在
+    static func exist(of pid: String) async -> Bool {
+        let ret = await run(path: "/bin/ps", args: ["-p", pid], silent: true)
         return ret
     }
 

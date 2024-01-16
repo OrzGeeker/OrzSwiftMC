@@ -27,8 +27,9 @@ extension Server {
             let pidFilePath = workDirectory.filePath("run.pid")
             if FileManager.default.fileExists(atPath: pidFilePath) {
                 let pid = try String(contentsOfFile: pidFilePath)
-                if await Shell.kill(with: pid) {
-                    Platform.console.info("killed Process(PID=\(pid))")
+                if await Shell.exist(of: pid), await Shell.kill(with: pid) {
+                    Platform.console.success("停止运行中服务端: ", newLine: false)
+                    Platform.console.info("PID = \(pid)")
                 }
             }
             args.append("--pidFile=\(pidFilePath)")
@@ -58,7 +59,8 @@ extension Server {
         }
         try modifyEULA(at: eulaFilePath)
         try modifyProperties(at: propertiesFilePath)
-        Platform.console.success("后台服务端启动")
-        try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath, terminationHandler: nil)
+        let process = try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath, terminationHandler: nil)
+        Platform.console.success("后台启动服务端: ", newLine: false)
+        Platform.console.info("PID = \(process.processIdentifier)")
     }
 }
