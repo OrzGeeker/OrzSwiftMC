@@ -33,6 +33,27 @@ public struct VanillaServer: Server {
         self.serverInfo = serverInfo
     }
     
+
+    /// 启动参考获取
+    /// ```
+    /// Starting net.minecraft.server.Main
+    /// Option               Description
+    /// ------               -----------
+    /// --bonusChest
+    /// --demo
+    /// --eraseCache
+    /// --forceUpgrade
+    /// --help
+    /// --initSettings       Initializes 'server.properties' and 'eula.txt', then quits
+    /// --jfrProfile
+    /// --nogui
+    /// --pidFile <Path>
+    /// --port <Integer>     (default: -1)
+    /// --safeMode           Loads level with vanilla datapack only
+    /// --serverId <String>
+    /// --universe <String>  (default: .)
+    /// --world <String>
+    /// ```
     public func start() async throws {
         
         guard let serverVersion = try await Mojang.manifest?.versions.filter({ $0.id == serverInfo.version }).first?.gameInfo?.downloads.server

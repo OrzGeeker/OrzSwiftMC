@@ -9,7 +9,7 @@ import Foundation
 import JokerKits
 
 extension Server {
-    
+
     func launchServer(_ filePath: String, workDirectory: GameDir, jarArgs: [String] = []) async throws {
         
         var args = [
@@ -23,7 +23,16 @@ extension Server {
         if serverInfo.showJarHelpInfo {
             args.append("--help")
         } else {
-        
+            let pidFilePath = workDirectory.filePath("run.pid")
+            if FileManager.default.fileExists(atPath: pidFilePath) {
+                let pidFileContent = try String(contentsOfFile: pidFilePath)
+                let ret = await Shell.run(path: "/bin/kill", args: [
+                    "-9",
+                    pidFileContent
+                ])
+            }
+            args.append("--pidFile=\(pidFilePath)")
+
             if serverInfo.forceUpgrade {
                 args.append("--forceUpgrade")
             }
