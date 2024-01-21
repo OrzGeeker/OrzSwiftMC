@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct LauncherUI: View {
-    
-    @EnvironmentObject private var appModel: LauncherModel
-    
+
+    @Environment(LauncherModel.self) private var appModel
+
     @Environment(\.scenePhase) var scenePhase
     
     static private var appFirstLaunched = true
@@ -18,17 +18,16 @@ struct LauncherUI: View {
     @State private var path = NavigationPath()
     
     var body: some View {
-        
+        @Bindable var appModel = appModel
         NavigationStack(path: $path) {
             MainView()
         }
-        .alert(appModel.alertMessage ?? "", isPresented: $appModel.showAlert) {
+        .alert(appModel.alertMessage ?? "", isPresented: $appModel.showLoading) {
             Button(appModel.alertActionTip) {
             }
         }
-        .onChange(of: scenePhase) { phase in
-            if phase == .active && Self.appFirstLaunched {
-                appModel.loadDbClientInfoItem()
+        .onChange(of: scenePhase) { oldValue, newValue in
+            if newValue == .active && Self.appFirstLaunched {
                 Self.appFirstLaunched = false
             }
         }
@@ -39,7 +38,7 @@ struct LauncherUI: View {
 struct LauncherUI_Previews: PreviewProvider {
     static var previews: some View {
         LauncherUI()
-            .environmentObject(LauncherModel())
+            .environment(LauncherModel())
     }
 }
 

@@ -10,8 +10,6 @@
 		2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920129D02B25002637E3 /* LauncherTerminateButton.swift */; platformFilters = (macos, ); };
 		2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */; platformFilters = (macos, ); };
 		2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799528FEAB0600D53658 /* OrzMCApp.swift */; };
-		2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799728FEAB0600D53658 /* Persistence.swift */; };
-		2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */; };
 		2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C799E28FEAB0700D53658 /* Assets.xcassets */; };
 		2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */; };
 		2B1C79AD28FEAB0700D53658 /* OrzMCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C79AC28FEAB0700D53658 /* OrzMCTests.swift */; };
@@ -76,8 +74,6 @@
 		2B00920429D02B6A002637E3 /* LauncherBackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherBackgroundView.swift; sourceTree = "<group>"; };
 		2B1C799228FEAB0600D53658 /* OrzMC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OrzMC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2B1C799528FEAB0600D53658 /* OrzMCApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrzMCApp.swift; sourceTree = "<group>"; };
-		2B1C799728FEAB0600D53658 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
-		2B1C799A28FEAB0600D53658 /* OrzMC.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = OrzMC.xcdatamodel; sourceTree = "<group>"; };
 		2B1C799E28FEAB0700D53658 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrzMC.entitlements; sourceTree = "<group>"; };
 		2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -160,22 +156,6 @@
 			path = Common;
 			sourceTree = "<group>";
 		};
-		2B0091FC29D0275B002637E3 /* Database */ = {
-			isa = PBXGroup;
-			children = (
-				2B0091FD29D0276F002637E3 /* CoreData */,
-			);
-			path = Database;
-			sourceTree = "<group>";
-		};
-		2B0091FD29D0276F002637E3 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
 		2B0091FE29D02A0F002637E3 /* ToolsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -224,9 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				2B1C799528FEAB0600D53658 /* OrzMCApp.swift */,
-				2B1C799728FEAB0600D53658 /* Persistence.swift */,
 				2B0091FB29D0263A002637E3 /* Common */,
-				2B0091FC29D0275B002637E3 /* Database */,
 				2BD301F029000B3E00993823 /* Launcher(MacOS) */,
 				2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */,
 				2B1C79A128FEAB0700D53658 /* Preview Content */,
@@ -481,7 +459,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1410;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					2B1C799128FEAB0600D53658 = {
 						CreatedOnToolsVersion = 14.1;
@@ -553,7 +531,6 @@
 				2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */,
 				F3B4D0D02A1A776A0095B108 /* MCRCONError.swift in Sources */,
 				F3B4D0D72A1A776A0095B108 /* MCServerStatus.swift in Sources */,
-				2B1C799B28FEAB0600D53658 /* OrzMC.xcdatamodeld in Sources */,
 				F3B4D0D32A1A776A0095B108 /* String+base64Image.swift in Sources */,
 				F3B4D0D12A1A776A0095B108 /* MCSLPPacket.swift in Sources */,
 				F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */,
@@ -583,7 +560,6 @@
 				F3B4D0DB2A1A776A0095B108 /* MCQuery+Packet.swift in Sources */,
 				F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */,
 				F3B4D0D82A1A776A0095B108 /* MCQueryError.swift in Sources */,
-				2B1C799828FEAB0600D53658 /* Persistence.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 				F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */,
 				2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */,
@@ -628,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -662,6 +639,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -676,8 +654,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -690,6 +666,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -724,6 +701,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -732,8 +710,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
-				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -770,10 +746,8 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -816,10 +790,8 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -990,19 +962,6 @@
 			productName = Socket;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		2B1C799928FEAB0600D53658 /* OrzMC.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				2B1C799A28FEAB0600D53658 /* OrzMC.xcdatamodel */,
-			);
-			currentVersion = 2B1C799A28FEAB0600D53658 /* OrzMC.xcdatamodel */;
-			path = OrzMC.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 2B1C798A28FEAB0600D53658 /* Project object */;
 }

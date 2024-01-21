@@ -14,11 +14,12 @@ enum Page {
 
 struct MainView: View {
     
-    @EnvironmentObject private var appModel: LauncherModel
+    @Environment(LauncherModel.self) private var appModel
     
     @FocusState private var focusState: Bool
     
     var body: some View {
+        @Bindable var appModel = appModel
         LauncherBackgroundView()
             .overlay(alignment: .topLeading) {
                 LauncherUserLoginArea(username: $appModel.username) {
@@ -82,7 +83,7 @@ struct MainView_Previews: PreviewProvider {
     
     static var previews: some View {
         MainView()
-            .environmentObject(model)
+            .environment(model)
             .previewLayout(.fixed(
                 width: model.windowSize.width,
                 height: model.windowSize.height)

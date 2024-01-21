@@ -11,7 +11,7 @@ import SwiftUI
 struct OrzMCApp: App {
     
 #if os(macOS)
-    @StateObject var model = LauncherModel()
+    @State var model = LauncherModel()
 #endif
     
 #if os(iOS)
@@ -27,8 +27,7 @@ struct OrzMCApp: App {
                 ContentView()
 #endif
             }
-            .environmentObject(model)
-            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
+            .environment(model)
         }
 #if os(macOS)
         .windowStyle(.hiddenTitleBar)

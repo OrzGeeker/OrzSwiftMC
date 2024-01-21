@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     
-    @EnvironmentObject private var appModel: LauncherModel
+    @Environment(LauncherModel.self) private var appModel
     
     var body: some View {
         Text("Settings")
@@ -19,6 +19,6 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
-            .environmentObject(LauncherModel())
+            .environment(LauncherModel())
     }
 }

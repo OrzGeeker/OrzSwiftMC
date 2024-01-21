@@ -28,7 +28,7 @@ struct GUILauncher: Client  {
         let downloadItems = try await generateDownloadItemInfos()
         try await Downloader.download(
             downloadItems,
-            progressSubject: LauncherModel.shared.progressSubject)
+            progressSubject: nil)
     }
     
     /// 启动客户端

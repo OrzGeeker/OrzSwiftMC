@@ -11,8 +11,8 @@ import JokerKits
 
 struct ServerView: View {
     
-    @EnvironmentObject private var appModel: LauncherModel
-        
+    @Environment(LauncherModel.self) private var appModel
+
     var body: some View {
         VStack {
             HStack {
@@ -77,6 +77,6 @@ struct ServerView_Previews: PreviewProvider {
     static var previews: some View {
         ServerView()
             .frame(width: 400, height: 200)
-            .environmentObject(LauncherModel())
+            .environment(LauncherModel())
     }
 }
