@@ -23,15 +23,8 @@ extension Server {
         if serverInfo.showJarHelpInfo {
             args.append("--help")
         } else {
-
+            try await Shell.stopAll()
             let pidFilePath = workDirectory.filePath("run.pid")
-            if FileManager.default.fileExists(atPath: pidFilePath) {
-                let pid = try String(contentsOfFile: pidFilePath)
-                if await Shell.exist(of: pid), await Shell.kill(with: pid) {
-                    Platform.console.success("停止运行中服务端: ", newLine: false)
-                    Platform.console.info("PID = \(pid)")
-                }
-            }
             args.append("--pidFile=\(pidFilePath)")
 
             if serverInfo.forceUpgrade {

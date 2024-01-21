@@ -36,4 +36,9 @@ final class ShellTests: XCTestCase {
         let ret = await Shell.runCommand(with: ["which", "bash"])
         XCTAssertEqual(ret, true)
     }
+
+    func testPidFetch() throws {
+        let ret = try Shell.pids(of: "bash")
+        XCTAssert(!ret.isEmpty, "process not existed")
+    }
 }

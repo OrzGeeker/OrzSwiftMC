@@ -45,10 +45,20 @@ struct ServerCommand: AsyncCommand {
 
         @Flag(name: "demo", help: "演示模式")
         var demo: Bool
+
+        @Flag(name: "kill-all", short: "k", help: "杀死所有正在运行的服务端")
+        var killAll: Bool
     }
 
     var help: String = "服务端相关"
     func run(using context: CommandContext, signature: Signature) async throws {
+        let killAll = signature.killAll
+        guard !killAll
+        else {
+            try await Shell.stopAll()
+            return
+        }
+
         let version = try await OrzMC.chooseGameVersion(signature.version)
         let gui = signature.gui
         let debug = signature.debug

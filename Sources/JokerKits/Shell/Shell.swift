@@ -8,9 +8,21 @@
 import Foundation
 
 public struct Shell {
-    
-    static let envPath = "/usr/bin/env"
-    
+
+    enum Executable: String, CaseIterable {
+        case env
+        case bash
+        case pgrep
+        case ps
+        case kill
+        var binPath: String { "\(Executable.binPath)/\(self.rawValue)" }
+        var userBinPath: String { "\(Executable.userBinPath)/\(self.rawValue)" }
+        private static let binPath = "/bin"
+        private static let userBinPath = "/usr/bin"
+    }
+
+    static let envPath = Executable.env.userBinPath
+
     @discardableResult
     public static func runCommand(with args: [String], workDirectory: String? = nil) throws -> String {
         return try self.run(path: envPath, args: args, workDirectory: workDirectory)
