@@ -28,10 +28,10 @@ struct ServerCommand: AsyncCommand {
         @Option(name: "version", short: "v", help: "游戏版本号")
         var version: String?
 
-        @Option(name: "ms", short: "s", help: "客户端运行使用的最小内存，默认为：512M")
+        @Option(name: "ms", short: "s", help: "客户端运行使用的最小内存，默认为：1G")
         var minMem: String?
 
-        @Option(name: "mx", short: "x", help: "客户端运行使用的最大内存，默认为：2G")
+        @Option(name: "mx", short: "x", help: "客户端运行使用的最大内存，默认为：1G")
         var maxMem: String?
 
         @Option(name: "online-mode", short: "o", help: "服务端运行时是否使用Online模式，默认为：false")
@@ -52,8 +52,8 @@ struct ServerCommand: AsyncCommand {
         let version = try await OrzMC.chooseGameVersion(signature.version)
         let gui = signature.gui
         let debug = signature.debug
-        let minMem = signature.minMem ?? "512M"
-        let maxMem = signature.maxMem ?? "2G"
+        let minMem = signature.minMem ?? "1G"
+        let maxMem = signature.maxMem ?? "1G"
         let onlineMode = signature.onlineMode ?? false
         let forceUpgrade = signature.forceUpgrade
         let demo = signature.demo
