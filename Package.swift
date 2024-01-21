@@ -13,7 +13,7 @@ let package = Package(
         .library(name: "Game", targets: ["Game"]),
         .library(name: "JokerKits", targets: ["JokerKits"]),
         .library(name: "Mojang", targets: ["Mojang"]),
-        .library(name: "PaperMC", targets: ["PaperMC"]),
+        .library(name: "PaperMC", targets: ["PaperMCAPI","HangarAPI"]),
         .library(name: "Fabric", targets: ["Fabric"]),
     ],
     dependencies: [
@@ -26,33 +26,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "JokerKits",
-            dependencies: [
-                .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux])),
-                "Alamofire",
-                .product(name: "ConsoleKit", package: "console-kit")
-            ]
-        ),
-        .testTarget(
-            name: "JokerKitsTests",
-            dependencies: ["JokerKits"]
-        ),
-        .target(
-            name: "Mojang",
-            dependencies: ["JokerKits"]
-        ),
-        .testTarget(
-            name: "MojangTests",
-            dependencies: ["Mojang"]
-        ),
-        .target(name: "Game", dependencies: [
-            "Mojang",
-            "PaperMC",
-            "Fabric"
-        ]),
+        // MARK: Command Line executable
         .executableTarget(
             name: "OrzMC",
             dependencies: ["Game"]
@@ -61,14 +35,23 @@ let package = Package(
             name: "OrzMCTests",
             dependencies: ["OrzMC"]
         ),
+        // MARK: Game Logic Capsule
+        .target(name: "Game", dependencies: [
+            "Mojang",
+            "PaperMCAPI",
+            "HangarAPI",
+            "Fabric"
+        ]),
+        // MARK: Mojang Offical
         .target(
-            name: "PaperMC",
-            dependencies: ["JokerKits", "PaperMCAPI", "HangarAPI"]
+            name: "Mojang",
+            dependencies: ["JokerKits"]
         ),
         .testTarget(
-            name: "PaperMCTests",
-            dependencies: ["PaperMC"]
+            name: "MojangTests",
+            dependencies: ["Mojang"]
         ),
+        // MARK: PaperMC
         .target(
             name: "PaperMCAPI",
             dependencies: [
@@ -113,6 +96,7 @@ let package = Package(
         .testTarget(
             name: "HangarAPITests",
             dependencies: ["HangarAPI"]),
+        // MARK: Fabric
         .target(
             name: "Fabric",
             dependencies: ["JokerKits"]
@@ -120,6 +104,19 @@ let package = Package(
         .testTarget(
             name: "FabricTests",
             dependencies: ["Fabric"]
+        ),
+        // MARK: Utils
+        .target(
+            name: "JokerKits",
+            dependencies: [
+                .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux])),
+                "Alamofire",
+                .product(name: "ConsoleKit", package: "console-kit")
+            ]
+        ),
+        .testTarget(
+            name: "JokerKitsTests",
+            dependencies: ["JokerKits"]
         )
     ],
     swiftLanguageVersions: [.v5]

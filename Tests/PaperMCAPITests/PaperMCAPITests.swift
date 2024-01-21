@@ -12,8 +12,6 @@ final class PaperMCAPITests: XCTestCase {
 
     let client = PaperMCAPIClient()
 
-    let version = "1.19.4"
-
     func testAllProjects() async throws {
         let projects = try await client.allProjects()
         XCTAssertNotNil(projects)
@@ -24,10 +22,13 @@ final class PaperMCAPITests: XCTestCase {
         }
     }
 
-    func testLatestBuild() async throws {
-
-        let latestBuild = try await client.latestBuild(project: .paper, version: version)
-        XCTAssertNotNil(latestBuild)
+    func testPaperLatestBuild() async throws {
+        let latestVersion = try await client.latestVersion(project: .paper)
+        XCTAssertNotNil(latestVersion)
+        if let latestVersion {
+            let latestBuild = try await client.latestBuild(project: .paper, version: latestVersion)
+            XCTAssertNotNil(latestBuild)
+        }
     }
 }
  

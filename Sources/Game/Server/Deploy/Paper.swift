@@ -5,10 +5,10 @@
 //  Created by joker on 2022/1/3.
 //
 
-import PaperMC
 import JokerKits
 import Foundation
 import ConsoleKit
+import PaperMCAPI
 
 enum PaperServerError: Error {
     case versionRespFailed
@@ -97,7 +97,7 @@ public struct PaperServer: Server {
         let version = serverInfo.version
         let loadingBar = Platform.console.loadingBar(title: "获最最新构建版本")
         loadingBar.start()
-        guard let (build, name, _) = try await PaperMC.apiV2.latestBuildApplication(project: .paper,
+        guard let (build, name, _) = try await client.latestBuildApplication(project: .paper,
                                                                                     version: version)
         else {
             loadingBar.fail()
@@ -117,7 +117,7 @@ public struct PaperServer: Server {
         if !FileManager.default.fileExists(atPath: jarFileURL.path()) {
             let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
             progressBar.start()
-            guard let (jar, total) = try await PaperMC.apiV2.downloadLatestBuild(project: .paper,
+            guard let (jar, total) = try await client.downloadLatestBuild(project: .paper,
                                                                                  version: version,
                                                                                  build: build,
                                                                                  name: name)
@@ -146,4 +146,6 @@ public struct PaperServer: Server {
             "--noconsole"
         ])
     }
+
+    private let client = PaperMCAPIClient()
 }

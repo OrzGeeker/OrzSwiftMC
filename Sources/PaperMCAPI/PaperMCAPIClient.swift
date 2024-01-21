@@ -9,6 +9,7 @@ import Foundation
 import OpenAPIRuntime
 import OpenAPIURLSession
 
+/// [PaperMC](https://papermc.io/)
 /// [PaperMC API](https://api.papermc.io/docs/swagger-ui/index.html?configUrl=/openapi/swagger-config)
 /// [openapi.json](https://api.papermc.io/openapi)
 public struct PaperMCAPIClient {
@@ -41,6 +42,20 @@ public extension PaperMCAPIClient {
             switch output.body {
             case .json(let jsonObj):
                 return jsonObj.projects?.compactMap { Project(rawValue: $0) }
+            }
+        default:
+            return nil
+        }
+    }
+
+    func latestVersion(project: Project) async throws -> String? {
+        let response = try await client.project(path: .init(project: project.name))
+        switch response {
+        case .ok(let output):
+            switch output.body {
+            case .json(let jsonObj):
+                let latestVersion = jsonObj.versions?.last
+                return latestVersion
             }
         default:
             return nil

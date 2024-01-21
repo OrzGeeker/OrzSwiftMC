@@ -8,7 +8,6 @@
 import ConsoleKit
 import JokerKits
 import Foundation
-import PaperMC
 import Game
 
 struct PluginCommand: AsyncCommand {
