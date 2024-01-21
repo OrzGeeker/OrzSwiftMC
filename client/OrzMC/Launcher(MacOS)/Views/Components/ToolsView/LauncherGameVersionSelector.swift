@@ -67,24 +67,24 @@ struct LauncherGameVersionSelector: View {
     }
 }
 
-struct GameVersionPickerView_Previews: PreviewProvider {
-    
-    static let gameVersions = [
-        "1.19.4",
-        "1.19.3",
-        "1.19.2",
-        "1.19.1",
-        "1.19",
-        "1.18.2",
-    ]
-    
-    static let gameProfiles = [
-        "normal",
-        "optfine"
-    ]
-    
-    static var previews: some View {
-        
+#Preview {
+
+    Group {
+
+        let gameVersions = [
+            "1.19.4",
+            "1.19.3",
+            "1.19.2",
+            "1.19.1",
+            "1.19",
+            "1.18.2",
+        ]
+
+        let gameProfiles = [
+            "normal",
+            "optfine"
+        ]
+
         LauncherGameVersionSelector(
             versions: gameVersions,
             selectedVersion: .constant(gameVersions.first!),
@@ -92,7 +92,7 @@ struct GameVersionPickerView_Previews: PreviewProvider {
             selectedProfile: .constant(""),
             gameVersionDownloadProgress: 0)
         .previewDisplayName("版本选择")
-        
+
         LauncherGameVersionSelector(
             versions: gameVersions,
             selectedVersion: .constant(gameVersions.first!),
@@ -100,7 +100,7 @@ struct GameVersionPickerView_Previews: PreviewProvider {
             selectedProfile: .constant(""),
             gameVersionDownloadProgress: 0.8)
         .previewDisplayName("版本选择+下载进度")
-        
+
         LauncherGameVersionSelector(
             versions: gameVersions,
             selectedVersion: .constant(gameVersions.first!),
@@ -108,7 +108,7 @@ struct GameVersionPickerView_Previews: PreviewProvider {
             selectedProfile: .constant(""),
             gameVersionDownloadProgress: 1)
         .previewDisplayName("版本选择+下载完成")
-        
+
         LauncherGameVersionSelector(
             versions: gameVersions,
             selectedVersion: .constant(gameVersions.first!),
@@ -116,6 +116,5 @@ struct GameVersionPickerView_Previews: PreviewProvider {
             selectedProfile: .constant(gameProfiles.first!),
             gameVersionDownloadProgress: 0.5)
         .previewDisplayName("版本+启动方式+下载进度")
-
     }
 }

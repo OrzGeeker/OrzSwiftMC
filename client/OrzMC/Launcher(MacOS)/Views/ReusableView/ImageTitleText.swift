@@ -25,13 +25,17 @@ struct ImageTitleText: View {
     }
 }
 
-struct ImageTitleText_Previews: PreviewProvider {
-    static var previews: some View {
-        ImageTitleText(title:"登录")
-            .previewDisplayName("仅标题")
-        ImageTitleText(imageSystemName: "gearshape")
-            .previewDisplayName("仅图标")
-        ImageTitleText(title:"关闭", imageSystemName: "power.circle")
-            .previewDisplayName("图标+标题")
-    }
+#Preview("仅标题") {
+    ImageTitleText(title:"登录")
+        .padding()
+}
+
+#Preview("仅图标") {
+    ImageTitleText(imageSystemName: "gearshape")
+        .padding()
+}
+
+#Preview("图标+标题") {
+    ImageTitleText(title:"关闭", imageSystemName: "power.circle")
+        .padding()
 }

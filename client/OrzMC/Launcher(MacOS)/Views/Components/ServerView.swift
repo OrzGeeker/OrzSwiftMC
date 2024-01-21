@@ -73,10 +73,8 @@ struct ServerView: View {
     }
 }
 
-struct ServerView_Previews: PreviewProvider {
-    static var previews: some View {
-        ServerView()
-            .frame(width: 400, height: 200)
-            .environment(LauncherModel())
-    }
+#Preview {
+    ServerView()
+        .frame(width: 400, height: 200)
+        .environment(LauncherModel())
 }

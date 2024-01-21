@@ -33,11 +33,9 @@ struct LauncherProgressViewStyle: ProgressViewStyle {
     }
 }
 
-struct LauncherProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LauncherProgressView(title: "进度条", progress: 0.2)
-            LauncherProgressView(title: "", progress: 0.5)
-        }.padding()
-    }
+#Preview {
+    Group {
+        LauncherProgressView(title: "进度条", progress: 0.2)
+        LauncherProgressView(title: "", progress: 0.5)
+    }.padding()
 }

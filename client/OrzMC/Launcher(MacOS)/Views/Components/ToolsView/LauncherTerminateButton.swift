@@ -18,8 +18,6 @@ struct LauncherTerminateButton: View {
     }
 }
 
-struct TerminateButton_Previews: PreviewProvider {
-    static var previews: some View {
-        LauncherTerminateButton()
-    }
+#Preview {
+    LauncherTerminateButton()
 }

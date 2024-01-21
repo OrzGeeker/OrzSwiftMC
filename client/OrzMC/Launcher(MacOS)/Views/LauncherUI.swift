@@ -35,10 +35,7 @@ struct LauncherUI: View {
     }
 }
 
-struct LauncherUI_Previews: PreviewProvider {
-    static var previews: some View {
-        LauncherUI()
-            .environment(LauncherModel())
-    }
+#Preview {
+    LauncherUI()
+        .environment(LauncherModel())
 }
-

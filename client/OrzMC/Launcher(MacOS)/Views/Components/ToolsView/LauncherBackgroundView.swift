@@ -19,9 +19,7 @@ struct LauncherBackgroundView: View {
     }
 }
 
-struct LauncherBackgroundView_Previews: PreviewProvider {
-    static var previews: some View {
-        LauncherBackgroundView()
-            .previewLayout(.fixed(width: 3840 / 3.0, height: 1712 / 3.0))
-    }
+#Preview {
+    LauncherBackgroundView()
+        .previewLayout(.fixed(width: 3840 / 3.0, height: 1712 / 3.0))
 }

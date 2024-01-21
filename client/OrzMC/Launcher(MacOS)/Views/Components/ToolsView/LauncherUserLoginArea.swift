@@ -17,24 +17,20 @@ struct LauncherUserLoginArea: View {
         HStack {
             HStack {
                 Text("玩家ID")
-                    .bold()
                 TextField("输入游戏用户名", text: $username)
-                    .bold()
                     .frame(maxWidth: 150)
             }
             LauncherUIButton(title:"启动客户端", action: loginAction)
         }
+        .bold()
         .padding()
     }
 }
 
-struct UserLoginArea_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LauncherUserLoginArea(username: .constant(""))
-                .previewDisplayName("未输入用户名")
-            LauncherUserLoginArea(username: .constant("joker"))
-                .previewDisplayName("用户名为: joker")
-        }
-    }
+#Preview("未输入用户名") {
+    LauncherUserLoginArea(username: .constant(""))
+}
+
+#Preview("用户名为: joker") {
+    LauncherUserLoginArea(username: .constant("joker"))
 }

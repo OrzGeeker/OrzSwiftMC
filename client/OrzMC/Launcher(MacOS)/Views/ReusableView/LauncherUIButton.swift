@@ -26,20 +26,21 @@ struct LauncherUIButton: View {
             ImageTitleText(
                 title: title,
                 imageSystemName: imageSystemName)
-            .padding(.vertical)
         })
     }
 }
 
-struct LauncherUIButton_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            LauncherUIButton(title:"登录")
-                .previewDisplayName("仅标题")
-            LauncherUIButton(imageSystemName: "gearshape")
-                .previewDisplayName("仅图标")
-            LauncherUIButton(title:"关闭", imageSystemName: "power.circle")
-                .previewDisplayName("图标+标题")
-        }
-    }
+#Preview("仅标题") {
+    LauncherUIButton(title:"登录")
+        .padding()
+}
+
+#Preview("仅图标") {
+    LauncherUIButton(imageSystemName: "gearshape")
+        .padding()
+}
+
+#Preview("图标+标题") {
+    LauncherUIButton(title:"关闭", imageSystemName: "power.circle")
+        .padding()
 }

@@ -77,11 +77,9 @@ struct MainView: View {
     }
 }
 
-struct MainView_Previews: PreviewProvider {
-    
-    static let model = LauncherModel()
-    
-    static var previews: some View {
+#Preview {
+    Group {
+        let model = LauncherModel()
         MainView()
             .environment(model)
             .previewLayout(.fixed(

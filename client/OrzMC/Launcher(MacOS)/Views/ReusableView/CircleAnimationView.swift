@@ -13,8 +13,7 @@ struct CircleAnimationView: View {
     }
 }
 
-struct CircleAnimationView_Previews: PreviewProvider {
-    static var previews: some View {
-        CircleAnimationView()
-    }
+#Preview {
+    CircleAnimationView()
+        .padding()
 }
