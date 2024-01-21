@@ -7,5 +7,6 @@
 
 import Foundation
 
-class Model: ObservableObject {
+@Observable
+class Model {
 }

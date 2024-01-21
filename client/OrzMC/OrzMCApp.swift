@@ -15,7 +15,7 @@ struct OrzMCApp: App {
 #endif
     
 #if os(iOS)
-    @StateObject var model = Model()
+    @State var model = Model()
 #endif
     
     var body: some Scene {
