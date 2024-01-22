@@ -8,7 +8,6 @@
 import Foundation
 import Alamofire
 import ConsoleKit
-import Combine
 
 public struct DownloadItemInfo {
     
@@ -69,8 +68,7 @@ public struct Downloader {
     
     public static func download(
         _ items: [DownloadItemInfo],
-        progressBar: ActivityIndicator<ProgressBar>? = nil,
-        progressSubject: PassthroughSubject<Double, Never>? = nil) async throws {
+        progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
             
         try await withThrowingTaskGroup(of: Void.self, body: { group in
             
@@ -80,7 +78,7 @@ public struct Downloader {
                     try await Downloader.download(item)
                 }
             }
-            let showProgress = ((progressBar == nil) || (progressSubject == nil))
+            let showProgress = progressBar == nil
             // 要显示进度时
             if showProgress {
                 let total = items.count
@@ -91,7 +89,6 @@ public struct Downloader {
                     index += 1
                     let progress = Double(index) / Double(total)
                     try progressBar?.updateProgress(progress)
-                    progressSubject?.send(progress)
                 }
                 progressBar?.succeed()
             }
