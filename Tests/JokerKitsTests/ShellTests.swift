@@ -11,8 +11,8 @@ import XCTest
 final class ShellTests: XCTestCase {
 
     func testShellSyncExecSuccess() throws {
-        let ret = try Shell.runCommand(with: ["which", "bash"])
-        XCTAssertEqual(ret, "/bin/bash\n")
+        let ret = try Shell.runCommand(with: ["which", "ls"])
+        XCTAssertEqual(ret, "/bin/ls\n")
     }
     
     func testShellSyncExecFailed() throws {
@@ -38,7 +38,7 @@ final class ShellTests: XCTestCase {
     }
 
     func testPidFetch() throws {
-        let ret = try Shell.pids(of: "bash")
+        let ret = try Shell.pids(of: "lsof")
         XCTAssert(!ret.isEmpty, "process not existed")
     }
 }
