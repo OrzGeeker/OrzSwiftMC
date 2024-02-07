@@ -1,4 +1,4 @@
-// swift-tools-version:5.8
+// swift-tools-version:5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,9 +6,7 @@ import PackageDescription
 let package = Package(
     name: "OrzMC",
     platforms: [
-        .macOS(.v13),
-        .iOS(.v13),
-        .tvOS(.v13)
+        .macOS(.v13)
     ],
     products: [
         .executable(name: "orzmc", targets: ["OrzMC"]),
@@ -20,9 +18,9 @@ let package = Package(
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/vapor/console-kit.git", .upToNextMajor(from: "4.4.0")),
-        .package(url: "https://github.com/apple/swift-crypto.git", .upToNextMajor(from: "2.6.0")),
-        .package(url: "https://github.com/Alamofire/Alamofire.git", .upToNextMajor(from: "5.8.1")),
+        .package(url: "https://github.com/vapor/console-kit.git", from: "4.14.1"),
+        .package(url: "https://github.com/apple/swift-crypto.git", from: "3.2.0"),
+        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.8.1"),
         .package(url: "https://github.com/apple/swift-openapi-generator.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
