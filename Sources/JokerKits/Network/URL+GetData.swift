@@ -6,22 +6,17 @@
 //
 
 import Foundation
-import Alamofire
 
 public extension URL {
+
     var getData: Data? {
         get async throws {
-            let ret: Data? = await withCheckedContinuation { continuation in
-                AF.request(self).responseData { response in
-                    switch response.result {
-                    case .success(let data):
-                        continuation.resume(with: .success(data))
-                    default:
-                        continuation.resume(with: .success(nil))
-                    }
-                }
+            let (data, response) = try await URLSession.dataTask(from: self)
+            guard (response as? HTTPURLResponse)?.statusCode == 200
+            else {
+                return nil
             }
-            return ret
+            return data
         }
     }
 }
