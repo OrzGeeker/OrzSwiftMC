@@ -78,19 +78,19 @@ public struct Downloader {
                     try await Downloader.download(item)
                 }
             }
-            let showProgress = progressBar == nil
+
             // 要显示进度时
-            if showProgress {
+            if let progressBar  {
                 let total = items.count
                 var index = 0
-                progressBar?.start(refreshRate: 100)
+                progressBar.start(refreshRate: 100)
                 // 更新进度条显示资源下载进度
                 for try await _ in group {
                     index += 1
                     let progress = Double(index) / Double(total)
-                    try progressBar?.updateProgress(progress)
+                    try progressBar.updateProgress(progress)
                 }
-                progressBar?.succeed()
+                progressBar.succeed()
             }
             
             // 不显示进度时
