@@ -30,6 +30,28 @@ public struct DownloadItemInfo {
     }
 }
 
+extension Array where Element == DownloadItemInfo {
+    public var asyncSequence: DownloadAsyncSequence { DownloadAsyncSequence(items: self) }
+    public struct DownloadAsyncSequence: AsyncSequence {
+        let items: [DownloadItemInfo]
+        public typealias AsyncIterator = DownloadAsyncIterator
+        public struct DownloadAsyncIterator: AsyncIteratorProtocol {
+            var itemsIterator: IndexingIterator<[DownloadItemInfo]>
+            public mutating func next() async throws -> DownloadItemInfo? {
+                guard let item = itemsIterator.next()
+                else {
+                    return nil
+                }
+                try await Downloader.download(item)
+                return item
+            }
+        }
+        public func makeAsyncIterator() -> DownloadAsyncIterator {
+            return DownloadAsyncIterator(itemsIterator: self.items.makeIterator())
+        }
+    }
+}
+
 public struct Downloader {
     
     public static func download(_ sourceURL: URL) -> (DownloadTask<URL>, StreamOf<Progress>) {
@@ -71,7 +93,7 @@ public struct Downloader {
         progressBar: ActivityIndicator<ProgressBar>? = nil) async throws {
             
         try await withThrowingTaskGroup(of: Void.self, body: { group in
-            
+
             // 资源信息转获为下载任务，添加到下载任务组中，下载任务并发进行
             for item in items {
                 group.addTask {

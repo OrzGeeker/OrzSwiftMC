@@ -12,7 +12,9 @@ import Game
 struct GUILauncher: Client  {
     
     var clientInfo: Game.ClientInfo
-    
+
+    let launcherModel: LauncherModel
+
     @MainActor
     mutating func start() async throws {
         
@@ -26,7 +28,14 @@ struct GUILauncher: Client  {
     /// 下载启动器启动需要的文件
     mutating func download() async throws {
         let downloadItems = try await generateDownloadItemInfos()
-        try await Downloader.download(downloadItems)
+        var progress = 0.0
+        var count = 0
+        let total = downloadItems.count
+        for try await _ in downloadItems.asyncSequence {
+            count += 1
+            progress = Double(count) / Double(total)
+            launcherModel.launcherProgress = progress
+        }
     }
     
     /// 启动客户端

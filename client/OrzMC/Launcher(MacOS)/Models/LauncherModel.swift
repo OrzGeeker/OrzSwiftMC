@@ -112,7 +112,7 @@ extension LauncherModel {
             return
         }
         
-        var launcher = GUILauncher(clientInfo: clientInfo)
+        var launcher = GUILauncher(clientInfo: clientInfo, launcherModel: self)
         try await launcher.start()
     }
     
