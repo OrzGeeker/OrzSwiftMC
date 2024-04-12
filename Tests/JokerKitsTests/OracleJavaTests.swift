@@ -7,6 +7,7 @@
 
 import XCTest
 @testable import JokerKits
+import RegexBuilder
 
 class OracleJavaTests: XCTestCase {
 
@@ -35,11 +36,13 @@ class OracleJavaTests: XCTestCase {
     
     func testInstalledJVM() throws {
         let jvms = try OracleJava.installedJVM()
-        XCTAssert(jvms.count > 0)
+        let lines = jvms.split(separator: .newlineSequence)
+        XCTAssert(lines.count > 0)
     }
     
     func testCurrentJVM() throws {
         let jvm = try OracleJava.currentJavaVersion()
-        XCTAssert(jvm.count > 0)
+        let lines = jvm.split(separator: .newlineSequence)
+        XCTAssert(lines.count > 0)
     }
 }
