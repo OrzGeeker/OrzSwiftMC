@@ -56,4 +56,36 @@ public struct OracleJava {
         }
         return ret;
     }
+
+    static public func uninstallJava(version: String) throws {
+
+        guard let javas = try installedJavaVersions()?.filter({ $0.contains(version) })
+        else {
+            return
+        }
+
+        for java in javas {
+            let ret = try Shell.runCommand(with: [
+                "sudo expect",
+                "rm", "-rf",
+                java
+            ])
+            print(ret)
+        }
+    }
+
+    static public func uninstallAllJava() throws {
+        guard let javas = try installedJavaVersions()
+        else {
+            return
+        }
+        for java in javas {
+            let ret = try Shell.runCommand(with: [
+                "sudo expect",
+                "rm", "-rf",
+                java
+            ])
+            print(ret)
+        }
+    }
 }
