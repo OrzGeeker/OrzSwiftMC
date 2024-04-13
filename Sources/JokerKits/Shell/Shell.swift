@@ -27,7 +27,7 @@ public struct Shell {
     public static func runCommand(with args: [String], workDirectory: String? = nil) throws -> String {
         return try self.run(path: envPath, args: args, workDirectory: workDirectory)
     }
-        
+    
     @discardableResult
     public static func runCommand(with args: [String], workDirectory: String? = nil, terminationHandler:((Process) -> Void)? = nil) throws -> Process {
         return try self.run(path: envPath, args: args, workDirectory: workDirectory, terminationHandler: terminationHandler)

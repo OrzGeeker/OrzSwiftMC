@@ -38,7 +38,7 @@ final class ShellTests: XCTestCase {
     }
 
     func testPidFetch() throws {
-        let ret = try Shell.pids(of: "lsof")
+        let ret = try Shell.pids(of: "timed")
         XCTAssert(!ret.isEmpty, "process not existed")
     }
 }
