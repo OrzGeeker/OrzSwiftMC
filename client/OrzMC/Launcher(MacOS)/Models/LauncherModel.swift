@@ -36,7 +36,7 @@ class LauncherModel {
     /// 当前选中的启动方式
     var selectedProfileItem: String = "" {
         didSet {
-            _ = try? GUILauncher.saveSelectedProfile(for: selectedVersion, with: selectedProfileItem)
+            _ = try? GUIClient.saveSelectedProfile(for: selectedVersion, with: selectedProfileItem)
         }
     }
     
@@ -112,7 +112,7 @@ extension LauncherModel {
             return
         }
         
-        var launcher = GUILauncher(clientInfo: clientInfo, launcherModel: self)
+        var launcher = GUIClient(clientInfo: clientInfo, launcherModel: self, gameModel: GameModel())
         try await launcher.start()
     }
     
@@ -124,7 +124,7 @@ extension LauncherModel {
             if let firstVersion = self.versions.first {
                 self.selectedVersion = firstVersion
                 
-                if let profileItems = try? GUILauncher.launcherProfileItems(for: self.selectedVersion) {
+                if let profileItems = try? GUIClient.launcherProfileItems(for: self.selectedVersion) {
                     self.profileItems = profileItems
                 }
             }
@@ -132,7 +132,7 @@ extension LauncherModel {
     }
     
     func refreshProfileItems(for version: String) async throws {
-        let profileItems = try GUILauncher.launcherProfileItems(for: version)
+        let profileItems = try GUIClient.launcherProfileItems(for: version)
         await MainActor.run {
             self.profileItems = profileItems
             if let firstItem = self.profileItems.first {

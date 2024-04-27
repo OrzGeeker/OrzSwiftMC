@@ -27,7 +27,7 @@ enum VanillaServerError: Error {
 /// 官方服务端文件下载速度太慢, 容易超时
 public struct VanillaServer: Server {
     
-    let serverInfo: ServerInfo
+    public let serverInfo: ServerInfo
     
     public init(serverInfo: ServerInfo) {
         self.serverInfo = serverInfo

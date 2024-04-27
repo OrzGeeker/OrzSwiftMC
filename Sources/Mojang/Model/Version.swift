@@ -8,7 +8,7 @@
 import Foundation
 import JokerKits
 
-public struct Version: MojangCodable {
+public struct Version: MojangCodable, Identifiable, Hashable {
     
     public let id: String
     public let type: String

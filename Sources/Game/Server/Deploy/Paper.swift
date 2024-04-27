@@ -20,7 +20,7 @@ enum PaperServerError: Error {
 
 public struct PaperServer: Server {
 
-    let serverInfo: ServerInfo
+    public let serverInfo: ServerInfo
 
     public init(serverInfo: ServerInfo) {
         self.serverInfo = serverInfo

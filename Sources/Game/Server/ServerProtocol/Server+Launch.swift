@@ -8,10 +8,10 @@
 import Foundation
 import JokerKits
 
-extension Server {
-
+public extension Server {
+    
     func launchServer(_ filePath: String, workDirectory: GameDir, jarArgs: [String] = []) async throws {
-
+        
         var args = [
             "-server",
             "-Xms" + serverInfo.minMem,
@@ -19,36 +19,36 @@ extension Server {
             "-jar",
             filePath,
         ]
-
+        
         if serverInfo.showJarHelpInfo {
             args.append("--help")
         } else {
             try await Shell.stopAll()
             let pidFilePath = workDirectory.filePath("run.pid")
             args.append("--pidFile=\(pidFilePath)")
-
+            
             if serverInfo.forceUpgrade {
                 args.append("--forceUpgrade")
             }
-
+            
             if serverInfo.demo {
                 args.append("--demo")
             }
-
+            
             if !jarArgs.isEmpty {
                 args += jarArgs
             }
-
+            
             if let jarOpts = serverInfo.jarOptions {
                 args.append(jarOpts.replacingOccurrences(of: "a:", with: ""))
             }
-
+            
             if !serverInfo.gui {
                 args.append("--nogui")
             }
         }
         if serverInfo.debug { print(args.joined(separator: " ")) }
-
+        
         let eulaFilePath = workDirectory.filePath("eula.txt")
         let propertiesFilePath = workDirectory.filePath("server.properties")
         if !FileManager.default.fileExists(atPath: eulaFilePath) || !FileManager.default.fileExists(atPath: propertiesFilePath) {

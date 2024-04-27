@@ -1,0 +1,248 @@
+//
+//  GameVersionList.swift
+//  OrzMC
+//
+//  Created by joker on 4/26/24.
+//
+
+import SwiftUI
+import Mojang
+
+struct GameVersionList: View {
+    
+    @State private var searchContent: String = ""
+    
+    @State private var filteredVersions = [Version]()
+    
+    @State private var showOnlyRelease: Bool = true
+    
+    @FocusState private var usernameTextFieldFocused: Bool
+    
+    @State private var enableStartGameButton: Bool = false
+    
+    @Environment(GameModel.self) private var model
+    
+    var body: some View {
+        @Bindable var model = model
+        VStack(alignment: .leading) {
+            List(filteredVersions, selection: $model.selectedVersion) { version in
+                HStack() {
+                    Text(version.id)
+                        .font(.system(size: 12))
+                        .bold()
+                        .padding([.vertical, .leading], 5)
+                    
+                    Spacer()
+                    
+                    if !showOnlyRelease {
+                        Text(version.type)
+                            .bold()
+                            .foregroundStyle(version.typeTagColor)
+                            .padding([.horizontal], 5)
+                            .offset(x: -5)
+                    }
+                }
+                .contentShape(Rectangle())
+                .onTapGesture {
+                    guard !model.isLaunchingGame else { return }
+                    model.selectedVersion = version
+                    usernameTextFieldFocused = model.isClient
+                }
+                .background(model.selectedVersion == version ? Color.accentColor : .clear)
+                .cornerRadius(5)
+            }
+            .searchable(text: $searchContent, placement: .sidebar)
+            .onChange(of: searchContent) {
+                refreshList()
+            }
+            .onChange(of: showOnlyRelease) {
+                refreshList()
+            }
+            .onAppear {
+                guard model.versions.isEmpty
+                else {
+                    return
+                }
+                reloadList()
+            }
+            .toolbar {
+                ToolbarItem {
+                    Toggle(isOn: $showOnlyRelease) {
+                        Text("Show Release Only")
+                            .padding(4)
+                            .foregroundStyle(showOnlyRelease ? Color.accentColor : Color.gray)
+                            .fontWeight(showOnlyRelease ? .medium : .regular)
+                    }
+                    .toggleStyle(.button)
+                }
+                ToolbarItem {
+                    Button(action: {
+                        reloadList()
+                    }, label: {
+                        if model.isFetchingGameVersions {
+                            ProgressView()
+                                .progressViewStyle(.circular)
+                                .controlSize(.small)
+                        } else {
+                            Image(systemName: "arrow.clockwise")
+                        }
+                    })
+                    .disabled(model.isFetchingGameVersions)
+                }
+            }
+            
+            if let selectedVersion = model.selectedVersion {
+                VStack(alignment: .leading, spacing: 10) {
+                    Divider()
+                    HStack() {
+                        Text("Game Version:")
+                            .font(.headline)
+                        
+                        Text(selectedVersion.id)
+                            .foregroundStyle(Color.accentColor)
+                        
+                        Spacer()
+                        
+                        Picker("", selection: $model.gameType) {
+                            ForEach(GameModel.GameType.allCases, id: \.self.rawValue) { type in
+                                Text(type.rawValue)
+                                    .tag(type)
+                            }
+                        }
+                        .pickerStyle(.menu)
+                        .onChange(of: model.gameType) {
+                            usernameTextFieldFocused = model.isClient
+                        }
+                        .onChange(of: usernameTextFieldFocused) {
+                            refreshStartGameButton()
+                        }
+                        .disabled(model.isLaunchingGame)
+                    }
+                    .bold()
+                    
+                    if model.isClient {
+                        HStack() {
+                            Text("User Name:")
+                                .font(.headline)
+                                .bold()
+                            TextField("Input User Name", text: $model.username)
+                                .foregroundStyle(Color.accentColor)
+                                .bold()
+                                .textFieldStyle(.plain)
+                                .textContentType(.username)
+                                .autocorrectionDisabled()
+                                .textSelection(.disabled)
+                                .focused($usernameTextFieldFocused)
+                                .onChange(of: model.username) {
+                                    refreshStartGameButton()
+                                }
+                                .onSubmit {
+                                    startGame()
+                                }
+                                .disabled(model.isLaunchingGame)
+                        }
+                    }
+                    
+                    HStack() {
+                        Spacer()
+                        Button {
+                            startGame()
+                        } label: {
+                            Text("Start \(model.gameType.rawValue.capitalized)")
+                                .font(.headline)
+                                .bold()
+                                .padding([.horizontal], 4)
+                                .padding([.vertical], 4)
+                            
+                            if (model.progress > 0 && model.progress < 1) {
+                                ProgressView(value: model.progress, total: 1)
+                                    .progressViewStyle(.circular)
+                                    .controlSize(.small)
+                            } else if model.progress >= 1 {
+                                Image(systemName: "checkmark.seal.fill")
+                                    .controlSize(.regular)
+                            }
+                        }
+                        .tint(enableStartGameButton ? Color.accentColor : .gray)
+                        .controlSize(.regular)
+                        .buttonStyle(.borderedProminent)
+                        .disabled(!enableStartGameButton)
+                        
+                        Spacer()
+                    }
+                }
+                .padding([.horizontal, .bottom], 10)
+                .onChange(of: model.isLaunchingGame) {
+                    refreshStartGameButton()
+                }
+            }
+        }
+        .navigationSplitViewColumnWidth(min: 300, ideal: 300, max: 300)
+    }
+    
+    func startGame() {
+        usernameTextFieldFocused = false
+        model.startGame()
+    }
+    
+    func refreshStartGameButton() {
+        guard model.selectedVersion != nil
+        else {
+            enableStartGameButton = false
+            return
+        }
+        
+        if model.isClient {
+            enableStartGameButton = !model.username.isEmpty && !model.isFetchingGameVersions && !model.isLaunchingGame
+        } else if model.isServer {
+            enableStartGameButton = true
+        }
+    }
+    
+    func reloadList() {
+        Task {
+            model.isFetchingGameVersions = true
+            try await model.fetchGameVersions()
+            model.isFetchingGameVersions = false
+            refreshList()
+        }
+    }
+    
+    func refreshList() {
+        if searchContent.isEmpty {
+            filteredVersions = model.versions
+        } else {
+            filteredVersions = model.versions.filter { $0.id.contains(searchContent)}
+        }
+        
+        if showOnlyRelease {
+            filteredVersions = filteredVersions.filter { $0.type == "release" }
+        }
+    }
+}
+
+extension Version {
+    var typeTagColor: Color {
+        if type.contains("release") {
+            return .accentColor
+        } else if type.contains("snapshot") {
+            return .mint
+        } else if type.contains("alpha") {
+            return .red
+        } else if type.contains("beta") {
+            return .orange
+        } else {
+            return .gray
+        }
+    }
+}
+
+#Preview {
+    NavigationSplitView {
+        GameVersionList()
+            .environment(GameModel())
+    } detail: {
+        Text("Detail")
+    }
+}
+
