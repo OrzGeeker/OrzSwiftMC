@@ -9,9 +9,9 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-    
+
     var body: some Scene {
-        
+
         WindowGroup {
 #if os(macOS)
             LauncherUI()
@@ -21,7 +21,5 @@ struct OrzMCApp: App {
                 .environment(Model())
 #endif
         }
-        .windowStyle(.hiddenTitleBar)
-        .windowResizability(.contentSize)
     }
 }

@@ -12,13 +12,12 @@ struct LauncherUI: View {
     var body: some View {
 
         NavigationSplitView {
-
             GameView()
-                .navigationSplitViewColumnWidth(min: 300, ideal: 300, max: 300)
-
+                .navigationSplitViewColumnWidth(min: 320, ideal: 320, max: 320)
         } detail: {
-            Text("Detail")
+            GameInfoView()
         }
+        .navigationSplitViewStyle(.prominentDetail)
     }
 }
 

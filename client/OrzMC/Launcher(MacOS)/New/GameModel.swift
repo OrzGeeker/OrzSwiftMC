@@ -53,6 +53,18 @@ final class GameModel {
 }
 
 extension GameModel {
+
+    var detailTitle: String {
+        guard let selectedVersion
+        else {
+            return "Minecraft"
+        }
+        return "Minecraft - \(selectedVersion.id)"
+    }
+
+}
+
+extension GameModel {
     
     func fetchGameVersions() async throws {
         versions = try await Mojang.manifest?.versions ?? []

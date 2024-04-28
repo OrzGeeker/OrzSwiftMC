@@ -13,6 +13,8 @@
 		2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C799E28FEAB0700D53658 /* Assets.xcassets */; };
 		2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */; };
 		2B54E0872BDDFB16001B6877 /* Version+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0862BDDFB16001B6877 /* Version+.swift */; };
+		2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0892BDE0945001B6877 /* GameInfoView.swift */; };
+		2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
@@ -62,6 +64,8 @@
 		2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OrzMC.entitlements; sourceTree = "<group>"; };
 		2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		2B54E0862BDDFB16001B6877 /* Version+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+.swift"; sourceTree = "<group>"; };
+		2B54E0892BDE0945001B6877 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
+		2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfo.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
@@ -188,9 +192,12 @@
 		2B54E0882BDE00B7001B6877 /* New */ = {
 			isa = PBXGroup;
 			children = (
+				2B54E0862BDDFB16001B6877 /* Version+.swift */,
 				F30F00EE2BDC966900CAA802 /* GameModel.swift */,
 				F30F00EC2BDBDF7000CAA802 /* GameView.swift */,
 				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
+				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
+				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -247,7 +254,6 @@
 			children = (
 				2BADE2AE29D065B300DB1E68 /* Components */,
 				2B00920329D02B4B002637E3 /* ReusableView */,
-				2B54E0862BDDFB16001B6877 /* Version+.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -440,6 +446,8 @@
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */,
 				F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */,
+				2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */,
+				2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */,
 				2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */,
 				F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
