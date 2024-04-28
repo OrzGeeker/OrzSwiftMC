@@ -1,5 +1,5 @@
 //
-//  GameVersionList.swift
+//  GameView.swift
 //  OrzMC
 //
 //  Created by joker on 4/26/24.
@@ -8,7 +8,7 @@
 import SwiftUI
 import Mojang
 
-struct GameVersionList: View {
+struct GameView: View {
     
     @State private var searchContent: String = ""
     
@@ -177,69 +177,56 @@ struct GameVersionList: View {
                 }
             }
         }
-        .navigationSplitViewColumnWidth(min: 300, ideal: 300, max: 300)
     }
+}
+
+extension GameView {
     
     func startGame() {
         usernameTextFieldFocused = false
         model.startGame()
     }
-    
+
     func refreshStartGameButton() {
         guard model.selectedVersion != nil
         else {
             enableStartGameButton = false
             return
         }
-        
+
         if model.isClient {
             enableStartGameButton = !model.username.isEmpty && !model.isFetchingGameVersions && !model.isLaunchingGame
         } else if model.isServer {
             enableStartGameButton = true
         }
     }
-    
+
     func reloadList() {
         Task {
             model.isFetchingGameVersions = true
             try await model.fetchGameVersions()
             model.isFetchingGameVersions = false
-            refreshList()
+            await refreshList()
         }
     }
-    
+
+    @MainActor
     func refreshList() {
         if searchContent.isEmpty {
             filteredVersions = model.versions
         } else {
             filteredVersions = model.versions.filter { $0.id.contains(searchContent)}
         }
-        
+
         if showOnlyRelease {
             filteredVersions = filteredVersions.filter { $0.type == "release" }
         }
     }
 }
 
-extension Version {
-    var typeTagColor: Color {
-        if type.contains("release") {
-            return .accentColor
-        } else if type.contains("snapshot") {
-            return .mint
-        } else if type.contains("alpha") {
-            return .red
-        } else if type.contains("beta") {
-            return .orange
-        } else {
-            return .gray
-        }
-    }
-}
-
 #Preview {
     NavigationSplitView {
-        GameVersionList()
+        GameView()
             .environment(GameModel())
     } detail: {
         Text("Detail")
