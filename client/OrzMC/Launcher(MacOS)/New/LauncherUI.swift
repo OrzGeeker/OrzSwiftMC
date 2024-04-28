@@ -13,7 +13,7 @@ struct LauncherUI: View {
 
         NavigationSplitView {
             GameView()
-                .navigationSplitViewColumnWidth(min: 320, ideal: 320, max: 320)
+                .navigationSplitViewColumnWidth(Constants.sidebarWidth)
         } detail: {
             GameInfoView()
         }

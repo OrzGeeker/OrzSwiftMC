@@ -62,6 +62,16 @@ extension GameModel {
         return "Minecraft - \(selectedVersion.id)"
     }
 
+
+}
+
+struct Constants {
+
+    static let sidebarWidth: CGFloat = 320
+
+    static let minWidth: CGFloat = 3 * sidebarWidth
+
+    static let minHeight: CGFloat = minWidth * 0.618
 }
 
 extension GameModel {

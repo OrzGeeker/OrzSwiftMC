@@ -15,11 +15,13 @@ struct OrzMCApp: App {
         WindowGroup {
 #if os(macOS)
             LauncherUI()
+                .frame(minWidth: Constants.minWidth, minHeight: Constants.minHeight)
                 .environment(GameModel())
 #elseif os(iOS)
             ContentView()
                 .environment(Model())
 #endif
         }
+        .windowResizability(.contentSize)
     }
 }
