@@ -12,9 +12,10 @@
 		2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1C799528FEAB0600D53658 /* OrzMCApp.swift */; };
 		2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C799E28FEAB0700D53658 /* Assets.xcassets */; };
 		2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B1C79A228FEAB0700D53658 /* Preview Assets.xcassets */; };
-		2B54E0872BDDFB16001B6877 /* Version+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0862BDDFB16001B6877 /* Version+.swift */; };
-		2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0892BDE0945001B6877 /* GameInfoView.swift */; };
-		2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */; };
+		2B54E0872BDDFB16001B6877 /* Version+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0862BDDFB16001B6877 /* Version+.swift */; platformFilters = (macos, ); };
+		2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0892BDE0945001B6877 /* GameInfoView.swift */; platformFilters = (macos, ); };
+		2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */; platformFilters = (macos, ); };
+		2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */; platformFilters = (macos, ); };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
@@ -24,10 +25,10 @@
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
-		F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EC2BDBDF7000CAA802 /* GameView.swift */; };
-		F30F00EF2BDC966900CAA802 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EE2BDC966900CAA802 /* GameModel.swift */; };
-		F30F00F12BDCC6D900CAA802 /* GUIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F02BDCC6D900CAA802 /* GUIClient.swift */; };
-		F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F22BDCCBD300CAA802 /* GUIServer.swift */; };
+		F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EC2BDBDF7000CAA802 /* GameView.swift */; platformFilters = (macos, ); };
+		F30F00EF2BDC966900CAA802 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EE2BDC966900CAA802 /* GameModel.swift */; platformFilters = (macos, ); };
+		F30F00F12BDCC6D900CAA802 /* GUIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F02BDCC6D900CAA802 /* GUIClient.swift */; platformFilters = (macos, ); };
+		F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F22BDCCBD300CAA802 /* GUIServer.swift */; platformFilters = (macos, ); };
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
@@ -66,6 +67,7 @@
 		2B54E0862BDDFB16001B6877 /* Version+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Version+.swift"; sourceTree = "<group>"; };
 		2B54E0892BDE0945001B6877 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfo.swift; sourceTree = "<group>"; };
+		2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSScene.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
 				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
 				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
+				2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */,
 				F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */,
 				2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */,
+				2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */,
 				2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */,
 				2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */,
 				F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */,

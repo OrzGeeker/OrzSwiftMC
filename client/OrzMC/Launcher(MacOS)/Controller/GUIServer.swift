@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Game
 import PaperMCAPI
+import Game
 
 struct GUIServer: Server {
     

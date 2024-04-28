@@ -9,19 +9,14 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-
     var body: some Scene {
-
-        WindowGroup {
 #if os(macOS)
-            LauncherUI()
-                .frame(minWidth: Constants.minWidth, minHeight: Constants.minHeight)
-                .environment(GameModel())
+        MacOSScene()
 #elseif os(iOS)
+        WindowGroup {
             ContentView()
                 .environment(Model())
-#endif
         }
-        .windowResizability(.contentSize)
+#endif
     }
 }
