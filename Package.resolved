@@ -1,5 +1,5 @@
 {
-  "originHash" : "aceff7db97a3511223f417f9b455e0a0fae9f4fd12a7c0040c34e7d15ce242a8",
+  "originHash" : "ab03ad85b3f6c604131cf27767e4545083cb6280367053708e81322ca18ef378",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "33a9984b4af03f00e68b8ee85f1273cb826af04f",
         "version" : "3.1.3"
+      }
+    },
+    {
+      "identity" : "orzswiftkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "6fe95453a27d393df06fb8d43e960ca030973fe6"
       }
     },
     {
@@ -96,8 +105,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "fc63f0cf4e55a4597407a9fc95b16a2bc44b4982",
-        "version" : "2.64.0"
+        "revision" : "359c461e5561d22c6334828806cc25d759ca7aa6",
+        "version" : "2.65.0"
       }
     },
     {
