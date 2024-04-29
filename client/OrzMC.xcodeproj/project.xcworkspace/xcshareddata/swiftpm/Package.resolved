@@ -1,13 +1,13 @@
 {
-  "originHash" : "8a769b9c19656e400befb4a9877a569429c7bb68141e5fa3fec9c75ac781f393",
+  "originHash" : "0b722a3448e2adb3e16c78cdb55faf3505daae4eb8340314431484832a844261",
   "pins" : [
     {
       "identity" : "alamofire",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
-        "version" : "5.8.1"
+        "revision" : "f455c2975872ccd2d9c81594c658af65716e9b9a",
+        "version" : "5.9.1"
       }
     },
     {
@@ -35,6 +35,15 @@
       "state" : {
         "revision" : "283454875cc6e5b2801d184d65835b92252d1784",
         "version" : "3.1.2"
+      }
+    },
+    {
+      "identity" : "orzswiftkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "712519f1b5212f9054427bf956652dc26f1512a5"
       }
     },
     {
@@ -105,8 +114,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "fc63f0cf4e55a4597407a9fc95b16a2bc44b4982",
-        "version" : "2.64.0"
+        "revision" : "359c461e5561d22c6334828806cc25d759ca7aa6",
+        "version" : "2.65.0"
       }
     },
     {

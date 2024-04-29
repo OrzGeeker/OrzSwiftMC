@@ -7,6 +7,7 @@
 
 import Foundation
 import JokerKits
+import Utils
 
 extension Client {
     public mutating func parseBootArgs() async throws -> [String]? {
@@ -16,7 +17,7 @@ extension Client {
         }
         
         let jarExt = "jar"
-        let cpSep = Platform.os() == .windows ? ";" : ":"
+        let cpSep = Platform.os == .windows ? ";" : ":"
         
         var libraryDirs = Array([
             GameDir.libraries(version: clientInfo.version.id).dirPath,
@@ -63,7 +64,7 @@ extension Client {
             switch arg {
             case .object(let obj):
                 for rule in obj.rules {
-                    if rule.os.name == Platform.os().platformName(), rule.action == "allow" {
+                    if rule.os.name == Platform.os.platformName(), rule.action == "allow" {
                         switch obj.value {
                         case .array(let values):
                             return values.joined(separator: " ")

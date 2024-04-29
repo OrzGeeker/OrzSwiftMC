@@ -8,6 +8,7 @@
 import Foundation
 import JokerKits
 import ConsoleKit
+import Utils
 
 public extension Platform {
     func platformName() -> String {
@@ -16,7 +17,7 @@ public extension Platform {
             return "linux"
         case .windows:
             return "windows"
-        case .macosx:
+        case .macOS:
             return "osx"
         default:
             return "unsupported"
