@@ -29,9 +29,9 @@ final class GameModel {
             }
             progress = 0.0
         }
-        
         didSet {
             fetchGameInfo()
+            fetchCurrentJavaMajorVersion()
         }
     }
     
@@ -56,6 +56,8 @@ final class GameModel {
     var isServer: Bool { gameType == .server }
     
     var gameInfoMap = [Version: GameInfo]()
+    
+    var currentJavaMajorVersion: Int?
 }
 
 extension GameModel {
@@ -68,6 +70,18 @@ extension GameModel {
         return "Minecraft - \(selectedVersion.id)"
     }
     
+    var javaVersionTextColor: Color {
+        guard let currentJavaMajorVersion, let selectedGameJavaMajorVersionRequired
+        else {
+            return .primary
+        }
+        if currentJavaMajorVersion >= selectedGameJavaMajorVersionRequired {
+            return .green
+        } else {
+            return .red
+        }
+    }
+    
     var selectedGameJavaMajorVersionRequired: Int? {
         guard let selectedVersion, let gameInfo = gameInfoMap[selectedVersion]
         else {
@@ -75,28 +89,19 @@ extension GameModel {
         }
         return gameInfo.javaVersion.majorVersion
     }
+}
+
+extension GameModel {
     
-    var currentJavaMajorVersion: Int? {
+    func fetchCurrentJavaMajorVersion() {
         guard let currentJavaVersion = try? OracleJava.currentJDK()?.version,
               let currentJaveMajorVersionSubstring = currentJavaVersion.split(separator: ".").first,
               let currentJavaMajorVersion = Int(String(currentJaveMajorVersionSubstring))
         else {
-            return nil
+            return
         }
-        return currentJavaMajorVersion
+        self.currentJavaMajorVersion = currentJavaMajorVersion
     }
-    
-    var isJavaRuntimeOK: Bool {
-        guard let currentJavaMajorVersion, let selectedGameJavaMajorVersionRequired
-        else {
-            return false
-        }
-        return currentJavaMajorVersion >= selectedGameJavaMajorVersionRequired
-    }
-
-}
-
-extension GameModel {
     
     func fetchGameVersions() async throws {
         versions = try await Mojang.manifest?.versions ?? []

@@ -14,11 +14,7 @@ struct BasicInfo: View {
 
     var body: some View {
         VStack {
-            if let javaMajorVersion = model.selectedGameJavaMajorVersionRequired {
-                Text("\(javaMajorVersion)")
-            } else {
-                Text("Retry Again Later")
-            }
+           Text("Basic Info")
         }
         .navigationTitle(model.detailTitle)
     }

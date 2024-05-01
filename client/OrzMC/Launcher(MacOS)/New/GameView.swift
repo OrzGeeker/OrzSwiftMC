@@ -98,7 +98,7 @@ struct GameView: View {
                         HStack {
                             Spacer()
                             Text("Java Version")
-                                .foregroundStyle(model.isJavaRuntimeOK ? Color.green : Color.red)
+                                .foregroundStyle(model.javaVersionTextColor)
                             Spacer()
                         }
                         
@@ -109,21 +109,15 @@ struct GameView: View {
                             .foregroundStyle(Color.orange)
                             .padding([.vertical], 5)
                         }
-                        HStack {
-                            Text("Required:")
-                            if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
+                        
+                        if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
+                            HStack {
+                                Text("Required:")
                                 Text("\(requiredJavaMajorVersion)")
                                     .padding(5)
-                            } else {
-                                Button("Retry Fetch", systemImage: "arrow.clockwise") {
-                                    model.fetchGameInfo()
-                                }
                             }
+                            .foregroundStyle(Color.teal)
                         }
-                        .onChange(of: model.selectedGameJavaMajorVersionRequired) {
-                            
-                        }
-                        .foregroundStyle(Color.teal)
                     }
                     .font(.headline)
                     .bold()
