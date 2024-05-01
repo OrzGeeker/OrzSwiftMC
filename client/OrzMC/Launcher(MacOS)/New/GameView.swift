@@ -28,7 +28,7 @@ struct GameView: View {
             List(filteredVersions, selection: $model.selectedVersion) { version in
                 HStack() {
                     Text(version.id)
-                        .font(.system(size: 12))
+                        .font(.system(size: 14))
                         .bold()
                         .padding([.vertical, .leading], 5)
                     
@@ -93,6 +93,41 @@ struct GameView: View {
             
             if let selectedVersion = model.selectedVersion {
                 VStack(alignment: .leading, spacing: 10) {
+                    Divider()
+                    VStack(alignment: .leading) {
+                        HStack {
+                            Spacer()
+                            Text("Java Version")
+                                .foregroundStyle(model.isJavaRuntimeOK ? Color.green : Color.red)
+                            Spacer()
+                        }
+                        
+                        if let currentJavaMajorVersion = model.currentJavaMajorVersion {
+                            HStack {
+                                Text("Current: \(currentJavaMajorVersion)")
+                            }
+                            .foregroundStyle(Color.orange)
+                            .padding([.vertical], 5)
+                        }
+                        HStack {
+                            Text("Required:")
+                            if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
+                                Text("\(requiredJavaMajorVersion)")
+                                    .padding(5)
+                            } else {
+                                Button("Retry Fetch", systemImage: "arrow.clockwise") {
+                                    model.fetchGameInfo()
+                                }
+                            }
+                        }
+                        .onChange(of: model.selectedGameJavaMajorVersionRequired) {
+                            
+                        }
+                        .foregroundStyle(Color.teal)
+                    }
+                    .font(.headline)
+                    .bold()
+                    
                     Divider()
                     HStack() {
                         Text("Game Version:")
@@ -171,7 +206,8 @@ struct GameView: View {
                         Spacer()
                     }
                 }
-                .padding([.horizontal, .bottom], 10)
+                .padding([.horizontal], 10)
+                .padding([.bottom], 20)
                 .onChange(of: model.isLaunchingGame) {
                     refreshStartGameButton()
                 }
@@ -186,21 +222,21 @@ extension GameView {
         usernameTextFieldFocused = false
         model.startGame()
     }
-
+    
     func refreshStartGameButton() {
         guard model.selectedVersion != nil
         else {
             enableStartGameButton = false
             return
         }
-
+        
         if model.isClient {
             enableStartGameButton = !model.username.isEmpty && !model.isFetchingGameVersions && !model.isLaunchingGame
         } else if model.isServer {
             enableStartGameButton = true
         }
     }
-
+    
     func reloadList() {
         Task {
             model.isFetchingGameVersions = true
@@ -209,7 +245,7 @@ extension GameView {
             await refreshList()
         }
     }
-
+    
     @MainActor
     func refreshList() {
         if searchContent.isEmpty {
@@ -217,7 +253,7 @@ extension GameView {
         } else {
             filteredVersions = model.versions.filter { $0.id.contains(searchContent)}
         }
-
+        
         if showOnlyRelease {
             filteredVersions = filteredVersions.filter { $0.type == "release" }
         }

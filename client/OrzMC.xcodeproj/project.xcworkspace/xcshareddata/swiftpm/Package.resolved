@@ -1,5 +1,5 @@
 {
-  "originHash" : "0b722a3448e2adb3e16c78cdb55faf3505daae4eb8340314431484832a844261",
+  "originHash" : "e1edb57f2d24a81cc7a260f1968ffde648c09f6d73e588539cbe02047367dd44",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,15 +35,6 @@
       "state" : {
         "revision" : "283454875cc6e5b2801d184d65835b92252d1784",
         "version" : "3.1.2"
-      }
-    },
-    {
-      "identity" : "orzswiftkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "712519f1b5212f9054427bf956652dc26f1512a5"
       }
     },
     {

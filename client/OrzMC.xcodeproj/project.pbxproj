@@ -32,6 +32,7 @@
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
+		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; };
 		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; };
 		F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */; };
@@ -85,6 +86,8 @@
 		F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherUserLoginArea.swift; sourceTree = "<group>"; };
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
+		F3B18FAB2BE242A2002C7851 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		F3B18FAD2BE25957002C7851 /* OrzSwiftKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrzSwiftKit; path = ../../../OrzSwiftKit; sourceTree = "<group>"; };
 		F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+littleEndianBytes.swift"; sourceTree = "<group>"; };
 		F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRCON.swift; sourceTree = "<group>"; };
 		F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCONPacket.swift; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
 				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
 				2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */,
+				F3B18FAB2BE242A2002C7851 /* Constants.swift */,
 			);
 			path = New;
 			sourceTree = "<group>";
@@ -228,6 +232,7 @@
 		2BADE2BA29D088C800DB1E68 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				F3B18FAD2BE25957002C7851 /* OrzSwiftKit */,
 				2BADE2BB29D088C800DB1E68 /* swift */,
 			);
 			name = Packages;
@@ -460,6 +465,7 @@
 				2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */,
 				2B54E0872BDDFB16001B6877 /* Version+.swift in Sources */,
 				2BD03D792907F93200BE1D1F /* Model.swift in Sources */,
+				F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */,
 				F3B4D0E02A1A777A0095B108 /* MCServerStatusInfo.swift in Sources */,
 				2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */,
 				F3B4D0D52A1A776A0095B108 /* MCSLPError.swift in Sources */,

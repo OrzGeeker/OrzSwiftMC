@@ -8,6 +8,7 @@
 import SwiftUI
 import Game
 import Mojang
+import JokerKits
 
 @Observable
 final class GameModel {
@@ -28,6 +29,10 @@ final class GameModel {
             }
             progress = 0.0
         }
+        
+        didSet {
+            fetchGameInfo()
+        }
     }
     
     var username: String = ""
@@ -41,7 +46,7 @@ final class GameModel {
             progress = 0.0
         }
     }
-        
+    
     var progress: Double = 0.0
     
     var isFetchingGameVersions: Bool = false
@@ -50,10 +55,11 @@ final class GameModel {
     
     var isServer: Bool { gameType == .server }
     
+    var gameInfoMap = [Version: GameInfo]()
 }
 
 extension GameModel {
-
+    
     var detailTitle: String {
         guard let selectedVersion
         else {
@@ -61,23 +67,57 @@ extension GameModel {
         }
         return "Minecraft - \(selectedVersion.id)"
     }
+    
+    var selectedGameJavaMajorVersionRequired: Int? {
+        guard let selectedVersion, let gameInfo = gameInfoMap[selectedVersion]
+        else {
+            return nil
+        }
+        return gameInfo.javaVersion.majorVersion
+    }
+    
+    var currentJavaMajorVersion: Int? {
+        guard let currentJavaVersion = try? OracleJava.currentJDK()?.version,
+              let currentJaveMajorVersionSubstring = currentJavaVersion.split(separator: ".").first,
+              let currentJavaMajorVersion = Int(String(currentJaveMajorVersionSubstring))
+        else {
+            return nil
+        }
+        return currentJavaMajorVersion
+    }
+    
+    var isJavaRuntimeOK: Bool {
+        guard let currentJavaMajorVersion, let selectedGameJavaMajorVersionRequired
+        else {
+            return false
+        }
+        return currentJavaMajorVersion >= selectedGameJavaMajorVersionRequired
+    }
 
-
-}
-
-struct Constants {
-
-    static let sidebarWidth: CGFloat = 320
-
-    static let minWidth: CGFloat = 3 * sidebarWidth
-
-    static let minHeight: CGFloat = minWidth * 0.618
 }
 
 extension GameModel {
     
     func fetchGameVersions() async throws {
         versions = try await Mojang.manifest?.versions ?? []
+    }
+    
+    func fetchGameInfo() {
+        guard let selectedVersion
+        else {
+            return
+        }
+        
+        guard !gameInfoMap.keys.contains(selectedVersion)
+        else {
+            return
+        }
+        
+        Task {
+            guard let gameInfo = try? await selectedVersion.gameInfo
+            else { return }
+            gameInfoMap[selectedVersion] = gameInfo
+        }
     }
     
     func startGame() {
