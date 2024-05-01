@@ -58,6 +58,8 @@ final class GameModel {
     var gameInfoMap = [Version: GameInfo]()
     
     var currentJavaMajorVersion: Int?
+    
+    let javaInstallationLinkURL = URL(string: OracleJava.javaInstallationPageUrl)!
 }
 
 extension GameModel {
@@ -71,13 +73,13 @@ extension GameModel {
     }
     
     var javaVersionTextColor: Color {
-        guard let currentJavaMajorVersion, let selectedGameJavaMajorVersionRequired
-        else {
+        
+        switch javaRuntimeStatus {
+        case .unknown:
             return .primary
-        }
-        if currentJavaMajorVersion >= selectedGameJavaMajorVersionRequired {
+        case .valid:
             return .green
-        } else {
+        case .invalid:
             return .red
         }
     }
@@ -88,6 +90,24 @@ extension GameModel {
             return nil
         }
         return gameInfo.javaVersion.majorVersion
+    }
+    
+    enum JavaRuntimeStatus {
+        case unknown
+        case valid
+        case invalid
+    }
+    
+    var javaRuntimeStatus: JavaRuntimeStatus {
+        guard let currentJavaMajorVersion, let selectedGameJavaMajorVersionRequired
+        else {
+            return .unknown
+        }
+        if currentJavaMajorVersion >= selectedGameJavaMajorVersionRequired {
+            return .valid
+        } else {
+            return .invalid
+        }
     }
 }
 

@@ -94,7 +94,7 @@ struct GameView: View {
             if let selectedVersion = model.selectedVersion {
                 VStack(alignment: .leading, spacing: 10) {
                     Divider()
-                    VStack(alignment: .leading) {
+                    VStack(alignment: .leading, spacing: 10) {
                         HStack {
                             Spacer()
                             Text("Java Version")
@@ -105,16 +105,27 @@ struct GameView: View {
                         if let currentJavaMajorVersion = model.currentJavaMajorVersion {
                             HStack {
                                 Text("Current: \(currentJavaMajorVersion)")
+                                Spacer()
+                                Button {
+                                    model.fetchCurrentJavaMajorVersion()
+                                } label: {
+                                    Image(systemName: "arrow.clockwise")
+                                }
                             }
                             .foregroundStyle(Color.orange)
-                            .padding([.vertical], 5)
                         }
                         
                         if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
                             HStack {
                                 Text("Required:")
                                 Text("\(requiredJavaMajorVersion)")
-                                    .padding(5)
+                                if model.javaRuntimeStatus == .invalid {
+                                    Spacer()
+                                    Link(destination: model.javaInstallationLinkURL) {
+                                        Text("Install Java")
+                                    }
+                                    .buttonStyle(BorderedProminentButtonStyle())
+                                }
                             }
                             .foregroundStyle(Color.teal)
                         }
