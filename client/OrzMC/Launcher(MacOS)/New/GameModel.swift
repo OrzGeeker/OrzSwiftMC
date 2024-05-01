@@ -84,6 +84,10 @@ extension GameModel {
         }
     }
     
+    var progressDesc: String {
+        return String(format: "%.2f%%", progress * 100)
+    }
+    
     var selectedGameJavaMajorVersionRequired: Int? {
         guard let selectedVersion, let gameInfo = gameInfoMap[selectedVersion]
         else {

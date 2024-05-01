@@ -198,6 +198,7 @@ struct GameView: View {
                                 ProgressView(value: model.progress, total: 1)
                                     .progressViewStyle(.circular)
                                     .controlSize(.small)
+                                Text(model.progressDesc)
                             } else if model.progress >= 1 {
                                 Image(systemName: "checkmark.seal.fill")
                                     .controlSize(.regular)
