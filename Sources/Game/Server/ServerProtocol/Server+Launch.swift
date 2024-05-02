@@ -11,7 +11,7 @@ import Utils
 
 public extension Server {
     
-    func launchServer(_ filePath: String, workDirectory: GameDir, jarArgs: [String] = []) async throws {
+    func launchServer(_ filePath: String, workDirectory: GameDir, jarArgs: [String] = []) async throws -> Process {
         
         var args = [
             "-server",
@@ -60,5 +60,6 @@ public extension Server {
         let process = try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath, terminationHandler: nil)
         Platform.console.success("后台启动服务端: ", newLine: false)
         Platform.console.info("PID = \(process.processIdentifier)")
+        return process
     }
 }

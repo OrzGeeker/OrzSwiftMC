@@ -32,6 +32,7 @@ final class GameModel {
         didSet {
             fetchGameInfo()
             fetchCurrentJavaMajorVersion()
+            checkRunningServer()
         }
     }
     
@@ -60,6 +61,10 @@ final class GameModel {
     var currentJavaMajorVersion: Int?
     
     let javaInstallationLinkURL = URL(string: OracleJava.javaInstallationPageUrl)!
+    
+    static var serverPIDMap = [String: String]()
+    
+    var isShowKillAllServerButton: Bool = false
 }
 
 extension GameModel {
@@ -112,6 +117,15 @@ extension GameModel {
         } else {
             return .invalid
         }
+    }
+    
+    var selectedServerPID: String? {
+        guard isServer, let selectedVersion,
+              GameModel.serverPIDMap.keys.contains(selectedVersion.id)
+        else { 
+            return nil
+        }
+        return GameModel.serverPIDMap[selectedVersion.id]
     }
 }
 
@@ -194,6 +208,23 @@ extension GameModel {
             jarOptions: nil
         )
         let launcher = GUIServer(serverInfo: serverInfo, gameModel: self)
-        try await launcher.start()
+        guard let process = try await launcher.start()
+        else {
+            return
+        }
+        let pid = String(process.processIdentifier)
+        GameModel.serverPIDMap[serverInfo.version] = pid
+    }
+    
+    func checkRunningServer() {
+        let hasRunningServer = (try? !Shell.allRunningServerPids().isEmpty) ?? false
+        isShowKillAllServerButton = hasRunningServer
+    }
+    
+    func killAllRunningServer() {
+        Task {
+            try await Shell.stopAll()
+            checkRunningServer()
+        }
     }
 }

@@ -13,9 +13,29 @@ struct BasicInfo: View {
     @Environment(GameModel.self) private var model
 
     var body: some View {
-        VStack {
-           Text("Basic Info")
+        
+        Form {
+            
+            
+            
         }
         .navigationTitle(model.detailTitle)
+        .task {
+            model.checkRunningServer()
+        }
+        .toolbar {
+            if model.isShowKillAllServerButton {
+                ToolbarItem {
+                    Button {
+                        model.killAllRunningServer()
+                    } label: {
+                        Text("Kill Running Servers")
+                            .foregroundStyle(Color.accentColor)
+                            .padding(4)
+                            .bold()
+                    }
+                }
+            }
+        }
     }
 }

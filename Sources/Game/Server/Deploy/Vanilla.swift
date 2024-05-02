@@ -55,7 +55,7 @@ public struct VanillaServer: Server {
     /// --universe <String>  (default: .)
     /// --world <String>
     /// ```
-    public func start() async throws {
+    public func start() async throws -> Process? {
         
         guard let serverVersion = try await Mojang.manifest?.versions.filter({ $0.id == serverInfo.version }).first?.gameInfo?.downloads.server
         else {
@@ -70,6 +70,7 @@ public struct VanillaServer: Server {
         
         let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)
-        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
+        let process = try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
+        return process
     }
 }

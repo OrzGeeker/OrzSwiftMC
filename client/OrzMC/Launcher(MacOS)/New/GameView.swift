@@ -68,7 +68,7 @@ struct GameView: View {
             .toolbar {
                 ToolbarItem {
                     Toggle(isOn: $showOnlyRelease) {
-                        Text("Show Release Only")
+                        Text("Release Only")
                             .padding(4)
                             .foregroundStyle(showOnlyRelease ? Color.accentColor : Color.gray)
                             .fontWeight(showOnlyRelease ? .medium : .regular)

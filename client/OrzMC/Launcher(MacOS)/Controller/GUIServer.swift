@@ -17,24 +17,24 @@ struct GUIServer: Server {
     
     let gameModel: GameModel
     
-    func start() async throws {
+    func start() async throws -> Process? {
         
         switch serverType {
         case .paper:
-            try await startPaperServer()
+            return try await startPaperServer()
         case .vanilla:
-            try await VanillaServer(serverInfo: serverInfo).start()
+            return try await VanillaServer(serverInfo: serverInfo).start()
         }
     }
     
     // MARK: PaperMC
-    public func startPaperServer() async throws {
+    public func startPaperServer() async throws -> Process? {
         
         let version = serverInfo.version
         
         guard let (build, name, _) = try await client.latestBuildApplication(project: .paper, version: version)
         else {
-            return
+            return nil
         }
         
         let workDirectory = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
@@ -51,7 +51,7 @@ struct GUIServer: Server {
                                                                           build: build,
                                                                           name: name)
             else {
-                return
+                return nil
             }
             
             var jarData = Data()
@@ -66,12 +66,14 @@ struct GUIServer: Server {
             }
             try jarData.write(to: jarFileURL, options: .atomic)
         }
-        
-        try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
+        gameModel.progress = 1
+        let process = try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
             "--nojline",
             "--noconsole"
         ])
+        
+        return process
     }
     
     private let client = PaperMCAPIClient()
