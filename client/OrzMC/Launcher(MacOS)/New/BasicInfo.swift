@@ -88,6 +88,30 @@ struct BasicInfo: View {
                     }
                 }
             }
+            
+            ToolbarItem {
+                Link(destination: URL(string: "https://minecraft.jokerhub.cn")!) {
+                    Image(systemName: "house")
+                        .padding(4)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            
+            ToolbarItem {
+                Link(destination: URL(string: "https://papermc.io/")!) {
+                    Image(systemName: "paperplane")
+                        .padding(4)
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            
+            ToolbarItem {
+                Link(destination: URL(string: "https://hangar.papermc.io/")!) {
+                    Image(systemName: "powerplug")
+                        .padding(4)
+                }
+                .buttonStyle(.borderedProminent)
+            }
         }
     }
 }

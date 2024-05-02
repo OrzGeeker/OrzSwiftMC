@@ -124,7 +124,7 @@ struct GameView: View {
                                     Link(destination: model.javaInstallationLinkURL) {
                                         Text("Install Java")
                                     }
-                                    .buttonStyle(BorderedProminentButtonStyle())
+                                    .buttonStyle(.borderedProminent)
                                 }
                             }
                             .foregroundStyle(Color.teal)
