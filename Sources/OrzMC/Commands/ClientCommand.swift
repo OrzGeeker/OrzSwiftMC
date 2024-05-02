@@ -7,6 +7,7 @@
 
 import ConsoleKit
 import JokerKits
+import Utils
 import Game
 
 struct ClientCommand: AsyncCommand {
