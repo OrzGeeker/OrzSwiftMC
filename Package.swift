@@ -20,7 +20,7 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-openapi-generator.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
-        .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "0.0.1")
+        .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "main")
     ],
     targets: [
         // MARK: Command Line executable
