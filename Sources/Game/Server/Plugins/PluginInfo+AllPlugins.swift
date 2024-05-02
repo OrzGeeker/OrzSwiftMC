@@ -10,6 +10,7 @@ import Utils
 import Foundation
 
 public extension PluginInfo {
+    
     static func allPlugins() -> [PluginInfo] {
         return [
             PluginInfo(

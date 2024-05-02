@@ -21,6 +21,7 @@ public enum GameError: Error {
 public enum GameDir {
     
     public static let defaultClientType = GameType.vanilla.rawValue
+    public static let defaultServerType = GameType.vanilla.rawValue
 
     case home
     case minecraft
@@ -37,7 +38,8 @@ public enum GameDir {
     case clientVersionProfileLibraries(version: String, profile: String, type: String = defaultClientType)
     case clientVersionNative(version: String, type: String = defaultClientType)
     case clientLogConfig(version: String, type: String = defaultClientType)
-    case server(version: String, type: String = defaultClientType)
+    case server(version: String, type: String = defaultServerType)
+    case serverPlugin(version: String, type: String = defaultServerType)
     
     private var pathComponents: [String] {
         switch self {
@@ -74,6 +76,8 @@ public enum GameDir {
             return GameDir.clientVersion(version: version, type: type).pathComponents + [nativesPlatform]
         case .server(let version, let type):
             return GameDir.gameVersion(version: version).pathComponents + ["server", type]
+        case .serverPlugin(let version, let type):
+            return GameDir.server(version: version, type: type).pathComponents + ["plugins"]
         }
     }
     
