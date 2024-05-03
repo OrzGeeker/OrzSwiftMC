@@ -93,18 +93,22 @@ struct GameView: View {
             
             if let selectedVersion = model.selectedVersion {
                 VStack(alignment: .leading, spacing: 10) {
-                    Divider()
-                    VStack(alignment: .leading, spacing: 10) {
-                        HStack {
-                            Spacer()
-                            Text("Java Version")
-                                .foregroundStyle(model.javaVersionTextColor)
-                            Spacer()
-                        }
-                        
-                        if let currentJavaMajorVersion = model.currentJavaMajorVersion {
+                    
+                    if model.showJavaVersionArea {
+                        Divider()
+                        VStack(alignment: .leading, spacing: 10) {
                             HStack {
-                                Text("Current: \(currentJavaMajorVersion)")
+                                Spacer()
+                                Text("Java Version")
+                                    .foregroundStyle(model.javaVersionTextColor)
+                                Spacer()
+                            }
+                            
+                            HStack {
+                                Text("Current:")
+                                if let currentJavaMajorVersion = model.currentJavaMajorVersion {
+                                    Text("\(currentJavaMajorVersion)")
+                                }
                                 Spacer()
                                 Button {
                                     model.fetchCurrentJavaMajorVersion()
@@ -113,12 +117,12 @@ struct GameView: View {
                                 }
                             }
                             .foregroundStyle(Color.orange)
-                        }
-                        
-                        if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
+                            
                             HStack {
                                 Text("Required:")
-                                Text("\(requiredJavaMajorVersion)")
+                                if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
+                                    Text("\(requiredJavaMajorVersion)")
+                                }
                                 if model.javaRuntimeStatus == .invalid {
                                     Spacer()
                                     Link(destination: model.javaInstallationLinkURL) {
@@ -128,10 +132,11 @@ struct GameView: View {
                                 }
                             }
                             .foregroundStyle(Color.teal)
+                            
                         }
+                        .font(.headline)
+                        .bold()
                     }
-                    .font(.headline)
-                    .bold()
                     
                     Divider()
                     HStack() {

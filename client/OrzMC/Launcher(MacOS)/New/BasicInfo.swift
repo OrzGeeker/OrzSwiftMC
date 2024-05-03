@@ -78,18 +78,6 @@ struct BasicInfo: View {
             model.checkRunningServer()
         }
         .toolbar {
-            if model.isShowKillAllServerButton {
-                ToolbarItem {
-                    Button {
-                        model.stopAllRunningServer()
-                    } label: {
-                        Text("Stop All Servers")
-                            .foregroundStyle(Color.accentColor)
-                            .padding(4)
-                            .bold()
-                    }
-                }
-            }
             
             ToolbarItem {
                 Link(destination: URL(string: "https://minecraft.jokerhub.cn")!) {
@@ -113,6 +101,19 @@ struct BasicInfo: View {
                         .padding(4)
                 }
                 .buttonStyle(.borderedProminent)
+            }
+            
+            if model.isShowKillAllServerButton {
+                ToolbarItem {
+                    Button {
+                        model.stopAllRunningServer()
+                    } label: {
+                        Text("Stop All Servers")
+                            .foregroundStyle(Color.accentColor)
+                            .padding(4)
+                            .bold()
+                    }
+                }
             }
         }
     }

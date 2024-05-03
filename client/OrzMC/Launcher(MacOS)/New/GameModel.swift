@@ -88,6 +88,8 @@ extension GameModel {
         }
     }
     
+    var showJavaVersionArea: Bool { currentJavaMajorVersion != nil || selectedGameJavaMajorVersionRequired != nil }
+    
     var progressDesc: String {
         return String(format: "%.2f%%", progress * 100)
     }
