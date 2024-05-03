@@ -6,6 +6,7 @@
 //
 
 import JokerKits
+import Utils
 import Foundation
 import ConsoleKit
 import PaperMCAPI
@@ -20,7 +21,7 @@ enum PaperServerError: Error {
 
 public struct PaperServer: Server {
 
-    let serverInfo: ServerInfo
+    public let serverInfo: ServerInfo
 
     public init(serverInfo: ServerInfo) {
         self.serverInfo = serverInfo
@@ -92,7 +93,7 @@ public struct PaperServer: Server {
     /// -w, --level-name, --world <String:      World name
     ///   World name>
     /// ```
-    public func start() async throws {
+    public func start() async throws -> Process? {
 
         let version = serverInfo.version
         let loadingBar = Platform.console.loadingBar(title: "获最最新构建版本")
@@ -101,7 +102,7 @@ public struct PaperServer: Server {
                                                                                     version: version)
         else {
             loadingBar.fail()
-            return
+            return nil
         }
         loadingBar.succeed()
         Platform.console.info(name)
@@ -123,7 +124,7 @@ public struct PaperServer: Server {
                                                                                  name: name)
             else {
                 progressBar.fail()
-                return
+                return nil
             }
 
             var jarData = Data()
@@ -140,11 +141,12 @@ public struct PaperServer: Server {
             try jarData.write(to: jarFileURL, options: .atomic)
         }
         
-        try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
+        let process = try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
             "--nojline",
             "--noconsole"
         ])
+        return process
     }
 
     private let client = PaperMCAPIClient()

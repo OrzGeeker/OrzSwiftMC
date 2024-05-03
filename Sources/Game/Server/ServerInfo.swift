@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ServerInfo {
-    let version: String
+    public let version: String
     let gui: Bool
     let debug: Bool
     let forceUpgrade: Bool
@@ -19,7 +19,7 @@ public struct ServerInfo {
     var maxMem: String
     
     // 服务端参数
-    var onlineMode: Bool // 是否以online模式运行服务端
+    public var onlineMode: Bool // 是否以online模式运行服务端
     var showJarHelpInfo: Bool // 显示服务端Jar包帮助信息
     
     // Jar包对应的参数

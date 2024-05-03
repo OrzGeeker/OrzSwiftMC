@@ -8,6 +8,7 @@
 import Foundation
 import Mojang
 import JokerKits
+import Utils
 
 public extension Client {
     /// 从客户端版本清单文件中分析出要下载的资源信息
@@ -65,7 +66,7 @@ public extension Client {
             let dirPath = NSString(string: artifact.path).deletingLastPathComponent
             var targetDir = GameDir.libraryObj(version: clientInfo.version.id, path: dirPath)
             
-            let currentOSName = Platform.os().platformName()
+            let currentOSName = Platform.os.platformName()
             if let natives = lib.natives, let nativeClassifier = natives[currentOSName], let nativeArtifact = lib.downloads.classifiers?[nativeClassifier] {
                 artifact = nativeArtifact
                 targetDir = GameDir.clientVersionNative(version: clientInfo.version.id)

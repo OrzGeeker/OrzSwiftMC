@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by wangzhizhou on 2021/12/25.
 //
@@ -8,14 +8,15 @@
 import Foundation
 import JokerKits
 
-public struct Version: MojangCodable {
-    
+public struct Version: MojangCodable, Identifiable, Hashable {
     public let id: String
     public let type: String
     public let url: URL?
     let time: String
     let releaseTime: String
-    
+}
+
+extension Version {
     public var gameInfo: GameInfo? {
         get async throws {
             guard let data = try await self.url?.getData

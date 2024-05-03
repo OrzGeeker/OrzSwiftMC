@@ -1,5 +1,5 @@
 //
-//  GUILauncher.swift
+//  GUIClient.swift
 //  OrzMC
 //
 //  Created by joker on 2022/10/22.
@@ -9,12 +9,14 @@ import Foundation
 import JokerKits
 import Game
 
-struct GUILauncher: Client  {
+struct GUIClient: Client  {
     
     var clientInfo: Game.ClientInfo
 
     let launcherModel: LauncherModel
-
+    
+    let gameModel: GameModel
+    
     @MainActor
     mutating func start() async throws {
         
@@ -35,6 +37,7 @@ struct GUILauncher: Client  {
             count += 1
             progress = Double(count) / Double(total)
             launcherModel.launcherProgress = progress
+            gameModel.progress = progress
         }
     }
     

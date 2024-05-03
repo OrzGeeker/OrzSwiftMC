@@ -11,19 +11,16 @@ let package = Package(
     products: [
         .executable(name: "orzmc", targets: ["OrzMC"]),
         .library(name: "Game", targets: ["Game"]),
-        .library(name: "JokerKits", targets: ["JokerKits"]),
         .library(name: "Mojang", targets: ["Mojang"]),
         .library(name: "PaperMC", targets: ["PaperMCAPI","HangarAPI"]),
         .library(name: "Fabric", targets: ["Fabric"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/vapor/console-kit.git", from: "4.14.1"),
-        .package(url: "https://github.com/apple/swift-crypto.git", from: "3.2.0"),
-        .package(url: "https://github.com/Alamofire/Alamofire.git", from: "5.8.1"),
         .package(url: "https://github.com/apple/swift-openapi-generator.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
+        .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "main")
     ],
     targets: [
         // MARK: Command Line executable
@@ -40,12 +37,13 @@ let package = Package(
             "Mojang",
             "PaperMCAPI",
             "HangarAPI",
-            "Fabric"
+            "Fabric",
+            .product(name: "Utils", package: "OrzSwiftKit")
         ]),
         // MARK: Mojang Offical
         .target(
             name: "Mojang",
-            dependencies: ["JokerKits"]
+            dependencies: [.product(name: "JokerKits", package: "OrzSwiftKit")]
         ),
         .testTarget(
             name: "MojangTests",
@@ -99,25 +97,12 @@ let package = Package(
         // MARK: Fabric
         .target(
             name: "Fabric",
-            dependencies: ["JokerKits"]
+            dependencies: [.product(name: "JokerKits", package: "OrzSwiftKit")]
         ),
         .testTarget(
             name: "FabricTests",
             dependencies: ["Fabric"]
         ),
-        // MARK: Utils
-        .target(
-            name: "JokerKits",
-            dependencies: [
-                .product(name: "Crypto", package: "swift-crypto", condition: .when(platforms: [.linux])),
-                "Alamofire",
-                .product(name: "ConsoleKit", package: "console-kit")
-            ]
-        ),
-        .testTarget(
-            name: "JokerKitsTests",
-            dependencies: ["JokerKits"]
-        )
     ],
     swiftLanguageVersions: [.v5]
 )

@@ -9,30 +9,14 @@ import SwiftUI
 
 @main
 struct OrzMCApp: App {
-    
-#if os(macOS)
-    @State var model = LauncherModel()
-#endif
-    
-#if os(iOS)
-    @State var model = Model()
-#endif
-    
     var body: some Scene {
+#if os(macOS)
+        MacOSScene()
+#elseif os(iOS)
         WindowGroup {
-            VStack {
-#if os(macOS)
-                LauncherUI()
-#elseif os(iOS)
-                ContentView()
-#endif
-            }
-            .environment(model)
+            ContentView()
+                .environment(Model())
         }
-#if os(macOS)
-        .windowStyle(.hiddenTitleBar)
-        .windowResizability(.contentSize)
-#elseif os(iOS)
 #endif
     }
 }

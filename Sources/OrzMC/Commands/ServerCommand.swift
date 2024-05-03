@@ -8,6 +8,7 @@
 import ConsoleKit
 import Dispatch
 import JokerKits
+import Utils
 import Game
 
 struct ServerCommand: AsyncCommand {
@@ -87,14 +88,14 @@ struct ServerCommand: AsyncCommand {
             Platform.console.success("服务器类型: \(type)")
             switch type {
             case .paper:
-                try await PaperServer(serverInfo: serverInfo).start()
+                _ = try await PaperServer(serverInfo: serverInfo).start()
             case .vanilla:
-                try await VanillaServer(serverInfo: serverInfo).start()
+                _ = try await VanillaServer(serverInfo: serverInfo).start()
             }
         }
         else{
             Platform.console.success("服务器类型: \(GameType.paper)")
-            try await PaperServer(serverInfo: serverInfo).start()
+            _ = try await PaperServer(serverInfo: serverInfo).start()
         }
     }
 }

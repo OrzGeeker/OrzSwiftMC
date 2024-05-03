@@ -6,16 +6,21 @@
 //
 
 import JokerKits
+import Utils
 
 public extension Shell {
     
+    static func allRunningServerPids() throws -> [String] {
+        let pids = try Shell.pids(of: "nogui")
+        return pids
+    }
     static func stopAll(with pids: [String]? = nil) async throws {
         var allPids = Set<String>()
         pids?.forEach { allPids.insert($0) }
-        try Shell.pids(of: "nogui").forEach { allPids.insert($0) }
+        try allRunningServerPids().forEach { allPids.insert($0) }
         for pid in allPids {
-            if await Shell.exist(of: pid), await Shell.kill(with: pid) {
-                Platform.console.success("服务端停止: ", newLine: false)
+            if await Shell.exist(of: pid), await Shell.kill(with: pid, signalName: .interrupt) {
+                Platform.console.success("正在停止服务端: ", newLine: false)
                 Platform.console.info("PID = \(pid)")
             }
         }

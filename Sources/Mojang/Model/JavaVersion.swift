@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JavaVersion: MojangCodable {
-    let component: String
-    let majorVersion: Int
+public struct JavaVersion: MojangCodable {
+    public let component: String
+    public let majorVersion: Int
 }

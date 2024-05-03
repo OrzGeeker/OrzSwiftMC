@@ -7,6 +7,7 @@
 
 import Mojang
 import JokerKits
+import Utils
 import Foundation
 
 enum VanillaServerError: Error {
@@ -27,7 +28,7 @@ enum VanillaServerError: Error {
 /// 官方服务端文件下载速度太慢, 容易超时
 public struct VanillaServer: Server {
     
-    let serverInfo: ServerInfo
+    public let serverInfo: ServerInfo
     
     public init(serverInfo: ServerInfo) {
         self.serverInfo = serverInfo
@@ -54,7 +55,7 @@ public struct VanillaServer: Server {
     /// --universe <String>  (default: .)
     /// --world <String>
     /// ```
-    public func start() async throws {
+    public func start() async throws -> Process? {
         
         guard let serverVersion = try await Mojang.manifest?.versions.filter({ $0.id == serverInfo.version }).first?.gameInfo?.downloads.server
         else {
@@ -69,6 +70,7 @@ public struct VanillaServer: Server {
         
         let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)
-        try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
+        let process = try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
+        return process
     }
 }
