@@ -33,6 +33,7 @@
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
+		F3B18FB72BE49BB3002C7851 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F3B18FB62BE49BB3002C7851 /* SwiftUIX */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; };
 		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; };
 		F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */; };
@@ -87,7 +88,7 @@
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 		F3B18FAB2BE242A2002C7851 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F3B18FAD2BE25957002C7851 /* OrzSwiftKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrzSwiftKit; path = ../../../OrzSwiftKit; sourceTree = "<group>"; };
+		F3B18FB82BE49D16002C7851 /* OrzSwiftKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrzSwiftKit; path = ../../../OrzSwiftKit; sourceTree = "<group>"; };
 		F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+littleEndianBytes.swift"; sourceTree = "<group>"; };
 		F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRCON.swift; sourceTree = "<group>"; };
 		F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCONPacket.swift; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 			files = (
 				2B79FC4C2906A791000C21A1 /* Game in Frameworks */,
 				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
+				F3B18FB72BE49BB3002C7851 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -232,7 +234,7 @@
 		2BADE2BA29D088C800DB1E68 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				F3B18FAD2BE25957002C7851 /* OrzSwiftKit */,
+				F3B18FB82BE49D16002C7851 /* OrzSwiftKit */,
 				2BADE2BB29D088C800DB1E68 /* swift */,
 			);
 			name = Packages;
@@ -384,6 +386,7 @@
 			packageProductDependencies = (
 				2B79FC4B2906A791000C21A1 /* Game */,
 				F3B4D0E42A1A79390095B108 /* Socket */,
+				F3B18FB62BE49BB3002C7851 /* SwiftUIX */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -415,6 +418,7 @@
 			mainGroup = 2B1C798928FEAB0600D53658;
 			packageReferences = (
 				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
+				F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -711,6 +715,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
 		F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Kitura/BlueSocket.git";
@@ -725,6 +737,11 @@
 		2B79FC4B2906A791000C21A1 /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
+		};
+		F3B18FB62BE49BB3002C7851 /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
+			productName = SwiftUIX;
 		};
 		F3B4D0E42A1A79390095B108 /* Socket */ = {
 			isa = XCSwiftPackageProductDependency;

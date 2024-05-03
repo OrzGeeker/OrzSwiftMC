@@ -32,11 +32,11 @@ struct FilePathEntry: View {
     }
 }
 struct BasicInfo: View {
-
+    
     @Environment(GameModel.self) private var model
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
+    
     var body: some View {
         
         Form {
@@ -78,31 +78,6 @@ struct BasicInfo: View {
             model.checkRunningServer()
         }
         .toolbar {
-            
-            ToolbarItem {
-                Link(destination: URL(string: "https://minecraft.jokerhub.cn")!) {
-                    Image(systemName: "house")
-                        .padding(4)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-            
-            ToolbarItem {
-                Link(destination: URL(string: "https://papermc.io/")!) {
-                    Image(systemName: "paperplane")
-                        .padding(4)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-            
-            ToolbarItem {
-                Link(destination: URL(string: "https://hangar.papermc.io/")!) {
-                    Image(systemName: "powerplug")
-                        .padding(4)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-            
             if model.isShowKillAllServerButton {
                 ToolbarItem {
                     Button {
