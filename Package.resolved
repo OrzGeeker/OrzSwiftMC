@@ -34,7 +34,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "aa32223e1b2317d8ff7ac2ecef21a3d36c84f603"
+        "revision" : "1a31fe0ca4c9b03d8822c3e064240721958eeaf5"
       }
     },
     {
@@ -152,6 +152,15 @@
       "state" : {
         "revision" : "025bcb1165deab2e20d4eaba79967ce73013f496",
         "version" : "1.2.1"
+      }
+    },
+    {
+      "identity" : "swiftui-webview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kylehickinson/swiftui-webview.git",
+      "state" : {
+        "revision" : "a67dcaff2377573a51f75761bb6e768b78931909",
+        "version" : "0.3.0"
       }
     },
     {
