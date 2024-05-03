@@ -21,13 +21,17 @@ struct FilePathEntry: View {
                 .padding([.trailing], 5)
             
             Text(path)
-            Spacer()
-            Button(action: {
-                _ = try? Shell.runCommand(with: ["open", "\(path)"])
-            }, label: {
-                Image(systemName: path.isDirPath() ? "folder" : "doc.plaintext")
-            })
-            .buttonStyle(.plain)
+                .foregroundStyle(path.isExist() ? Color.primary : Color.red)
+            
+            if path.isExist() {
+                Spacer()
+                Button(action: {
+                    _ = try? Shell.runCommand(with: ["open", "\(path)"])
+                }, label: {
+                    Image(systemName: path.isDirPath() ? "folder" : "doc.plaintext")
+                })
+                .buttonStyle(.plain)
+            }
         }
     }
 }
