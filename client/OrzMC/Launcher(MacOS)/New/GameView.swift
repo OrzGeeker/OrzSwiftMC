@@ -235,11 +235,9 @@ extension GameView {
             enableStartGameButton = false
             return
         }
-        
+        enableStartGameButton = !model.isFetchingGameVersions && !model.isLaunchingGame
         if model.isClient {
-            enableStartGameButton = !model.username.isEmpty && !model.isFetchingGameVersions && !model.isLaunchingGame
-        } else if model.isServer {
-            enableStartGameButton = true
+            enableStartGameButton = !model.username.isEmpty && enableStartGameButton
         }
     }
     

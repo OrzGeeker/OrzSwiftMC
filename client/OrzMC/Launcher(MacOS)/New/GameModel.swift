@@ -32,7 +32,6 @@ final class GameModel {
         didSet {
             fetchGameInfo()
             fetchCurrentJavaMajorVersion()
-            checkRunningServer()
         }
     }
     
@@ -122,7 +121,7 @@ extension GameModel {
     var selectedServerPID: String? {
         guard isServer, let selectedVersion,
               GameModel.serverPIDMap.keys.contains(selectedVersion.id)
-        else { 
+        else {
             return nil
         }
         return GameModel.serverPIDMap[selectedVersion.id]
@@ -221,10 +220,9 @@ extension GameModel {
         isShowKillAllServerButton = hasRunningServer
     }
     
-    func killAllRunningServer() {
+    func stopAllRunningServer() {
         Task {
             try await Shell.stopAll()
-            checkRunningServer()
         }
     }
 }

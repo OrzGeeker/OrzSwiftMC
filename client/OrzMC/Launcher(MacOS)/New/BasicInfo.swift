@@ -34,6 +34,8 @@ struct FilePathEntry: View {
 struct BasicInfo: View {
 
     @Environment(GameModel.self) private var model
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var body: some View {
         
@@ -72,16 +74,16 @@ struct BasicInfo: View {
         }
         .formStyle(.grouped)
         .navigationTitle(model.detailTitle)
-        .task {
+        .onReceive(timer) { _ in
             model.checkRunningServer()
         }
         .toolbar {
             if model.isShowKillAllServerButton {
                 ToolbarItem {
                     Button {
-                        model.killAllRunningServer()
+                        model.stopAllRunningServer()
                     } label: {
-                        Text("Kill Running Servers")
+                        Text("Stop All Servers")
                             .foregroundStyle(Color.accentColor)
                             .padding(4)
                             .bold()

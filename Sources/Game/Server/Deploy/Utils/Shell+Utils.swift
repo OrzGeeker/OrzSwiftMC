@@ -19,8 +19,8 @@ public extension Shell {
         pids?.forEach { allPids.insert($0) }
         try allRunningServerPids().forEach { allPids.insert($0) }
         for pid in allPids {
-            if await Shell.exist(of: pid), await Shell.kill(with: pid) {
-                Platform.console.success("服务端停止: ", newLine: false)
+            if await Shell.exist(of: pid), await Shell.kill(with: pid, signalName: .interrupt) {
+                Platform.console.success("正在停止服务端: ", newLine: false)
                 Platform.console.info("PID = \(pid)")
             }
         }
