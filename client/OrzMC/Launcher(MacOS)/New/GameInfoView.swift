@@ -18,6 +18,7 @@ struct GameInfoView: View {
             Web(url: url)
         }
         .toolbar {
+            
             ToolbarItem {
                 Button(action: {
                     path.append(URL(string: "https://minecraft.jokerhub.cn")!)
@@ -46,6 +47,21 @@ struct GameInfoView: View {
                         .padding(4)
                 })
                 .buttonStyle(.borderedProminent)
+            }
+            
+            ToolbarItem {
+                Button {
+                    path.append(URL(string: "https://aternos.org/")!)
+                } label: {
+                    Image(systemName: "server.rack")
+                }
+                .buttonStyle(.borderedProminent)
+                
+            }
+            
+            ToolbarItem {
+                
+//                FeedBackButton(email: "824219521@qq.com")
             }
         }
     }
