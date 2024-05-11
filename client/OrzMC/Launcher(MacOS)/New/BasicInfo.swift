@@ -44,34 +44,25 @@ struct BasicInfo: View {
     var body: some View {
         
         Form {
-            
-            if let selectedVersion = model.selectedVersion {
+            if let serverDirPath, serverDirPath.isExist() {
                 Section("Server") {
                     FilePathEntry(
                         name: "Game",
-                        path: GameDir.server(
-                            version: selectedVersion.id,
-                            type: GameType.paper.rawValue
-                        )
-                        .dirPath
+                        path: serverDirPath
                     )
-                    FilePathEntry(
-                        name: "Plugins",
-                        path: GameDir.serverPlugin(
-                            version: selectedVersion.id,
-                            type: GameType.paper.rawValue
+                    if let serverPluginDirPath {
+                        FilePathEntry(
+                            name: "Plugins",
+                            path: serverPluginDirPath
                         )
-                        .dirPath
-                    )
+                    }
                 }
+            }
+            if let clientDirPath, clientDirPath.isExist() {
                 Section("Client") {
                     FilePathEntry(
                         name: "Game",
-                        path: GameDir.client(
-                            version: selectedVersion.id,
-                            type: GameType.vanilla.rawValue
-                        )
-                        .dirPath
+                        path: clientDirPath
                     )
                 }
             }
@@ -95,6 +86,33 @@ struct BasicInfo: View {
                 }
             }
         }
+    }
+}
+
+extension BasicInfo {
+    
+    var serverDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.server(version: selectedVersion.id, type: GameType.paper.rawValue).dirPath
+    }
+    
+    var serverPluginDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.serverPlugin(version: selectedVersion.id, type: GameType.paper.rawValue).dirPath
+    }
+    
+    var clientDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.client(version: selectedVersion.id, type: GameType.vanilla.rawValue).dirPath
     }
 }
 

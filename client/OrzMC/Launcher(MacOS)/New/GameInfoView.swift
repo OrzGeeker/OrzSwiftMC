@@ -18,52 +18,22 @@ struct GameInfoView: View {
             Web(url: url)
         }
         .toolbar {
-            
-            ToolbarItem {
-                Button(action: {
-                    path.append(URL(string: "https://minecraft.jokerhub.cn")!)
-                }, label: {
-                    Image(systemName: "house")
-                        .padding(4)
-                })
-                .buttonStyle(.borderedProminent)
-            }
-            
-            ToolbarItem {
-                Button(action: {
-                    path.append(URL(string: "https://papermc.io/")!)
-                }, label: {
-                    Image(systemName: "paperplane")
-                        .padding(4)
-                })
-                .buttonStyle(.borderedProminent)
-            }
-            
-            ToolbarItem {
-                Button(action: {
-                    path.append(URL(string: "https://hangar.papermc.io/")!)
-                }, label: {
-                    Image(systemName: "powerplug")
-                        .padding(4)
-                })
-                .buttonStyle(.borderedProminent)
-            }
-            
-            ToolbarItem {
-                Button {
-                    path.append(URL(string: "https://aternos.org/")!)
-                } label: {
-                    Image(systemName: "server.rack")
+            ToolbarItemGroup {
+                ForEach([
+                    ("https://minecraft.jokerhub.cn", "house"),
+                    ("https://papermc.io/", "paperplane"),
+                    ("https://hangar.papermc.io/", "powerplug"),
+                    ("https://aternos.org/", "server.rack")
+                ], id: \.0) { info in
+                    Button(action: {
+                        path.append(URL(string: info.0)!)
+                    }, label: {
+                        Image(systemName: info.1)
+                            .padding(4)
+                    })
+                    .buttonStyle(.borderedProminent)
                 }
-                .buttonStyle(.borderedProminent)
-                
-            }
-            
-            ToolbarItem {
-                
-//                FeedBackButton(email: "824219521@qq.com")
             }
         }
     }
 }
-
