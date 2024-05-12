@@ -10,6 +10,22 @@ import Mojang
 import Game
 import JokerKits
 
+struct FormSectionHeader: View {
+    let title: String
+    var deleteBtnAction: ButtonAction
+    typealias ButtonAction = () -> Void
+    var body: some View {
+        HStack {
+            Text(title)
+            Button(action: deleteBtnAction) {
+                Image(systemName: "trash")
+                    .foregroundColor(Color.red)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+}
+
 struct FilePathEntry: View {
     let name: String
     let path: String
@@ -44,35 +60,34 @@ struct BasicInfo: View {
     var body: some View {
         
         Form {
-            
-            if let selectedVersion = model.selectedVersion {
-                Section("Server") {
+            if let serverDirPath, serverDirPath.isExist() {
+                Section {
                     FilePathEntry(
                         name: "Game",
-                        path: GameDir.server(
-                            version: selectedVersion.id,
-                            type: GameType.paper.rawValue
-                        )
-                        .dirPath
+                        path: serverDirPath
                     )
-                    FilePathEntry(
-                        name: "Plugins",
-                        path: GameDir.serverPlugin(
-                            version: selectedVersion.id,
-                            type: GameType.paper.rawValue
+                    if let serverPluginDirPath {
+                        FilePathEntry(
+                            name: "Plugins",
+                            path: serverPluginDirPath
                         )
-                        .dirPath
-                    )
+                    }
+                } header: {
+                    FormSectionHeader(title: "Server") {
+                        try? serverDirPath.remove()
+                    }
                 }
-                Section("Client") {
+            }
+            if let clientDirPath, clientDirPath.isExist() {
+                Section {
                     FilePathEntry(
                         name: "Game",
-                        path: GameDir.client(
-                            version: selectedVersion.id,
-                            type: GameType.vanilla.rawValue
-                        )
-                        .dirPath
+                        path: clientDirPath
                     )
+                } header: {
+                    FormSectionHeader(title: "Client") {
+                        try? clientDirPath.remove()
+                    }
                 }
             }
         }
@@ -95,6 +110,33 @@ struct BasicInfo: View {
                 }
             }
         }
+    }
+}
+
+extension BasicInfo {
+    
+    var serverDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.server(version: selectedVersion.id, type: GameType.paper.rawValue).dirPath
+    }
+    
+    var serverPluginDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.serverPlugin(version: selectedVersion.id, type: GameType.paper.rawValue).dirPath
+    }
+    
+    var clientDirPath: String? {
+        guard let selectedVersion = model.selectedVersion
+        else {
+            return nil
+        }
+        return GameDir.client(version: selectedVersion.id, type: GameType.vanilla.rawValue).dirPath
     }
 }
 

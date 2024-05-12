@@ -25,6 +25,7 @@
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
+		2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */; };
 		F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EC2BDBDF7000CAA802 /* GameView.swift */; platformFilters = (macos, ); };
 		F30F00EF2BDC966900CAA802 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EE2BDC966900CAA802 /* GameModel.swift */; platformFilters = (macos, ); };
 		F30F00F12BDCC6D900CAA802 /* GUIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F02BDCC6D900CAA802 /* GUIClient.swift */; platformFilters = (macos, ); };
@@ -33,7 +34,6 @@
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
 		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
-		F3B18FB72BE49BB3002C7851 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F3B18FB62BE49BB3002C7851 /* SwiftUIX */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; };
 		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; };
 		F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */; };
@@ -88,7 +88,6 @@
 		F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherProgressView.swift; sourceTree = "<group>"; };
 		F339F62E2903CF61003CB50C /* CircleAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationView.swift; sourceTree = "<group>"; };
 		F3B18FAB2BE242A2002C7851 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		F3B18FB82BE49D16002C7851 /* OrzSwiftKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = OrzSwiftKit; path = ../../../OrzSwiftKit; sourceTree = "<group>"; };
 		F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+littleEndianBytes.swift"; sourceTree = "<group>"; };
 		F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MCRCON.swift; sourceTree = "<group>"; };
 		F3B4D0BD2A1A776A0095B108 /* RCONPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RCONPacket.swift; sourceTree = "<group>"; };
@@ -117,9 +116,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */,
 				2B79FC4C2906A791000C21A1 /* Game in Frameworks */,
 				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
-				F3B18FB72BE49BB3002C7851 /* SwiftUIX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -234,7 +233,6 @@
 		2BADE2BA29D088C800DB1E68 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				F3B18FB82BE49D16002C7851 /* OrzSwiftKit */,
 				2BADE2BB29D088C800DB1E68 /* swift */,
 			);
 			name = Packages;
@@ -386,7 +384,7 @@
 			packageProductDependencies = (
 				2B79FC4B2906A791000C21A1 /* Game */,
 				F3B4D0E42A1A79390095B108 /* Socket */,
-				F3B18FB62BE49BB3002C7851 /* SwiftUIX */,
+				2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -418,7 +416,7 @@
 			mainGroup = 2B1C798928FEAB0600D53658;
 			packageReferences = (
 				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
-				F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
+				2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -620,9 +618,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -648,6 +645,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 			};
@@ -658,9 +656,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
-				CODE_SIGN_IDENTITY = "-";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = YES;
@@ -686,6 +683,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 			};
@@ -715,7 +713,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
+		2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
 			requirement = {
@@ -738,9 +736,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Game;
 		};
-		F3B18FB62BE49BB3002C7851 /* SwiftUIX */ = {
+		2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = F3B18FB52BE49BB3002C7851 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
+			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
 			productName = SwiftUIX;
 		};
 		F3B4D0E42A1A79390095B108 /* Socket */ = {

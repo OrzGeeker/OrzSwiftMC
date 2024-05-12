@@ -66,7 +66,7 @@ struct GameView: View {
                 reloadList()
             }
             .toolbar {
-                ToolbarItem {
+                ToolbarItemGroup {
                     Toggle(isOn: $showOnlyRelease) {
                         Text("Release Only")
                             .padding(4)
@@ -74,8 +74,7 @@ struct GameView: View {
                             .fontWeight(showOnlyRelease ? .medium : .regular)
                     }
                     .toggleStyle(.button)
-                }
-                ToolbarItem {
+                    
                     Button(action: {
                         reloadList()
                     }, label: {
@@ -213,7 +212,6 @@ struct GameView: View {
                         .controlSize(.regular)
                         .buttonStyle(.borderedProminent)
                         .disabled(!enableStartGameButton)
-                        
                         Spacer()
                     }
                 }
