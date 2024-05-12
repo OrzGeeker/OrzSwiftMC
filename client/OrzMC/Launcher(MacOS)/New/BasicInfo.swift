@@ -10,6 +10,22 @@ import Mojang
 import Game
 import JokerKits
 
+struct FormSectionHeader: View {
+    let title: String
+    var deleteBtnAction: ButtonAction
+    typealias ButtonAction = () -> Void
+    var body: some View {
+        HStack {
+            Text(title)
+            Button(action: deleteBtnAction) {
+                Image(systemName: "trash")
+                    .foregroundColor(Color.red)
+            }
+            .buttonStyle(.plain)
+        }
+    }
+}
+
 struct FilePathEntry: View {
     let name: String
     let path: String
@@ -45,7 +61,7 @@ struct BasicInfo: View {
         
         Form {
             if let serverDirPath, serverDirPath.isExist() {
-                Section("Server") {
+                Section {
                     FilePathEntry(
                         name: "Game",
                         path: serverDirPath
@@ -56,14 +72,22 @@ struct BasicInfo: View {
                             path: serverPluginDirPath
                         )
                     }
+                } header: {
+                    FormSectionHeader(title: "Server") {
+                        try? serverDirPath.remove()
+                    }
                 }
             }
             if let clientDirPath, clientDirPath.isExist() {
-                Section("Client") {
+                Section {
                     FilePathEntry(
                         name: "Game",
                         path: clientDirPath
                     )
+                } header: {
+                    FormSectionHeader(title: "Client") {
+                        try? clientDirPath.remove()
+                    }
                 }
             }
         }

@@ -23,7 +23,8 @@ struct GameInfoView: View {
                     ("https://minecraft.jokerhub.cn", "house"),
                     ("https://papermc.io/", "paperplane"),
                     ("https://hangar.papermc.io/", "powerplug"),
-                    ("https://aternos.org/", "server.rack")
+                    ("https://aternos.org/server/", "testtube.2"),
+                    ("https://exaroton.com/server", "server.rack"),
                 ], id: \.0) { info in
                     Button(action: {
                         path.append(URL(string: info.0)!)
