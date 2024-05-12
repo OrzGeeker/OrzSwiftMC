@@ -9,28 +9,62 @@ import XCTest
 @testable import ExarotonAPI
 
 final class ExarotonAPITests: XCTestCase {
+    
+    private let client = APIClient(
+        baseURL: URL(string: "https://api.exaroton.com/v1/")!,
+        token: "irSTtn02Xw1I6qJWZC7JfDMWYCvBei0XxNSP3RXWkCT1zHmwD8L4XxYRPhFaYA5BoYg9YuptPHJnetQIJGBeuZrBW5flcv1yRfnk")
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    func testAccount() async throws {
+        guard let ret = try await client.request(.account, dataType: AccountData.self)
+        else {
+            XCTAssertNotNil(nil, "Response为空")
+            return
+        }
+        XCTAssertTrue(ret.success)
+        XCTAssertNil(ret.error)
+        
+        guard let data = ret.data
+        else {
+            XCTAssertNotNil(nil, "Data为空")
+            return
+        }
+        
+        XCTAssertNotNil(data.name)
+        XCTAssertNotNil(data.email)
+        XCTAssertTrue(data.verified)
+        XCTAssertGreaterThanOrEqual(data.credits, 0)
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testServers() async throws {
+        guard let ret = try await client.request(.servers(), dataType: [ServerData].self)
+        else {
+            XCTAssertNotNil(nil, "Response为空")
+            return
+        }
+        XCTAssertTrue(ret.success)
+        XCTAssertNil(ret.error)
+        
+        guard let data = ret.data
+        else {
+            XCTAssertNotNil(nil, "Data为空")
+            return
+        }
+        XCTAssertFalse(data.isEmpty)
+        if let firstServer = data.first {
+            guard let ret = try await client.request(.servers(serverId: firstServer.id), dataType: ServerData.self)
+            else {
+                XCTAssertNotNil(nil, "Response为空")
+                return
+            }
+            XCTAssertTrue(ret.success)
+            XCTAssertNil(ret.error)
+            
+            guard let data = ret.data
+            else {
+                XCTAssertNotNil(nil, "Data为空")
+                return
+            }
+            XCTAssertNotNil(data)
         }
     }
-
 }
