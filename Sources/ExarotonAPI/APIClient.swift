@@ -26,18 +26,14 @@ extension APIClient {
         return URLSession(configuration: configuration)
     }()
     func request<DataType: Codable>(_ endpoint: EndPoint, dataType: DataType.Type) async throws -> Response<DataType>? {
-        var req = URLRequest(url: URL(string: endpoint.urlComponent, relativeTo: baseURL)!)
+        var req = URLRequest(url: URL(string: endpoint.path, relativeTo: baseURL)!)
         req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = endpoint.httpMethod.rawValue
-        if let postBody = endpoint.postBodyModel {
+        if let postBody = endpoint.httpBodyModel {
             req.setValue("application/json", forHTTPHeaderField: "Content-Type")
             req.httpBody = try APIClient.jsonEncoder.encode(postBody)
         }
-        let (data, response) = try await APIClient.session.data(for: req)
-        guard let resp = response as? HTTPURLResponse, resp.statusCode == 200
-        else {
-            return nil
-        }
+        let (data, _) = try await APIClient.session.data(for: req)
         print(String(data:data, encoding: .utf8)!)
         return try APIClient.jsonDecoder.decode(ExarotonAPI.Response<DataType>.self, from: data)
     }

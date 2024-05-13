@@ -84,6 +84,59 @@ final class ExarotonAPITests: XCTestCase {
         else { return }
         XCTAssertTrue(data.motd == dstMOTD)
     }
+
+    func testStartServer() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .start()), dataType: String.self)
+        XCTAssertNotNil(response)
+    }
+
+    func testStartServerWithOwnCredits() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .start(.init(useOwnCredits: true))), dataType: String.self)
+        XCTAssertNotNil(response)
+    }
+
+    func testStopServer() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .stop), dataType: String.self)
+        XCTAssertNotNil(response)
+    }
+
+    func testRestartServer() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .restart), dataType: String.self)
+        XCTAssertNotNil(response)
+    }
+
+    func testRunServerCommand() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .command(.init(command: "plugins"))), dataType: String.self)
+        XCTAssertNotNil(response)
+    }
+
+    func testGetPlaylistTypes() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist()), dataType: [String].self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertFalse(data.isEmpty)
+    }
+
+    func testGetPlaylistOfWhitelist() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist")), dataType: [String].self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertFalse(data.isEmpty)
+    }
+
+    let testPlayerName = "ExarotonAPI_Tester_Player"
+    func testAddPlayerIntoWhitelist() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist", op: .add(.init(entries: [testPlayerName])))), dataType: [String].self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertTrue(data.contains(testPlayerName))
+    }
+    func testDeletePlayerIntoWhitelist() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist", op: .delete(.init(entries: [testPlayerName])))), dataType: [String].self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertFalse(data.contains(testPlayerName))
+    }
 }
 
 extension ExarotonAPITests {
@@ -97,8 +150,12 @@ extension ExarotonAPITests {
         }
         XCTAssertTrue(ret.success)
         XCTAssertNil(ret.error)
+        return checkResponseData(ret.data)
+    }
 
-        guard let data = ret.data
+    @discardableResult
+    func checkResponseData<DataType: Codable>(_ data: DataType?) -> DataType? {
+        guard let data
         else {
             XCTAssertNotNil(nil)
             return nil

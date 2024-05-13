@@ -23,10 +23,26 @@ enum EndPoint {
         case ram(_: ServerRAMData? = nil)
         /// Get or Set server MOTD
         case motd(_: ServerMOTDData? = nil)
+        /// Start a server or Start a server with own credits
+        case start(_: ServerStartData? = nil)
+        /// Stop a server
+        case stop
+        /// Restart a server
+        case restart
+        /// Execute a server command
+        case command(_: ServerCommandData? = nil)
+        /// Get all or specified type of playlist
+        enum PlayListOp {
+            case add(_: PlayerList)
+            case delete(_: PlayerList)
+        }
+        case playlist(_:String? = nil, op: PlayListOp? = nil)
     }
     enum HttpMethod: String {
         case GET
         case POST
+        case PUT
+        case DELETE
     }
 
     var httpMethod: HttpMethod {
@@ -42,21 +58,32 @@ enum EndPoint {
             case .logs, .logsShare:
                 return .GET
             case .ram(let ram):
-                guard ram != nil
-                else {
-                    return .GET
-                }
-                return .POST
+                return postIfExist(ram)
             case .motd(let motd):
-                guard motd != nil
+                return postIfExist(motd)
+            case .start(let ownCredits):
+                return postIfExist(ownCredits)
+            case .command:
+                return .POST
+            case .playlist(_, let op):
+                guard let op
                 else {
                     return .GET
                 }
-                return .POST
+                switch op {
+                case .add:
+                    return .PUT
+                case .delete:
+                    return .DELETE
+                }
+            default:
+                return .GET
             }
         }
+
+        func postIfExist(_ postBody: Codable?) -> HttpMethod { postBody != nil ? .POST : .GET }
     }
-    var urlComponent: String {
+    var path: String {
         switch self {
         case .account:
             return "account"
@@ -78,11 +105,24 @@ enum EndPoint {
                 component += "/options/ram"
             case .motd:
                 component += "/options/motd"
+            case .start:
+                component += "/start"
+            case .stop:
+                component += "/stop"
+            case .restart:
+                component += "/restart"
+            case .command:
+                component += "/command"
+            case .playlist(let type, _):
+                component += "/playerlists"
+                if let type {
+                    component += "/\(type)"
+                }
             }
             return component
         }
     }
-    var postBodyModel: Encodable? {
+    var httpBodyModel: Encodable? {
         switch self {
         case .servers(_, let op):
             switch op {
@@ -90,6 +130,21 @@ enum EndPoint {
                 return ram
             case .motd(let motd):
                 return motd
+            case .start(let ownCredits):
+                return ownCredits
+            case .command(let command):
+                return command
+            case .playlist(_, let op):
+                guard let op
+                else {
+                    return nil
+                }
+                switch op {
+                case .add(let addPlayers):
+                    return addPlayers
+                case .delete(let delPlayers):
+                    return delPlayers
+                }
             default:
                 return nil
             }

@@ -28,7 +28,6 @@ public struct Players: Codable {
     public let max: Int
     public let count: Int
     public let list: [String]
-    
 }
 public struct Software: Codable, Identifiable {
     public let id: String
@@ -48,4 +47,13 @@ public struct ServerRAMData: Codable {
 }
 public struct ServerMOTDData: Codable {
     public let motd: String
+}
+public struct ServerStartData: Codable {
+    public let useOwnCredits: Bool
+}
+public struct ServerCommandData: Codable {
+    public let command: String
+}
+public struct PlayerList: Codable {
+    public let entries: [String]
 }
