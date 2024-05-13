@@ -1,5 +1,5 @@
 //
-//  ExarotonAPITests.swift
+//  ExarotonTests.swift
 //
 //
 //  Created by joker on 5/11/24.
@@ -8,12 +8,12 @@
 //  exaroton API Doc: https://developers.exaroton.com/
 
 import XCTest
-@testable import ExarotonAPI
+@testable import Exaroton
 
-final class ExarotonAPITests: XCTestCase {
+final class ExarotonTests: XCTestCase {
 
     let client = APIClient(
-        baseURL: URL(string: "https://api.exaroton.com/v1/")!,
+        baseURL: URL(string: "https://api.exaroton.com/v1")!,
         token: "irSTtn02Xw1I6qJWZC7JfDMWYCvBei0XxNSP3RXWkCT1zHmwD8L4XxYRPhFaYA5BoYg9YuptPHJnetQIJGBeuZrBW5flcv1yRfnk")
 
     func testAccount() async throws {
@@ -137,9 +137,30 @@ final class ExarotonAPITests: XCTestCase {
         else { return }
         XCTAssertFalse(data.contains(testPlayerName))
     }
+
+    func testListCreditPools() async throws {
+        let response = try await client.request(.creditPool(), dataType: [CreditPool].self)
+        XCTAssertNotNil(response)
+    }
+
+    let poolId = "qWE6dfsMX4TxT6g4"
+    func testGetACreditPool() async throws {
+        let response = try await client.request(.creditPool(poolId: poolId), dataType: CreditPool.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertNotNil(data.id)
+    }
+    func testListCreditPoolMembers() async throws {
+        let response = try await client.request(.creditPool(poolId: poolId, op: .members), dataType: [CreditPoolMember].self)
+        XCTAssertNotNil(response)
+    }
+    func testListCreditPoolServers() async throws {
+        let response = try await client.request(.creditPool(poolId: poolId, op: .servers), dataType: [ServerData].self)
+        XCTAssertNotNil(response)
+    }
 }
 
-extension ExarotonAPITests {
+extension ExarotonTests {
 
     @discardableResult
     func checkResponse<DataType: Codable>(_ response: Response<DataType>?) -> DataType? {

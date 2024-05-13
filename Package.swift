@@ -14,14 +14,14 @@ let package = Package(
         .library(name: "Mojang", targets: ["Mojang"]),
         .library(name: "PaperMC", targets: ["PaperMCAPI","HangarAPI"]),
         .library(name: "Fabric", targets: ["Fabric"]),
-        .library(name: "ExarotonAPI", targets: ["ExarotonAPI"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/apple/swift-openapi-generator.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
-        .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "main")
+        .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "main"),
+        .package(url: "https://github.com/wangzhizhou/ExarotonAPI.git", branch: "main"),
     ],
     targets: [
         // MARK: Command Line executable
@@ -104,8 +104,8 @@ let package = Package(
             name: "FabricTests",
             dependencies: ["Fabric"]
         ),
-        .target(name: "ExarotonAPI"),
-        .testTarget(name: "ExarotonAPITests", dependencies: ["ExarotonAPI"]),
+        .target(name: "Exaroton"),
+        .testTarget(name: "ExarotonTests", dependencies: ["Exaroton", "ExarotonAPI"]),
     ],
     swiftLanguageVersions: [.v5]
 )

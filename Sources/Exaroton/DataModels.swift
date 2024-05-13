@@ -6,12 +6,16 @@
 //
 
 import Foundation
+
+// MARK: Account
 public struct AccountData: Codable {
     public let name: String
     public let email: String
     public let verified: Bool
     public let credits: Int
 }
+
+// MARK: Servers
 public struct ServerData: Codable, Identifiable {
     public let id: String
     public let name: String
@@ -56,4 +60,24 @@ public struct ServerCommandData: Codable {
 }
 public struct PlayerList: Codable {
     public let entries: [String]
+}
+
+// MARK: Credit Pool
+public struct CreditPool: Codable, Identifiable {
+    public let id: String
+    public let name: String
+    public let credits: Decimal
+    public let servers: Double
+    public let owner: String
+    public let isOwner: Bool
+    public let members: Int
+    public let ownShare: Int
+    public let ownCredits: Decimal
+}
+public struct CreditPoolMember: Codable {
+    public let account: String
+    public let name: String
+    public let share: Int
+    public let credits: Decimal
+    public let isOwner: Bool
 }
