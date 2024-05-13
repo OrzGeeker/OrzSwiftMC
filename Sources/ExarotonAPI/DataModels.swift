@@ -35,3 +35,15 @@ public struct Software: Codable, Identifiable {
     public let name: String
     public let version: String
 }
+public struct ServerLogData: Codable {
+    let content: String?
+}
+public struct ServerLogShareData: Codable, Identifiable {
+    public let id: String
+    public let url: String
+    public let raw: String
+}
+
+public struct ServerRAMData: Codable {
+    public let ram: Int     // 单位：GB
+}
