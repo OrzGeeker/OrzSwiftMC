@@ -19,8 +19,10 @@ enum EndPoint {
         case logs
         /// Upload a server log to mclo.gs
         case logsShare
-        /// Get server RAM
+        /// Get or Set server RAM
         case ram(_: ServerRAMData? = nil)
+        /// Get or Set server MOTD
+        case motd(_: ServerMOTDData? = nil)
     }
     enum HttpMethod: String {
         case GET
@@ -41,6 +43,12 @@ enum EndPoint {
                 return .GET
             case .ram(let ram):
                 guard ram != nil
+                else {
+                    return .GET
+                }
+                return .POST
+            case .motd(let motd):
+                guard motd != nil
                 else {
                     return .GET
                 }
@@ -68,6 +76,8 @@ enum EndPoint {
                 component += "/logs/share"
             case .ram:
                 component += "/options/ram"
+            case .motd:
+                component += "/options/motd"
             }
             return component
         }
@@ -78,6 +88,8 @@ enum EndPoint {
             switch op {
             case .ram(let ram):
                 return ram
+            case .motd(let motd):
+                return motd
             default:
                 return nil
             }

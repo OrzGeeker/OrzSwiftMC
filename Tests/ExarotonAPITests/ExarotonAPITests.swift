@@ -38,23 +38,18 @@ final class ExarotonAPITests: XCTestCase {
 
     func testServer() async throws {
         let response = try await client.request(.servers(serverId: serverId), dataType: ServerData.self)
-        guard let data = checkResponse(response)
-        else { return }
-        XCTAssertNotNil(data)
+        checkResponse(response)
     }
 
     func testGetServerLog() async throws {
         let response = try await client.request(.servers(serverId: serverId, op: .logs), dataType: ServerLogData.self)
-        guard let data = checkResponse(response)
-        else { return }
-        XCTAssertNotNil(data)
+        checkResponse(response)
     }
 
     func testUploadServerLog() async throws {
         let response = try await client.request(.servers(serverId: serverId, op: .logsShare), dataType: ServerLogShareData.self)
         guard let data = checkResponse(response)
         else { return }
-        XCTAssertNotNil(data)
         XCTAssertFalse(data.id.isEmpty)
         XCTAssertFalse(data.url.isEmpty)
         XCTAssertFalse(data.raw.isEmpty)
@@ -64,22 +59,36 @@ final class ExarotonAPITests: XCTestCase {
         let response = try await client.request(.servers(serverId: serverId, op: .ram()), dataType: ServerRAMData.self)
         guard let data = checkResponse(response)
         else { return }
-        XCTAssertNotNil(data)
         XCTAssertTrue(data.ram > 0)
     }
     
     func testChangeServerRAM() async throws {
-        let dstRAM = 4
+        let dstRAM = 2
         let response = try await client.request(.servers(serverId: serverId, op: .ram(.init(ram: dstRAM))), dataType: ServerRAMData.self)
         guard let data = checkResponse(response)
         else { return }
-        XCTAssertNotNil(data)
         XCTAssertTrue(data.ram == dstRAM)
+    }
+
+    func testGetServerMOTD() async throws {
+        let response = try await client.request(.servers(serverId: serverId, op: .motd()), dataType: ServerMOTDData.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertFalse(data.motd.isEmpty)
+    }
+
+    func testChangeServerMOTD() async throws {
+        let dstMOTD = "§b🗡 §7欢迎来到§ajokerhub§7的服务器！§b⛏"
+        let response = try await client.request(.servers(serverId: serverId, op: .motd(.init(motd: dstMOTD))), dataType: ServerMOTDData.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertTrue(data.motd == dstMOTD)
     }
 }
 
 extension ExarotonAPITests {
 
+    @discardableResult
     func checkResponse<DataType: Codable>(_ response: Response<DataType>?) -> DataType? {
         guard let ret = response
         else {

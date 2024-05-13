@@ -21,15 +21,19 @@ extension APIClient {
         let jsonDecoder = JSONDecoder()
         return jsonDecoder
     }()
+    static let session = {
+        let configuration = URLSessionConfiguration.default
+        return URLSession(configuration: configuration)
+    }()
     func request<DataType: Codable>(_ endpoint: EndPoint, dataType: DataType.Type) async throws -> Response<DataType>? {
         var req = URLRequest(url: URL(string: endpoint.urlComponent, relativeTo: baseURL)!)
         req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = endpoint.httpMethod.rawValue
         if let postBody = endpoint.postBodyModel {
-            req.setValue("Content-Type", forHTTPHeaderField: "application/json")
+            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
             req.httpBody = try APIClient.jsonEncoder.encode(postBody)
         }
-        let (data, response) = try await URLSession.shared.data(for: req)
+        let (data, response) = try await APIClient.session.data(for: req)
         guard let resp = response as? HTTPURLResponse, resp.statusCode == 200
         else {
             return nil

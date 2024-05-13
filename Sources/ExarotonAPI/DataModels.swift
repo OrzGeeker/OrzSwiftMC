@@ -43,7 +43,9 @@ public struct ServerLogShareData: Codable, Identifiable {
     public let url: String
     public let raw: String
 }
-
 public struct ServerRAMData: Codable {
-    public let ram: Int     // 单位：GB
+    public let ram: Int     // 单位：GB, 最小值为2
+}
+public struct ServerMOTDData: Codable {
+    public let motd: String
 }
