@@ -44,6 +44,8 @@ extension EndPoint {
                 if let type {
                     component += "/\(type)"
                 }
+            case .fileInfo(let path):
+                component += "/files/info/\(path)"
             }
             return component
         case .creditPool(let pollId, let op):

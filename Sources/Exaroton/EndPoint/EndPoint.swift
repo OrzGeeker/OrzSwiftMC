@@ -34,6 +34,8 @@ enum EndPoint {
             case delete(_: PlayerList)
         }
         case playlist(_:String? = nil, op: PlayListOp? = nil)
+        /// Get file information
+        case fileInfo(path: String)
     }
     case servers(serverId: String? = nil, op: ServerOp? = nil)
 

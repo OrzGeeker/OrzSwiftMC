@@ -61,6 +61,19 @@ public struct ServerCommandData: Codable {
 public struct PlayerList: Codable {
     public let entries: [String]
 }
+// MARK: File Information
+public struct ServerFileInfo: Codable {
+    public let path: String
+    public let name: String
+    public let isTextFile: Bool
+    public let isConfigFile: Bool
+    public let isDirectory: Bool
+    public let isLog: Bool
+    public let isReadable: Bool
+    public let isWritable: Bool
+    public let size: Int
+    public let children: [ServerFileInfo]?
+}
 
 // MARK: Credit Pool
 public struct CreditPool: Codable, Identifiable {

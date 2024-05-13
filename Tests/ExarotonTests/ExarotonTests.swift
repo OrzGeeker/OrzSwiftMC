@@ -134,6 +134,24 @@ final class ExarotonTests: XCTestCase {
         XCTAssertFalse(data.contains(testPlayerName))
     }
 
+    func testGetFileInfo() async throws {
+        let dstPath = "/server.properties"
+        let response = try await client.request(.servers(serverId: serverId, op: .fileInfo(path: dstPath)), dataType: ServerFileInfo.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertTrue(data.path == dstPath)
+        XCTAssertNil(data.children)
+    }
+
+    func testGetDirInfo() async throws {
+        let dstPath = "/plugins"
+        let response = try await client.request(.servers(serverId: serverId, op: .fileInfo(path: dstPath)), dataType: ServerFileInfo.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertTrue(data.path == dstPath)
+        XCTAssertNotNil(data.children)
+    }
+
     func testListCreditPools() async throws {
         let response = try await client.request(.creditPool(), dataType: [CreditPool].self)
         XCTAssertNotNil(response)
