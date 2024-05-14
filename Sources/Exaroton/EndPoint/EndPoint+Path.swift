@@ -46,6 +46,10 @@ extension EndPoint {
                 }
             case .fileInfo(let path):
                 component += "/files/info/\(path)"
+            case .fileData(let path, _):
+                component += "/files/data/\(path)"
+            case .fileConfig(let path, _):
+                component += "/files/config/\(path)"
             }
             return component
         case .creditPool(let pollId, let op):

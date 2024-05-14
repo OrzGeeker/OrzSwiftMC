@@ -33,13 +33,23 @@ enum EndPoint {
             case add(_: PlayerList)
             case delete(_: PlayerList)
         }
-        case playlist(_:String? = nil, op: PlayListOp? = nil)
+        /// Get player list
+        case playlist(type:String? = nil, op: PlayListOp? = nil)
         /// Get file information
         case fileInfo(path: String)
+        /// read\write\delete file data
+        enum FileDataOp {
+            case write
+            case delete
+        }
+        case fileData(path: String, op: FileDataOp? = nil)
+        /// Get and set config options
+        case fileConfig(path:String, kv: [String: String]? = nil)
     }
     case servers(serverId: String? = nil, op: ServerOp? = nil)
 
 
+    /// Credits Pool
     enum CreditPoolOp {
         case members
         case servers

@@ -47,6 +47,19 @@ extension EndPoint {
                 case .delete:
                     return .DELETE
                 }
+            case .fileData(_, let op):
+                guard let op
+                else {
+                    return.GET
+                }
+                switch op {
+                case .write:
+                    return .PUT
+                case .delete:
+                    return .DELETE
+                }
+            case .fileConfig(_, let kv):
+                return postIfExist(kv)
             default:
                 return .GET
             }

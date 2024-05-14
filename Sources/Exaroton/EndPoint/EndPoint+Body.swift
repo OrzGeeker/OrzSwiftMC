@@ -32,6 +32,8 @@ extension EndPoint {
                 case .delete(let delPlayers):
                     return delPlayers
                 }
+            case .fileConfig(_, let kv):
+                return kv
             default:
                 return nil
             }

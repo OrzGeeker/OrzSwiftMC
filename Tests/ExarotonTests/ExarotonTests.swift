@@ -16,6 +16,15 @@ final class ExarotonTests: XCTestCase {
         baseURL: URL(string: "https://api.exaroton.com/v1")!,
         token: "irSTtn02Xw1I6qJWZC7JfDMWYCvBei0XxNSP3RXWkCT1zHmwD8L4XxYRPhFaYA5BoYg9YuptPHJnetQIJGBeuZrBW5flcv1yRfnk")
 
+    let serverId = "ATMiLQGZ43vW2k3W"
+
+    let playerName = "ExarotonAPI_Tester_Player"
+
+    let poolId = "qWE6dfsMX4TxT6g4"
+}
+
+extension ExarotonTests {
+
     func testAccount() async throws {
         let response = try await client.request(.account, dataType: AccountData.self)
         guard let account = checkResponse(response)
@@ -32,9 +41,6 @@ final class ExarotonTests: XCTestCase {
         else { return }
         XCTAssertFalse(servers.isEmpty)
     }
-
-
-    let serverId = "ATMiLQGZ43vW2k3W"
 
     func testServer() async throws {
         let response = try await client.request(.servers(serverId: serverId), dataType: ServerData.self)
@@ -57,7 +63,7 @@ final class ExarotonTests: XCTestCase {
         else { return }
         XCTAssertTrue(data.ram > 0)
     }
-    
+
     func testChangeServerRAM() async throws {
         let dstRAM = 2
         let response = try await client.request(.servers(serverId: serverId, op: .ram(.init(ram: dstRAM))), dataType: ServerRAMData.self)
@@ -114,24 +120,24 @@ final class ExarotonTests: XCTestCase {
     }
 
     func testGetPlaylistOfWhitelist() async throws {
-        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist")), dataType: [String].self)
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist(type: "whitelist")), dataType: [String].self)
         guard let data = checkResponse(response)
         else { return }
         XCTAssertFalse(data.isEmpty)
     }
 
-    let testPlayerName = "ExarotonAPI_Tester_Player"
     func testAddPlayerIntoWhitelist() async throws {
-        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist", op: .add(.init(entries: [testPlayerName])))), dataType: [String].self)
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist(type: "whitelist", op: .add(.init(entries: [playerName])))), dataType: [String].self)
         guard let data = checkResponse(response)
         else { return }
-        XCTAssertTrue(data.contains(testPlayerName))
+        XCTAssertTrue(data.contains(playerName))
     }
+
     func testDeletePlayerIntoWhitelist() async throws {
-        let response = try await client.request(.servers(serverId: serverId, op: .playlist("whitelist", op: .delete(.init(entries: [testPlayerName])))), dataType: [String].self)
+        let response = try await client.request(.servers(serverId: serverId, op: .playlist(type: "whitelist", op: .delete(.init(entries: [playerName])))), dataType: [String].self)
         guard let data = checkResponse(response)
         else { return }
-        XCTAssertFalse(data.contains(testPlayerName))
+        XCTAssertFalse(data.contains(playerName))
     }
 
     func testGetFileInfo() async throws {
@@ -152,22 +158,63 @@ final class ExarotonTests: XCTestCase {
         XCTAssertNotNil(data.children)
     }
 
+    func testGetFileData() async throws {
+        let dstPath = "/bukkit.yml"
+        let response = try await client.request(.servers(serverId: serverId, op: .fileData(path: dstPath)), dataType: Data.self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertNotNil(data)
+        XCTAssertTrue(data.count > 0)
+    }
+
+    func testWriteFileData() async throws {
+
+    }
+
+    func testDeleteFile() async throws {
+
+    }
+
+    func testGetFileConfigOptions() async throws {
+        let configFilePath = "/server.properties"
+        let response = try await client.request(.servers(serverId: serverId, op: .fileConfig(path: configFilePath)), dataType: [ServerFileConfig].self)
+        guard let data = checkResponse(response)
+        else { return }
+        XCTAssertFalse(data.isEmpty)
+    }
+
+    func testUpdateFileConfigOptions() async throws {
+        let configFilePath = "/server.properties"
+        let key = "gamemode"
+        let value = "survival"
+        let kv = [key: value]
+        let response = try await client.request(.servers(serverId: serverId, op: .fileConfig(path: configFilePath, kv: kv)), dataType: [ServerFileConfig].self)
+        guard let data = checkResponse(response)
+        else { return }
+        let gameModeOption = data.filter { $0.key == key }.first
+        XCTAssertNotNil(gameModeOption)
+        if let gameMode = gameModeOption?.value.value as? String {
+            XCTAssertTrue(gameMode == value)
+        }
+    }
+
     func testListCreditPools() async throws {
         let response = try await client.request(.creditPool(), dataType: [CreditPool].self)
         XCTAssertNotNil(response)
     }
 
-    let poolId = "qWE6dfsMX4TxT6g4"
     func testGetACreditPool() async throws {
         let response = try await client.request(.creditPool(poolId: poolId), dataType: CreditPool.self)
         guard let data = checkResponse(response)
         else { return }
         XCTAssertNotNil(data.id)
     }
+
     func testListCreditPoolMembers() async throws {
         let response = try await client.request(.creditPool(poolId: poolId, op: .members), dataType: [CreditPoolMember].self)
         XCTAssertNotNil(response)
     }
+
     func testListCreditPoolServers() async throws {
         let response = try await client.request(.creditPool(poolId: poolId, op: .servers), dataType: [ServerData].self)
         XCTAssertNotNil(response)

@@ -11,3 +11,9 @@ struct Response<DataType: Codable>: Codable {
     var error: String?
     var data: DataType?
 }
+enum MIMEType: String {
+    case json = "application/json"
+    case zip = "application/zip"
+    case data = "application/octet-stream"
+    case text = "text/plain"
+}

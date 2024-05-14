@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AnyCodable
 
 // MARK: Account
 public struct AccountData: Codable {
@@ -73,6 +74,23 @@ public struct ServerFileInfo: Codable {
     public let isWritable: Bool
     public let size: Int
     public let children: [ServerFileInfo]?
+}
+
+// MARK: File Config Options
+public struct ServerFileConfig: Codable {
+    public let key: String
+    public let value: AnyCodable
+    public let label: String
+    public enum OptionType: String, Codable {
+        case string
+        case integer
+        case float
+        case boolean
+        case multiselect
+        case select
+    }
+    public let type: OptionType
+    public let options: [String]?
 }
 
 // MARK: Credit Pool

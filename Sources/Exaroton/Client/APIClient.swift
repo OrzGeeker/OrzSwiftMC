@@ -27,14 +27,35 @@ extension APIClient {
     }()
     func request<DataType: Codable>(_ endpoint: EndPoint, dataType: DataType.Type) async throws -> Response<DataType>? {
         var req = URLRequest(url: baseURL.appending(path: endpoint.path))
-        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         req.httpMethod = endpoint.httpMethod.rawValue
+        req.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         if let postBody = endpoint.httpBodyModel {
-            req.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            req.setValue(endpoint.contentType, forHTTPHeaderField: "Content-Type")
             req.httpBody = try APIClient.jsonEncoder.encode(postBody)
         }
-        let (data, _) = try await APIClient.session.data(for: req)
-        print(String(data:data, encoding: .utf8)!)
-        return try APIClient.jsonDecoder.decode(Response<DataType>.self, from: data)
+        let (data, response) = try await APIClient.session.data(for: req)
+        var responseModel = Response<DataType>(success: (response as? HTTPURLResponse)?.statusCode == 200)
+        guard let mime = response.mimeType, let mimeType = MIMEType(rawValue: mime)
+        else {
+            throw APIError.unknownMIME
+        }
+        switch mimeType {
+        case .json:
+            print(String(data:data, encoding: .utf8)!)
+            let jsonModel = try APIClient.jsonDecoder.decode(Response<DataType>.self, from: data)
+            return jsonModel
+        default:
+            guard let data = data as? DataType
+            else {
+                throw APIError.convertDataFailed
+            }
+            responseModel.data = data
+        }
+        return responseModel
     }
+}
+
+enum APIError: Error {
+    case unknownMIME
+    case convertDataFailed
 }
