@@ -22,7 +22,12 @@ extension EndPoint {
                 else {
                     return MIMEType.json.rawValue
                 }
-                return op == .write ? MIMEType.data.rawValue : nil
+                switch op {
+                case .write:
+                    return MIMEType.data.rawValue
+                default:
+                    return nil
+                }
             default:
                 return MIMEType.json.rawValue
             }

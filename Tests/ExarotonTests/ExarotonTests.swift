@@ -168,11 +168,24 @@ extension ExarotonTests {
     }
 
     func testWriteFileData() async throws {
-
+        let filePath = "new_test_file"
+        let fileContentData = "test_write_file_content".data(using: .utf8)!
+        let response = try await client.request(.servers(serverId: serverId, op: .fileData(path: filePath, op: .write(data: fileContentData))), dataType: String.self)
+        XCTAssertNotNil(response)
+        if let response {
+            XCTAssertTrue(response.success)
+            XCTAssertNil(response.data)
+        }
     }
 
     func testDeleteFile() async throws {
-
+        let filePath = "new_test_file"
+        let response = try await client.request(.servers(serverId: serverId, op: .fileData(path: filePath, op: .delete)), dataType: String.self)
+        XCTAssertNotNil(response)
+        if let response {
+            XCTAssertTrue(response.success || response.error == "Access denied")
+            XCTAssertNil(response.data)
+        }
     }
 
     func testGetFileConfigOptions() async throws {

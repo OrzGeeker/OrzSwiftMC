@@ -39,7 +39,7 @@ enum EndPoint {
         case fileInfo(path: String)
         /// read\write\delete file data
         enum FileDataOp {
-            case write
+            case write(data: Data)
             case delete
         }
         case fileData(path: String, op: FileDataOp? = nil)
