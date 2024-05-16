@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import PaperMCAPI
+import DownloadAPI
 import Game
 
 struct GUIServer: Server {
@@ -76,5 +76,5 @@ struct GUIServer: Server {
         return process
     }
     
-    private let client = PaperMCAPIClient()
+    private let client = DownloadAPI()
 }
