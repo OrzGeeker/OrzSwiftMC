@@ -21,7 +21,6 @@ let package = Package(
         .package(url: "https://github.com/apple/swift-openapi-runtime.git", from: "1.2.0"),
         .package(url: "https://github.com/apple/swift-openapi-urlsession.git", from: "1.0.0"),
         .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", branch: "main"),
-        .package(url: "https://github.com/Flight-School/AnyCodable.git", from: "0.6.7"),
     ],
     targets: [
         // MARK: Command Line executable
@@ -104,8 +103,6 @@ let package = Package(
             name: "FabricTests",
             dependencies: ["Fabric"]
         ),
-        .target(name: "Exaroton", dependencies: ["AnyCodable"]),
-        .testTarget(name: "ExarotonTests", dependencies: ["Exaroton"]),
     ],
     swiftLanguageVersions: [.v5]
 )
