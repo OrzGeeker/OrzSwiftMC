@@ -18,6 +18,7 @@
 		2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */; platformFilters = (macos, ); };
 		2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9722BF705F000387498 /* GameExtensions.swift */; platformFilters = (macos, ); };
 		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
+		2B62C97D2BF7216000387498 /* ExarotonServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerView.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
@@ -74,6 +75,7 @@
 		2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSScene.swift; sourceTree = "<group>"; };
 		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
+		2B62C97C2BF7216000387498 /* ExarotonServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerView.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				2B62C9722BF705F000387498 /* GameExtensions.swift */,
+				2B62C97C2BF7216000387498 /* ExarotonServerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */,
 				F3B4D0DC2A1A776A0095B108 /* String+MOTD.swift in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
+				2B62C97D2BF7216000387498 /* ExarotonServerView.swift in Sources */,
 				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */,
