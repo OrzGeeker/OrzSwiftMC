@@ -11,9 +11,10 @@ struct ExarotonServerDetail: View {
 
     @Environment(ExarotonServerModel.self) var model
 
-    @State var server: ServerInfo
+    @State var server: ExarotonServerInfo
 
     var body: some View {
+        
         @Bindable var model = model
 
         Form {
@@ -29,8 +30,18 @@ struct ExarotonServerDetail: View {
 
                 Text("Server: \(model.isConnected ? "connected" : "disconnected")")
 
-                if let host = server.host, let port = server.port {
-                    Text("\(host):\(port)")
+                if let staticAddress = server.staticAddress {
+                    Text(staticAddress)
+                        .onTapGesture {
+                            staticAddress.copyToPasteboard()
+                        }
+                }
+                
+                if let dynamicAddress = server.dynamicAddress {
+                    Text(dynamicAddress)
+                        .onTapGesture {
+                            dynamicAddress.copyToPasteboard()
+                        }
                 }
             }
 
@@ -65,11 +76,13 @@ struct ExarotonServerDetail: View {
 
         }
         .navigationTitle(server.name ?? "")
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
         .toolbar {
             ToolbarItemGroup {
-                if let statusConfig = server.serverStatusConfig {
-                    ServerStatusView(config: statusConfig)
+                if let status = server.serverStatus {
+                    ServerStatusView(status: status)
                         .frame(width: 30, height: 30)
                 }
             }

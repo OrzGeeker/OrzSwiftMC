@@ -14,7 +14,10 @@ import Foundation
 import ExarotonWebSocket
 import Starscream
 
-enum ServerStatus: Int {
+let mainColor = Color.init(red: 0.1, green: 0.73, blue: 0.1)
+let dangerColor = Color.init(red: 0.98, green: 0.11, blue: 0.11)
+
+enum ServerStatus: Int, CaseIterable {
     case OFFLINE = 0
     case ONLINE = 1
     case STARTING = 2
@@ -26,11 +29,9 @@ enum ServerStatus: Int {
     case PENDING = 8
     case PREPARING = 10
 }
-
-typealias ServerStatusConfig = (String, Color)
-typealias ServerInfo = ExarotonHTTP.Components.Schemas.Server
-extension ServerInfo {
-
+typealias ExarotonServerInfo = ExarotonHTTP.Components.Schemas.Server
+extension ExarotonServerInfo {
+    
     var detail: String? {
         var ret = ""
         if let software {
@@ -41,7 +42,7 @@ extension ServerInfo {
         }
         return ret
     }
-
+    
     var serverStatus: ServerStatus? {
         guard let status
         else {
@@ -49,41 +50,30 @@ extension ServerInfo {
         }
         return ServerStatus(rawValue: status.rawValue)
     }
-
-    var serverStatusConfig: ServerStatusConfig? {
-        switch serverStatus {
-        case .OFFLINE:
-            return ("stop.circle.fill", .red)
-        case .ONLINE:
-            return ("play.circle.fill", .green)
-        case .STARTING:
-            return ("baseball.circle.fill", .green)
-        case .STOPPING:
-            return ("baseball.circle.fill", .red)
-        case .RESTARTING:
-            return ("baseball.circle.fill", .green)
-        case .SAVING:
-            return ("baseball.circle.fill", .red)
-        case .LOADING:
-            return ("baseball.circle.fill", .green)
-        case .CRASHED:
-            return ("exclamationmark.transmission", .red)
-        case .PENDING:
-            return ("baseball.circle.fill", .green)
-        case .PREPARING:
-            return ("baseball.circle.fill", .green)
-        case nil:
+    
+    var staticAddress: String? {
+        guard let address, let port
+        else {
             return nil
         }
+        return "\(address):\(String(port))"
+    }
+    
+    var dynamicAddress: String? {
+        guard let host, let port
+        else {
+            return nil
+        }
+        return "\(host):\(String(port))"
     }
 }
 
 @Observable
 final class ExarotonServerModel {
-
+    
     @ObservationIgnored
     let token: String = ProcessInfo.processInfo.environment["TOKEN"] ?? ""
-
+    
     // HTTP Client
     @ObservationIgnored
     private lazy var httpClient: Client = {
@@ -92,11 +82,11 @@ final class ExarotonServerModel {
                middlewares: [AuthenticationMiddleware(token: token)]
         )
     }()
-
+    
     var isHttpLoading = false
-
-    var servers = [ServerInfo]()
-
+    
+    var servers = [ExarotonServerInfo]()
+    
     func fetchServers() async {
         isHttpLoading = true
         do {
@@ -114,7 +104,7 @@ final class ExarotonServerModel {
         }
         isHttpLoading = false
     }
-
+    
     func startServer(serverId: String) async -> Bool {
         do {
             let reponse = try await httpClient.getStartServer(path: .init(serverId: serverId))
@@ -130,7 +120,7 @@ final class ExarotonServerModel {
             return false
         }
     }
-
+    
     func stopServer(serverId: String) async -> Bool {
         do {
             let reponse = try await httpClient.stopServer(path: .init(serverId: serverId))
@@ -146,7 +136,7 @@ final class ExarotonServerModel {
             return false
         }
     }
-
+    
     func restartServer(serverId: String) async -> Bool {
         do {
             let reponse = try await httpClient.restartServer(path: .init(serverId: serverId))
@@ -162,12 +152,12 @@ final class ExarotonServerModel {
             return false
         }
     }
-
+    
     // MARK: WebSocket Client
-
+    
     @ObservationIgnored
     private var websocket: ExarotonWebSocketAPI?
-
+    
     var readyServerID: String?
     var isConnected: Bool = false
     var disconnectedReason: String?
@@ -177,7 +167,7 @@ final class ExarotonServerModel {
     var tickChanged: ExarotonWebSocket.Tick?
     var statsChanged: ExarotonWebSocket.Stats?
     var heapChanged: ExarotonWebSocket.Heap?
-
+    
     func startConnect(for serverId: String) {
         if websocket == nil {
             websocket = ExarotonWebSocketAPI(token: token, serverId: serverId, delegate: self)
@@ -191,60 +181,67 @@ final class ExarotonServerModel {
 
 // MARK: WebSocket
 extension ExarotonWebSocket.Server {
-    var serverInfo: ServerInfo {
+    var serverInfo: ExarotonServerInfo {
         get throws {
             let data = try JSONEncoder().encode(self)
-            let serverInfo = try JSONDecoder().decode(ServerInfo.self, from: data)
+            let serverInfo = try JSONDecoder().decode(ExarotonServerInfo.self, from: data)
             return serverInfo
         }
     }
 }
 extension ExarotonServerModel: ExarotonServerEventHandlerProtocol {
-
+    
     func onReady(serverID: String?) {
         readyServerID = serverID
     }
-
+    
     func onConnected() {
         isConnected = true
         disconnectedReason = nil
     }
-
+    
     func onDisconnected(reason: String?) {
         isConnected = false
         disconnectedReason = reason
     }
-
+    
     func onKeepAlive() {
         // Ignore
     }
-
+    
     func onStatusChanged(_ info: ExarotonWebSocket.Server?) {
         statusChangedServer = info
     }
-
+    
     func onStreamStarted(_ stream: ExarotonWebSocket.StreamCategory?) {
         streamStarted = stream
     }
-
+    
     func onConsoleLine(_ line: String?) {
         consoleLine = line
     }
-
+    
     func onTick(_ tick: ExarotonWebSocket.Tick?) {
         tickChanged = tick
     }
-
+    
     func onStats(_ stats: ExarotonWebSocket.Stats?) {
         statsChanged = stats
     }
-
+    
     func onHeap(_ heap: ExarotonWebSocket.Heap?) {
         heapChanged = heap
     }
-
+    
     func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
         // Do Nothing
     }
+    
+}
 
+extension String {
+    func copyToPasteboard() {
+        UIPasteboard.general.string = self
+        UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+    }
 }

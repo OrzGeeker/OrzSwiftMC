@@ -16,21 +16,23 @@ struct ExarotonServerList: View {
                     ExarotonServerDetail(server: server)
                         .environment(model)
                 } label: {
-                    ExarotonServerItem(server: server)
+                    ExarotonServerListItem(server: server)
                 }
                 .listRowSeparator(.hidden)
                 .listRowBackground(
                     RoundedRectangle(cornerRadius: 10, style: .continuous)
                         .fill()
-                        .foregroundStyle(Color.teal)
+                        .foregroundStyle(Color("AccentColor", bundle: nil))
                         .padding([.horizontal], 8)
                 )
             }
         }
         .listStyle(.plain)
-        .listRowSpacing(10)
         .navigationTitle("Exaroton")
+#if os(iOS)
+        .listRowSpacing(10)
         .navigationBarTitleDisplayMode(.automatic)
+#endif
         .task {
             await model.fetchServers()
         }
@@ -39,7 +41,6 @@ struct ExarotonServerList: View {
                 .controlSize(.extraLarge)
                 .progressViewStyle(.circular)
                 .opacity(model.isHttpLoading ? 1 : 0)
-                .offset(y: -30)
         }
         .toolbar {
             ToolbarItemGroup {
@@ -54,52 +55,4 @@ struct ExarotonServerList: View {
         }
     }
 
-}
-
-struct ExarotonServerItem: View {
-    @State var model = ExarotonServerModel()
-
-    let server: ServerInfo
-
-    var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                if let name = server.name {
-                    Text(name)
-                        .font(.headline)
-                }
-                if let id = server.id {
-                    Text(id)
-                        .font(.caption)
-                }
-                if let detail = server.detail {
-                    Text(detail)
-                        .font(.callout)
-                }
-            }
-            Spacer()
-
-            if let statusConfig = server.serverStatusConfig {
-                ServerStatusView(config: statusConfig)
-                    .frame(width: 30, height: 30)
-            }
-        }
-        .task {
-            
-        }
-    }
-}
-
-struct ServerStatusView: View {
-    let config: ServerStatusConfig
-    var body: some View {
-        Button {
-
-        } label: {
-            Image(systemName: config.0)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .foregroundStyle(config.1)
-        }
-    }
 }
