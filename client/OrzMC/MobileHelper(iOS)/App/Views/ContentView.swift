@@ -9,12 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        NavigationSplitView {
-            Text("Side Bar")
-        } content: {
-            Text("Content View")
-        } detail: {
-            Text("Detail View")
+        NavigationView {
+            ExarotonServerList()
         }
     }
 }

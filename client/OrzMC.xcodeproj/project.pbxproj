@@ -18,9 +18,16 @@
 		2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */; platformFilters = (macos, ); };
 		2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9722BF705F000387498 /* GameExtensions.swift */; platformFilters = (macos, ); };
 		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
-		2B62C97D2BF7216000387498 /* ExarotonServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerView.swift */; };
+		2B62C97D2BF7216000387498 /* ExarotonServerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */; };
+		2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9802BF73EBD00387498 /* ExarotonHTTP */; };
+		2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9822BF73EBD00387498 /* ExarotonWebSocket */; };
+		2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9842BF73F0200387498 /* ExarotonServerList.swift */; };
+		2B62C9872BF7412100387498 /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9862BF7412100387498 /* Utils */; };
+		2B62C98A2BF741B600387498 /* Fabric in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C9892BF741B600387498 /* Fabric */; };
+		2B62C98C2BF741B600387498 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C98B2BF741B600387498 /* Game */; };
+		2B62C98E2BF741B600387498 /* Mojang in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C98D2BF741B600387498 /* Mojang */; };
+		2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
-		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
 		2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */; platformFilters = (macos, ); };
 		2BADE2B029D065D300DB1E68 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AF29D065D300DB1E68 /* MainView.swift */; platformFilters = (macos, ); };
@@ -75,13 +82,14 @@
 		2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSScene.swift; sourceTree = "<group>"; };
 		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
-		2B62C97C2BF7216000387498 /* ExarotonServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerView.swift; sourceTree = "<group>"; };
+		2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerDetail.swift; sourceTree = "<group>"; };
+		2B62C9842BF73F0200387498 /* ExarotonServerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerList.swift; sourceTree = "<group>"; };
+		2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerModel.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
 		2BADE2AF29D065D300DB1E68 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2BADE2B129D06ACB00DB1E68 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2BADE2BB29D088C800DB1E68 /* swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = swift; path = ..; sourceTree = "<group>"; };
 		2BD03D782907F93200BE1D1F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BD301EE29000B2C00993823 /* LauncherUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUI.swift; sourceTree = "<group>"; };
 		2BD301F129001CD000993823 /* LauncherModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherModel.swift; sourceTree = "<group>"; };
@@ -122,9 +130,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */,
 				2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */,
-				2B79FC4C2906A791000C21A1 /* Game in Frameworks */,
+				2B62C98E2BF741B600387498 /* Mojang in Frameworks */,
+				2B62C98C2BF741B600387498 /* Game in Frameworks */,
+				2B62C9872BF7412100387498 /* Utils in Frameworks */,
+				2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */,
 				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
+				2B62C98A2BF741B600387498 /* Fabric in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +147,7 @@
 		2B0091FB29D0263A002637E3 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2B62C97E2BF73E0D00387498 /* ExarotonUI */,
 				F339F62129038E60003CB50C /* Info.plist */,
 				2B1C799E28FEAB0700D53658 /* Assets.xcassets */,
 				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
@@ -166,7 +180,6 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
-				2BADE2BA29D088C800DB1E68 /* Packages */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C799328FEAB0600D53658 /* Products */,
 				F370F74029037521005497A1 /* Frameworks */,
@@ -239,7 +252,6 @@
 			isa = PBXGroup;
 			children = (
 				2B62C9722BF705F000387498 /* GameExtensions.swift */,
-				2B62C97C2BF7216000387498 /* ExarotonServerView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -267,6 +279,16 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		2B62C97E2BF73E0D00387498 /* ExarotonUI */ = {
+			isa = PBXGroup;
+			children = (
+				2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */,
+				2B62C9842BF73F0200387498 /* ExarotonServerList.swift */,
+				2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */,
+			);
+			path = ExarotonUI;
+			sourceTree = "<group>";
+		};
 		2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */ = {
 			isa = PBXGroup;
 			children = (
@@ -285,14 +307,6 @@
 				2B0091FE29D02A0F002637E3 /* ToolsView */,
 			);
 			path = Components;
-			sourceTree = "<group>";
-		};
-		2BADE2BA29D088C800DB1E68 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				2BADE2BB29D088C800DB1E68 /* swift */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		2BD301F029000B3E00993823 /* Launcher(MacOS) */ = {
@@ -439,9 +453,14 @@
 			);
 			name = OrzMC;
 			packageProductDependencies = (
-				2B79FC4B2906A791000C21A1 /* Game */,
 				F3B4D0E42A1A79390095B108 /* Socket */,
 				2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */,
+				2B62C9802BF73EBD00387498 /* ExarotonHTTP */,
+				2B62C9822BF73EBD00387498 /* ExarotonWebSocket */,
+				2B62C9862BF7412100387498 /* Utils */,
+				2B62C9892BF741B600387498 /* Fabric */,
+				2B62C98B2BF741B600387498 /* Game */,
+				2B62C98D2BF741B600387498 /* Mojang */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -474,6 +493,8 @@
 			packageReferences = (
 				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
 				2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
+				2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */,
+				2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -507,9 +528,10 @@
 				F3B4D0D32A1A776A0095B108 /* String+base64Image.swift in Sources */,
 				F3B4D0D12A1A776A0095B108 /* MCSLPPacket.swift in Sources */,
 				F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */,
+				2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */,
 				F3B4D0DC2A1A776A0095B108 /* String+MOTD.swift in Sources */,
 				F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */,
-				2B62C97D2BF7216000387498 /* ExarotonServerView.swift in Sources */,
+				2B62C97D2BF7216000387498 /* ExarotonServerDetail.swift in Sources */,
 				2B00920529D02B6A002637E3 /* LauncherBackgroundView.swift in Sources */,
 				2B1C799628FEAB0600D53658 /* OrzMCApp.swift in Sources */,
 				F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */,
@@ -544,6 +566,7 @@
 				F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */,
 				F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */,
 				F3B4D0D82A1A776A0095B108 /* MCQueryError.swift in Sources */,
+				2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 				F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */,
 				2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */,
@@ -608,6 +631,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -665,6 +690,8 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -708,6 +735,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -746,6 +775,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -773,6 +804,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/wangzhizhou/ExarotonAPI.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftMC.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
@@ -792,9 +839,35 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2B79FC4B2906A791000C21A1 /* Game */ = {
+		2B62C9802BF73EBD00387498 /* ExarotonHTTP */ = {
 			isa = XCSwiftPackageProductDependency;
+			package = 2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */;
+			productName = ExarotonHTTP;
+		};
+		2B62C9822BF73EBD00387498 /* ExarotonWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */;
+			productName = ExarotonWebSocket;
+		};
+		2B62C9862BF7412100387498 /* Utils */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
+			productName = Utils;
+		};
+		2B62C9892BF741B600387498 /* Fabric */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
+			productName = Fabric;
+		};
+		2B62C98B2BF741B600387498 /* Game */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
 			productName = Game;
+		};
+		2B62C98D2BF741B600387498 /* Mojang */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
+			productName = Mojang;
 		};
 		2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;
