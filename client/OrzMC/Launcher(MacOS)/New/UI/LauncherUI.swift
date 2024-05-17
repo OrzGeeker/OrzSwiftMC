@@ -18,6 +18,7 @@ struct LauncherUI: View {
             GameInfoView()
         }
         .navigationSplitViewStyle(.prominentDetail)
+        .feedbackToAuthor(email: "824219521@qq.com")
     }
 }
 

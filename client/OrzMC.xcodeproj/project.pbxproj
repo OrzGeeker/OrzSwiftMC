@@ -16,6 +16,8 @@
 		2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E0892BDE0945001B6877 /* GameInfoView.swift */; platformFilters = (macos, ); };
 		2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */; platformFilters = (macos, ); };
 		2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */; platformFilters = (macos, ); };
+		2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9722BF705F000387498 /* GameExtensions.swift */; platformFilters = (macos, ); };
+		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B79FC4C2906A791000C21A1 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B79FC4B2906A791000C21A1 /* Game */; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
@@ -70,6 +72,8 @@
 		2B54E0892BDE0945001B6877 /* GameInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameInfoView.swift; sourceTree = "<group>"; };
 		2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicInfo.swift; sourceTree = "<group>"; };
 		2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSScene.swift; sourceTree = "<group>"; };
+		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
+		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauncherUIButton.swift; sourceTree = "<group>"; };
 		2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherGameVersionSelector.swift; sourceTree = "<group>"; };
@@ -198,16 +202,66 @@
 		2B54E0882BDE00B7001B6877 /* New */ = {
 			isa = PBXGroup;
 			children = (
-				2B54E0862BDDFB16001B6877 /* Version+.swift */,
-				F30F00EE2BDC966900CAA802 /* GameModel.swift */,
-				F30F00EC2BDBDF7000CAA802 /* GameView.swift */,
-				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
-				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
-				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
-				2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */,
-				F3B18FAB2BE242A2002C7851 /* Constants.swift */,
+				2B62C97B2BF7203F00387498 /* UI */,
+				2B62C97A2BF7202200387498 /* Models */,
 			);
 			path = New;
+			sourceTree = "<group>";
+		};
+		2B62C9762BF71F7000387498 /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
+		2B62C9772BF71FC900387498 /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				F30F00EC2BDBDF7000CAA802 /* GameView.swift */,
+			);
+			path = SideBar;
+			sourceTree = "<group>";
+		};
+		2B62C9782BF71FDF00387498 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
+				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		2B62C9792BF7201500387498 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2B62C9722BF705F000387498 /* GameExtensions.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2B62C97A2BF7202200387498 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2B54E0862BDDFB16001B6877 /* Version+.swift */,
+				F3B18FAB2BE242A2002C7851 /* Constants.swift */,
+				F30F00EE2BDC966900CAA802 /* GameModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2B62C97B2BF7203F00387498 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				2B54E08D2BDE21A4001B6877 /* MacOSScene.swift */,
+				2BD301EE29000B2C00993823 /* LauncherUI.swift */,
+				2B62C9772BF71FC900387498 /* SideBar */,
+				2B62C9782BF71FDF00387498 /* Detail */,
+				2B62C9792BF7201500387498 /* Views */,
+				2B62C9762BF71F7000387498 /* Modifiers */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		2B79DCF429066B91000C21A1 /* MobileHelper(iOS) */ = {
@@ -458,6 +512,8 @@
 				F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */,
 				2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */,
 				2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */,
+				2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */,
+				2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */,
 				2B54E08A2BDE0945001B6877 /* GameInfoView.swift in Sources */,
 				2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */,
 				F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */,
@@ -629,7 +685,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrzMC/Common/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -667,7 +723,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrzMC/Common/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = OrzMC;
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
