@@ -1,5 +1,5 @@
 {
-  "originHash" : "ad8dcfdf953e9c01b461cc667873dd212687d59c07b3aa2c66fe80f06097a20f",
+  "originHash" : "d39807b73f082f3e8a1b08f5ec966f468d15fc81daaf452b326fc889aaf70ab4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -43,7 +43,16 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "fdcfdaa43cd04d47b625cd8656a035cf5272d936"
+        "revision" : "028ccaea8f6a82b4cafbc82d6b357ab5fd8d7a8e"
+      }
+    },
+    {
+      "identity" : "papermc",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wangzhizhou/PaperMC.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "dc31b684598b02254019af95c202742aa2de67bb"
       }
     },
     {
