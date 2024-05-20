@@ -80,40 +80,43 @@ struct ExarotonServerDetail: View {
                     }
                     .disabled(serverStatus != .ONLINE)
                 }
-            }
 
-            Text("Server: \(model.isConnected ? "connected" : "disconnected")")
+                Text("Server: \(model.isConnected ? "connected" : "disconnected")")
 
-            Section("Streams") {
+                if serverStatus == .ONLINE {
 
-                if let console = model.consoleLine {
-                    Text(console)
-                        .lineLimit(nil)
-                }
+                    Section("Streams") {
 
-                Button("start console") {
-                    model.startStream(.console, data: ["tail": 10])
-                }
+                        if let console = model.consoleLine {
+                            Text(console)
+                                .lineLimit(nil)
+                        }
 
-                Button("send console command") {
-                    model.sendConsoleCmd("say Hello")
-                }
+                        Button("start console") {
+                            model.startStream(.console, data: ["tail": 10])
+                        }
 
-                Button("stop console") {
-                    model.stopStream(.console)
-                }
+                        Button("send console command") {
+                            model.sendConsoleCmd("say Hello")
+                        }
 
-                ForEach([
-                    StreamCategory.tick,
-                    StreamCategory.stats,
-                    StreamCategory.heap
-                ], id: \.self) { streamCategory in
-                    Button("start \(streamCategory.rawValue)") {
-                        model.startStream(streamCategory)
-                    }
+                        Button("stop console") {
+                            model.stopStream(.console)
+                        }
 
-                    Button("stop \(streamCategory.rawValue)") {
-                        model.stopStream(streamCategory)
+                        ForEach([
+                            StreamCategory.tick,
+                            StreamCategory.stats,
+                            StreamCategory.heap
+                        ], id: \.self) { streamCategory in
+                            Button("start \(streamCategory.rawValue)") {
+                                model.startStream(streamCategory)
+                            }
+
+                            Button("stop \(streamCategory.rawValue)") {
+                                model.stopStream(streamCategory)
+                            }
+                        }
                     }
                 }
             }
