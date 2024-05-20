@@ -86,6 +86,11 @@ struct ExarotonServerDetail: View {
 
             Section("Streams") {
 
+                if let console = model.consoleLine {
+                    Text(console)
+                        .lineLimit(nil)
+                }
+
                 Button("start console") {
                     model.startStream(.console, data: ["tail": 10])
                 }
@@ -98,13 +103,6 @@ struct ExarotonServerDetail: View {
                     model.stopStream(.console)
                 }
 
-                if let console = model.consoleLine {
-                    Text(console)
-                        .lineLimit(nil)
-                }
-            }
-
-            Section("Others") {
                 ForEach([
                     StreamCategory.tick,
                     StreamCategory.stats,
