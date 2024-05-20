@@ -72,7 +72,6 @@ struct ExarotonServerList: View {
         .sheet(isPresented: $showTokenInput) {
             if !token.isEmpty {
                 model.token = token.trimmingCharacters(in: .whitespacesAndNewlines)
-                token = ""
                 Task {
                     await startWork()
                 }
