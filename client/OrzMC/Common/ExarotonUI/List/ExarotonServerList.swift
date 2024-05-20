@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct ExarotonServerList: View {
+    @State var token: String
     @State private var model = ExarotonServerModel()
     @State private var isLoading = false
+    @State private var showTokenInput = false
     var body: some View {
         List() {
             if !model.servers.isEmpty {
@@ -52,9 +54,11 @@ struct ExarotonServerList: View {
         .navigationBarTitleDisplayMode(.automatic)
 #endif
         .task {
-            self.isLoading = true
-            await fetchData()
-            self.isLoading = false
+            if model.token.isEmpty {
+                showTokenInput = true
+            } else {
+                await startWork()
+            }
         }
         .overlay {
             ProgressView()
@@ -65,6 +69,57 @@ struct ExarotonServerList: View {
         .refreshable {
             await fetchData()
         }
+        .sheet(isPresented: $showTokenInput) {
+            if !token.isEmpty {
+                model.token = token.trimmingCharacters(in: .whitespacesAndNewlines)
+                token = ""
+                Task {
+                    await startWork()
+                }
+            }
+        } content: {
+            VStack(alignment: .trailing, spacing: 20) {
+                VStack(alignment: .leading) {
+                    Text("Input Account Token: ")
+                        .font(.title)
+                        .bold()
+                    TextField("TOKEN", text: $token, axis: .vertical)
+                        .frame(height: 80)
+                        .textFieldStyle(.roundedBorder)
+                        .font(.body)
+                }
+                VStack(alignment: .trailing) {
+                    HStack(alignment: .center) {
+                        Image("exaroton", bundle: nil)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30, height: 30)
+                            .offset(y: 3)
+                        Text("exaroton")
+                            .font(.title)
+                            .bold()
+                    }
+                    Text("by Aternos")
+                        .font(.footnote)
+                }
+            }
+            .frame(height: 100)
+            .padding([.horizontal], 10)
+        }
+        .toolbar {
+            ToolbarItemGroup {
+                Button {
+                    showTokenInput.toggle()
+                } label: {
+                    Image(systemName: "gear")
+                }
+            }
+        }
+    }
+    func startWork() async {
+        self.isLoading = true
+        await fetchData()
+        self.isLoading = false
     }
     func fetchData() async {
         await withTaskGroup(of: Void.self) { group in

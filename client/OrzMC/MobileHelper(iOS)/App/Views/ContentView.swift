@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    @AppStorage("TOKEN") var token: String = ""
     var body: some View {
         NavigationView {
-            ExarotonServerList()
+            ExarotonServerList(token: token)
         }
     }
 }

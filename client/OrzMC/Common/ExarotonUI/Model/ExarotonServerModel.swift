@@ -15,7 +15,18 @@ import OpenAPIURLSession
 final class ExarotonServerModel {
 
     @ObservationIgnored
-    let token: String = ProcessInfo.processInfo.environment["TOKEN"] ?? ""
+    var token: String {
+        get {
+            var ret = ProcessInfo.processInfo.environment["TOKEN"]
+            if ret == nil {
+                ret = UserDefaults.standard.string(forKey: "TOKEN")
+            }
+            return ret ?? ""
+        }
+        set {
+            UserDefaults.standard.setValue(newValue, forKey: "TOKEN")
+        }
+    }
 
     // HTTP Client
     @ObservationIgnored
