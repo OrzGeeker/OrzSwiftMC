@@ -25,8 +25,7 @@ final class ExarotonServerModel {
                middlewares: [AuthenticationMiddleware(token: token)]
         )
     }()
-
-    var isHttpLoading = false
+    
     var servers = [ExarotonServer]()
     var creditPools = [ExarotonCreditPool]()
 

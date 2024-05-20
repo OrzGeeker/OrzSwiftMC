@@ -9,7 +9,6 @@ import ExarotonHTTP
 
 extension ExarotonServerModel {
     func fetchServers() async {
-        isHttpLoading = true
         do {
             let response = try await httpClient.getServers()
             switch response {
@@ -23,7 +22,6 @@ extension ExarotonServerModel {
         } catch let error {
             print(error.localizedDescription)
         }
-        isHttpLoading = false
     }
 
     func startServer(serverId: String) async -> Bool {

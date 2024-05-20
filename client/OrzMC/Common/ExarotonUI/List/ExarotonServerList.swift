@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ExarotonServerList: View {
-    @State var model = ExarotonServerModel()
+    @State private var model = ExarotonServerModel()
+    @State private var isHttpLoading = false
     var body: some View {
         List() {
             if !model.servers.isEmpty {
@@ -57,7 +58,7 @@ struct ExarotonServerList: View {
             ProgressView()
                 .controlSize(.extraLarge)
                 .progressViewStyle(.circular)
-                .opacity(model.isHttpLoading ? 1 : 0)
+                .opacity(isHttpLoading ? 1 : 0)
         }
         .toolbar {
             ToolbarItemGroup {
@@ -71,9 +72,16 @@ struct ExarotonServerList: View {
             }
         }
     }
-
     func fetchData() async {
-        await model.fetchServers()
-        await model.fetchCreditPools()
+        self.isHttpLoading = true
+        await withTaskGroup(of: Void.self) { group in
+            group.addTask {
+                await model.fetchServers()
+            }
+            group.addTask {
+                await model.fetchCreditPools()
+            }
+        }
+        self.isHttpLoading = false
     }
 }
