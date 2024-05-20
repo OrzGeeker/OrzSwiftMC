@@ -38,8 +38,7 @@ struct ExarotonCreditPoolDetail: View {
             if let servers {
                 Section("Servers") {
                     ForEach(servers) { server in
-                        ExarotonServerListItem(server: server)
-                            .disabled(true)
+                        ExarotonServerListLinkItem(server: server)
                     }
                 }
             }

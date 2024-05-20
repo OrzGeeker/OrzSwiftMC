@@ -35,9 +35,6 @@ struct ExarotonServerListItem: View {
                     .frame(width: 30, height: 30)
             }
         }
-        .task {
-            
-        }
     }
 }
 

@@ -52,19 +52,15 @@ struct ServerStatusView: View {
     @State private var opacity: Double = 1
     var body: some View {
         let config = status.displayConfig
-        Button {
-
-        } label: {
-            Image(systemName: config.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .foregroundStyle(config.foregroundColor)
-                .opacity(opacity)
-                .animation(
-                    config.animate ? .easeInOut(duration: 1).repeatForever() : nil,
-                    value: opacity
-                )
-        }
+        Image(systemName: config.imageName)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .foregroundStyle(config.foregroundColor)
+            .opacity(opacity)
+            .animation(
+                config.animate ? .easeInOut(duration: 0.8).repeatForever() : nil,
+                value: opacity
+            )
         .onChange(of: status, { oldValue, newValue in
             opacity = status.displayConfig.animate ? 0 : 1
         })

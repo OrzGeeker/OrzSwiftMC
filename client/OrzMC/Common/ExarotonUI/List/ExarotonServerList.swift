@@ -17,42 +17,20 @@ struct ExarotonServerList: View {
             if !model.servers.isEmpty {
                 Section("Servers") {
                     ForEach(model.servers, id: \.id) { server in
-                        NavigationLink {
-                            ExarotonServerDetail(server: server)
-                                .environment(model)
-                        } label: {
-                            ExarotonServerListItem(server: server)
-                        }
-                        .listRowSeparator(.hidden)
-                        .listRowBackground(
-                            RoundedRectangle(cornerRadius: 10, style: .continuous)
-                                .fill()
-                                .foregroundStyle(Color("AccentColor", bundle: nil))
-                                .padding([.horizontal], 8)
-                        )
+                        ExarotonServerListLinkItem(server: server)
                     }
                 }
             }
             if !model.creditPools.isEmpty {
                 Section("Credit Pools") {
                     ForEach(model.creditPools) { creditPool in
-                        NavigationLink {
-                            ExarotonCreditPoolDetail(creditPool: creditPool)
-                                .environment(model)
-                        } label: {
-                            ExarotonCreditPoolListItem(creditPool: creditPool)
-                        }
-                        .listRowSeparator(.hidden)
+                        ExarotonCreditPoolListLinkItem(creditPool: creditPool)
                     }
                 }
             }
         }
-        .listStyle(.plain)
+        .environment(model)
         .navigationTitle("Exaroton")
-#if os(iOS)
-        .listRowSpacing(10)
-        .navigationBarTitleDisplayMode(.automatic)
-#endif
         .task {
             if model.token.isEmpty {
                 showTokenInput = true
@@ -87,20 +65,7 @@ struct ExarotonServerList: View {
                         .textFieldStyle(.roundedBorder)
                         .font(.body)
                 }
-                VStack(alignment: .trailing) {
-                    HStack(alignment: .center) {
-                        Image("exaroton", bundle: nil)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30, height: 30)
-                            .offset(y: 3)
-                        Text("exaroton")
-                            .font(.title)
-                            .bold()
-                    }
-                    Text("by Aternos")
-                        .font(.footnote)
-                }
+                ExarotonTradeMark()
             }
             .frame(height: 100)
             .padding([.horizontal], 10)
@@ -115,6 +80,9 @@ struct ExarotonServerList: View {
             }
         }
     }
+}
+
+extension ExarotonServerList {
     func startWork() async {
         self.isLoading = true
         await fetchData()

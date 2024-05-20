@@ -5,18 +5,46 @@
 //  Created by joker on 2024/5/20.
 //
 
+import Foundation
 import ExarotonWebSocket
 import Starscream
+import AnyCodable
 
 extension ExarotonServerModel {
     func startConnect(for serverId: String) {
         if websocket == nil {
             websocket = ExarotonWebSocketAPI(token: token, serverId: serverId, delegate: self)
         }
-        websocket?.client.connect()
+        websocket?.connect()
     }
     func stopConnect() {
-        websocket?.client.disconnect()
+        websocket?.disconnect()
+        reset()
+    }
+    func reset() {
+        readyServerID = nil
+        isConnected = false
+        disconnectedReason = nil
+        streamStarted = nil
+        streamStopped = nil
+        consoleLine = nil
+        tickChanged = nil
+        statsChanged = nil
+        heapChanged = nil
+        statusChangedServer = nil
+    }
+
+    func startStream(_ stream: StreamCategory, data: AnyCodable? = nil)  {
+        websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.start, data: data))
+    }
+
+    func sendConsoleCmd(_ cmd: String) {
+//        let cmdStringData = cmd.data(using: .utf8)
+//        websocket?.send(message: ExarotonMessage(stream: .console, type: StreamType.command, data: cmdStringData))
+    }
+
+    func stopStream(_ stream: StreamCategory) {
+        websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.stop, data: nil))
     }
 }
 
@@ -46,6 +74,10 @@ extension ExarotonServerModel: ExarotonServerEventHandlerProtocol {
 
     func onStreamStarted(_ stream: ExarotonWebSocket.StreamCategory?) {
         streamStarted = stream
+    }
+
+    func onStreamStopped(_ stream: StreamCategory?) {
+        streamStopped = stream
     }
 
     func onConsoleLine(_ line: String?) {

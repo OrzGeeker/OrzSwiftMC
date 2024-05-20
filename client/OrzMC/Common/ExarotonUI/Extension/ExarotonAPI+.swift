@@ -59,6 +59,10 @@ extension ExarotonServer {
         }
         return "\(host):\(String(port))"
     }
+
+    var hasAddress: Bool {
+        return staticAddress?.isEmpty == false || dynamicAddress?.isEmpty == false
+    }
 }
 
 typealias ExarotonCreditPool = ExarotonHTTP.Components.Schemas.CreditPool
@@ -75,6 +79,26 @@ extension ExarotonWebSocket.Server {
             let data = try JSONEncoder().encode(self)
             let serverInfo = try JSONDecoder().decode(ExarotonServer.self, from: data)
             return serverInfo
+        }
+    }
+}
+
+extension ExarotonWebSocketAPI {
+    
+    func connect() {
+        client.connect()
+    }
+    
+    func disconnect() {
+        client.disconnect()
+    }
+
+    func send<T: Codable>(message: ExarotonMessage<T>) {
+        do {
+            let data = try message.toData
+            client.write(stringData: data, completion: nil)
+        } catch {
+            print(error.localizedDescription)
         }
     }
 }
