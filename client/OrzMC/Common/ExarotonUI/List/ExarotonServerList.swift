@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ExarotonServerList: View {
     @State private var model = ExarotonServerModel()
-    @State private var isHttpLoading = false
+    @State private var isLoading = false
     var body: some View {
         List() {
             if !model.servers.isEmpty {
@@ -52,28 +52,21 @@ struct ExarotonServerList: View {
         .navigationBarTitleDisplayMode(.automatic)
 #endif
         .task {
+            self.isLoading = true
             await fetchData()
+            self.isLoading = false
         }
         .overlay {
             ProgressView()
                 .controlSize(.extraLarge)
                 .progressViewStyle(.circular)
-                .opacity(isHttpLoading ? 1 : 0)
+                .opacity(isLoading ? 1 : 0)
         }
-        .toolbar {
-            ToolbarItemGroup {
-                Button(action: {
-                    Task {
-                        await fetchData()
-                    }
-                }, label: {
-                    Image(systemName: "arrow.clockwise")
-                })
-            }
+        .refreshable {
+            await fetchData()
         }
     }
     func fetchData() async {
-        self.isHttpLoading = true
         await withTaskGroup(of: Void.self) { group in
             group.addTask {
                 await model.fetchServers()
@@ -82,6 +75,5 @@ struct ExarotonServerList: View {
                 await model.fetchCreditPools()
             }
         }
-        self.isHttpLoading = false
     }
 }

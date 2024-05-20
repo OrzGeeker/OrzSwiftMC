@@ -45,7 +45,9 @@ struct ExarotonCreditPoolDetail: View {
             }
         }
         .task {
+            loading = true
             await fetchData()
+            loading = false
         }
         .navigationTitle(creditPool.name ?? "")
         .navigationBarTitleDisplayMode(.inline)
@@ -55,28 +57,18 @@ struct ExarotonCreditPoolDetail: View {
                 .progressViewStyle(.circular)
                 .opacity(loading ? 1 : 0)
         }
-        .toolbar {
-            ToolbarItemGroup {
-                Button(action: {
-                    Task {
-                        await fetchData()
-                    }
-                }, label: {
-                    Image(systemName: "arrow.clockwise")
-                })
-            }
+        .refreshable {
+            await fetchData()
         }
     }
 
     func fetchData() async {
-        loading = true
         let info = await model.fetchCreditPoolInfo(creditPool)
         guard let info
         else {
-            loading = false
+
             return
         }
-        loading = false
         let (pool, members, servers) = info
         if let pool {
             self.creditPool = pool
