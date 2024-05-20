@@ -53,7 +53,7 @@ struct ServerStatusView: View {
     var body: some View {
         let config = status.displayConfig
         Button {
-            
+
         } label: {
             Image(systemName: config.imageName)
                 .resizable()

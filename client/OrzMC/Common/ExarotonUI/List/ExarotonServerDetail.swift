@@ -11,10 +11,10 @@ struct ExarotonServerDetail: View {
 
     @Environment(ExarotonServerModel.self) var model
 
-    @State var server: ExarotonServerInfo
+    @State var server: ExarotonServer
 
     var body: some View {
-        
+
         @Bindable var model = model
 
         Form {
@@ -36,7 +36,7 @@ struct ExarotonServerDetail: View {
                             staticAddress.copyToPasteboard()
                         }
                 }
-                
+
                 if let dynamicAddress = server.dynamicAddress {
                     Text(dynamicAddress)
                         .onTapGesture {

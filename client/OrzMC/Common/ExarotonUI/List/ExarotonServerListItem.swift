@@ -10,7 +10,7 @@ import SwiftUI
 struct ExarotonServerListItem: View {
     @State private var model = ExarotonServerModel()
     
-    let server: ExarotonServerInfo
+    let server: ExarotonServer
     
     var body: some View {
         HStack {
