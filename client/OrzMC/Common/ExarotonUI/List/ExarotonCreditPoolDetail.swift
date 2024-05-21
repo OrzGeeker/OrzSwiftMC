@@ -40,7 +40,10 @@ struct ExarotonCreditPoolDetail: View {
             if let servers {
                 Section("Servers") {
                     ForEach(servers) { server in
-                        ExarotonServerListLinkItem(server: server)
+                        ExarotonServerView(server: server)
+                            .onTapGesture {
+                                model.path.append(server)
+                            }
                     }
                 }
             }

@@ -111,4 +111,36 @@ extension ExarotonServerModel {
             return (nil, nil, nil)
         }
     }
+
+    func getRAM(serverId: String) async -> Int32? {
+        do {
+            let response = try await httpClient.getServerRam(path: .init(serverId: serverId))
+            switch response {
+            case .ok(let ok):
+                let data = try ok.body.json.data
+                return data?.ram
+            default:
+                return nil
+            }
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
+
+    func changeRAM(serverId: String, ramGB: Int32) async -> Int32? {
+        do {
+            let response = try await httpClient.postServerRam(path: .init(serverId: serverId), body: .json(.init(ram: ramGB)))
+            switch response {
+            case .ok(let ok):
+                let data = try ok.body.json.data
+                return data?.ram
+            default:
+                return nil
+            }
+        } catch {
+            print(error.localizedDescription)
+            return nil
+        }
+    }
 }

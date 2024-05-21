@@ -10,9 +10,12 @@ import ExarotonHTTP
 import ExarotonWebSocket
 import OpenAPIRuntime
 import OpenAPIURLSession
+import SwiftUI
 
 @Observable
 final class ExarotonServerModel {
+
+    var path = NavigationPath()
 
     @ObservationIgnored
     var token: String {

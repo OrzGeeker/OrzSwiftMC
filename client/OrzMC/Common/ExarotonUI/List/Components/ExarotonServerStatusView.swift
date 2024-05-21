@@ -30,21 +30,21 @@ extension ServerStatus {
         case .ONLINE:
             return .init("play.circle", mainColor, false)
         case .STARTING:
-            return .init("circle.fill", mainColor)
+            return .init("play.circle", mainColor)
         case .STOPPING:
-            return .init("circle.fill", dangerColor)
+            return .init("stop.circle", dangerColor)
         case .RESTARTING:
-            return .init("circle.fill", mainColor)
+            return .init("play.circle", mainColor)
         case .SAVING:
-            return .init("circle.fill", dangerColor)
+            return .init("stop.circle", dangerColor)
         case .LOADING:
-            return .init("circle.fill", mainColor)
+            return .init("play.circle", mainColor)
         case .CRASHED:
             return .init("exclamationmark.transmission", dangerColor, false)
         case .PENDING:
-            return .init("circle.fill", mainColor)
+            return .init("play.circle", mainColor)
         case .PREPARING:
-            return .init("circle.fill", mainColor)
+            return .init("play.circle", mainColor)
         }
     }
 }

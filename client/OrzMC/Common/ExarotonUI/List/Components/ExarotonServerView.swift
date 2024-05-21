@@ -10,25 +10,50 @@ import SwiftUI
 struct ExarotonServerView: View {
     let server: ExarotonServer
     var body: some View {
-        HStack {
-            VStack(alignment: .leading) {
-                if let name = server.name {
-                    Text(name)
-                        .font(.headline)
+        VStack(alignment: .leading) {
+            if let motd = server.motd {
+                Text(motd)
+                    .font(.subheadline)
+            }
+            Divider()
+            HStack {
+                VStack(alignment: .leading) {
+                    if let name = server.name {
+                        Text(name)
+                            .font(.headline)
+                    }
+                    if let id = server.id {
+                        Text(id)
+                            .font(.caption)
+                    }
+                    if let detail = server.detail {
+                        Text(detail)
+                            .font(.callout)
+                    }
                 }
-                if let id = server.id {
-                    Text(id)
-                        .font(.caption)
-                }
-                if let detail = server.detail {
-                    Text(detail)
-                        .font(.callout)
+                Spacer()
+                if let status = server.serverStatus {
+                    ExarotonServerStatusView(status: status)
+                        .frame(width: 30, height: 30)
                 }
             }
-            Spacer()
-            if let status = server.serverStatus {
-                ExarotonServerStatusView(status: status)
-                    .frame(width: 30, height: 30)
+            if server.hasAddress {
+                Divider()
+                VStack(alignment: .leading, spacing: 4) {
+                    if let staticAddress = server.staticAddress {
+                        Text("\(staticAddress)")
+                            .onTapGesture {
+                                staticAddress.copyToPasteboard()
+                            }
+                    }
+
+                    if let dynamicAddress = server.dynamicAddress {
+                        Text("\(dynamicAddress)")
+                            .onTapGesture {
+                                dynamicAddress.copyToPasteboard()
+                            }
+                    }
+                }
             }
         }
     }

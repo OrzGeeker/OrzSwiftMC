@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ExarotonServerList: View {
+    @Environment(ExarotonServerModel.self) var model
     @State var token: String
-    @State private var model = ExarotonServerModel()
     @State private var isLoading = false
     @State private var showTokenInput = false
     var body: some View {
@@ -17,14 +17,20 @@ struct ExarotonServerList: View {
             if !model.servers.isEmpty {
                 Section("Servers") {
                     ForEach(model.servers, id: \.id) { server in
-                        ExarotonServerListLinkItem(server: server)
+                        ExarotonServerView(server: server)
+                            .onTapGesture {
+                                model.path.append(server)
+                            }
                     }
                 }
             }
             if !model.creditPools.isEmpty {
                 Section("Credit Pools") {
                     ForEach(model.creditPools) { creditPool in
-                        ExarotonCreditPoolListLinkItem(creditPool: creditPool)
+                        ExarotonCreditPoolView(creditPool: creditPool)
+                            .onTapGesture {
+                                model.path.append(creditPool)
+                            }
                     }
                 }
             }

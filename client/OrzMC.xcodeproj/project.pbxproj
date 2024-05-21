@@ -25,10 +25,8 @@
 		2B5ACA632BFB2A8300397BFC /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA622BFB2A8300397BFC /* Config.swift */; };
 		2B5ACA682BFB312300397BFC /* ExarotonCreditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA672BFB312300397BFC /* ExarotonCreditView.swift */; };
 		2B5ACA6A2BFB5C8A00397BFC /* ExarotonTradeMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */; };
-		2B5ACA6C2BFB5CFF00397BFC /* ExarotonServerListLinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA6B2BFB5CFF00397BFC /* ExarotonServerListLinkItem.swift */; };
-		2B5ACA6E2BFB5E4200397BFC /* ExarotonCreditPoolListLinkItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA6D2BFB5E4200397BFC /* ExarotonCreditPoolListLinkItem.swift */; };
 		2B5BC3D52BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */; };
-		2B5BC3D72BFC527E00348C00 /* ExarotonServerRuntimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D62BFC527E00348C00 /* ExarotonServerRuntimeView.swift */; };
+		2B5BC3D72BFC527E00348C00 /* ExarotonServerPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */; };
 		2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9722BF705F000387498 /* GameExtensions.swift */; platformFilters = (macos, ); };
 		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
 		2B62C97D2BF7216000387498 /* ExarotonServerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */; };
@@ -104,10 +102,8 @@
 		2B5ACA622BFB2A8300397BFC /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		2B5ACA672BFB312300397BFC /* ExarotonCreditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonCreditView.swift; sourceTree = "<group>"; };
 		2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonTradeMarkView.swift; sourceTree = "<group>"; };
-		2B5ACA6B2BFB5CFF00397BFC /* ExarotonServerListLinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerListLinkItem.swift; sourceTree = "<group>"; };
-		2B5ACA6D2BFB5E4200397BFC /* ExarotonCreditPoolListLinkItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonCreditPoolListLinkItem.swift; sourceTree = "<group>"; };
 		2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonAccountTokenInputView.swift; sourceTree = "<group>"; };
-		2B5BC3D62BFC527E00348C00 /* ExarotonServerRuntimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerRuntimeView.swift; sourceTree = "<group>"; };
+		2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerPlayList.swift; sourceTree = "<group>"; };
 		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
 		2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerDetail.swift; sourceTree = "<group>"; };
@@ -267,8 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				2B62C9842BF73F0200387498 /* ExarotonServerList.swift */,
-				2B5ACA6B2BFB5CFF00397BFC /* ExarotonServerListLinkItem.swift */,
-				2B5ACA6D2BFB5E4200397BFC /* ExarotonCreditPoolListLinkItem.swift */,
 				2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */,
 				2B5ACA582BFB267B00397BFC /* ExarotonCreditPoolDetail.swift */,
 				2B5BC3D32BFC4AA300348C00 /* Components */,
@@ -294,7 +288,7 @@
 				2B5ACA672BFB312300397BFC /* ExarotonCreditView.swift */,
 				2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */,
 				2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */,
-				2B5BC3D62BFC527E00348C00 /* ExarotonServerRuntimeView.swift */,
+				2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -599,7 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2B5BC3D72BFC527E00348C00 /* ExarotonServerRuntimeView.swift in Sources */,
+				2B5BC3D72BFC527E00348C00 /* ExarotonServerPlayList.swift in Sources */,
 				2B5ACA5B2BFB28B100397BFC /* ExarotonAPI+.swift in Sources */,
 				2B00920229D02B25002637E3 /* LauncherTerminateButton.swift in Sources */,
 				F3B4D0D02A1A776A0095B108 /* MCRCONError.swift in Sources */,
@@ -656,9 +650,7 @@
 				F3B4D0D82A1A776A0095B108 /* MCQueryError.swift in Sources */,
 				2B5ACA632BFB2A8300397BFC /* Config.swift in Sources */,
 				2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */,
-				2B5ACA6C2BFB5CFF00397BFC /* ExarotonServerListLinkItem.swift in Sources */,
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
-				2B5ACA6E2BFB5E4200397BFC /* ExarotonCreditPoolListLinkItem.swift in Sources */,
 				F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */,
 				2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */,
 				F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */,

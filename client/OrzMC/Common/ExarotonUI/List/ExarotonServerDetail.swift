@@ -14,7 +14,13 @@ struct ExarotonServerDetail: View {
 
     @State var server: ExarotonServer
 
+    @State private var wsServerReady: Bool = false
+
     @State private var networkOpacity: Double = 1
+
+    @State private var serverRAM: Int32 = 0
+
+    @State private var loading  = false
 
     var body: some View {
 
@@ -26,13 +32,24 @@ struct ExarotonServerDetail: View {
                 ExarotonServerView(server: server)
             }
 
-            Section("Runtime") {
-                ExarotonServerRuntimeView(server: server)
+            if let playlist = server.players?.list, !playlist.isEmpty {
+                Section("Playlist") {
+                    ExarotonServerPlayList(playlist: playlist)
+                }
             }
 
             if let serverStatus = server.serverStatus {
 
-                Section("Actions") {
+                Section("Actions - HTTP") {
+
+                    if serverRAM > 0 {
+                        Stepper("RAM: \(String(format: "%d", serverRAM)) GB",
+                                value: $serverRAM,
+                                in: 2...16,
+                                step: 1
+                        )
+                        .disabled(loading || serverStatus != .OFFLINE)
+                    }
 
                     Button("Start Server") {
                         Task {
@@ -57,10 +74,8 @@ struct ExarotonServerDetail: View {
                 }
 
                 Text("Server: \(model.isConnected ? "connected" : "disconnected")")
-
                 if serverStatus != .OFFLINE {
-
-                    Section("Streams") {
+                    Section("Streams - WebSocket") {
 
                         if let console = model.consoleLine {
                             Text(console)
@@ -88,7 +103,6 @@ struct ExarotonServerDetail: View {
                             Button("start \(streamCategory.rawValue)") {
                                 model.startStream(streamCategory)
                             }
-
                             Button("stop \(streamCategory.rawValue)") {
                                 model.stopStream(streamCategory)
                             }
@@ -103,27 +117,32 @@ struct ExarotonServerDetail: View {
 #endif
         .toolbar {
             ToolbarItemGroup {
-                Image(systemName: "network")
+                Image(systemName: wsServerReady ? "checkmark.icloud.fill" : "icloud.fill")
                     .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .foregroundStyle(isWebSocketReady ? mainColor : dangerColor)
-                    .frame(width: 25, height: 25)
-                    .overlay {
-                        Text("ws")
-                            .font(.system(size: 8))
-                            .bold()
-                            .foregroundStyle(isWebSocketReady ? .pink : .teal)
-                    }
+                    .aspectRatio(contentMode: .fit)
+                    .foregroundStyle(wsServerReady ? mainColor : dangerColor)
+                    .frame(width: 30, height: 30)
                     .opacity(networkOpacity)
-                    .animation(isWebSocketReady ? nil : .easeInOut(duration: 0.8).repeatForever(), value: networkOpacity)
+                    .animation(wsServerReady ? nil : .easeInOut(duration: 0.8).repeatForever(), value: networkOpacity)
             }
+        }
+        .overlay {
+            ProgressView()
+                .controlSize(.extraLarge)
+                .progressViewStyle(.circular)
+                .opacity(loading ? 1 : 0)
         }
         .task {
             model.startConnect(for: server.id!)
-            networkOpacity = model.readyServerID == nil ? 0 : 1
+            wsServerReady = model.readyServerID != nil
+            networkOpacity = wsServerReady ? 1 : 0
+            if let ram = await model.getRAM(serverId: server.id!) {
+                serverRAM = ram
+            }
         }
         .onChange(of: model.readyServerID) { oldValue, newValue in
-            networkOpacity = newValue == nil ? 0 : 1
+            wsServerReady = newValue != nil
+            networkOpacity = wsServerReady ? 1 : 0
         }
         .onDisappear {
             model.stopConnect()
@@ -135,9 +154,33 @@ struct ExarotonServerDetail: View {
             }
             server = serverInfo
         }
+        .onChange(of: serverRAM, initial: false) { oldValue, newValue in
+            guard let serverID = server.id
+            else {
+                return
+            }
+            Task {
+                loading = true
+                if let ram = await model.changeRAM(serverId: serverID, ramGB: newValue) {
+                    serverRAM = ram
+                }
+                loading = false
+            }
+        }
     }
+}
 
-    var isWebSocketReady: Bool {
-        return model.readyServerID != nil
+extension ExarotonServerDetail {
+    func startSubscribeEvent() {
+        if wsServerReady {
+            [
+                StreamCategory.console,
+                StreamCategory.tick,
+                StreamCategory.stats,
+                StreamCategory.heap,
+            ].forEach { stream in
+                model.startStream(stream)
+            }
+        }
     }
 }
