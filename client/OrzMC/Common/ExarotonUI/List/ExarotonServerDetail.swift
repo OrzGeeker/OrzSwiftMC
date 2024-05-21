@@ -26,6 +26,8 @@ struct ExarotonServerDetail: View {
 
     @State private var consoleCommand: String = ""
 
+    private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+
     var body: some View {
 
         @Bindable var model = model
@@ -33,7 +35,7 @@ struct ExarotonServerDetail: View {
         Form {
 
             Section("General") {
-                ExarotonServerView(server: server)
+                ExarotonServerView(server: server, showStatus: false, showMotd: true)
             }
 
             if let playlist = server.players?.list, !playlist.isEmpty {
@@ -43,6 +45,33 @@ struct ExarotonServerDetail: View {
             }
 
             if let serverStatus = server.serverStatus {
+
+                if model.isConnected {
+                    Section("Metrics") {
+                        VStack(alignment: .center, spacing: 10) {
+                            if let stats = model.statsChanged {
+                                HStack(alignment: .center, spacing: 20) {
+                                    Gauge(value: stats.cpu.percent, in: 0...Double(100 * stats.cpu.limit)) {
+                                        Text("CPU x \(stats.cpu.limit)")
+                                    } currentValueLabel: {
+                                        Text("\(String(format: "%.2f", stats.cpu.percent))%")
+                                    }
+                                    Gauge(value: stats.memory.percent, in: 0...100) {
+                                        Text("Memory(\(String(format: "%.2f", stats.memory.usage * 100 / stats.memory.percent / Double(1024 * 1024 * 1024))) GB)")
+                                    } currentValueLabel: {
+                                        Text("\(String(format: "%.2f", stats.memory.percent))%")
+                                    }
+                                }
+                            }
+                            if let tick = model.tickChanged {
+                                Text("Tick: \(String(format: "%.2f", tick.averageTickTime))")
+                            }
+                            if let heap = model.heapChanged {
+                                Text("Heap: \(String(format: "%.2f", Double(heap.usage) / Double(1024 * 1024 * 1024))) GB")
+                            }
+                        }
+                    }
+                }
 
                 Section("Actions - HTTP") {
 
@@ -77,76 +106,27 @@ struct ExarotonServerDetail: View {
                     .disabled(serverStatus != .ONLINE)
                 }
 
-                Text("Server: \(model.isConnected ? "connected" : "disconnected")")
+                if model.isConnected {
 
-                if let stats = model.statsChanged {
-                    HStack {
-                        Gauge(value: stats.cpu.percent, in: 0...Double(100 * stats.cpu.limit)) {
-                            Text("CPU x \(stats.cpu.limit)")
-                        } currentValueLabel: {
-                            Text("\(String(format: "%.2f", stats.cpu.percent))%")
+                    Section("Console") {
+
+                        ScrollView(.vertical, showsIndicators: true) {
+                            Text(consoleLog)
+                                .foregroundStyle(Color.white)
+                                .font(.system(size: 8))
                         }
-                        Gauge(value: stats.memory.percent, in: 0...100) {
-                            Text("Memory(\(String(format: "%.2f", stats.memory.usage * 100 / stats.memory.percent / Double(1024 * 1024 * 1024))) GB)")
-                        } currentValueLabel: {
-                            Text("\(String(format: "%.2f", stats.memory.percent))%")
+                        .frame(height: 100)
+                        .listRowBackground(Color.black)
+
+                        Button {
+                            consoleLog = ""
+                        } label: {
+                            Text("Clear Console")
                         }
-                    }
-                }
-                if let tick = model.tickChanged {
-                    Text("Tick: \(tick.averageTickTime)")
-                }
-                if let heap = model.heapChanged {
-                    Text("Heap: \(String(format: "%.2f", Double(heap.usage) / Double(1024 * 1024 * 1024))) GB")
-                }
 
-                Section("Console") {
 
-                    ScrollView(.vertical, showsIndicators: true) {
-                        Text(consoleLog)
-                            .foregroundStyle(Color.white)
-                            .font(.system(size: 8))
-                    }
-                    .frame(maxHeight: 100)
-                    .listRowBackground(Color.black)
-
-                    Button {
-                        consoleLog = ""
-                    } label: {
-                        Text("Clear Console")
-                    }
-
-                    Button("Start Console") {
-                        model.startStream(.console, data: ["tail": 10])
-                    }
-
-                    Button("Stop Console") {
-                        model.stopStream(.console)
-                    }
-
-                    Button("Send Console Command") {
-                        model.sendConsoleCmd("say Hello")
-                    }
-                }
-
-                if serverStatus != .OFFLINE {
-                    Section("Streams - WebSocket") {
-                        ForEach([
-                            StreamCategory.tick,
-                            StreamCategory.stats,
-                            StreamCategory.heap
-                        ], id: \.self) { streamCategory in
-                            VStack {
-                                HStack {
-                                    Button("start \(streamCategory.rawValue)") {
-                                        model.startStream(streamCategory)
-                                    }
-                                    Button("stop \(streamCategory.rawValue)") {
-                                        model.stopStream(streamCategory)
-                                    }
-                                }
-                                .buttonStyle(BorderedProminentButtonStyle())
-                            }
+                        Button("Send Console Command") {
+                            model.sendConsoleCmd("say Hello")
                         }
                     }
                 }
@@ -165,6 +145,10 @@ struct ExarotonServerDetail: View {
                     .frame(width: 30, height: 30)
                     .opacity(networkOpacity)
                     .animation(wsServerReady ? nil : .easeInOut(duration: 0.8).repeatForever(), value: networkOpacity)
+
+                if let serverStatus = server.serverStatus {
+                    ExarotonServerStatusView(status: serverStatus)
+                }
             }
         }
         .overlay {
@@ -215,11 +199,18 @@ struct ExarotonServerDetail: View {
             }
             consoleLog.append(consoleLine)
         }
+        .onReceive(timer) { _ in
+            guard let serverStatus = server.serverStatus, serverStatus == .ONLINE, model.isConnected == false
+            else {
+                return
+            }
+            startStreams()
+        }
     }
 }
 
 extension ExarotonServerDetail {
-    
+
     static let actionStreams = StreamCategory.allCases.filter { $0 != .status }
 
     func startStreams() {

@@ -9,13 +9,10 @@ import SwiftUI
 
 struct ExarotonServerView: View {
     let server: ExarotonServer
+    var showStatus = true
+    var showMotd = false
     var body: some View {
         VStack(alignment: .leading) {
-            if let motd = server.motd {
-                Text(motd)
-                    .font(.subheadline)
-            }
-            Divider()
             HStack {
                 VStack(alignment: .leading) {
                     if let name = server.name {
@@ -31,11 +28,17 @@ struct ExarotonServerView: View {
                             .font(.callout)
                     }
                 }
-                Spacer()
-                if let status = server.serverStatus {
+                
+                if showStatus, let status = server.serverStatus {
+                    Spacer()
                     ExarotonServerStatusView(status: status)
                         .frame(width: 30, height: 30)
                 }
+            }
+            if showMotd, let motd = server.motd {
+                Divider()
+                Text(motd)
+                    .font(.subheadline)
             }
             if server.hasAddress {
                 Divider()
@@ -71,6 +74,6 @@ struct ExarotonServerView: View {
             players: .init(max: 20, count: 1, list: ["joker"]),
             software: .init(id: "1", name: "paper", version: "1.20.6"),
             shared: false
-        )
+        ), showStatus: true
     )
 }
