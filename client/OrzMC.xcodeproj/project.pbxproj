@@ -104,6 +104,7 @@
 		2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonTradeMarkView.swift; sourceTree = "<group>"; };
 		2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonAccountTokenInputView.swift; sourceTree = "<group>"; };
 		2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerPlayList.swift; sourceTree = "<group>"; };
+		2B5BC3D82BFC9F4200348C00 /* ExarotonAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ExarotonAPI; path = ../../../ExarotonAPI; sourceTree = "<group>"; };
 		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
 		2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerDetail.swift; sourceTree = "<group>"; };
@@ -206,6 +207,7 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
+				2B5BC3D82BFC9F4200348C00 /* ExarotonAPI */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C799328FEAB0600D53658 /* Products */,
 				F370F74029037521005497A1 /* Frameworks */,

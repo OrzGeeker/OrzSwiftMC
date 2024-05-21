@@ -1,5 +1,5 @@
 {
-  "originHash" : "7024ab999125729dbccde0ca0029754f83df702c88e64b7ca8981c700c4b70d4",
+  "originHash" : "9add03979cf963cf5026fab9bc04d0846a109fa874d4370a2ca25300084b46a8",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -35,15 +35,6 @@
       "state" : {
         "revision" : "a31f44ebfbd15a2cc0fda705279676773ac16355",
         "version" : "4.14.1"
-      }
-    },
-    {
-      "identity" : "exarotonapi",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/wangzhizhou/ExarotonAPI.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "cac10c86b0ca89c039bf4a1c940ba96d5bfcf9a3"
       }
     },
     {

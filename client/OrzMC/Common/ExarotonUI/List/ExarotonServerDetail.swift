@@ -219,16 +219,14 @@ struct ExarotonServerDetail: View {
 }
 
 extension ExarotonServerDetail {
-    func startSubscribeEvent() {
-        if wsServerReady {
-            [
-                StreamCategory.console,
-                StreamCategory.tick,
-                StreamCategory.stats,
-                StreamCategory.heap,
-            ].forEach { stream in
-                model.startStream(stream)
-            }
-        }
+    
+    static let actionStreams = StreamCategory.allCases.filter { $0 != .status }
+
+    func startStreams() {
+        Self.actionStreams.forEach { model.startStream($0) }
+    }
+
+    func stopStreams() {
+        Self.actionStreams.forEach { model.stopStream($0) }
     }
 }

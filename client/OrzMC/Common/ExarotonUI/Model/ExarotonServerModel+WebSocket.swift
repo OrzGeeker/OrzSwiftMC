@@ -35,16 +35,15 @@ extension ExarotonServerModel {
     }
 
     func startStream(_ stream: StreamCategory, data: AnyCodable? = nil)  {
-        websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.start, data: data))
+        try? websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.start, data: data))
     }
 
-    func sendConsoleCmd(_ cmd: String) {
-//        let cmdStringData = cmd.data(using: .utf8)
-//        websocket?.send(message: ExarotonMessage(stream: .console, type: StreamType.command, data: cmdStringData))
+    func sendConsoleCmd(_ cmd: AnyCodable) {
+        try? websocket?.send(message: ExarotonMessage(stream: .console, type: StreamType.command, data: cmd))
     }
 
     func stopStream(_ stream: StreamCategory) {
-        websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.stop, data: nil))
+        try? websocket?.send(message: ExarotonMessage(stream: stream, type: StreamType.stop, data: nil))
     }
 }
 

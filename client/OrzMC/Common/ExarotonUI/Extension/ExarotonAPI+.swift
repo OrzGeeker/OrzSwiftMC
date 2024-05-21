@@ -9,18 +9,6 @@ import Foundation
 import ExarotonHTTP
 import ExarotonWebSocket
 
-enum ServerStatus: Int, CaseIterable {
-    case OFFLINE = 0
-    case ONLINE = 1
-    case STARTING = 2
-    case STOPPING = 3
-    case RESTARTING = 4
-    case SAVING = 5
-    case LOADING = 6
-    case CRASHED = 7
-    case PENDING = 8
-    case PREPARING = 10
-}
 typealias ExarotonServer = ExarotonHTTP.Components.Schemas.Server
 extension ExarotonServer: Identifiable {}
 extension ExarotonServer {
@@ -68,11 +56,12 @@ extension ExarotonServer {
 typealias ExarotonCreditPool = ExarotonHTTP.Components.Schemas.CreditPool
 extension ExarotonCreditPool: Identifiable {}
 typealias ExarotonCreditMember = ExarotonHTTP.Components.Schemas.CreditPoolMember
-extension ExarotonCreditMember: Identifiable {
+extension ExarotonCreditMember: Identifiable { 
     public var id: String { account ?? name ?? "" }
 }
 
 // WebSocket
+typealias ServerStatus = ExarotonWebSocket.ServerStatus
 extension ExarotonWebSocket.Server {
     var serverInfo: ExarotonServer {
         get throws {
@@ -83,22 +72,4 @@ extension ExarotonWebSocket.Server {
     }
 }
 
-extension ExarotonWebSocketAPI {
-    
-    func connect() {
-        client.connect()
-    }
-    
-    func disconnect() {
-        client.disconnect()
-    }
 
-    func send<T: Codable>(message: ExarotonMessage<T>) {
-        do {
-            let data = try message.toData
-            client.write(stringData: data, completion: nil)
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-}
