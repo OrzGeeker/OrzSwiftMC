@@ -1,11 +1,12 @@
 //
-//  ServerStatusView.swift
+//  ExarotonServerStatusView.swift
 //  OrzMC
 //
 //  Created by joker on 5/17/24.
 //
 
 import SwiftUI
+
 struct DisplayConfig {
     let imageName: String
     let foregroundColor: Color
@@ -20,6 +21,7 @@ struct DisplayConfig {
         self.animate = animate
     }
 }
+
 extension ServerStatus {
     var displayConfig: DisplayConfig {
         switch self {
@@ -47,7 +49,7 @@ extension ServerStatus {
     }
 }
 
-struct ServerStatusView: View {
+struct ExarotonServerStatusView: View {
     let status: ServerStatus
     @State private var opacity: Double = 1
     var body: some View {
@@ -61,8 +63,8 @@ struct ServerStatusView: View {
                 config.animate ? .easeInOut(duration: 0.8).repeatForever() : nil,
                 value: opacity
             )
-        .onChange(of: status, { oldValue, newValue in
-            opacity = status.displayConfig.animate ? 0 : 1
-        })
+            .onChange(of: status, { oldValue, newValue in
+                opacity = status.displayConfig.animate ? 0 : 1
+            })
     }
 }

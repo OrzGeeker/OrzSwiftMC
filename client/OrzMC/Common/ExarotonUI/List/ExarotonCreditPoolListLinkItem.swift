@@ -15,7 +15,7 @@ struct ExarotonCreditPoolListLinkItem: View {
             ExarotonCreditPoolDetail(creditPool: creditPool)
                 .environment(model)
         } label: {
-            ExarotonCreditPoolListItem(creditPool: creditPool)
+            ExarotonCreditPoolView(creditPool: creditPool)
         }
     }
 }

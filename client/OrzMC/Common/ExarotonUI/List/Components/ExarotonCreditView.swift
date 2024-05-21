@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 struct ExarotonCreditView: View {
     let credits: Double?
     var body: some View {

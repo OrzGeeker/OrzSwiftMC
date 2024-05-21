@@ -29,15 +29,7 @@ struct ExarotonServerList: View {
                 }
             }
         }
-        .environment(model)
         .navigationTitle("Exaroton")
-        .task {
-            if model.token.isEmpty {
-                showTokenInput = true
-            } else {
-                await startWork()
-            }
-        }
         .overlay {
             ProgressView()
                 .controlSize(.extraLarge)
@@ -55,20 +47,7 @@ struct ExarotonServerList: View {
                 }
             }
         } content: {
-            VStack(alignment: .trailing, spacing: 20) {
-                VStack(alignment: .leading) {
-                    Text("Input Account Token: ")
-                        .font(.title)
-                        .bold()
-                    TextField("TOKEN", text: $token, axis: .vertical)
-                        .frame(height: 80)
-                        .textFieldStyle(.roundedBorder)
-                        .font(.body)
-                }
-                ExarotonTradeMark()
-            }
-            .frame(height: 100)
-            .padding([.horizontal], 10)
+            ExarotonAccountTokenInputView(token: $token)
         }
         .toolbar {
             ToolbarItemGroup {
@@ -77,6 +56,14 @@ struct ExarotonServerList: View {
                 } label: {
                     Image(systemName: "gear")
                 }
+            }
+        }
+        .environment(model)
+        .task {
+            if model.token.isEmpty {
+                showTokenInput = true
+            } else {
+                await startWork()
             }
         }
     }

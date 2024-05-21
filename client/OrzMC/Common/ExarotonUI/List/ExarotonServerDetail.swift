@@ -22,38 +22,13 @@ struct ExarotonServerDetail: View {
 
         Form {
 
-            if let motd = server.motd {
-                Section("MOTD") {
-                    Text(motd)
-                }
+            Section("General") {
+                ExarotonServerView(server: server)
             }
 
-            if server.hasAddress {
-                Section("Address") {
-                    if let staticAddress = server.staticAddress {
-                        Text("\(staticAddress)")
-                            .onTapGesture {
-                                staticAddress.copyToPasteboard()
-                            }
-                    }
-
-                    if let dynamicAddress = server.dynamicAddress {
-                        Text("\(dynamicAddress)")
-                            .onTapGesture {
-                                dynamicAddress.copyToPasteboard()
-                            }
-                    }
-                }
+            Section("Runtime") {
+                ExarotonServerRuntimeView(server: server)
             }
-
-            if let playerList = server.players?.list, !playerList.isEmpty {
-                Section("Players") {
-                    ForEach(playerList, id: \.self) { playerName in
-                        Text(playerName)
-                    }
-                }
-            }
-
 
             if let serverStatus = server.serverStatus {
 
@@ -83,12 +58,13 @@ struct ExarotonServerDetail: View {
 
                 Text("Server: \(model.isConnected ? "connected" : "disconnected")")
 
-                if serverStatus == .ONLINE {
+                if serverStatus != .OFFLINE {
 
                     Section("Streams") {
 
                         if let console = model.consoleLine {
                             Text(console)
+                                .font(.system(size: 8))
                                 .lineLimit(nil)
                         }
 
@@ -121,7 +97,7 @@ struct ExarotonServerDetail: View {
                 }
             }
         }
-        .navigationTitle(server.name ?? "")
+        .navigationTitle("Server Detail")
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
 #endif
@@ -131,7 +107,7 @@ struct ExarotonServerDetail: View {
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .foregroundStyle(isWebSocketReady ? mainColor : dangerColor)
-                    .frame(width: 30, height: 30)
+                    .frame(width: 25, height: 25)
                     .overlay {
                         Text("ws")
                             .font(.system(size: 8))
@@ -140,11 +116,6 @@ struct ExarotonServerDetail: View {
                     }
                     .opacity(networkOpacity)
                     .animation(isWebSocketReady ? nil : .easeInOut(duration: 0.8).repeatForever(), value: networkOpacity)
-
-                if let status = server.serverStatus {
-                    ServerStatusView(status: status)
-                        .frame(width: 30, height: 30)
-                }
             }
         }
         .task {

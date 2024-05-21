@@ -15,11 +15,13 @@ struct ExarotonCreditPoolDetail: View {
     @State private var loading = false
     var body: some View {
         List {
-            HStack {
-                Spacer()
-                ExarotonCreditView(credits: creditPool.credits)
-                    .padding([.top], 10)
-                Spacer()
+            Section(creditPool.name ?? "") {
+                HStack {
+                    Spacer()
+                    ExarotonCreditView(credits: creditPool.credits)
+                        .padding([.top], 10)
+                    Spacer()
+                }
             }
             if let members {
                 Section("Members") {
@@ -48,7 +50,7 @@ struct ExarotonCreditPoolDetail: View {
             await fetchData()
             loading = false
         }
-        .navigationTitle(creditPool.name ?? "")
+        .navigationTitle("Credit Pool Detail")
         .navigationBarTitleDisplayMode(.inline)
         .overlay {
             ProgressView()

@@ -1,5 +1,5 @@
 //
-//  ExarotonTradeMark.swift
+//  ExarotonTradeMarkView.swift
 //  OrzMC
 //
 //  Created by joker on 2024/5/20.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExarotonTradeMark: View {
+struct ExarotonTradeMarkView: View {
     var body: some View {
         VStack(alignment: .trailing) {
             HStack(alignment: .center) {

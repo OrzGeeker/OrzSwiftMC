@@ -15,7 +15,7 @@ struct ExarotonServerListLinkItem: View {
             ExarotonServerDetail(server: server)
                 .environment(model)
         } label: {
-            ExarotonServerListItem(server: server)
+            ExarotonServerView(server: server)
         }
     }
 }
