@@ -22,6 +22,10 @@ struct ExarotonServerDetail: View {
 
     @State private var loading  = false
 
+    @State private var consoleLog: String = ""
+
+    @State private var consoleCommand: String = ""
+
     var body: some View {
 
         @Bindable var model = model
@@ -74,37 +78,74 @@ struct ExarotonServerDetail: View {
                 }
 
                 Text("Server: \(model.isConnected ? "connected" : "disconnected")")
+
+                if let stats = model.statsChanged {
+                    HStack {
+                        Gauge(value: stats.cpu.percent, in: 0...Double(100 * stats.cpu.limit)) {
+                            Text("CPU x \(stats.cpu.limit)")
+                        } currentValueLabel: {
+                            Text("\(String(format: "%.2f", stats.cpu.percent))%")
+                        }
+                        Gauge(value: stats.memory.percent, in: 0...100) {
+                            Text("Memory(\(String(format: "%.2f", stats.memory.usage * 100 / stats.memory.percent / Double(1024 * 1024 * 1024))) GB)")
+                        } currentValueLabel: {
+                            Text("\(String(format: "%.2f", stats.memory.percent))%")
+                        }
+                    }
+                }
+                if let tick = model.tickChanged {
+                    Text("Tick: \(tick.averageTickTime)")
+                }
+                if let heap = model.heapChanged {
+                    Text("Heap: \(String(format: "%.2f", Double(heap.usage) / Double(1024 * 1024 * 1024))) GB")
+                }
+
+                Section("Console") {
+
+                    ScrollView(.vertical, showsIndicators: true) {
+                        Text(consoleLog)
+                            .foregroundStyle(Color.white)
+                            .font(.system(size: 8))
+                    }
+                    .frame(maxHeight: 100)
+                    .listRowBackground(Color.black)
+
+                    Button {
+                        consoleLog = ""
+                    } label: {
+                        Text("Clear Console")
+                    }
+
+                    Button("Start Console") {
+                        model.startStream(.console, data: ["tail": 10])
+                    }
+
+                    Button("Stop Console") {
+                        model.stopStream(.console)
+                    }
+
+                    Button("Send Console Command") {
+                        model.sendConsoleCmd("say Hello")
+                    }
+                }
+
                 if serverStatus != .OFFLINE {
                     Section("Streams - WebSocket") {
-
-                        if let console = model.consoleLine {
-                            Text(console)
-                                .font(.system(size: 8))
-                                .lineLimit(nil)
-                        }
-
-                        Button("start console") {
-                            model.startStream(.console, data: ["tail": 10])
-                        }
-
-                        Button("send console command") {
-                            model.sendConsoleCmd("say Hello")
-                        }
-
-                        Button("stop console") {
-                            model.stopStream(.console)
-                        }
-
                         ForEach([
                             StreamCategory.tick,
                             StreamCategory.stats,
                             StreamCategory.heap
                         ], id: \.self) { streamCategory in
-                            Button("start \(streamCategory.rawValue)") {
-                                model.startStream(streamCategory)
-                            }
-                            Button("stop \(streamCategory.rawValue)") {
-                                model.stopStream(streamCategory)
+                            VStack {
+                                HStack {
+                                    Button("start \(streamCategory.rawValue)") {
+                                        model.startStream(streamCategory)
+                                    }
+                                    Button("stop \(streamCategory.rawValue)") {
+                                        model.stopStream(streamCategory)
+                                    }
+                                }
+                                .buttonStyle(BorderedProminentButtonStyle())
                             }
                         }
                     }
@@ -166,6 +207,13 @@ struct ExarotonServerDetail: View {
                 }
                 loading = false
             }
+        }
+        .onChange(of: model.consoleLine) { oldValue, newValue in
+            guard let consoleLine = newValue
+            else {
+                return
+            }
+            consoleLog.append(consoleLine)
         }
     }
 }
