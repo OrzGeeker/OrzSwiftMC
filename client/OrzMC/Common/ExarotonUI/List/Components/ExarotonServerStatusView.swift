@@ -66,10 +66,10 @@ struct ExarotonServerStatusView: View {
             .onChange(of: status, { oldValue, newValue in
                 opacity = status.displayConfig.animate ? 0 : 1
             })
-            .overlay {
-                Text(String(describing: status))
-                    .font(.system(size: 4))
-                    .bold()
-            }
+//            .overlay {
+//                Text(String(describing: status))
+//                    .font(.system(size: 4))
+//                    .bold()
+//            }
     }
 }
