@@ -48,6 +48,22 @@ struct ExarotonServerList: View {
         .refreshable {
             await fetchData()
         }
+        .toolbar {
+            ToolbarItemGroup {
+#if os(macOS)
+                Button("Refresh Page", systemImage: "arrow.circlepath") {
+                    Task {
+                        await fetchDataWithLoading()
+                    }
+                }
+                .keyboardShortcut(.init(.init("r")), modifiers: .command)
+#endif
+                Button("Settings", systemImage: "gear") {
+                    showTokenInput.toggle()
+                }
+                .keyboardShortcut(.init(.init("t")), modifiers: .command)
+            }
+        }
         .sheet(isPresented: $showTokenInput) {
             if !token.isEmpty {
                 model.token = token.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -64,22 +80,6 @@ struct ExarotonServerList: View {
                 .presentationDetents([.height(250)])
                 .presentationCornerRadius(10)
                 .presentationCompactAdaptation(horizontal: .none, vertical: .sheet)
-        }
-        .toolbar {
-            ToolbarItemGroup {
-#if os(macOS)
-                Button("Refresh Page", systemImage: "arrow.circlepath") {
-                    Task {
-                        await fetchDataWithLoading()
-                    }
-                }
-                .keyboardShortcut(.init(.init("r")), modifiers: .command)
-#endif
-                Button("Settings", systemImage: "gear") {
-                    showTokenInput.toggle()
-                }
-                .keyboardShortcut(.init(.init("t")), modifiers: .command)
-            }
         }
         .task {
             if model.token.isEmpty {

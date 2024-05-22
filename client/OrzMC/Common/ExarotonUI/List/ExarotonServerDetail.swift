@@ -52,23 +52,23 @@ struct ExarotonServerDetail: View {
                         VStack(alignment: .center, spacing: 10) {
                             if let stats = model.statsChanged {
                                 HStack(alignment: .center, spacing: 20) {
-                                    Gauge(value: stats.cpu.percent, in: 0...Double(100 * stats.cpu.limit)) {
-                                        Text("CPU x \(stats.cpu.limit)")
+                                    Gauge(value: stats.cpuUsage, in: stats.cpuUsageRange) {
+                                        Text(stats.cpuUsageLabel)
                                     } currentValueLabel: {
-                                        Text("\(String(format: "%.2f", stats.cpu.percent))%")
+                                        Text(stats.cpuUsageDesc)
                                     }
-                                    Gauge(value: stats.memory.percent, in: 0...100) {
-                                        Text("Memory(\(String(format: "%.2f", stats.memory.usage * 100 / stats.memory.percent / Double(1024 * 1024 * 1024))) GB)")
+                                    Gauge(value: stats.memUsage, in: stats.memUsageRange) {
+                                        Text(stats.memUsageLabel)
                                     } currentValueLabel: {
-                                        Text("\(String(format: "%.2f", stats.memory.percent))%")
+                                        Text(stats.memUsageDesc)
                                     }
                                 }
                             }
                             if let tick = model.tickChanged {
-                                Text("Tick: \(String(format: "%.2f", tick.averageTickTime))")
+                                Text(tick.usageLabel)
                             }
                             if let heap = model.heapChanged {
-                                Text("Heap: \(String(format: "%.2f", Double(heap.usage) / Double(1024 * 1024 * 1024))) GB")
+                                Text(heap.usageLabel)
                             }
                         }
                     }
