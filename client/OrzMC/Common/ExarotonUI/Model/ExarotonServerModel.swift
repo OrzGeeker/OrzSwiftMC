@@ -5,7 +5,6 @@
 //  Created by joker on 2024/5/17.
 //
 
-import Foundation
 import ExarotonHTTP
 import ExarotonWebSocket
 import OpenAPIRuntime
@@ -17,19 +16,18 @@ final class ExarotonServerModel {
 
     var path = NavigationPath()
 
+    static let accountTokenPersistentKey = "EXAROTON_TOKEN"
+
     @ObservationIgnored
     var token: String {
         get {
-            var ret = ProcessInfo.processInfo.environment["TOKEN"]
-            if ret == nil {
-                ret = UserDefaults.standard.string(forKey: "TOKEN")
-            }
-            return ret ?? ""
+            return UserDefaults.standard.string(forKey: Self.accountTokenPersistentKey) ?? ""
         }
         set {
-            UserDefaults.standard.setValue(newValue, forKey: "TOKEN")
+            UserDefaults.standard.setValue(newValue, forKey: Self.accountTokenPersistentKey)
         }
     }
+
 
     // HTTP Client
     @ObservationIgnored
@@ -39,7 +37,7 @@ final class ExarotonServerModel {
                middlewares: [AuthenticationMiddleware(token: token)]
         )
     }()
-    
+
     var servers = [ExarotonServer]()
     var creditPools = [ExarotonCreditPool]()
 

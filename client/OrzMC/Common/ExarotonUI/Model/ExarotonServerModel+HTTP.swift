@@ -8,6 +8,7 @@
 import ExarotonHTTP
 
 extension ExarotonServerModel {
+    @MainActor
     func fetchServers() async {
         do {
             let response = try await httpClient.getServers()

@@ -12,7 +12,7 @@ struct ExarotonCreditPoolDetail: View {
     @State var creditPool: ExarotonCreditPool
     @State private var members: [ExarotonCreditMember]?
     @State private var servers: [ExarotonServer]?
-    @State private var loading = false
+    @State private var isLoading = false
     var body: some View {
         List {
             Section(creditPool.name ?? "") {
@@ -22,6 +22,7 @@ struct ExarotonCreditPoolDetail: View {
                         .padding([.top], 10)
                     Spacer()
                 }
+                .listRowSeparator(.hidden)
             }
             if let members {
                 Section("Members") {
@@ -34,6 +35,7 @@ struct ExarotonCreditPoolDetail: View {
                                     .frame(height: 20)
                             }
                         }
+                        .listRowSeparator(.hidden)
                     }
                 }
             }
@@ -49,21 +51,37 @@ struct ExarotonCreditPoolDetail: View {
             }
         }
         .task {
-            loading = true
-            await fetchData()
-            loading = false
+            await fetchDataWithLoading()
         }
         .navigationTitle("Credit Pool Detail")
+#if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+#endif
         .overlay {
             ProgressView()
                 .controlSize(.extraLarge)
                 .progressViewStyle(.circular)
-                .opacity(loading ? 1 : 0)
+                .opacity(isLoading ? 1 : 0)
         }
         .refreshable {
             await fetchData()
         }
+        .toolbar {
+#if os(macOS)
+            Button("Refresh Page", systemImage: "arrow.circlepath") {
+                Task {
+                    await fetchDataWithLoading()
+                }
+            }
+            .keyboardShortcut(.init(.init("r")), modifiers: .command)
+#endif
+        }
+    }
+
+    func fetchDataWithLoading() async {
+        isLoading = true
+        await fetchData()
+        isLoading = false
     }
 
     func fetchData() async {

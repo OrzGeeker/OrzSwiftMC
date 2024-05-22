@@ -27,6 +27,7 @@
 		2B5ACA6A2BFB5C8A00397BFC /* ExarotonTradeMarkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */; };
 		2B5BC3D52BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */; };
 		2B5BC3D72BFC527E00348C00 /* ExarotonServerPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */; };
+		2B5E409E2BFD9683007216E7 /* ExarotonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5E409D2BFD9683007216E7 /* ExarotonContent.swift */; };
 		2B62C9732BF705F000387498 /* GameExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9722BF705F000387498 /* GameExtensions.swift */; platformFilters = (macos, ); };
 		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
 		2B62C97D2BF7216000387498 /* ExarotonServerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */; };
@@ -104,7 +105,7 @@
 		2B5ACA692BFB5C8A00397BFC /* ExarotonTradeMarkView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonTradeMarkView.swift; sourceTree = "<group>"; };
 		2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonAccountTokenInputView.swift; sourceTree = "<group>"; };
 		2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerPlayList.swift; sourceTree = "<group>"; };
-		2B5BC3D82BFC9F4200348C00 /* ExarotonAPI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ExarotonAPI; path = ../../../ExarotonAPI; sourceTree = "<group>"; };
+		2B5E409D2BFD9683007216E7 /* ExarotonContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonContent.swift; sourceTree = "<group>"; };
 		2B62C9722BF705F000387498 /* GameExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameExtensions.swift; sourceTree = "<group>"; };
 		2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackToAuthor.swift; sourceTree = "<group>"; };
 		2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerDetail.swift; sourceTree = "<group>"; };
@@ -207,7 +208,6 @@
 		2B1C798928FEAB0600D53658 = {
 			isa = PBXGroup;
 			children = (
-				2B5BC3D82BFC9F4200348C00 /* ExarotonAPI */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
 				2B1C799328FEAB0600D53658 /* Products */,
 				F370F74029037521005497A1 /* Frameworks */,
@@ -355,6 +355,7 @@
 			isa = PBXGroup;
 			children = (
 				2B5ACA622BFB2A8300397BFC /* Config.swift */,
+				2B5E409D2BFD9683007216E7 /* ExarotonContent.swift */,
 				2B5ACA652BFB2ADB00397BFC /* List */,
 				2B5ACA642BFB2AB200397BFC /* Model */,
 				2B5ACA662BFB2B2500397BFC /* Extension */,
@@ -624,6 +625,7 @@
 				2BADE2B229D06ACB00DB1E68 /* SettingsView.swift in Sources */,
 				2B5ACA682BFB312300397BFC /* ExarotonCreditView.swift in Sources */,
 				F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */,
+				2B5E409E2BFD9683007216E7 /* ExarotonContent.swift in Sources */,
 				2BD301F229001CD000993823 /* LauncherModel.swift in Sources */,
 				F3B4D0D62A1A776A0095B108 /* Array+UInt8.swift in Sources */,
 				2B5ACA612BFB2A1900397BFC /* ExarotonServerModel+WebSocket.swift in Sources */,
@@ -862,8 +864,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/wangzhizhou/ExarotonAPI.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.5;
 			};
 		};
 		2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {

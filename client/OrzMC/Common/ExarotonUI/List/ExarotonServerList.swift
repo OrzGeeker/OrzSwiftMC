@@ -35,6 +35,9 @@ struct ExarotonServerList: View {
                 }
             }
         }
+#if os(macOS)
+        .listStyle(.inset)
+#endif
         .navigationTitle("Exaroton")
         .overlay {
             ProgressView()
@@ -49,34 +52,53 @@ struct ExarotonServerList: View {
             if !token.isEmpty {
                 model.token = token.trimmingCharacters(in: .whitespacesAndNewlines)
                 Task {
-                    await startWork()
+                    await fetchDataWithLoading()
                 }
             }
         } content: {
             ExarotonAccountTokenInputView(token: $token)
+                .onSubmit {
+                    showTokenInput = false
+                }
+                .presentationDragIndicator(.visible)
+                .presentationDetents([.height(250)])
+                .presentationCornerRadius(10)
+                .presentationCompactAdaptation(horizontal: .none, vertical: .sheet)
         }
         .toolbar {
             ToolbarItemGroup {
-                Button {
-                    showTokenInput.toggle()
-                } label: {
-                    Image(systemName: "gear")
+#if os(macOS)
+                Button("Refresh Page", systemImage: "arrow.circlepath") {
+                    Task {
+                        await fetchDataWithLoading()
+                    }
                 }
+                .keyboardShortcut(.init(.init("r")), modifiers: .command)
+#endif
+                Button("Settings", systemImage: "gear") {
+                    showTokenInput.toggle()
+                }
+                .keyboardShortcut(.init(.init("t")), modifiers: .command)
             }
         }
-        .environment(model)
         .task {
             if model.token.isEmpty {
                 showTokenInput = true
             } else {
-                await startWork()
+                await fetchDataWithLoading()
             }
         }
+        .navigationDestination(for: ExarotonServer.self, destination: { server in
+            ExarotonServerDetail(server: server).environment(model)
+        })
+        .navigationDestination(for: ExarotonCreditPool.self, destination: { creditPool in
+            ExarotonCreditPoolDetail(creditPool: creditPool).environment(model)
+        })
     }
 }
 
 extension ExarotonServerList {
-    func startWork() async {
+    func fetchDataWithLoading() async {
         self.isLoading = true
         await fetchData()
         self.isLoading = false

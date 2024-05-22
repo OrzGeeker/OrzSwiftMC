@@ -212,6 +212,7 @@ struct GameView: View {
                         .controlSize(.regular)
                         .buttonStyle(.borderedProminent)
                         .disabled(!enableStartGameButton)
+                        .keyboardShortcut(.init(.init("b")), modifiers: .command)
                         Spacer()
                     }
                 }

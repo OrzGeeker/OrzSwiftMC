@@ -56,7 +56,7 @@ struct ExarotonServerStatusView: View {
         let config = status.displayConfig
         Image(systemName: config.imageName)
             .resizable()
-            .aspectRatio(contentMode: .fill)
+            .aspectRatio(contentMode: .fit)
             .foregroundStyle(config.foregroundColor)
             .opacity(opacity)
             .animation(

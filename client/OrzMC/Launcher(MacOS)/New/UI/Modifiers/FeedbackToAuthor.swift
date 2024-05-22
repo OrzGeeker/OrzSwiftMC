@@ -34,6 +34,7 @@ struct FeedbackToAuthor: ViewModifier {
                 FeedBackButton(email: email)
                     .offset(x: offset.x, y: offset.y)
                     .foregroundColor(.yellow)
+                    .keyboardShortcut(.init(.init("f")), modifiers: .command)
             }
     }
 }

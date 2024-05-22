@@ -16,14 +16,14 @@ struct ExarotonAccountTokenInputView: View {
                     .font(.title)
                     .bold()
                 TextField("TOKEN", text: $token, axis: .vertical)
-                    .frame(height: 80)
                     .textFieldStyle(.roundedBorder)
                     .font(.body)
+                    .lineLimit(nil)
+                    .frame(maxWidth: 400)
             }
             ExarotonTradeMarkView()
         }
-        .frame(height: 100)
-        .padding([.horizontal], 10)
+        .padding(10)
     }
 }
 

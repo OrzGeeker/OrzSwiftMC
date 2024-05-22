@@ -33,5 +33,7 @@ struct ExarotonCreditPoolView: View {
                 }
             }
         }
+        .contentShape(Rectangle())
+        .listRowSeparator(.hidden)
     }
 }

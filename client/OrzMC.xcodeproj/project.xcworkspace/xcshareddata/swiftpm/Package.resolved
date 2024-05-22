@@ -1,5 +1,5 @@
 {
-  "originHash" : "9add03979cf963cf5026fab9bc04d0846a109fa874d4370a2ca25300084b46a8",
+  "originHash" : "7024ab999125729dbccde0ca0029754f83df702c88e64b7ca8981c700c4b70d4",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -33,8 +33,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/vapor/console-kit.git",
       "state" : {
-        "revision" : "a31f44ebfbd15a2cc0fda705279676773ac16355",
-        "version" : "4.14.1"
+        "revision" : "9c24ac496c97cfb49c1bd5e7162008bb50abafc8",
+        "version" : "4.14.2"
+      }
+    },
+    {
+      "identity" : "exarotonapi",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/wangzhizhou/ExarotonAPI.git",
+      "state" : {
+        "revision" : "104b876f1332ba559967655aa21e4a1a6fdf5607",
+        "version" : "0.0.5"
       }
     },
     {
@@ -195,8 +204,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-system.git",
       "state" : {
-        "revision" : "025bcb1165deab2e20d4eaba79967ce73013f496",
-        "version" : "1.2.1"
+        "revision" : "f9266c85189c2751589a50ea5aec72799797e471",
+        "version" : "1.3.0"
       }
     },
     {

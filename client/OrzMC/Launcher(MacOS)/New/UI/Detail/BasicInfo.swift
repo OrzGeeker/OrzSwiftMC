@@ -107,6 +107,7 @@ struct BasicInfo: View {
                             .padding(4)
                             .bold()
                     }
+                    .keyboardShortcut(.init(.init("k")), modifiers: .command)
                 }
             }
         }

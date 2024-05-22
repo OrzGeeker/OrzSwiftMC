@@ -73,7 +73,7 @@ struct ExarotonServerDetail: View {
                     }
                 }
 
-                Section("Actions - HTTP") {
+                Section("Actions") {
 
                     if serverRAM > 0 {
                         Stepper("RAM: \(String(format: "%d", serverRAM)) GB",
@@ -84,21 +84,20 @@ struct ExarotonServerDetail: View {
                         .disabled(loading || serverStatus != .OFFLINE)
                     }
 
-                    Button("Start Server") {
+                    Button("Start Server", systemImage: "restart.circle") {
                         Task {
                             await model.startServer(serverId: server.id!)
                         }
-                    }
-                    .disabled(serverStatus != .OFFLINE)
+                    }.disabled(serverStatus != .OFFLINE)
 
-                    Button("Stop Server") {
+                    Button("Stop Server", systemImage: "stop.fill") {
                         Task {
                             await model.stopServer(serverId: server.id!)
                         }
                     }
                     .disabled(serverStatus != .ONLINE)
 
-                    Button("Restart Server") {
+                    Button("Restart Server", systemImage: "restart.circle.fill") {
                         Task {
                             await model.restartServer(serverId: server.id!)
                         }
@@ -132,6 +131,7 @@ struct ExarotonServerDetail: View {
                 }
             }
         }
+        .formStyle(GroupedFormStyle())
         .navigationTitle("Server Detail")
 #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -148,6 +148,7 @@ struct ExarotonServerDetail: View {
 
                 if let serverStatus = server.serverStatus {
                     ExarotonServerStatusView(status: serverStatus)
+                        .frame(width: 25, height: 25)
                 }
             }
         }

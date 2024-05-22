@@ -59,6 +59,8 @@ struct ExarotonServerView: View {
                 }
             }
         }
+        .contentShape(Rectangle())
+        .listRowSeparator(.hidden)
     }
 }
 #Preview {
