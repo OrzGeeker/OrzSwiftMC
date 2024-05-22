@@ -52,6 +52,7 @@ final class ExarotonServerModel {
     var streamStarted: ExarotonWebSocket.StreamCategory?
     var streamStopped: ExarotonWebSocket.StreamCategory?
     var consoleLine: String?
+    var consoleLines = [String]()
     var tickChanged: ExarotonWebSocket.Tick?
     var statsChanged: ExarotonWebSocket.Stats?
     var heapChanged: ExarotonWebSocket.Heap?

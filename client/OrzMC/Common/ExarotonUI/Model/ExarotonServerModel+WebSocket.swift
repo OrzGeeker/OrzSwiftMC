@@ -28,6 +28,7 @@ extension ExarotonServerModel {
         streamStarted = nil
         streamStopped = nil
         consoleLine = nil
+        consoleLines = [String]()
         tickChanged = nil
         statsChanged = nil
         heapChanged = nil
@@ -80,7 +81,12 @@ extension ExarotonServerModel: ExarotonServerEventHandlerProtocol {
     }
 
     func onConsoleLine(_ line: String?) {
+        guard let line
+        else {
+            return
+        }
         consoleLine = line
+        consoleLines.append(line)
     }
 
     func onTick(_ tick: ExarotonWebSocket.Tick?) {

@@ -222,12 +222,8 @@ struct ExarotonServerDetail: View {
                 loading = false
             }
         }
-        .onChange(of: model.consoleLine) { oldValue, newValue in
-            guard let consoleLine = newValue
-            else {
-                return
-            }
-            consoleLog.append(consoleLine)
+        .onReceive(model.consoleLine.publisher.throttle(for: 1, scheduler: RunLoop.main, latest: true)) { _ in
+            consoleLog = model.consoleLines.joined(separator: "")
         }
         .onReceive(model.statusChangedServer.publisher) { newStatusServer in
             guard let serverInfo = try? newStatusServer.serverInfo
@@ -238,7 +234,7 @@ struct ExarotonServerDetail: View {
         }
         .onReceive(timer) { _ in
             guard wsServerReady, model.isConnected == false,
-                  let serverStatus = server.serverStatus, serverStatus == .STARTING
+                  let serverStatus = server.serverStatus, serverStatus == .ONLINE
             else {
                 return
             }
