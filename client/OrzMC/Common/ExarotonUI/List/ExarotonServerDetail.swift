@@ -118,6 +118,7 @@ struct ExarotonServerDetail: View {
                         }
                         .frame(height: 100)
                         .listRowBackground(Color.black)
+                        .defaultScrollAnchor(.bottom)
 
                         Button {
                             consoleLog = ""
@@ -201,19 +202,12 @@ struct ExarotonServerDetail: View {
                 serverRAM = ram
             }
         }
-        .onChange(of: model.readyServerID) { oldValue, newValue in
-            wsServerReady = newValue != nil
-            networkOpacity = wsServerReady ? 1 : 0
-        }
         .onDisappear {
             model.stopConnect()
         }
-        .onReceive(model.statusChangedServer.publisher) { newStatusServer in
-            guard let serverInfo = try? newStatusServer.serverInfo
-            else {
-                return
-            }
-            server = serverInfo
+        .onChange(of: model.readyServerID) { oldValue, newValue in
+            wsServerReady = newValue != nil
+            networkOpacity = wsServerReady ? 1 : 0
         }
         .onChange(of: serverRAM, initial: false) { oldValue, newValue in
             guard let serverID = server.id
@@ -235,12 +229,28 @@ struct ExarotonServerDetail: View {
             }
             consoleLog.append(consoleLine)
         }
+        .onReceive(model.statusChangedServer.publisher) { newStatusServer in
+            guard let serverInfo = try? newStatusServer.serverInfo
+            else {
+                return
+            }
+            server = serverInfo
+        }
         .onReceive(timer) { _ in
-            guard let serverStatus = server.serverStatus, serverStatus == .ONLINE, model.isConnected == false
+            guard wsServerReady, model.isConnected == false,
+                  let serverStatus = server.serverStatus, serverStatus == .STARTING
             else {
                 return
             }
             startStreams()
+        }
+        .onReceive(timer) { _ in
+            guard wsServerReady, model.isConnected == true,
+                  let serverStatus = server.serverStatus, serverStatus == .OFFLINE
+            else {
+                return
+            }
+            stopStreams()
         }
     }
 }

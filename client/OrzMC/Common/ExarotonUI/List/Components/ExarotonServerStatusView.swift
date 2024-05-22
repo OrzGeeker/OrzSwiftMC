@@ -63,9 +63,9 @@ struct ExarotonServerStatusView: View {
                 config.animate ? .easeInOut(duration: 0.8).repeatForever() : nil,
                 value: opacity
             )
-            .onChange(of: status, { oldValue, newValue in
+            .onChange(of: status, initial: true) {
                 opacity = status.displayConfig.animate ? 0 : 1
-            })
+            }
 //            .overlay {
 //                Text(String(describing: status))
 //                    .font(.system(size: 4))
