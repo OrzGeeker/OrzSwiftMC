@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import OrzAppUpdater
 
 @main
 struct OrzMCApp: App {
+    let updaterController = OrzAppUpdaterController()
     var body: some Scene {
 #if os(macOS)
         MacOSScene()
+            .addCheckUpdatesCommand(updaterController: updaterController)
 #elseif os(iOS)
         WindowGroup {
             ContentView()

@@ -1,5 +1,5 @@
 {
-  "originHash" : "7024ab999125729dbccde0ca0029754f83df702c88e64b7ca8981c700c4b70d4",
+  "originHash" : "5811a36ef7469c2bfa08f0cbcbdd8c2fb23d68bba913dce389def37c2a6d192c",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -56,6 +56,15 @@
       }
     },
     {
+      "identity" : "orzappupdater",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/OrzGeeker/OrzAppUpdater.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e1a8593a9321df9008791499de14a5ea675407ab"
+      }
+    },
+    {
       "identity" : "orzswiftkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
@@ -80,6 +89,15 @@
       "state" : {
         "branch" : "main",
         "revision" : "dc31b684598b02254019af95c202742aa2de67bb"
+      }
+    },
+    {
+      "identity" : "sparkle",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/sparkle-project/Sparkle",
+      "state" : {
+        "revision" : "41847a58cdef7506b257591fcca6f9495df591d4",
+        "version" : "2.6.2"
       }
     },
     {
