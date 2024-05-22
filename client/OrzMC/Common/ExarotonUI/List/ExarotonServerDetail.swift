@@ -24,9 +24,10 @@ struct ExarotonServerDetail: View {
 
     @State private var consoleLog: String = ""
 
-    @State private var consoleCommand: String = ""
-
     private let timer = Timer.publish(every: 3, on: .main, in: .common).autoconnect()
+
+    @State private var showConsoleCommandInput = false
+    @State private var consoleCommand: String = ""
 
     var body: some View {
 
@@ -123,10 +124,10 @@ struct ExarotonServerDetail: View {
                             Text("Clear Console")
                         }
 
-
                         Button("Send Console Command") {
-                            model.sendConsoleCmd("say Hello")
+                            showConsoleCommandInput = true
                         }
+                        .keyboardShortcut(.init("c"), modifiers: .command)
                     }
                 }
             }
@@ -157,6 +158,39 @@ struct ExarotonServerDetail: View {
                 .controlSize(.extraLarge)
                 .progressViewStyle(.circular)
                 .opacity(loading ? 1 : 0)
+        }
+        .sheet(isPresented: $showConsoleCommandInput) {
+            if !consoleCommand.isEmpty {
+                let validCommand = consoleCommand.trimmingCharacters(in: .whitespacesAndNewlines)
+                model.sendConsoleCmd(.init(validCommand))
+                consoleCommand = ""
+            }
+        } content: {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Input Command")
+                    .font(.headline)
+                    .frame(minWidth: 300, alignment: .leading)
+
+                TextEditor(text: $consoleCommand)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.black)
+                    .foregroundStyle(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+#if os(macOS)
+                    .frame(maxWidth: 400, minHeight: 100)
+#endif
+#if os(iOS)
+                    .keyboardType(.alphabet)
+#endif
+            }
+            .padding()
+            .onSubmit {
+                showConsoleCommandInput = false
+            }
+            .presentationDragIndicator(.visible)
+            .presentationDetents([.height(300)])
+            .presentationCornerRadius(10)
+            .presentationCompactAdaptation(horizontal: .none, vertical: .sheet)
         }
         .task {
             model.startConnect(for: server.id!)

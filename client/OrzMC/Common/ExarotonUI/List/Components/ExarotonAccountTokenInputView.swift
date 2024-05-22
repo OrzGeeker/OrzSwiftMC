@@ -19,7 +19,9 @@ struct ExarotonAccountTokenInputView: View {
                     .textFieldStyle(.roundedBorder)
                     .font(.body)
                     .lineLimit(nil)
+#if os(macOS)
                     .frame(maxWidth: 400)
+#endif
             }
             ExarotonTradeMarkView()
         }

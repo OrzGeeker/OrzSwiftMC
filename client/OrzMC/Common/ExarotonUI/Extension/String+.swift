@@ -9,11 +9,19 @@
 import UIKit
 #endif
 
+#if canImport(AppKit)
+import AppKit
+#endif
+
 extension String {
     func copyToPasteboard() {
 #if canImport(UIKit)
         UIPasteboard.general.string = self
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+#endif
+
+#if canImport(AppKit)
+        NSPasteboard.general.setString(self, forType: .string)
 #endif
     }
 }
