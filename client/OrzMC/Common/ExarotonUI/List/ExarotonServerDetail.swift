@@ -114,6 +114,7 @@ struct ExarotonServerDetail: View {
                             Text(consoleLog)
                                 .foregroundStyle(Color.white)
                                 .font(.system(size: 8))
+                                .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .frame(height: 100)
                         .listRowBackground(Color.black)
