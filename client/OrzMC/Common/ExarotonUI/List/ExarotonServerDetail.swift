@@ -178,11 +178,13 @@ struct ExarotonServerDetail: View {
                     .background(Color.black)
                     .foregroundStyle(Color.white)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                    .autocorrectionDisabled()
 #if os(macOS)
                     .frame(maxWidth: 400, minHeight: 100)
 #endif
 #if os(iOS)
                     .keyboardType(.alphabet)
+                    .textInputAutocapitalization(.never)
 #endif
             }
             .padding()
