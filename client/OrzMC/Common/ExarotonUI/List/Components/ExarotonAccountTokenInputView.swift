@@ -12,9 +12,10 @@ struct ExarotonAccountTokenInputView: View {
     var body: some View {
         VStack(alignment: .trailing, spacing: 20) {
             VStack(alignment: .leading) {
-                Text("Input Account Token: ")
+                Text("Input Account Token")
                     .font(.title)
                     .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 TextField("TOKEN", text: $token, axis: .vertical)
                     .textFieldStyle(.roundedBorder)
                     .font(.body)
