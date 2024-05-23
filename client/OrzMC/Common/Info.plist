@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>SUFeedURL</key>
-	<string></string>
+	<string>https://raw.githubusercontent.com/OrzGeeker/OrzSwiftMC/main/appcast.xml</string>
 </dict>
 </plist>

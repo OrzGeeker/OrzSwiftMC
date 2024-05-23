@@ -10,7 +10,7 @@ import OrzAppUpdater
 
 @main
 struct OrzMCApp: App {
-    let updaterController = OrzAppUpdaterController(startingUpdater: false)
+    let updaterController = OrzAppUpdaterController()
     var body: some Scene {
 #if os(macOS)
         MacOSScene()
