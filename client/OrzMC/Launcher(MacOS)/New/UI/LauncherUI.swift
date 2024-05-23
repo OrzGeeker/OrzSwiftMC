@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct LauncherUI: View {
-
     var body: some View {
-
         NavigationSplitView {
             GameView()
                 .navigationSplitViewColumnWidth(Constants.sidebarWidth)

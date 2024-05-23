@@ -54,7 +54,7 @@ final class GameModel {
     var isClient: Bool { gameType == .client }
     
     var isServer: Bool { gameType == .server }
-    
+
     var gameInfoMap = [Version: GameInfo]()
     
     var currentJavaMajorVersion: Int?
@@ -160,7 +160,9 @@ extension GameModel {
         Task {
             guard let gameInfo = try? await selectedVersion.gameInfo
             else { return }
-            gameInfoMap[selectedVersion] = gameInfo
+            await MainActor.run {
+                gameInfoMap[selectedVersion] = gameInfo
+            }
         }
     }
     
