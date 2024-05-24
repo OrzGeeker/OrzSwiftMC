@@ -6,9 +6,9 @@
             <title>0.0.4</title>
             <pubDate>Fri, 24 May 2024 12:12:12 +0800</pubDate>
             <sparkle:version>1</sparkle:version>
-            <sparkle:shortVersionString>0.0.4</sparkle:shortVersionString>
+            <sparkle:shortVersionString>0.0.5</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.4/OrzMC.tar.xz" length="6349248" type="application/octet-stream" sparkle:edSignature="cZSR2NvJwt/lNmIxq9TO9IufVO7BE/kfUCsEfxCx/X3qRvG35hJH17M4G3bOEAIEkIy1cg1xAXTOOzO1QggtDg=="/>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.5/OrzMC.tar.xz" length="6349848" type="application/octet-stream" sparkle:edSignature="19VNnxmB0XME9zvNjlv+PhQ64cy5PAFvU5c/6Owesw7jygfBNkQPlSCDHIo22SJzxlkN/ly5ugjjQuU/HF+BDg=="/>
         </item>
     </channel>
 </rss>
