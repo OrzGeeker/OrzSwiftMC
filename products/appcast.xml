@@ -5,7 +5,7 @@
         <item>
             <title>0.0.5</title>
             <pubDate>Fri, 24 May 2024 12:12:12 +0800</pubDate>
-            <sparkle:version>1</sparkle:version>
+            <sparkle:version>2</sparkle:version>
             <sparkle:shortVersionString>0.0.5</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.5/OrzMC.tar.xz" length="6349848" type="application/octet-stream" sparkle:edSignature="19VNnxmB0XME9zvNjlv+PhQ64cy5PAFvU5c/6Owesw7jygfBNkQPlSCDHIo22SJzxlkN/ly5ugjjQuU/HF+BDg=="/>
