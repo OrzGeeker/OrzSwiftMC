@@ -28,7 +28,7 @@ struct GameView: View {
             ZStack {
                 HStack {
                     Button("Up") {
-                        guard let selectedVersion = model.selectedVersion
+                        guard let selectedVersion = model.selectedVersion, filteredVersions.contains(selectedVersion)
                         else {
                             model.selectedVersion = filteredVersions.first
                             return
@@ -48,7 +48,7 @@ struct GameView: View {
                     }
                     .keyboardShortcut(.upArrow, modifiers: .command)
                     Button("Down") {
-                        guard let selectedVersion = model.selectedVersion
+                        guard let selectedVersion = model.selectedVersion, filteredVersions.contains(selectedVersion)
                         else {
                             model.selectedVersion = filteredVersions.first
                             return
@@ -99,6 +99,9 @@ struct GameView: View {
                     .searchable(text: $searchContent, placement: .toolbar, prompt: "Filter a version")
                     .onChange(of: searchContent) {
                         refreshList()
+                        if searchContent.isEmpty, let selectedVersion = model.selectedVersion {
+                            proxy.scrollTo(selectedVersion.id)
+                        }
                     }
                     .onChange(of: showOnlyRelease) {
                         refreshList()

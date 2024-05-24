@@ -55,7 +55,6 @@
 		F339F6252903A710003CB50C /* LauncherUserLoginArea.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F6242903A710003CB50C /* LauncherUserLoginArea.swift */; platformFilters = (macos, ); };
 		F339F62D2903A7C2003CB50C /* LauncherProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62C2903A7C2003CB50C /* LauncherProgressView.swift */; platformFilters = (macos, ); };
 		F339F62F2903CF61003CB50C /* CircleAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F339F62E2903CF61003CB50C /* CircleAnimationView.swift */; platformFilters = (macos, ); };
-		F353DDDD2BFE57520097986E /* OrzAppUpdater in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = F353DDDC2BFE57520097986E /* OrzAppUpdater */; };
 		F353DDE02BFE60100097986E /* OrzAppUpdater in Frameworks */ = {isa = PBXBuildFile; productRef = F353DDDF2BFE60100097986E /* OrzAppUpdater */; };
 		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; };
@@ -160,7 +159,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F353DDDD2BFE57520097986E /* OrzAppUpdater in Frameworks */,
 				2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */,
 				2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */,
 				2B62C98E2BF741B600387498 /* Mojang in Frameworks */,
@@ -539,7 +537,6 @@
 				2B62C9892BF741B600387498 /* Fabric */,
 				2B62C98B2BF741B600387498 /* Game */,
 				2B62C98D2BF741B600387498 /* Mojang */,
-				F353DDDC2BFE57520097986E /* OrzAppUpdater */,
 				F353DDDF2BFE60100097986E /* OrzAppUpdater */,
 			);
 			productName = OrzMC;
@@ -800,7 +797,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -836,7 +833,7 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -944,10 +941,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
 			productName = SwiftUIX;
-		};
-		F353DDDC2BFE57520097986E /* OrzAppUpdater */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = OrzAppUpdater;
 		};
 		F353DDDF2BFE60100097986E /* OrzAppUpdater */ = {
 			isa = XCSwiftPackageProductDependency;
