@@ -95,3 +95,4 @@ iOSInjectionProject/
 .vscode/
 .DS_Store
 cache/
+products/*
