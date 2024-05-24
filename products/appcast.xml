@@ -1,0 +1,14 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>OrzMC</title>
+        <item>
+            <title>0.0.4</title>
+            <pubDate>Fri, 24 May 2024 12:12:12 +0800</pubDate>
+            <sparkle:version>1</sparkle:version>
+            <sparkle:shortVersionString>0.0.4</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.4/OrzMC.tar.xz" length="6350448" type="application/octet-stream" sparkle:edSignature="KFxPoXSxmx1gxwHNIgPGSdnJ8z00npSuoh0oo6fuG+YJUfkCHEIbeYu0ug9lwgx0IH7sIpgI1PR/Pu1tPpoyAw=="/>
+        </item>
+    </channel>
+</rss>
