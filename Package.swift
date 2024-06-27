@@ -54,6 +54,5 @@ let package = Package(
             name: "FabricTests",
             dependencies: ["Fabric"]
         ),
-    ],
-    swiftLanguageVersions: [.v6]
+    ]
 )

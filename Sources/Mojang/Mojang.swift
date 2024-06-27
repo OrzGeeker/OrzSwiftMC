@@ -8,7 +8,7 @@
 import Foundation
 import JokerKits
 
-typealias MojangCodable = Codable & JsonRepresentable
+typealias MojangCodable = Codable & JsonRepresentable & Sendable
 
 public struct Mojang {
     /// 获取版本信息
