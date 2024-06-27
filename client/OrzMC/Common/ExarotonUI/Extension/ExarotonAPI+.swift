@@ -10,7 +10,7 @@ import ExarotonHTTP
 import ExarotonWebSocket
 
 typealias ExarotonServer = ExarotonHTTP.Components.Schemas.Server
-extension ExarotonServer: Identifiable {}
+extension ExarotonServer: @retroactive Identifiable {}
 extension ExarotonServer {
 
     var detail: String? {
@@ -54,9 +54,9 @@ extension ExarotonServer {
 }
 
 typealias ExarotonCreditPool = ExarotonHTTP.Components.Schemas.CreditPool
-extension ExarotonCreditPool: Identifiable {}
+extension ExarotonCreditPool: @retroactive Identifiable {}
 typealias ExarotonCreditMember = ExarotonHTTP.Components.Schemas.CreditPoolMember
-extension ExarotonCreditMember: Identifiable {
+extension ExarotonCreditMember: @retroactive Identifiable {
     public var id: String { account ?? name ?? "" }
 }
 

@@ -35,10 +35,8 @@
 		2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9822BF73EBD00387498 /* ExarotonWebSocket */; };
 		2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9842BF73F0200387498 /* ExarotonServerList.swift */; };
 		2B62C9872BF7412100387498 /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9862BF7412100387498 /* Utils */; };
-		2B62C98A2BF741B600387498 /* Fabric in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C9892BF741B600387498 /* Fabric */; };
-		2B62C98C2BF741B600387498 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C98B2BF741B600387498 /* Game */; };
-		2B62C98E2BF741B600387498 /* Mojang in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2B62C98D2BF741B600387498 /* Mojang */; };
 		2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */; };
+		2B6629732C2D4E08008558DC /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 2B6629722C2D4E08008558DC /* Game */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
 		2BADE2AD29D03AE100DB1E68 /* LauncherGameVersionSelector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BADE2AC29D03AE100DB1E68 /* LauncherGameVersionSelector.swift */; platformFilters = (macos, ); };
@@ -161,13 +159,11 @@
 			files = (
 				2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */,
 				2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */,
-				2B62C98E2BF741B600387498 /* Mojang in Frameworks */,
-				2B62C98C2BF741B600387498 /* Game in Frameworks */,
 				2B62C9872BF7412100387498 /* Utils in Frameworks */,
 				2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */,
 				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
 				F353DDE02BFE60100097986E /* OrzAppUpdater in Frameworks */,
-				2B62C98A2BF741B600387498 /* Fabric in Frameworks */,
+				2B6629732C2D4E08008558DC /* Game in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -534,10 +530,8 @@
 				2B62C9802BF73EBD00387498 /* ExarotonHTTP */,
 				2B62C9822BF73EBD00387498 /* ExarotonWebSocket */,
 				2B62C9862BF7412100387498 /* Utils */,
-				2B62C9892BF741B600387498 /* Fabric */,
-				2B62C98B2BF741B600387498 /* Game */,
-				2B62C98D2BF741B600387498 /* Mojang */,
 				F353DDDF2BFE60100097986E /* OrzAppUpdater */,
+				2B6629722C2D4E08008558DC /* Game */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -551,7 +545,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1530;
+				LastUpgradeCheck = 1600;
 				TargetAttributes = {
 					2B1C799128FEAB0600D53658 = {
 						CreatedOnToolsVersion = 14.1;
@@ -571,8 +565,8 @@
 				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
 				2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
 				2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */,
-				2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
 				F353DDDE2BFE600F0097986E /* XCRemoteSwiftPackageReference "OrzAppUpdater" */,
+				2B66296F2C2D4DB2008558DC /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -682,16 +676,22 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -709,6 +709,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -718,7 +719,8 @@
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -735,16 +737,22 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -756,6 +764,7 @@
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -764,7 +773,8 @@
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.0;
+				SWIFT_STRICT_CONCURRENCY = complete;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -872,7 +882,7 @@
 				minimumVersion = 0.0.5;
 			};
 		};
-		2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {
+		2B66296F2C2D4DB2008558DC /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftMC.git";
 			requirement = {
@@ -922,20 +932,10 @@
 			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
 			productName = Utils;
 		};
-		2B62C9892BF741B600387498 /* Fabric */ = {
+		2B6629722C2D4E08008558DC /* Game */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
-			productName = Fabric;
-		};
-		2B62C98B2BF741B600387498 /* Game */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
+			package = 2B66296F2C2D4DB2008558DC /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
 			productName = Game;
-		};
-		2B62C98D2BF741B600387498 /* Mojang */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2B62C9882BF741B600387498 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
-			productName = Mojang;
 		};
 		2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */ = {
 			isa = XCSwiftPackageProductDependency;

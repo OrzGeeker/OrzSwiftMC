@@ -36,8 +36,8 @@ struct GUIClient: Client  {
         for try await _ in downloadItems.asyncSequence {
             count += 1
             progress = Double(count) / Double(total)
-            launcherModel.launcherProgress = progress
-            gameModel.progress = progress
+            await launcherModel.updateLauncherProgress(progress)
+            await gameModel.updateProgress(progress)
         }
     }
     

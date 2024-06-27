@@ -300,7 +300,7 @@ extension GameView {
             model.isFetchingGameVersions = true
             try await model.fetchGameVersions()
             model.isFetchingGameVersions = false
-            await refreshList()
+            refreshList()
         }
     }
 

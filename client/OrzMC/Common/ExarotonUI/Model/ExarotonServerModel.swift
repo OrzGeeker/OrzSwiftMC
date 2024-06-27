@@ -11,6 +11,7 @@ import OpenAPIRuntime
 import OpenAPIURLSession
 import SwiftUI
 
+@MainActor
 @Observable
 final class ExarotonServerModel {
 

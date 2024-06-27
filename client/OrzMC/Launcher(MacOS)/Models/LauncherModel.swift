@@ -9,6 +9,7 @@ import Foundation
 import Game
 import CoreData
 
+@MainActor
 @Observable
 class LauncherModel {
     
@@ -139,6 +140,10 @@ extension LauncherModel {
                 self.selectedProfileItem = firstItem
             }
         }
+    }
+
+    func updateLauncherProgress(_ progress: Double) {
+        self.launcherProgress = progress
     }
 }
 

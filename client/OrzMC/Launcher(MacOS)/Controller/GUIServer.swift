@@ -58,7 +58,7 @@ struct GUIServer: Server {
             for try await byteChunk in jar {
                 jarData.append(Data(byteChunk))
                 let progress = Double(jarData.count) / Double(total)
-                gameModel.progress = progress
+                await gameModel.updateProgress(progress)
             }
             
             if !FileManager.default.fileExists(atPath: dirURL.path()) {
@@ -66,7 +66,7 @@ struct GUIServer: Server {
             }
             try jarData.write(to: jarFileURL, options: .atomic)
         }
-        gameModel.progress = 1
+        await gameModel.updateProgress(1)
         let process = try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
             "--nojline",

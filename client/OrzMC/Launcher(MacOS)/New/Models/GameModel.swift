@@ -10,6 +10,7 @@ import Game
 import Mojang
 import JokerKits
 
+@MainActor
 @Observable
 final class GameModel {
     
@@ -228,5 +229,9 @@ extension GameModel {
         Task {
             try await Shell.stopAll()
         }
+    }
+
+    func updateProgress(_ progress: Double) {
+        self.progress = progress
     }
 }

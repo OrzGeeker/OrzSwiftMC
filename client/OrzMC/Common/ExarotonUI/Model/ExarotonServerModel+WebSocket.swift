@@ -48,7 +48,7 @@ extension ExarotonServerModel {
     }
 }
 
-extension ExarotonServerModel: ExarotonServerEventHandlerProtocol {
+extension ExarotonServerModel: @preconcurrency ExarotonServerEventHandlerProtocol {
 
     func onReady(serverID: String?) {
         readyServerID = serverID
@@ -101,7 +101,7 @@ extension ExarotonServerModel: ExarotonServerEventHandlerProtocol {
         heapChanged = heap
     }
 
-    func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
+    nonisolated func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
         // Do Nothing
     }
 }
