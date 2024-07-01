@@ -279,6 +279,10 @@ struct GameView: View {
 extension GameView {
 
     func startGame() {
+        guard enableStartGameButton
+        else {
+            return
+        }
         usernameTextFieldFocused = false
         model.startGame()
     }
