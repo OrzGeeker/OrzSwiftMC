@@ -35,9 +35,13 @@ struct GUIClient: Client  {
         let total = downloadItems.count
         for try await _ in downloadItems.asyncSequence {
             count += 1
-            progress = Double(count) / Double(total)
-            await launcherModel.updateLauncherProgress(progress)
-            await gameModel.updateProgress(progress)
+            let curProgress = Double(count) / Double(total)
+            let delta = curProgress - progress
+            if delta > 0.01 || curProgress == 1 {
+                progress = curProgress
+                await launcherModel.updateLauncherProgress(progress)
+                await gameModel.updateProgress(progress)
+            }
         }
     }
     

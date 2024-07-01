@@ -55,10 +55,15 @@ struct GUIServer: Server {
             }
             
             var jarData = Data()
+            var progress: Double = 0
             for try await byteChunk in jar {
                 jarData.append(Data(byteChunk))
-                let progress = Double(jarData.count) / Double(total)
-                await gameModel.updateProgress(progress)
+                let curProgress = Double(jarData.count) / Double(total)
+                let delta = curProgress - progress
+                if delta > 0.01 || curProgress == 1 {
+                    progress = curProgress
+                    await gameModel.updateProgress(progress)
+                }
             }
             
             if !FileManager.default.fileExists(atPath: dirURL.path()) {
