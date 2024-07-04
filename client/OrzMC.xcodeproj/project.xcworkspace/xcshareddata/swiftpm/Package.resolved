@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wangzhizhou/ExarotonAPI.git",
       "state" : {
-        "revision" : "104b876f1332ba559967655aa21e4a1a6fdf5607",
-        "version" : "0.0.5"
+        "revision" : "b5c70757c3e9fee91e715bea57a1eb13769eb333",
+        "version" : "0.0.7"
       }
     },
     {
@@ -70,7 +70,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "844a4e5a847dbbdce27c36a388b37ab628296b58"
+        "revision" : "338c31a5614ab9263206862f59d72e995cc81ddc"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
       "state" : {
         "branch" : "main",
-        "revision" : "b89a567fe8d9af3ec9d8f7b98a6c8ebfd11b2519"
+        "revision" : "644eeec9918d5123aaec14d5eb7077ae45e9e886"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sparkle-project/Sparkle.git",
       "state" : {
-        "revision" : "b456fd404954a9e13f55aa0c88cd5a40b8399638",
-        "version" : "2.6.3"
+        "revision" : "0ef1ee0220239b3776f433314515fd849025673f",
+        "version" : "2.6.4"
       }
     },
     {
@@ -150,8 +150,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-crypto.git",
       "state" : {
-        "revision" : "bc1c29221f6dfeb0ebbfbc98eb95cd3d4967868e",
-        "version" : "3.4.0"
+        "revision" : "46072478ca365fe48370993833cb22de9b41567f",
+        "version" : "3.5.2"
       }
     },
     {
@@ -177,8 +177,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-nio.git",
       "state" : {
-        "revision" : "e5a216ba89deba84356bad9d4c2eab99071c745b",
-        "version" : "2.67.0"
+        "revision" : "fc79798d5a150d61361a27ce0c51169b889e23de",
+        "version" : "2.68.0"
       }
     },
     {
