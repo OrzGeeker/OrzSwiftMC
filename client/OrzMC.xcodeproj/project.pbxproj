@@ -79,6 +79,7 @@
 		F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */; };
 		F3FE52112BF7B494006E79AA /* ExarotonServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52102BF7B494006E79AA /* ExarotonServerStatusView.swift */; };
 		F3FE52132BF7B4FC006E79AA /* ExarotonServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52122BF7B4FC006E79AA /* ExarotonServerView.swift */; };
+		F3FFCD162C45856100414587 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F3FFCD152C45856100414587 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -150,6 +151,7 @@
 		F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageTitleText.swift; sourceTree = "<group>"; };
 		F3FE52102BF7B494006E79AA /* ExarotonServerStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerStatusView.swift; sourceTree = "<group>"; };
 		F3FE52122BF7B4FC006E79AA /* ExarotonServerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerView.swift; sourceTree = "<group>"; };
+		F3FFCD152C45856100414587 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,6 +225,7 @@
 		2B1C799428FEAB0600D53658 /* OrzMC */ = {
 			isa = PBXGroup;
 			children = (
+				F3FFCD142C45853700414587 /* Configuration */,
 				2B1C799528FEAB0600D53658 /* OrzMCApp.swift */,
 				2B0091FB29D0263A002637E3 /* Common */,
 				2BD301F029000B3E00993823 /* Launcher(MacOS) */,
@@ -508,6 +511,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		F3FFCD142C45853700414587 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				F3FFCD152C45856100414587 /* Config.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -583,6 +594,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */,
+				F3FFCD162C45856100414587 /* Config.xcconfig in Resources */,
 				2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +677,7 @@
 /* Begin XCBuildConfiguration section */
 		2B1C79BA28FEAB0700D53658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FFCD152C45856100414587 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -719,13 +732,12 @@
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
 		2B1C79BB28FEAB0700D53658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FFCD152C45856100414587 /* Config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -773,13 +785,12 @@
 				SUPPORTED_PLATFORMS = "macosx iphoneos iphonesimulator";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_STRICT_CONCURRENCY = complete;
-				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
 		2B1C79BD28FEAB0700D53658 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FFCD152C45856100414587 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
@@ -816,6 +827,7 @@
 		};
 		2B1C79BE28FEAB0700D53658 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F3FFCD152C45856100414587 /* Config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = OrzMC/Common/OrzMC.entitlements;
