@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct FabricModel: Codable {
+public struct FabricModel: Codable, Sendable {
     public let id: String
     public let inheritsFrom: String
     public let releaseTime: String
@@ -16,11 +16,11 @@ public struct FabricModel: Codable {
     public let mainClass: String
     public let arguments: Argument
     public let libraries: [Library]
-    public struct Argument: Codable {
+    public struct Argument: Codable, Sendable {
         public let game: [String]
         public let jvm: [String]
     }
-    public struct Library: Codable {
+    public struct Library: Codable, Sendable {
         public let name: String
         public let url: URL
         

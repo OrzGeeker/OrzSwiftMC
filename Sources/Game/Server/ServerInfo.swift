@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ServerInfo {
+public struct ServerInfo: Sendable {
     public let version: String
     let gui: Bool
     let debug: Bool

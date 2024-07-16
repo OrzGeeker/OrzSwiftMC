@@ -9,7 +9,7 @@ import Foundation
 import Mojang
 import Fabric
 
-public struct ClientInfo {
+public struct ClientInfo: Sendable {
     public var version: Version
     public var username: String
     var debug: Bool

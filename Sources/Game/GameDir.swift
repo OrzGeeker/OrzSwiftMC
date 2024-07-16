@@ -9,7 +9,7 @@ import Foundation
 import JokerKits
 import ConsoleKit
 
-public enum GameType: String {
+public enum GameType: String, Sendable {
     case vanilla
     case paper
 }
