@@ -9,7 +9,6 @@ import Foundation
 import JokerKits
 import Game
 
-@MainActor
 struct GUIClient: Client  {
     
     var clientInfo: Game.ClientInfo
@@ -39,8 +38,8 @@ struct GUIClient: Client  {
             let delta = curProgress - progress
             if delta > 0.01 || curProgress == 1 {
                 progress = curProgress
-                launcherModel.updateLauncherProgress(progress)
-                gameModel.updateProgress(progress)
+                await launcherModel.updateLauncherProgress(progress)
+                await gameModel.updateProgress(progress)
             }
         }
     }
