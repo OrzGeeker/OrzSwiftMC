@@ -80,6 +80,7 @@
 		F3C422BB29D94F3B00997DA9 /* ImageTitleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C422BA29D94F3B00997DA9 /* ImageTitleText.swift */; };
 		F3FE52112BF7B494006E79AA /* ExarotonServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52102BF7B494006E79AA /* ExarotonServerStatusView.swift */; };
 		F3FE52132BF7B4FC006E79AA /* ExarotonServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52122BF7B4FC006E79AA /* ExarotonServerView.swift */; };
+		F3FF377A2C46EF1800BBDACE /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F3FF37792C46EF1800BBDACE /* SwiftUIX */; };
 		F3FFCD162C45856100414587 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F3FFCD152C45856100414587 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3FF377A2C46EF1800BBDACE /* SwiftUIX in Frameworks */,
 				F35C6DB52C46E3FD0007AEA9 /* Game in Frameworks */,
 				2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */,
 				2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */,
@@ -546,6 +548,7 @@
 				F3BC44C12C46E0790054E88B /* DownloadAPI */,
 				F3BC44C32C46E0790054E88B /* HangarAPI */,
 				F35C6DB42C46E3FD0007AEA9 /* Game */,
+				F3FF37792C46EF1800BBDACE /* SwiftUIX */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -580,6 +583,7 @@
 				2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */,
 				F353DDDE2BFE600F0097986E /* XCRemoteSwiftPackageReference "OrzAppUpdater" */,
 				F35C6DB32C46E3FD0007AEA9 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
+				F3FF37782C46EF1800BBDACE /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
 			);
 			productRefGroup = 2B1C799328FEAB0600D53658 /* Products */;
 			projectDirPath = "";
@@ -916,6 +920,14 @@
 				minimumVersion = 2.0.4;
 			};
 		};
+		F3FF37782C46EF1800BBDACE /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -955,6 +967,11 @@
 		F3BC44C32C46E0790054E88B /* HangarAPI */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HangarAPI;
+		};
+		F3FF37792C46EF1800BBDACE /* SwiftUIX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3FF37782C46EF1800BBDACE /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
+			productName = SwiftUIX;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
