@@ -13,7 +13,7 @@ import CoreData
 @Observable
 class LauncherModel {
     
-    static let shared =  LauncherModel()
+    static let shared = LauncherModel()
     
     /// 当前玩家ID
     var username: String = ""
@@ -96,8 +96,8 @@ extension LauncherModel {
             await showAlert("没有输入玩家ID", actionTip: "到左上角输入玩家ID")
             return
         }
-        
-        guard let gameVersion = await GameUtils.releaseGameVersion(self.selectedVersion)?.first else {
+        let selectedVersion = self.selectedVersion
+        guard let gameVersion = await GameUtils.releaseGameVersion(selectedVersion)?.first else {
             await showAlert("没有选择游戏版本", actionTip: "到左下解选择游戏版本")
             return
         }

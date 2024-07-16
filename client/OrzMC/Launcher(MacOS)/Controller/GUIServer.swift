@@ -9,7 +9,7 @@ import Foundation
 import DownloadAPI
 import Game
 
-struct GUIServer: Server {
+struct GUIServer: Server, Sendable {
     
     let serverInfo: ServerInfo
     
@@ -62,7 +62,9 @@ struct GUIServer: Server {
                 let delta = curProgress - progress
                 if delta > 0.01 || curProgress == 1 {
                     progress = curProgress
-                    await gameModel.updateProgress(progress)
+                    await MainActor.run {
+                        self.gameModel.updateProgress(curProgress)
+                    }
                 }
             }
             
@@ -71,7 +73,9 @@ struct GUIServer: Server {
             }
             try jarData.write(to: jarFileURL, options: .atomic)
         }
-        await gameModel.updateProgress(1)
+        await MainActor.run {
+            self.gameModel.updateProgress(1)
+        }
         let process = try await launchServer(jarFileURL.path(), workDirectory: workDirectory, jarArgs: [
             "--online-mode=\(serverInfo.onlineMode ? "true" : "false")",
             "--nojline",

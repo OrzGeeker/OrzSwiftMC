@@ -9,6 +9,7 @@ import Foundation
 import JokerKits
 import Game
 
+@MainActor
 struct GUIClient: Client  {
     
     var clientInfo: Game.ClientInfo
@@ -17,7 +18,6 @@ struct GUIClient: Client  {
     
     let gameModel: GameModel
     
-    @MainActor
     mutating func start() async throws {
         
         // 下载启动器启动所需要的文件、资源及依赖
@@ -39,8 +39,8 @@ struct GUIClient: Client  {
             let delta = curProgress - progress
             if delta > 0.01 || curProgress == 1 {
                 progress = curProgress
-                await launcherModel.updateLauncherProgress(progress)
-                await gameModel.updateProgress(progress)
+                launcherModel.updateLauncherProgress(progress)
+                gameModel.updateProgress(progress)
             }
         }
     }

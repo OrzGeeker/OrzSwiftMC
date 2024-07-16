@@ -70,7 +70,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftKit.git",
       "state" : {
         "branch" : "main",
-        "revision" : "338c31a5614ab9263206862f59d72e995cc81ddc"
+        "revision" : "25e638f8a36243957c31079d7c2a4eb3ed44c905"
       }
     },
     {
@@ -79,7 +79,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
       "state" : {
         "branch" : "main",
-        "revision" : "644eeec9918d5123aaec14d5eb7077ae45e9e886"
+        "revision" : "702e0b972942cc0a85c8b119d546559845a7db23"
       }
     },
     {
@@ -88,7 +88,7 @@
       "location" : "https://github.com/wangzhizhou/PaperMC.git",
       "state" : {
         "branch" : "main",
-        "revision" : "86ed9d0431e17839662a3ad09ab56c45d8ae6b1b"
+        "revision" : "986a6c3e573ec9da78e3b4c20daac6176efd10e1"
       }
     },
     {
@@ -141,8 +141,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-collections",
       "state" : {
-        "revision" : "ee97538f5b81ae89698fd95938896dec5217b148",
-        "version" : "1.1.1"
+        "revision" : "3d2dc41a01f9e49d84f0a3925fb858bed64f702d",
+        "version" : "1.1.2"
       }
     },
     {
@@ -240,8 +240,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/jpsim/Yams",
       "state" : {
-        "revision" : "9234124cff5e22e178988c18d8b95a8ae8007f76",
-        "version" : "5.1.2"
+        "revision" : "3036ba9d69cf1fd04d433527bc339dc0dc75433d",
+        "version" : "5.1.3"
       }
     }
   ],
