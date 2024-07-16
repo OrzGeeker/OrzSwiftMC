@@ -34,7 +34,6 @@
 		2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9802BF73EBD00387498 /* ExarotonHTTP */; };
 		2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9822BF73EBD00387498 /* ExarotonWebSocket */; };
 		2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9842BF73F0200387498 /* ExarotonServerList.swift */; };
-		2B62C9872BF7412100387498 /* Utils in Frameworks */ = {isa = PBXBuildFile; productRef = 2B62C9862BF7412100387498 /* Utils */; };
 		2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2BA5439F2902624C00F4D6A6 /* LauncherUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA5439E2902624C00F4D6A6 /* LauncherUIButton.swift */; platformFilters = (macos, ); };
@@ -44,7 +43,6 @@
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		2BD301F229001CD000993823 /* LauncherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301F129001CD000993823 /* LauncherModel.swift */; platformFilters = (macos, ); };
-		2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */; };
 		F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EC2BDBDF7000CAA802 /* GameView.swift */; platformFilters = (macos, ); };
 		F30F00EF2BDC966900CAA802 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EE2BDC966900CAA802 /* GameModel.swift */; platformFilters = (macos, ); };
 		F30F00F12BDCC6D900CAA802 /* GUIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F02BDCC6D900CAA802 /* GUIClient.swift */; platformFilters = (macos, ); };
@@ -164,8 +162,6 @@
 			files = (
 				F35C6DB52C46E3FD0007AEA9 /* Game in Frameworks */,
 				2B62C9812BF73EBD00387498 /* ExarotonHTTP in Frameworks */,
-				2BFBC2102BE8824C00C6EEB2 /* SwiftUIX in Frameworks */,
-				2B62C9872BF7412100387498 /* Utils in Frameworks */,
 				2B62C9832BF73EBD00387498 /* ExarotonWebSocket in Frameworks */,
 				F3B4D0E52A1A79390095B108 /* Socket in Frameworks */,
 				F3BC44C22C46E0790054E88B /* DownloadAPI in Frameworks */,
@@ -543,10 +539,8 @@
 			name = OrzMC;
 			packageProductDependencies = (
 				F3B4D0E42A1A79390095B108 /* Socket */,
-				2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */,
 				2B62C9802BF73EBD00387498 /* ExarotonHTTP */,
 				2B62C9822BF73EBD00387498 /* ExarotonWebSocket */,
-				2B62C9862BF7412100387498 /* Utils */,
 				F353DDDF2BFE60100097986E /* OrzAppUpdater */,
 				F3BC44BE2C46DFD10054E88B /* Game */,
 				F3BC44C12C46E0790054E88B /* DownloadAPI */,
@@ -583,7 +577,6 @@
 			mainGroup = 2B1C798928FEAB0600D53658;
 			packageReferences = (
 				F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */,
-				2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */,
 				2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */,
 				F353DDDE2BFE600F0097986E /* XCRemoteSwiftPackageReference "OrzAppUpdater" */,
 				F35C6DB32C46E3FD0007AEA9 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */,
@@ -806,7 +799,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"OrzMC/Preview Content\"";
 				DEVELOPMENT_TEAM = 2N62934Y28;
@@ -827,7 +819,6 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -843,7 +834,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"OrzMC/Preview Content\"";
 				DEVELOPMENT_TEAM = 2N62934Y28;
@@ -864,7 +854,6 @@
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MARKETING_VERSION = 0.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.joker.OrzMC;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -900,31 +889,23 @@
 			repositoryURL = "https://github.com/wangzhizhou/ExarotonAPI.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.5;
-			};
-		};
-		2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
+				minimumVersion = 0.0.7;
 			};
 		};
 		F353DDDE2BFE600F0097986E /* XCRemoteSwiftPackageReference "OrzAppUpdater" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzAppUpdater.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.1;
 			};
 		};
 		F35C6DB32C46E3FD0007AEA9 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftMC.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
 			};
 		};
 		F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */ = {
@@ -932,7 +913,7 @@
 			repositoryURL = "https://github.com/Kitura/BlueSocket.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
+				minimumVersion = 2.0.4;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -947,16 +928,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2B62C97F2BF73EBD00387498 /* XCRemoteSwiftPackageReference "ExarotonAPI" */;
 			productName = ExarotonWebSocket;
-		};
-		2B62C9862BF7412100387498 /* Utils */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
-			productName = Utils;
-		};
-		2BFBC20F2BE8824C00C6EEB2 /* SwiftUIX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2BFBC20E2BE8824C00C6EEB2 /* XCRemoteSwiftPackageReference "OrzSwiftKit" */;
-			productName = SwiftUIX;
 		};
 		F353DDDF2BFE60100097986E /* OrzAppUpdater */ = {
 			isa = XCSwiftPackageProductDependency;
