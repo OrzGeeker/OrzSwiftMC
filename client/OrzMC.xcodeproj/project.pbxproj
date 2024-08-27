@@ -81,7 +81,6 @@
 		F3FE52112BF7B494006E79AA /* ExarotonServerStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52102BF7B494006E79AA /* ExarotonServerStatusView.swift */; };
 		F3FE52132BF7B4FC006E79AA /* ExarotonServerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3FE52122BF7B4FC006E79AA /* ExarotonServerView.swift */; };
 		F3FF377A2C46EF1800BBDACE /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = F3FF37792C46EF1800BBDACE /* SwiftUIX */; };
-		F3FFCD162C45856100414587 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = F3FFCD152C45856100414587 /* Config.xcconfig */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -562,7 +561,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1600;
+				LastUpgradeCheck = 1610;
 				TargetAttributes = {
 					2B1C799128FEAB0600D53658 = {
 						CreatedOnToolsVersion = 14.1;
@@ -600,7 +599,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				2B1C79A328FEAB0700D53658 /* Preview Assets.xcassets in Resources */,
-				F3FFCD162C45856100414587 /* Config.xcconfig in Resources */,
 				2B1C799F28FEAB0700D53658 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

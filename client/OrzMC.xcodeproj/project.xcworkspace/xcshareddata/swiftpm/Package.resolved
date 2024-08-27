@@ -1,5 +1,5 @@
 {
-  "originHash" : "8675e65d7b6ba155cb4123b919c063beb1d2d1324b7d3207fb76134b8f82a3c4",
+  "originHash" : "e31880adfe30cd6de5391174905dd1ab1fb2bd783d1d74bc2bcad3b5d9065c9c",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -78,7 +78,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
       "state" : {
-        "revision" : "cb18266a227c9ea9e7629e6adfa0c02f68cafbc9",
+        "revision" : "3b35ea41cc89820451088dfe50ec7ce3e1f4f51c",
         "version" : "0.0.6"
       }
     },
