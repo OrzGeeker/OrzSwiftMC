@@ -4,11 +4,11 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.6</title>
-            <pubDate>Wed, 17 Jul 2024 02:49:41 +0800</pubDate>
+            <pubDate>Sat, 31 Aug 2024 02:35:17 +0800</pubDate>
             <sparkle:version>3</sparkle:version>
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC.tar.xz" length="6652992" type="application/octet-stream" sparkle:edSignature="Un6SQ8xqJZfh9+16Z4LBnJnthnCWevLbR3s3J5DrCd8rq04MO+RuhzqIrjsCCgVjCkmwklJlAhgSPJ5k33BUCw=="/>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_3_20240831_023517.tar.xz" length="6658452" type="application/octet-stream" sparkle:edSignature="tayJcuY/9vef29vAa95cvVUIh640A8GRXANM/eNg123s8DigI6/nUbDox9mw2qEgJsVJ7aSwRpWDEClKFCl3AQ=="/>
         </item>
     </channel>
 </rss>
