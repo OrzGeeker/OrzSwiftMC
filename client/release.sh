@@ -104,7 +104,7 @@ fi
 version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$export_app/Contents/Info.plist")
 short_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$export_app/Contents/Info.plist")
 date=$(date +%Y%m%d_%H%M%S)
-app_dist_zip="$scheme_${short_version}_${version}_${date}.zip"
+app_dist_zip="${scheme}_${short_version}_${version}_${date}.zip"
 ditto -c -k --sequesterRsrc --keepParent $export_app $app_dist_zip
 if [ $? -ne 0 ]; then
     echo create zip with staple ticket failed!
