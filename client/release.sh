@@ -23,9 +23,17 @@ timeout_duration="5m"
 
 cd $client_dir
 
-defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+# delete all zip files
+zips=*.zip
+for zip in $zips
+do
+    if [ -f $zip ]; then
+        rm -f $zip
+    fi
+done
 
 # archive 
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 xcrun xcodebuild archive \
     -scheme $scheme \
     -configuration $configuration \
@@ -97,25 +105,70 @@ if [ $? -ne 0 ]; then
     exit -6
 fi
 
-# recreate zip for distribution
+# delete export app zip file
 if [ -f $export_app_zip ]; then
     rm -f $export_app_zip
 fi
-version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$export_app/Contents/Info.plist")
-short_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$export_app/Contents/Info.plist")
+
+plistBuddyBin=/usr/libexec/PlistBuddy
+app_info_plist="$export_app/Contents/Info.plist"
+
+# sparkle
+sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
+sparkle_bin=$derived_data_path/SourcePackages/artifacts/sparkle/Sparkle/bin
+sparkle_generate_keys=$sparkle_bin/generate_keys
+sparkle_generate_appcast=$sparkle_bin/generate_appcast
+
+sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
+sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
+sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
+
+# update SUPublicEDKey if changed
+if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
+    echo old: $sparkle_SUPublicEDKey
+    echo new: $sparkle_generate_public_key
+    # update SUPublicEDKey value
+    $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_generate_public_key" "$app_info_plist"
+    #save private key into local keychain
+    $sparkle_generate_keys -x private_key
+fi
+
+# recreate zip for distribution
+version=$($plistBuddyBin -c "Print CFBundleVersion" "$app_info_plist")
+short_version=$($plistBuddyBin -c "Print CFBundleShortVersionString" "$app_info_plist")
 date=$(date +%Y%m%d_%H%M%S)
-app_dist_zip="${scheme}_${short_version}_${version}_${date}.zip"
-ditto -c -k --sequesterRsrc --keepParent $export_app $app_dist_zip
+product_dir=$git_repo_dir/products
+
+# delete all tar.xz files
+tars=$product_dir/*.tar.xz
+for tar in $tars
+do
+    if [ -f $tar ]; then
+        rm -f $tar
+    fi
+done
+
+app_dist_tar_xz="${product_dir}/${scheme}_${short_version}_${version}_${date}.tar.xz"
+tar -C $export_path -cJf $app_dist_tar_xz $(basename $export_app)
 if [ $? -ne 0 ]; then
-    echo create zip with staple ticket failed!
+    echo create tar.xz with staple ticket failed!
     exit -7
 fi
 
-echo zip file for distribution of app: $app_dist_zip
+echo tar.xz file for distribution of app: $app_dist_tar_xz
 
-# sparkle sign
+# generate appcast.xml
+$sparkle_generate_appcast $product_dir
 
-# upload zip to github and create a release
+# change url
+tar_xz_filename=$(basename $app_dist_tar_xz)
+git_url=$(git remote get-url origin)
+url_pattern="https://.*${tar_xz_filename//./\\.}"
+target_url=${git_url%%.git}/releases/download/${short_version}/${tar_xz_filename}
+target_url=${target_url//./\\.}
+# echo pattern: $url_pattern
+# echo target: $target_url
+sed -i'' -e  "s|${url_pattern}|${target_url}|" $product_dir/appcast.xml
 
 # clean up
 if [ -d $build_dir ]; then
