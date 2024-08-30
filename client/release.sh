@@ -17,6 +17,8 @@ export_app_zip=$export_app.zip
 
 cd $client_dir
 
+defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+
 # Archive 
 xcrun xcodebuild archive \
     -scheme $scheme \
@@ -101,5 +103,3 @@ if [ $? -ne 0 ]; then
     echo create zip with staple ticket failed!
     exit -7
 fi
-
-#
