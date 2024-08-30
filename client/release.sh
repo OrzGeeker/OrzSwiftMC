@@ -5,21 +5,27 @@ scheme=OrzMC
 team_id=2N62934Y28
 configuration=Release
 destination="generic/platform=macOS"
+
 git_repo_dir=$(git rev-parse --show-toplevel)
 derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
 archive_path="$build_dir/$scheme.xcarchive"
 client_dir=$git_repo_dir/client
+
 export_options_plist=$client_dir/exportOptions.plist
 export_path=$client_dir
 export_app=$export_path/$scheme.app
 export_app_zip=$export_app.zip
 
+apple_id="824219521@qq.com"
+app_specific_password="bbgb-nzuk-trqz-uzax"
+timeout_duration="5m"
+
 cd $client_dir
 
 defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 
-# Archive 
+# archive 
 xcrun xcodebuild archive \
     -scheme $scheme \
     -configuration $configuration \
@@ -51,7 +57,7 @@ if [ $? -ne 0 ]; then
     exit -2
 fi
 
-# Export
+# export
 xcrun xcodebuild \
 	-exportArchive \
 	-archivePath $archive_path \
@@ -70,10 +76,7 @@ if [ $? -ne 0 ]; then
     exit -4
 fi
 
-# Notary
-apple_id="824219521@qq.com"
-app_specific_password="bbgb-nzuk-trqz-uzax"
-timeout_duration="1h"
+# notary
 xcrun notarytool submit               \
     --apple-id $apple_id              \
     --password $app_specific_password \
@@ -87,19 +90,44 @@ if [ $? -ne 0 ]; then
     exit -5
 fi
 
-# Staple 
+# staple 
 xcrun stapler staple $export_app
 if [ $? -ne 0 ]; then
     echo staple ticket failed!
     exit -6
 fi
 
-# Recreate Zip for Distribution
+# recreate zip for distribution
 if [ -f $export_app_zip ]; then
     rm -f $export_app_zip
 fi
-ditto -c -k --sequesterRsrc --keepParent $export_app $export_app_zip
+version=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" "$export_app/Contents/Info.plist")
+short_version=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" "$export_app/Contents/Info.plist")
+date=$(date +%Y%m%d_%H%M%S)
+app_dist_zip="$scheme_${short_version}_${version}_${date}.zip"
+ditto -c -k --sequesterRsrc --keepParent $export_app $app_dist_zip
 if [ $? -ne 0 ]; then
     echo create zip with staple ticket failed!
     exit -7
 fi
+
+echo zip file for distribution of app: $app_dist_zip
+
+# sparkle sign
+
+# upload zip to github and create a release
+
+# clean up
+if [ -d $build_dir ]; then
+    rm -rf $build_dir
+fi
+
+if [ -d $derived_data_path ]; then
+    rm -rf $derived_data_path
+fi 
+
+if [ -d $export_app ]; then
+    rm -rf $export_app
+fi
+
+rm -f *.plist *.log

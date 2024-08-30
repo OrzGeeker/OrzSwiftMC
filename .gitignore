@@ -101,5 +101,5 @@ client/exportOptions.plist
 client/DistributionSummary.plist
 client/Packaging.log
 client/*.app/
-client/*.app.zip
+client/*.zip
 client/*.p8
