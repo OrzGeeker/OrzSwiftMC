@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Mojang
+import Game
 
 struct GameView: View {
 
@@ -76,7 +77,15 @@ struct GameView: View {
                                 .font(.system(size: 14))
                                 .bold()
                                 .padding([.vertical, .leading], 5)
-
+                            
+                            if GameDir.client(version: version.id, type: GameType.vanilla.rawValue).dirPath.isExist() {
+                                Image(systemName: "macbook")
+                            }
+                            
+                            if GameDir.server(version: version.id, type: GameType.paper.rawValue).dirPath.isExist() {
+                                Image(systemName: "xserve")
+                            }
+                            
                             Spacer()
 
                             if !showOnlyRelease {

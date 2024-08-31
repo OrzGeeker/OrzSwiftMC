@@ -14,4 +14,6 @@ struct Constants {
     static let minWidth: CGFloat = 3 * sidebarWidth
 
     static let minHeight: CGFloat = minWidth * 0.618
+    
+    static let feedbackEmail = "824219521@qq.com"
 }
