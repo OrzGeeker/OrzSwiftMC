@@ -29,6 +29,7 @@ struct GameView: View {
             ZStack {
                 HStack {
                     Button("Up") {
+                        guard !model.isLaunchingGame else { return }
                         guard let selectedVersion = model.selectedVersion, filteredVersions.contains(selectedVersion)
                         else {
                             model.selectedVersion = filteredVersions.first
@@ -49,6 +50,7 @@ struct GameView: View {
                     }
                     .keyboardShortcut(.upArrow, modifiers: .command)
                     Button("Down") {
+                        guard !model.isLaunchingGame else { return }
                         guard let selectedVersion = model.selectedVersion, filteredVersions.contains(selectedVersion)
                         else {
                             model.selectedVersion = filteredVersions.first
