@@ -105,6 +105,13 @@ if [ $? -ne 0 ]; then
     exit -6
 fi
 
+# Gatekeeper validity
+spctl -a -t exec -vv $export_app
+if [ $? -ne 0 ]; then
+    echo gatekeeper validity failed!
+    exit -7
+fi
+
 # delete export app zip file
 if [ -f $export_app_zip ]; then
     rm -f $export_app_zip
@@ -152,7 +159,7 @@ app_dist_tar_xz="${product_dir}/${scheme}_${short_version}_${version}_${date}.ta
 tar -C $export_path -cJf $app_dist_tar_xz $(basename $export_app)
 if [ $? -ne 0 ]; then
     echo create tar.xz with staple ticket failed!
-    exit -7
+    exit -8
 fi
 
 echo tar.xz file for distribution of app: $app_dist_tar_xz
