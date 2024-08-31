@@ -33,7 +33,7 @@ struct FeedbackToAuthor: ViewModifier {
             .overlay(alignment: overlayAlignment) {
                 FeedBackButton(email: email)
                     .offset(x: offset.x, y: offset.y)
-                    .foregroundColor(.yellow)
+                    .foregroundStyle(.yellow)
                     .keyboardShortcut(.init(.init("f")), modifiers: .command)
             }
     }
