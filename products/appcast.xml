@@ -4,6 +4,14 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.6</title>
+            <pubDate>Sat, 31 Aug 2024 16:12:08 +0800</pubDate>
+            <sparkle:version>6</sparkle:version>
+            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_6_20240831_161208.tar.xz" length="6660256" type="application/octet-stream" sparkle:edSignature="ERMFnoiFEOLP8NEuBqpZWSlm9N2rwP5As9I9bUXpXbnTsMduoJMwsNVegP9/tYCANFbD/Qio/ZL63YjHmUrPAw=="/>
+        </item>
+        <item>
+            <title>0.0.6</title>
             <pubDate>Sat, 31 Aug 2024 02:56:13 +0800</pubDate>
             <sparkle:version>5</sparkle:version>
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
@@ -17,14 +25,6 @@
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_4_20240831_024400.tar.xz" length="6657620" type="application/octet-stream" sparkle:edSignature="hp2eMoRgLvweDc8sSizSwOym5UPU2rq7vU34Zr8aCj0THGTMxaHSQdOD/Wv86Fjj/4Yyt3QNzVrPDsXGnCrVBw=="/>
-        </item>
-        <item>
-            <title>0.0.6</title>
-            <pubDate>Sat, 31 Aug 2024 02:35:17 +0800</pubDate>
-            <sparkle:version>3</sparkle:version>
-            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_3_20240831_023517.tar.xz" length="6658452" type="application/octet-stream" sparkle:edSignature="tayJcuY/9vef29vAa95cvVUIh640A8GRXANM/eNg123s8DigI6/nUbDox9mw2qEgJsVJ7aSwRpWDEClKFCl3AQ=="/>
         </item>
     </channel>
 </rss>
