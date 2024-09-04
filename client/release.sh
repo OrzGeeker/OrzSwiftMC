@@ -17,41 +17,95 @@ derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
 archive_path="$build_dir/$scheme.xcarchive"
 client_dir=$git_repo_dir/client
+product_dir=$git_repo_dir/products
 
 export_options_plist=$client_dir/exportOptions.plist
 export_path=$client_dir
 export_app=$export_path/$scheme.app
 export_app_zip=$export_app.zip
 
-# change work dir
-cd $client_dir
+plistBuddyBin=/usr/libexec/PlistBuddy
+app_info_plist="$export_app/Contents/Info.plist"
 
-# delete all zip files
-zips=*.zip
-for zip in $zips
-do
-    if [ -f $zip ]; then
-        rm -f $zip
+sparkle_bin=$derived_data_path/SourcePackages/artifacts/sparkle/Sparkle/bin
+
+function remove() {
+    for path in $*
+    do
+        # remove dir if exist
+        if [ -d $path ]; then
+            rm -rf $path
+            echo removed dir: $path
+        fi
+
+        # remove file if exist
+        if [ -f $path ]; then
+            rm -f $path
+            echo removed file: $path
+        fi
+    done
+}
+
+function zip() {
+    local source=$1
+    local target=$2
+    ditto -c -k --sequesterRsrc --keepParent $source $target
+    if [ $? -ne 0 ]; then
+        echo create zip failed!
+        exit -1
     fi
-done
+}
 
-# archive 
-defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
-xcrun xcodebuild archive                \
-    -quiet                              \
-    -scheme $scheme                     \
-    -configuration $configuration       \
-    -destination "$destination"         \
-    -derivedDataPath $derived_data_path \
-    -archivePath $archive_path
-    
+function tarxz() {
+    local source=$1
+    local target=$2
+    tar -C $export_path -cJf $target $source
+    if [ $? -ne 0 ]; then
+        echo create tar.xz failed!
+        exit -1
+    fi
+}
 
-if [ $? -ne 0 ]; then
-    echo archive failed!
-    exit -1
-fi
+function sparkle() {
+    sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
+    sparkle_generate_keys=$sparkle_bin/generate_keys
 
-# make export options plist file
+    sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
+    sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
+    sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
+    sparkle_generate_private_key=sparkle_private_key
+
+    # update SUPublicEDKey if changed
+    if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
+        echo old: $sparkle_SUPublicEDKey
+        echo new: $sparkle_generate_public_key
+        # update SUPublicEDKey value
+        $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_generate_public_key" "$app_info_plist"
+        # save private key into local keychain
+        if [ -f $sparkle_generate_private_key ]; then
+            rm -f $sparkle_generate_private_key
+        fi
+        $sparkle_generate_keys -x $sparkle_generate_private_key
+        $sparkle_generate_keys -f $sparkle_generate_private_key
+    fi
+}
+
+function archive() {
+
+    cd $client_dir
+
+    defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+
+    xcrun xcodebuild archive                \
+        -quiet                              \
+        -scheme $scheme                     \
+        -configuration $configuration       \
+        -destination "$destination"         \
+        -derivedDataPath $derived_data_path \
+        -archivePath $archive_path
+}
+
+function write_export_options_plist() {
 cat > $export_options_plist <<EOF
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
@@ -64,152 +118,78 @@ cat > $export_options_plist <<EOF
     </dict>
 </plist>
 EOF
+}
 
-if [ $? -ne 0 ]; then
-    echo create export plist failed!
-    exit -2
-fi
+function export() {
+    xcrun xcodebuild                                \
+        -exportArchive                              \
+        -archivePath $archive_path                  \
+        -exportOptionsPlist $export_options_plist   \
+        -exportPath $export_path
+}
 
-# export
-xcrun xcodebuild                                \
-	-exportArchive                              \
-	-archivePath $archive_path                  \
-	-exportOptionsPlist $export_options_plist   \
-	-exportPath $export_path
+function notarize() {
+    zip $export_app $export_app_zip              && \
+    xcrun notarytool submit                         \
+        --apple-id $apple_id                        \
+        --password $app_specific_password           \
+        --team-id $team_id                          \
+        --wait                                      \
+        --timeout $notary_timeout_duration          \
+        $export_app_zip                          && \
+    xcrun stapler staple $export_app             && \
+    spctl -a -t exec -vv $export_app             && \
+    remove $export_app_zip
+}
 
-if [ $? -ne 0 ]; then
-    echo export failed!
-    exit -3
-fi
+function distribute() {
+    app_dist_file_ext=$1
 
-# create zip file
-ditto -c -k --sequesterRsrc --keepParent $export_app $export_app_zip
-if [ $? -ne 0 ]; then
-    echo create zip failed!
-    exit -4
-fi
+    version=$($plistBuddyBin -c "Print CFBundleVersion" "$app_info_plist")
+    short_version=$($plistBuddyBin -c "Print CFBundleShortVersionString" "$app_info_plist")
+    date=$(date +%Y%m%d_%H%M%S)
+    app_dist_file="${product_dir}/${scheme}_${short_version}_${version}_${date}.${app_dist_file_ext}"
 
-# notary
-xcrun notarytool submit                         \
-    --apple-id $apple_id                        \
-    --password $app_specific_password           \
-    --team-id $team_id                          \
-    --wait                                      \
-    --timeout $notary_timeout_duration          \
-    $export_app_zip
+    case $app_dist_file_ext in
+        "tar.xz")
+            tarxz $(basename $export_app) $app_dist_file
+            ;;
+        "zip")
+            zip $export_app $app_dist_file
+            ;;
+        *)
+            echo unsupportted file type
+            ;;
+    esac
 
-if [ $? -ne 0 ]; then
-    echo notary failed!
-    exit -5
-fi
-
-# staple 
-xcrun stapler staple $export_app
-if [ $? -ne 0 ]; then
-    echo staple ticket failed!
-    exit -6
-fi
-
-# Gatekeeper validity
-spctl -a -t exec -vv $export_app
-if [ $? -ne 0 ]; then
-    echo gatekeeper validity failed!
-    exit -7
-fi
-
-# delete export app zip file
-if [ -f $export_app_zip ]; then
-    rm -f $export_app_zip
-fi
-
-plistBuddyBin=/usr/libexec/PlistBuddy
-app_info_plist="$export_app/Contents/Info.plist"
-
-# sparkle
-sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
-sparkle_bin=$derived_data_path/SourcePackages/artifacts/sparkle/Sparkle/bin
-sparkle_generate_keys=$sparkle_bin/generate_keys
-sparkle_generate_appcast=$sparkle_bin/generate_appcast
-
-sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
-sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
-sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
-sparkle_generate_private_key=sparkle_private_key
-
-# update SUPublicEDKey if changed
-if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
-    echo old: $sparkle_SUPublicEDKey
-    echo new: $sparkle_generate_public_key
-    # update SUPublicEDKey value
-    $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_generate_public_key" "$app_info_plist"
-    # save private key into local keychain
-    if [ -f $sparkle_generate_private_key ]; then
-        rm -f $sparkle_generate_private_key
+    if [ $? -ne 0 ]; then
+        echo create dist file with staple ticket failed!
+        exit -1
     fi
-    $sparkle_generate_keys -x $sparkle_generate_private_key
-    $sparkle_generate_keys -f $sparkle_generate_private_key
-fi
 
-# recreate zip for distribution
-version=$($plistBuddyBin -c "Print CFBundleVersion" "$app_info_plist")
-short_version=$($plistBuddyBin -c "Print CFBundleShortVersionString" "$app_info_plist")
-date=$(date +%Y%m%d_%H%M%S)
-product_dir=$git_repo_dir/products
+    echo dist file of app: $app_dist_file
+}
 
-# delete all tar.xz files
-app_dist_file_ext="zip" # "tar.xz"
-app_dist_files=$product_dir/*.${app_dist_file_ext}
-for app_dist_file in $app_dist_files
-do
-    if [ -f $app_dist_file ]; then
-        rm -f $app_dist_file
-    fi
-done
+function write_appcast_xml() {
+    sparkle_generate_appcast=$sparkle_bin/generate_appcast
+    $sparkle_generate_appcast $product_dir
 
-app_dist_file="${product_dir}/${scheme}_${short_version}_${version}_${date}.${app_dist_file_ext}"
-case $app_dist_file_ext in
-    "tar.xz")
-        tar -C $export_path -cJf $app_dist_file $(basename $export_app)
-        ;;
-    "zip")
-        ditto -c -k --sequesterRsrc --keepParent $export_app $app_dist_file
-        ;;
-    *):
-        echo unsupportted file type
-        ;;
-esac
+    # change url
+    app_dist_file_name=$(basename $app_dist_file)
+    git_url=$(git remote get-url origin)
+    url_pattern="https://.*${app_dist_file_name//./\\.}"
+    target_url=${git_url%%.git}/releases/download/${short_version}/${app_dist_file_name}
+    target_url=${target_url//./\\.}
+    # echo pattern: $url_pattern
+    # echo target: $target_url
+    sed -i'' -e  "s|${url_pattern}|${target_url}|" $product_dir/appcast.xml
+}
 
-if [ $? -ne 0 ]; then
-    echo create dist file with staple ticket failed!
-    exit -8
-fi
+function cleanup() {
+    remove \
+        $client_dir/*.zip $product_dir/*.zip $product_dir/*.tar.xz  \
+        *.plist *.log                                               \
+        $build_dir $derived_data_path $export_app
+}
 
-echo dist file of app: $app_dist_file
-
-# generate appcast.xml
-$sparkle_generate_appcast $product_dir
-
-# change url
-app_dist_file_name=$(basename $app_dist_file)
-git_url=$(git remote get-url origin)
-url_pattern="https://.*${app_dist_file_name//./\\.}"
-target_url=${git_url%%.git}/releases/download/${short_version}/${app_dist_file_name}
-target_url=${target_url//./\\.}
-# echo pattern: $url_pattern
-# echo target: $target_url
-sed -i'' -e  "s|${url_pattern}|${target_url}|" $product_dir/appcast.xml
-
-# clean up
-if [ -d $build_dir ]; then
-    rm -rf $build_dir
-fi
-
-if [ -d $derived_data_path ]; then
-    rm -rf $derived_data_path
-fi 
-
-if [ -d $export_app ]; then
-    rm -rf $export_app
-fi
-
-rm -f *.plist *.log
+cleanup && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
