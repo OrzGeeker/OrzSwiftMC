@@ -11,14 +11,23 @@ on:
   #   branches: [ "main" ]
 
 jobs:
+
   build:
+    name: Run Swift build & Swift Tests
     runs-on: macos-latest
+
     steps:
-    - uses: swift-actions/setup-swift@v2
-      with:
-        swift-version: "6.0"
-    - uses: actions/checkout@v4
-    - name: Build
-      run: swift build -v
-    - name: Run tests
-      run: swift test -v
+
+      - name: setup swift env
+        uses: swift-actions/setup-swift@v2
+        with:
+          swift-version: "6.0"
+
+      - name: checkout code
+        uses: actions/checkout@v4
+
+      - name: Build
+        run: swift build -v
+
+      - name: Run tests
+        run: swift test -v
