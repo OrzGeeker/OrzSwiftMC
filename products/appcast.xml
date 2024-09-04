@@ -4,27 +4,11 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.6</title>
-            <pubDate>Sun, 01 Sep 2024 02:03:23 +0800</pubDate>
-            <sparkle:version>7</sparkle:version>
+            <pubDate>Thu, 05 Sep 2024 02:03:01 +0800</pubDate>
+            <sparkle:version>8</sparkle:version>
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_7_20240901_020323.tar.xz" length="4009588" type="application/octet-stream" sparkle:edSignature="yBRF8aiDPsKmfOFez+Qe3CAOAK0SYzu0DlV9tFWi5vMQqx5R0tONuCxglc4zDqHSJP0VjuVzGR/5qSGpQnkHDA=="/>
-        </item>
-        <item>
-            <title>0.0.6</title>
-            <pubDate>Sat, 31 Aug 2024 16:12:08 +0800</pubDate>
-            <sparkle:version>6</sparkle:version>
-            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_6_20240831_161208.tar.xz" length="6660256" type="application/octet-stream" sparkle:edSignature="ERMFnoiFEOLP8NEuBqpZWSlm9N2rwP5As9I9bUXpXbnTsMduoJMwsNVegP9/tYCANFbD/Qio/ZL63YjHmUrPAw=="/>
-        </item>
-        <item>
-            <title>0.0.6</title>
-            <pubDate>Sat, 31 Aug 2024 02:56:13 +0800</pubDate>
-            <sparkle:version>5</sparkle:version>
-            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_5_20240831_025613.tar.xz" length="6657440" type="application/octet-stream" sparkle:edSignature="hXOxtqW1p4KekB9obSzAMKmsUsJDFlptq1GSZ2joxzCkDBwxqFkU9G7WXewWMyU3BjcMgb/2YEzqw2eKh3d8Cw=="/>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_8_20240905_025801.zip" length="6159379" type="application/octet-stream" sparkle:edSignature="ZUZptflFtPdvw2e4LL5A2tMSri7VTltJenhryoqbp8lCu3FAQiB/Q+nPdPTvAHW7msZe9C7ujKKj77rVBR84AQ=="/>
         </item>
     </channel>
 </rss>

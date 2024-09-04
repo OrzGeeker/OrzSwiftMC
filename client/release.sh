@@ -66,7 +66,25 @@ function tarxz() {
     fi
 }
 
+function build() {
+    defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
+    cd $client_dir                       && \
+    xcrun xcodebuild                        \
+        -skipPackagePluginValidation        \
+        -quiet                              \
+        -scheme $scheme                     \
+        -configuration $configuration       \
+        -destination "$destination"         \
+        -derivedDataPath $derived_data_path
+}
+
 function sparkle() {
+    cd $client_dir
+    local app_info_plist="$client_dir/$(xcrun xcodebuild -showBuildSettings | grep -e ".plist" | grep -e INFOPLIST_FILE | cut -d '=' -f 2 | xargs)"
+    if [ ! -f $app_info_plist ]; then
+        echo info.plist file not found
+        exit -1
+    fi
     sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
     sparkle_generate_keys=$sparkle_bin/generate_keys
 
@@ -91,12 +109,9 @@ function sparkle() {
 }
 
 function archive() {
-
-    cd $client_dir
-
-    defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
-
+    cd $client_dir                       && \
     xcrun xcodebuild archive                \
+        -skipPackagePluginValidation        \
         -quiet                              \
         -scheme $scheme                     \
         -configuration $configuration       \
@@ -192,4 +207,4 @@ function cleanup() {
         $build_dir $derived_data_path $export_app
 }
 
-cleanup && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
+cleanup && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
