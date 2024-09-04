@@ -1,11 +1,17 @@
 #!/usr/bin/env bash
 #-*- coding: utf-8 -*-
 
+# parameters
 scheme=OrzMC
 team_id=2N62934Y28
 configuration=Release
 destination="generic/platform=macOS"
 
+apple_id="824219521@qq.com"
+app_specific_password="bbgb-nzuk-trqz-uzax"
+notary_timeout_duration="5m"
+
+# path defination
 git_repo_dir=$(git rev-parse --show-toplevel)
 derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
@@ -17,10 +23,7 @@ export_path=$client_dir
 export_app=$export_path/$scheme.app
 export_app_zip=$export_app.zip
 
-apple_id="824219521@qq.com"
-app_specific_password="bbgb-nzuk-trqz-uzax"
-timeout_duration="5m"
-
+# change work dir
 cd $client_dir
 
 # delete all zip files
@@ -34,12 +37,12 @@ done
 
 # archive 
 defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
-xcrun xcodebuild archive \
-    -scheme $scheme \
-    -configuration $configuration \
-    -destination "$destination" \
+xcrun xcodebuild archive                \
+    -scheme $scheme                     \
+    -configuration $configuration       \
+    -destination "$destination"         \
     -derivedDataPath $derived_data_path \
-    -archivePath $archive_path # -dry-run
+    -archivePath $archive_path
 
 if [ $? -ne 0 ]; then
     echo archive failed!
@@ -66,11 +69,11 @@ if [ $? -ne 0 ]; then
 fi
 
 # export
-xcrun xcodebuild \
-	-exportArchive \
-	-archivePath $archive_path \
-	-exportOptionsPlist $export_options_plist \
-	-exportPath $export_path # -dry-run
+xcrun xcodebuild                                \
+	-exportArchive                              \
+	-archivePath $archive_path                  \
+	-exportOptionsPlist $export_options_plist   \
+	-exportPath $export_path
 
 if [ $? -ne 0 ]; then
     echo export failed!
@@ -85,12 +88,12 @@ if [ $? -ne 0 ]; then
 fi
 
 # notary
-xcrun notarytool submit               \
-    --apple-id $apple_id              \
-    --password $app_specific_password \
-    --team-id $team_id                \
-    --wait                            \
-    --timeout $timeout_duration       \
+xcrun notarytool submit                         \
+    --apple-id $apple_id                        \
+    --password $app_specific_password           \
+    --team-id $team_id                          \
+    --wait                                      \
+    --timeout $notary_timeout_duration          \
     $export_app_zip
 
 if [ $? -ne 0 ]; then
