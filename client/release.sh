@@ -38,11 +38,13 @@ done
 # archive 
 defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
 xcrun xcodebuild archive                \
+    -quiet                              \
     -scheme $scheme                     \
     -configuration $configuration       \
     -destination "$destination"         \
     -derivedDataPath $derived_data_path \
     -archivePath $archive_path
+    
 
 if [ $? -ne 0 ]; then
     echo archive failed!
@@ -132,6 +134,7 @@ sparkle_generate_appcast=$sparkle_bin/generate_appcast
 sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
 sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
 sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
+sparkle_generate_private_key=sparkle_private_key
 
 # update SUPublicEDKey if changed
 if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
@@ -139,8 +142,12 @@ if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
     echo new: $sparkle_generate_public_key
     # update SUPublicEDKey value
     $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_generate_public_key" "$app_info_plist"
-    #save private key into local keychain
-    $sparkle_generate_keys -x private_key
+    # save private key into local keychain
+    if [ -f $sparkle_generate_private_key ]; then
+        rm -f $sparkle_generate_private_key
+    fi
+    $sparkle_generate_keys -x $sparkle_generate_private_key
+    $sparkle_generate_keys -f $sparkle_generate_private_key
 fi
 
 # recreate zip for distribution
@@ -150,31 +157,43 @@ date=$(date +%Y%m%d_%H%M%S)
 product_dir=$git_repo_dir/products
 
 # delete all tar.xz files
-tars=$product_dir/*.tar.xz
-for tar in $tars
+app_dist_file_ext="zip" # "tar.xz"
+app_dist_files=$product_dir/*.${app_dist_file_ext}
+for app_dist_file in $app_dist_files
 do
-    if [ -f $tar ]; then
-        rm -f $tar
+    if [ -f $app_dist_file ]; then
+        rm -f $app_dist_file
     fi
 done
 
-app_dist_tar_xz="${product_dir}/${scheme}_${short_version}_${version}_${date}.tar.xz"
-tar -C $export_path -cJf $app_dist_tar_xz $(basename $export_app)
+app_dist_file="${product_dir}/${scheme}_${short_version}_${version}_${date}.${app_dist_file_ext}"
+case $app_dist_file_ext in
+    "tar.xz")
+        tar -C $export_path -cJf $app_dist_file $(basename $export_app)
+        ;;
+    "zip")
+        ditto -c -k --sequesterRsrc --keepParent $export_app $app_dist_file
+        ;;
+    *):
+        echo unsupportted file type
+        ;;
+esac
+
 if [ $? -ne 0 ]; then
-    echo create tar.xz with staple ticket failed!
+    echo create dist file with staple ticket failed!
     exit -8
 fi
 
-echo tar.xz file for distribution of app: $app_dist_tar_xz
+echo dist file of app: $app_dist_file
 
 # generate appcast.xml
 $sparkle_generate_appcast $product_dir
 
 # change url
-tar_xz_filename=$(basename $app_dist_tar_xz)
+app_dist_file_name=$(basename $app_dist_file)
 git_url=$(git remote get-url origin)
-url_pattern="https://.*${tar_xz_filename//./\\.}"
-target_url=${git_url%%.git}/releases/download/${short_version}/${tar_xz_filename}
+url_pattern="https://.*${app_dist_file_name//./\\.}"
+target_url=${git_url%%.git}/releases/download/${short_version}/${app_dist_file_name}
 target_url=${target_url//./\\.}
 # echo pattern: $url_pattern
 # echo target: $target_url

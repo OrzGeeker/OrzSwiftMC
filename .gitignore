@@ -103,3 +103,4 @@ client/Packaging.log
 client/*.app/
 client/*.zip
 client/*.p8
+client/sparkle_private_key
