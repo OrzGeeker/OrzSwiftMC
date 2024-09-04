@@ -200,11 +200,14 @@ function write_appcast_xml() {
     sed -i'' -e  "s|${url_pattern}|${target_url}|" $product_dir/appcast.xml
 }
 
+function clean_products() {
+    remove $product_dir/*.zip $product_dir/*.tar.xz
+}
+
 function cleanup() {
-    remove \
-        $client_dir/*.zip $product_dir/*.zip $product_dir/*.tar.xz  \
-        *.plist *.log                                               \
+    remove $client_dir/*.zip   \
+        *.plist *.log          \
         $build_dir $derived_data_path $export_app
 }
 
-cleanup && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
+cleanup && clean_products && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
