@@ -67,10 +67,10 @@ function tarxz() {
 }
 
 function build() {
-    defaults write com.apple.dt.Xcode IDESkipPackagePluginFingerprintValidatation -bool YES
     cd $client_dir                       && \
-    xcrun xcodebuild                        \
+    xcrun xcodebuild build                  \
         -skipPackagePluginValidation        \
+        -skipMacroValidation                \
         -quiet                              \
         -scheme $scheme                     \
         -configuration $configuration       \
@@ -88,23 +88,29 @@ function sparkle() {
     sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
     sparkle_generate_keys=$sparkle_bin/generate_keys
 
-    sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
-    sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
-    sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
-    sparkle_generate_private_key=sparkle_private_key
-
-    # update SUPublicEDKey if changed
-    if [ "$sparkle_SUPublicEDKey" != "$sparkle_generate_public_key" ]; then
-        echo old: $sparkle_SUPublicEDKey
-        echo new: $sparkle_generate_public_key
-        # update SUPublicEDKey value
-        $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_generate_public_key" "$app_info_plist"
+    sparkle_existed_public_key=$($sparkle_generate_keys -p)
+    sparkle_local_public_key=$sparkle_existed_public_key
+    if [ -z $sparkle_existed_public_key ]; then
+        sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
+        sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
+        sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
         # save private key into local keychain
+        sparkle_generate_private_key=sparkle_private_key
         if [ -f $sparkle_generate_private_key ]; then
             rm -f $sparkle_generate_private_key
         fi
         $sparkle_generate_keys -x $sparkle_generate_private_key
         $sparkle_generate_keys -f $sparkle_generate_private_key
+        # record new generated public key
+        sparkle_local_public_key=$sparkle_generate_public_key
+    fi
+
+    # update SUPublicEDKey if changed
+    if [ "$sparkle_SUPublicEDKey" != "$sparkle_local_public_key" ]; then
+        echo old: $sparkle_SUPublicEDKey
+        echo new: $sparkle_local_public_key
+        # update SUPublicEDKey value with generated new public key
+        $plistBuddyBin -c "Set :SUPublicEDKey $sparkle_local_public_key" "$app_info_plist"
     fi
 }
 
@@ -112,6 +118,7 @@ function archive() {
     cd $client_dir                       && \
     xcrun xcodebuild archive                \
         -skipPackagePluginValidation        \
+        -skipMacroValidation                \
         -quiet                              \
         -scheme $scheme                     \
         -configuration $configuration       \
