@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>SUFeedURL</key>
-	<string>https://raw.githubusercontent.com/OrzGeeker/OrzSwiftMC/main/products/appcast.xml</string>
+	<string>https://raw.githubusercontent.com/OrzGeeker/OrzSwiftMC/main/client/products/appcast.xml</string>
 	<key>SUPublicEDKey</key>
 	<string>7Gf1TvQxEPdFPf1ac4rJ1roj4seA3nrWQtHtPOzdWEA=</string>
 </dict>

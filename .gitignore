@@ -95,8 +95,9 @@ iOSInjectionProject/
 .vscode/
 .DS_Store
 cache/
-products/*
-!products/appcast.xml
+
+client/products/*
+!client/products/appcast.xml
 client/exportOptions.plist
 client/DistributionSummary.plist
 client/Packaging.log

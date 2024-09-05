@@ -13,11 +13,12 @@ notary_timeout_duration="5m"
 
 # path defination
 git_repo_dir=$(git rev-parse --show-toplevel)
+git_url=$(git remote get-url origin)
 derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
 archive_path="$build_dir/$scheme.xcarchive"
 client_dir=$git_repo_dir/client
-product_dir=$git_repo_dir/products
+product_dir=$client_dir/products
 
 export_options_plist=$client_dir/exportOptions.plist
 export_path=$client_dir
@@ -85,6 +86,16 @@ function sparkle() {
         echo info.plist file not found
         exit -1
     fi
+
+    sparkle_SUFeedURL=$($plistBuddyBin -c "Print SUFeedURL" "$app_info_plist")
+    sparkle_appcast_xml_URL=${git_url%%.git}
+    sparkle_appcast_xml_URL=${sparkle_appcast_xml_URL/github.com/raw.githubusercontent.com}
+    sparkle_appcast_xml_URL=${sparkle_appcast_xml_URL}/main${product_dir##"${git_repo_dir}"}/appcast.xml
+    if [ "$sparkle_SUFeedURL" != "$sparkle_appcast_xml_URL" ]; then
+        $plistBuddyBin -c "Set :SUFeedURL $sparkle_appcast_xml_URL" "$app_info_plist"
+        echo update appcast xml url: $sparkle_appcast_xml_URL
+    fi
+
     sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
     sparkle_generate_keys=$sparkle_bin/generate_keys
 
@@ -198,7 +209,6 @@ function write_appcast_xml() {
 
     # change url
     app_dist_file_name=$(basename $app_dist_file)
-    git_url=$(git remote get-url origin)
     url_pattern="https://.*${app_dist_file_name//./\\.}"
     target_url=${git_url%%.git}/releases/download/${short_version}/${app_dist_file_name}
     target_url=${target_url//./\\.}
@@ -216,5 +226,4 @@ function cleanup() {
         *.plist *.log          \
         $build_dir $derived_data_path $export_app
 }
-
 cleanup && clean_products && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
