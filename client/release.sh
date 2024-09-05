@@ -226,4 +226,5 @@ function cleanup() {
         *.plist *.log          \
         $build_dir $derived_data_path $export_app
 }
+
 cleanup && clean_products && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
