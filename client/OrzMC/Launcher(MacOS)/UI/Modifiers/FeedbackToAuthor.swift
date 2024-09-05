@@ -25,11 +25,24 @@ struct FeedbackToAuthor: ViewModifier {
     let offset: CGPoint
     func body(content: Content) -> some View {
         content.overlay(alignment: overlayAlignment) {
-            FeedBackButton(email: email)
-                .buttonStyle(.borderless)
-                .foregroundStyle(.yellow)
-                .offset(x: offset.x, y: offset.y)
-                .keyboardShortcut(.init(.init("f")), modifiers: .command)
+            HStack(spacing: 10) {
+                
+                FeedBackButton(email: email)
+                    .buttonStyle(.borderless)
+                    .foregroundStyle(.yellow)
+                    .keyboardShortcut(.init(.init("f")), modifiers: .command)
+                
+                BuyMeCoffeeButton(
+                    content:
+                        Image("alipay")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 200, height: 235)
+                )
+                .keyboardShortcut(.init(.init("p")), modifiers: .command)
+                
+            }
+            .offset(x: offset.x, y: offset.y)
         }
     }
 }
