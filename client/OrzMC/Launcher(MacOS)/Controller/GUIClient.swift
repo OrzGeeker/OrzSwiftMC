@@ -12,8 +12,6 @@ import Game
 struct GUIClient: Client  {
     
     var clientInfo: Game.ClientInfo
-
-    let launcherModel: LauncherModel
     
     let gameModel: GameModel
     
@@ -38,7 +36,6 @@ struct GUIClient: Client  {
             let delta = curProgress - progress
             if delta > 0.01 || curProgress == 1 {
                 progress = curProgress
-                await launcherModel.updateLauncherProgress(progress)
                 await gameModel.updateProgress(progress)
             }
         }

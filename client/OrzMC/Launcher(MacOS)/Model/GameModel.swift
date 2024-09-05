@@ -194,7 +194,7 @@ extension GameModel {
             minMem: "512M",
             maxMem: "2G"
         )
-        var launcher = GUIClient(clientInfo: clientInfo, launcherModel: LauncherModel(), gameModel: self)
+        var launcher = GUIClient(clientInfo: clientInfo, gameModel: self)
         try await launcher.start()
     }
     
