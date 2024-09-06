@@ -44,17 +44,10 @@ struct ExarotonServerView: View {
                 Divider()
                 VStack(alignment: .leading, spacing: 4) {
                     if let staticAddress = server.staticAddress {
-                        Text("\(staticAddress)")
-                            .onTapGesture {
-                                staticAddress.copyToPasteboard()
-                            }
+                        ExarotonCopyableText(staticAddress, canCopy: showMotd)
                     }
-
                     if let dynamicAddress = server.dynamicAddress {
-                        Text("\(dynamicAddress)")
-                            .onTapGesture {
-                                dynamicAddress.copyToPasteboard()
-                            }
+                        ExarotonCopyableText(dynamicAddress, canCopy: showMotd)
                     }
                 }
             }

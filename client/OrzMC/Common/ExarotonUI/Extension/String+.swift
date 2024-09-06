@@ -14,15 +14,18 @@ import AppKit
 #endif
 
 extension String {
-    @MainActor func copyToPasteboard() {
+    @discardableResult
+    @MainActor func copyToPasteboard() -> Bool {
 #if canImport(UIKit)
         UIPasteboard.general.string = self
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
+        return true
 #endif
 
 #if canImport(AppKit)
         NSPasteboard.general.declareTypes([.string], owner: nil)
-        NSPasteboard.general.setString(self, forType: .string)
+        let success = NSPasteboard.general.setString(self, forType: .string)
+        return success
 #endif
     }
 }
