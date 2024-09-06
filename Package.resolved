@@ -1,5 +1,5 @@
 {
-  "originHash" : "165b56e0633460a186c6a46e28c3a784f0b7a52c343741a7782b15b0488415e1",
+  "originHash" : "e460ff55c75c7a6c88d69eed5a4fc6de3f16a53ed2e002f6da2f9997e8754b29",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wangzhizhou/PaperMC.git",
       "state" : {
-        "revision" : "77db86a7c11a9d9d6cb1618588594fb5d8e4a9ac",
-        "version" : "0.0.2"
+        "revision" : "ac56fc3dc0b80c7172e867a99708f1eba50c8914",
+        "version" : "0.0.3"
       }
     },
     {

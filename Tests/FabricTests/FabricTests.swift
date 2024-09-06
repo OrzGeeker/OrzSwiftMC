@@ -1,15 +1,16 @@
 //
 //  FabricTests.swift
-//  
+//
 //
 //  Created by joker on 2022/4/5.
 //
 
-import XCTest
-@testable import Fabric
+import Testing
+import Fabric
 
-final class FabricTests: XCTestCase {
-    func testDownload() throws {
+final class FabricTests {
+    @Test
+    func download() throws {
         let jsonContent = """
     {
         "id":"fabric-loader-0.13.3-1.18.2",
@@ -75,9 +76,7 @@ final class FabricTests: XCTestCase {
     }
     """
         let launcherModel = try Fabric.launcherConfig(jsonContent.data(using: .utf8)!)
-        XCTAssertNotNil(launcherModel)
-        
-        
+        #expect(launcherModel != nil)
     }
 }
 

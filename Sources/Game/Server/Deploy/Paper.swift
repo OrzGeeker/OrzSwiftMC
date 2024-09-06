@@ -9,7 +9,7 @@ import JokerKits
 import Utils
 import Foundation
 import ConsoleKit
-import DownloadAPI
+import PaperMCAPI
 
 enum PaperServerError: Error {
     case versionRespFailed
@@ -149,5 +149,5 @@ public struct PaperServer: Server {
         return process
     }
 
-    private let client = DownloadAPI()
+    private let client = PaperMCAPI()
 }
