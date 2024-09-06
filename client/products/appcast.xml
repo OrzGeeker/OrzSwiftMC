@@ -4,6 +4,14 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.6</title>
+            <pubDate>Fri, 06 Sep 2024 18:19:43 +0800</pubDate>
+            <sparkle:version>12</sparkle:version>
+            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_12_20240906_181943.zip" length="5612690" type="application/octet-stream" sparkle:edSignature="mev4K8c5zSrprnYoWbaB5pksTs5s5Laf94Igi/RGUh27+ZvucXbfZTZTUkRdG1KCeaD47WsTF7uTxnTXHJzWDA=="/>
+        </item>
+        <item>
+            <title>0.0.6</title>
             <pubDate>Fri, 06 Sep 2024 11:59:21 +0800</pubDate>
             <sparkle:version>11</sparkle:version>
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
@@ -17,14 +25,6 @@
             <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_10_20240906_021928.zip" length="6215000" type="application/octet-stream" sparkle:edSignature="C29wpA2+jh1bZccAz55ItBd9Ot+WHIJWBjwddCfUT8PkhFG89EI1rptTenc5X5p0TQLXL5csjkIFr5b0njHGAw=="/>
-        </item>
-        <item>
-            <title>0.0.6</title>
-            <pubDate>Fri, 06 Sep 2024 00:39:57 +0800</pubDate>
-            <sparkle:version>9</sparkle:version>
-            <sparkle:shortVersionString>0.0.6</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.6/OrzMC_0.0.6_9_20240906_003957.zip" length="6174230" type="application/octet-stream" sparkle:edSignature="eOvesd3NA7mLneP/2O/xITjoJIPy/yBqbj28z/SxybiN2m1237k5vUzYgiB2qF6MKyBmUh0jZ2NHuyE7D96qCQ=="/>
         </item>
     </channel>
 </rss>
