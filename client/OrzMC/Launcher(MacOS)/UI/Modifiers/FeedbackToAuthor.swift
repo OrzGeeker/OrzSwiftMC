@@ -26,12 +26,11 @@ struct FeedbackToAuthor: ViewModifier {
     func body(content: Content) -> some View {
         content.overlay(alignment: overlayAlignment) {
             HStack(spacing: 10) {
-                
+
                 FeedBackButton(email: email)
                     .buttonStyle(.borderless)
                     .foregroundStyle(.yellow)
-                    .keyboardShortcut(.init(.init("f")), modifiers: .command)
-                
+
                 BuyMeCoffeeButton(
                     content:
                         Image("alipay")
@@ -39,7 +38,6 @@ struct FeedbackToAuthor: ViewModifier {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 200 * 0.5, height: 235 * 0.5)
                 )
-                .keyboardShortcut(.init(.init("p")), modifiers: .command)
                 
             }
             .offset(x: offset.x, y: offset.y)
