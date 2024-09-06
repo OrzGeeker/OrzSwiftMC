@@ -19,15 +19,7 @@ struct ExarotonCopyableText: View {
         self.content = content
         self.canCopy = canCopy
     }
-    
-    var labelTitle: String {
-        copyed ? "copyed" : "copy it"
-    }
-    
-    var labelIcon: String {
-        copyed ? "list.bullet.clipboard" : "clipboard"
-    }
-    
+
     var body: some View {
         HStack {
             Text("\(content)")
