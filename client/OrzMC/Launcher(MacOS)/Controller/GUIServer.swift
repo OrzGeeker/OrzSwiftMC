@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import DownloadAPI
+import PaperMCAPI
 import Game
 
 struct GUIServer: Server, Sendable {
@@ -85,5 +85,5 @@ struct GUIServer: Server, Sendable {
         return process
     }
     
-    private let client = DownloadAPI()
+    private let client = PaperMCAPI()
 }
