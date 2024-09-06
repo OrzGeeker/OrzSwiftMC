@@ -37,7 +37,7 @@ struct FeedbackToAuthor: ViewModifier {
                         Image("alipay")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 200, height: 235)
+                        .frame(width: 200 * 0.5, height: 235 * 0.5)
                 )
                 .keyboardShortcut(.init(.init("p")), modifiers: .command)
                 
