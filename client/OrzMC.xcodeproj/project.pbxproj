@@ -44,6 +44,7 @@
 		F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F22BDCCBD300CAA802 /* GUIServer.swift */; platformFilters = (macos, ); };
 		F310C79C2C8B47DF00590F32 /* Socket in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = F310C79B2C8B47DF00590F32 /* Socket */; };
 		F310C79E2C8B535700590F32 /* ExarotonCopyableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F310C79D2C8B535700590F32 /* ExarotonCopyableText.swift */; };
+		F310C7A02C8B6B5D00590F32 /* documentation.docc in Sources */ = {isa = PBXBuildFile; fileRef = F310C79F2C8B6B5D00590F32 /* documentation.docc */; };
 		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; platformFilter = ios; };
 		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; platformFilter = ios; };
@@ -102,6 +103,7 @@
 		F30F00F02BDCC6D900CAA802 /* GUIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GUIClient.swift; sourceTree = "<group>"; };
 		F30F00F22BDCCBD300CAA802 /* GUIServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GUIServer.swift; sourceTree = "<group>"; };
 		F310C79D2C8B535700590F32 /* ExarotonCopyableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonCopyableText.swift; sourceTree = "<group>"; };
+		F310C79F2C8B6B5D00590F32 /* documentation.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = documentation.docc; sourceTree = "<group>"; };
 		F339F62129038E60003CB50C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3B18FAB2BE242A2002C7851 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int32+littleEndianBytes.swift"; sourceTree = "<group>"; };
@@ -152,6 +154,7 @@
 				F339F62129038E60003CB50C /* Info.plist */,
 				2B1C799E28FEAB0700D53658 /* Assets.xcassets */,
 				2B1C79A028FEAB0700D53658 /* OrzMC.entitlements */,
+				F310C79F2C8B6B5D00590F32 /* documentation.docc */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				F3B4D0D32A1A776A0095B108 /* String+base64Image.swift in Sources */,
 				2B5ACA6A2BFB5C8A00397BFC /* ExarotonTradeMarkView.swift in Sources */,
 				F3B4D0D12A1A776A0095B108 /* MCSLPPacket.swift in Sources */,
+				F310C7A02C8B6B5D00590F32 /* documentation.docc in Sources */,
 				2B5ACA5D2BFB28E700397BFC /* String+.swift in Sources */,
 				2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */,
 				F3B4D0DC2A1A776A0095B108 /* String+MOTD.swift in Sources */,
