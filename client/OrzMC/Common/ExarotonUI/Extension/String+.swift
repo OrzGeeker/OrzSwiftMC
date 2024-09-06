@@ -21,6 +21,7 @@ extension String {
 #endif
 
 #if canImport(AppKit)
+        NSPasteboard.general.declareTypes([.string], owner: nil)
         NSPasteboard.general.setString(self, forType: .string)
 #endif
     }
