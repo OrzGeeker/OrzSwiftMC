@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+#if canImport(OrzAppUpdater)
 import OrzAppUpdater
+#endif
 
 @main
 struct OrzMCApp: App {
+#if canImport(OrzAppUpdater)
     let updaterController = OrzAppUpdaterController()
+#endif
     var body: some Scene {
 #if os(macOS)
         MacOSScene()

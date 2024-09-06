@@ -26,22 +26,23 @@
 		2B5BC3D52BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D42BFC4B4100348C00 /* ExarotonAccountTokenInputView.swift */; };
 		2B5BC3D72BFC527E00348C00 /* ExarotonServerPlayList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5BC3D62BFC527E00348C00 /* ExarotonServerPlayList.swift */; };
 		2B5E409E2BFD9683007216E7 /* ExarotonContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5E409D2BFD9683007216E7 /* ExarotonContent.swift */; };
-		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; };
+		2B62C9752BF71D5B00387498 /* FeedbackToAuthor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9742BF71D5B00387498 /* FeedbackToAuthor.swift */; platformFilters = (macos, ); };
 		2B62C97D2BF7216000387498 /* ExarotonServerDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C97C2BF7216000387498 /* ExarotonServerDetail.swift */; };
 		2B62C9852BF73F0200387498 /* ExarotonServerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9842BF73F0200387498 /* ExarotonServerList.swift */; };
 		2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
-		E20C658A2C8AFD8400831909 /* OrzAppUpdater in Frameworks */ = {isa = PBXBuildFile; productRef = E20C65892C8AFD8400831909 /* OrzAppUpdater */; };
+		E20C658A2C8AFD8400831909 /* OrzAppUpdater in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = E20C65892C8AFD8400831909 /* OrzAppUpdater */; };
 		E20C658C2C8AFD8F00831909 /* ExarotonHTTP in Frameworks */ = {isa = PBXBuildFile; productRef = E20C658B2C8AFD8F00831909 /* ExarotonHTTP */; };
-		E20C65922C8AFDB400831909 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = E20C65912C8AFDB400831909 /* SwiftUIX */; };
+		E20C65922C8AFDB400831909 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = E20C65912C8AFDB400831909 /* SwiftUIX */; };
 		E20C65942C8AFE4F00831909 /* ExarotonWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = E20C65932C8AFE4F00831909 /* ExarotonWebSocket */; };
-		E20C65962C8AFE6000831909 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = E20C65952C8AFE6000831909 /* Game */; };
+		E20C65962C8AFE6000831909 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = E20C65952C8AFE6000831909 /* Game */; };
 		F30F00ED2BDBDF7000CAA802 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EC2BDBDF7000CAA802 /* GameView.swift */; platformFilters = (macos, ); };
 		F30F00EF2BDC966900CAA802 /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00EE2BDC966900CAA802 /* GameModel.swift */; platformFilters = (macos, ); };
 		F30F00F12BDCC6D900CAA802 /* GUIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F02BDCC6D900CAA802 /* GUIClient.swift */; platformFilters = (macos, ); };
 		F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F30F00F22BDCCBD300CAA802 /* GUIServer.swift */; platformFilters = (macos, ); };
+		F310C79C2C8B47DF00590F32 /* Socket in Frameworks */ = {isa = PBXBuildFile; platformFilter = ios; productRef = F310C79B2C8B47DF00590F32 /* Socket */; };
 		F3B18FAC2BE242A2002C7851 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B18FAB2BE242A2002C7851 /* Constants.swift */; };
 		F3B4D0CD2A1A776A0095B108 /* Int32+littleEndianBytes.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BB2A1A776A0095B108 /* Int32+littleEndianBytes.swift */; platformFilter = ios; };
 		F3B4D0CE2A1A776A0095B108 /* MCRCON.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B4D0BC2A1A776A0095B108 /* MCRCON.swift */; platformFilter = ios; };
@@ -133,6 +134,7 @@
 				E20C65962C8AFE6000831909 /* Game in Frameworks */,
 				E20C658C2C8AFD8F00831909 /* ExarotonHTTP in Frameworks */,
 				E20C65922C8AFDB400831909 /* SwiftUIX in Frameworks */,
+				F310C79C2C8B47DF00590F32 /* Socket in Frameworks */,
 				E20C65942C8AFE4F00831909 /* ExarotonWebSocket in Frameworks */,
 				E20C658A2C8AFD8400831909 /* OrzAppUpdater in Frameworks */,
 			);
@@ -441,6 +443,7 @@
 				E20C65912C8AFDB400831909 /* SwiftUIX */,
 				E20C65932C8AFE4F00831909 /* ExarotonWebSocket */,
 				E20C65952C8AFE6000831909 /* Game */,
+				F310C79B2C8B47DF00590F32 /* Socket */,
 			);
 			productName = OrzMC;
 			productReference = 2B1C799228FEAB0600D53658 /* OrzMC.app */;
@@ -832,6 +835,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F35C6DB32C46E3FD0007AEA9 /* XCRemoteSwiftPackageReference "OrzSwiftMC" */;
 			productName = Game;
+		};
+		F310C79B2C8B47DF00590F32 /* Socket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F3B4D0E32A1A79390095B108 /* XCRemoteSwiftPackageReference "BlueSocket" */;
+			productName = Socket;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -14,7 +14,7 @@ import AppKit
 #endif
 
 extension String {
-    func copyToPasteboard() {
+    @MainActor func copyToPasteboard() {
 #if canImport(UIKit)
         UIPasteboard.general.string = self
         UIImpactFeedbackGenerator(style: .heavy).impactOccurred()
