@@ -8,6 +8,7 @@
 import SwiftUI
 import Mojang
 import Game
+import JokerKits
 
 struct GameView: View {
 
@@ -20,6 +21,14 @@ struct GameView: View {
     @FocusState private var usernameTextFieldFocused: Bool
 
     @State private var enableStartGameButton: Bool = false
+    
+    @State private var downloadingJDK: Bool = false
+    
+    @State private var downloadJDKProgress: Double = 0
+    
+    @State private var downloadJDKCompleted: Bool = false
+    
+    @State private var jdkFileURL: URL? = nil
 
     @Environment(GameModel.self) private var model
 
@@ -181,12 +190,44 @@ struct GameView: View {
                                         if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
                                             Text("\(requiredJavaMajorVersion)")
                                         }
-                                        if model.javaRuntimeStatus == .invalid {
+                                        if model.javaRuntimeStatus == .valid {
                                             Spacer()
-                                            Link(destination: model.javaInstallationLinkURL) {
-                                                Text("Install Java")
+                                            Button {
+                                                Task {
+                                                    if let jdkFilePath = jdkFileURL?.path() {
+                                                        downloadJDKCompleted = FileManager.default.fileExists(atPath: jdkFilePath)
+                                                        if downloadJDKCompleted {
+                                                            await Shell.runCommand(with: ["open", "\(jdkFilePath)"])
+                                                            return
+                                                        }
+                                                    }
+                                                    
+                                                    guard let javaVersionInt = model.selectedGameJavaMajorVersionRequired
+                                                    else {
+                                                        return
+                                                    }
+                                                    
+                                                    downloadingJDK = true
+                                                    let javaVersion = String(javaVersionInt)
+                                                    jdkFileURL = try await OracleJava.downloadJDK(javaVersion) { progress in
+                                                        await MainActor.run {
+                                                            downloadJDKProgress = progress * 100
+                                                        }
+                                                    }
+                                                    downloadingJDK = false
+                                                    
+                                                    if let jdkFilePath = jdkFileURL?.path() {
+                                                        downloadJDKCompleted = FileManager.default.fileExists(atPath: jdkFilePath)
+                                                    } else {
+                                                        downloadJDKCompleted = false
+                                                    }
+                                                }
+                                                
+                                            } label: {
+                                                Label(downloadingJDK ? String(format: "%.2f %%", downloadJDKProgress) : "\(downloadJDKCompleted ? "Install" : "Download") JDK", systemImage: downloadJDKCompleted ? "folder" : "arrow.down.circle")
                                             }
                                             .buttonStyle(.borderedProminent)
+                                            .disabled(downloadingJDK)
                                         }
                                     }
                                     .foregroundStyle(Color.teal)

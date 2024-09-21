@@ -60,8 +60,6 @@ final class GameModel {
     
     var currentJavaMajorVersion: Int?
     
-    let javaInstallationLinkURL = URL(string: OracleJava.javaInstallationPageUrl)!
-    
     static var serverPIDMap = [String: String]()
     
     var isShowKillAllServerButton: Bool = false
