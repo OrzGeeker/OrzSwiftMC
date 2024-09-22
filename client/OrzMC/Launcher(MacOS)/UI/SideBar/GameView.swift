@@ -151,7 +151,7 @@ struct GameView: View {
                                         .progressViewStyle(.circular)
                                         .controlSize(.small)
                                 } else {
-                                    Image(systemName: "arrow.clockwise")
+                                    Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
                                 }
                             })
                             .disabled(model.isFetchingGameVersions)
@@ -371,6 +371,10 @@ extension GameView {
 
         if showOnlyRelease {
             filteredVersions = filteredVersions.filter { $0.type == "release" }
+        }
+        
+        if model.selectedVersion == nil {
+            model.selectedVersion = filteredVersions.first
         }
     }
 }
