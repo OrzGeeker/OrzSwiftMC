@@ -175,12 +175,13 @@ struct GameView: View {
                                         Text("Current:")
                                         if let currentJavaMajorVersion = model.currentJavaMajorVersion {
                                             Text("\(currentJavaMajorVersion)")
-                                        }
-                                        Spacer()
-                                        Button {
-                                            model.fetchCurrentJavaMajorVersion()
-                                        } label: {
-                                            Image(systemName: "arrow.clockwise")
+                                        } else {
+                                            Spacer()
+                                            Button {
+                                                model.fetchCurrentJavaMajorVersion()
+                                            } label: {
+                                                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                                            }
                                         }
                                     }
                                     .foregroundStyle(Color.orange)
@@ -190,7 +191,7 @@ struct GameView: View {
                                         if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
                                             Text("\(requiredJavaMajorVersion)")
                                         }
-                                        if model.javaRuntimeStatus == .valid {
+                                        if model.javaRuntimeStatus == .invalid {
                                             Spacer()
                                             Button {
                                                 Task {
