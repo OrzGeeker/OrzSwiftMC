@@ -4,6 +4,14 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.7</title>
+            <pubDate>Sun, 22 Sep 2024 12:17:46 +0800</pubDate>
+            <sparkle:version>15</sparkle:version>
+            <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.7/OrzMC_0.0.7_15_20240922_121746.zip" length="5566543" type="application/octet-stream" sparkle:edSignature="k3uHOjpuiqbgE7BurNRNqflE16HnrwSlkFWiV5O4daAv65CSu77ocOVNDkWucKOU9Uz7529kcx/sOzpfHZ5lDw=="/>
+        </item>
+        <item>
+            <title>0.0.7</title>
             <pubDate>Sun, 22 Sep 2024 10:51:32 +0800</pubDate>
             <sparkle:version>14</sparkle:version>
             <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
