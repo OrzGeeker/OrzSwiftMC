@@ -191,7 +191,7 @@ struct GameView: View {
                                         if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
                                             Text("\(requiredJavaMajorVersion)")
                                         }
-                                        if model.javaRuntimeStatus == .invalid {
+                                        if model.javaRuntimeStatus != .valid {
                                             Spacer()
                                             Button {
                                                 Task {
