@@ -143,5 +143,12 @@ extension BasicInfo {
 
 
 #Preview {
-    BasicInfo().environment(GameModel())
+    
+    @Previewable
+    @State
+    var gameModel = GameModel()
+    
+    BasicInfo()
+        .frame(width: Constants.minWidth - Constants.sidebarWidth, height: Constants.minHeight)
+        .environment(gameModel)
 }

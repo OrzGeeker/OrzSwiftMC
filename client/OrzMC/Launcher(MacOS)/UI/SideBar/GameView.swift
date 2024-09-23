@@ -380,11 +380,8 @@ extension GameView {
 }
 
 #Preview {
-    NavigationSplitView {
-        GameView()
-            .environment(GameModel())
-    } detail: {
-        Text("Detail")
-    }
+    GameView()
+        .frame(width: Constants.sidebarWidth, height: Constants.minHeight)
+        .environment(GameModel())
 }
 

@@ -71,4 +71,5 @@ struct ExarotonServerView: View {
             shared: false
         ), showStatus: true
     )
+    .padding()
 }

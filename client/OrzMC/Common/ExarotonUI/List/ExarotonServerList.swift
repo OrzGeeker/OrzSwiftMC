@@ -114,3 +114,9 @@ extension ExarotonServerList {
         }
     }
 }
+
+
+#Preview {
+    ExarotonServerList(token: "")
+        .environment(ExarotonServerModel())
+}

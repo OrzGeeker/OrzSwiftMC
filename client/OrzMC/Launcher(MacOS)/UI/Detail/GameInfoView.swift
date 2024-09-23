@@ -98,3 +98,9 @@ extension GameInfoView {
         }
     }
 }
+
+#Preview {
+    GameInfoView()
+        .frame(width: Constants.minWidth - Constants.sidebarWidth, height: Constants.minHeight)
+        .environment(GameModel())
+}

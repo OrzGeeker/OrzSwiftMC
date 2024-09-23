@@ -22,5 +22,6 @@ struct LauncherUI: View {
 
 #Preview {
     LauncherUI()
+        .frame(minWidth: Constants.minWidth, minHeight: Constants.minHeight)
         .environment(GameModel())
 }

@@ -16,3 +16,7 @@ struct ExarotonContent: View {
         }
     }
 }
+
+#Preview {
+    ExarotonContent()
+}

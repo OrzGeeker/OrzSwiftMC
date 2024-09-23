@@ -63,13 +63,28 @@ struct ExarotonServerStatusView: View {
                 config.animate ? .easeInOut(duration: 0.8).repeatForever() : nil,
                 value: opacity
             )
-            .onChange(of: status, initial: true) {
-                opacity = status.displayConfig.animate ? 0 : 1
+            .onChange(of: status, initial: false) {
+                opacity = config.animate ? 0 : 1
             }
-//            .overlay {
-//                Text(String(describing: status))
-//                    .font(.system(size: 4))
-//                    .bold()
-//            }
     }
+}
+
+#Preview {
+    
+    VStack(spacing: 10) {
+        
+        ForEach(ServerStatus.allCases, id: \.self) { status in
+            
+            HStack {
+                
+                Text("\(status)")
+                
+                Spacer()
+                
+                ExarotonServerStatusView(status: status)
+                    .frame(width: 24, height: 24)
+            }
+        }
+    }
+    .padding()
 }
