@@ -98,10 +98,11 @@ function sparkle() {
 
     sparkle_SUPublicEDKey=$($plistBuddyBin -c "Print SUPublicEDKey" "$app_info_plist")
     sparkle_generate_keys=$sparkle_bin/generate_keys
-
-    sparkle_existed_public_key=$($sparkle_generate_keys -p)
-    sparkle_local_public_key=$sparkle_existed_public_key
-    if [ -z $sparkle_existed_public_key ]; then
+    sparkle_local_public_key=$($sparkle_generate_keys -p)
+    if [ $? -ne 0 ]; then
+        unset sparkle_local_public_key
+    fi
+    if [ -z "$sparkle_local_public_key" ]; then
         sparkle_generate_public_key=$($sparkle_generate_keys | grep -o "<string>.*</string>")
         sparkle_generate_public_key=${sparkle_generate_public_key##<string>}
         sparkle_generate_public_key=${sparkle_generate_public_key%%</string>}
