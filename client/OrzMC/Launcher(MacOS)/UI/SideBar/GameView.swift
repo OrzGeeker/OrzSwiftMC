@@ -257,6 +257,7 @@ struct GameView: View {
                                 .pickerStyle(.menu)
                                 .onChange(of: model.gameType) {
                                     usernameTextFieldFocused = model.isClient
+                                    refreshStartGameButton()
                                 }
                                 .onChange(of: usernameTextFieldFocused) {
                                     refreshStartGameButton()
