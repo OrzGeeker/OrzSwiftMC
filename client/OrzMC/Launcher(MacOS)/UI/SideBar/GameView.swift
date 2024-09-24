@@ -151,7 +151,7 @@ struct GameView: View {
                                         .progressViewStyle(.circular)
                                         .controlSize(.small)
                                 } else {
-                                    Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                                    Image(systemName: "arrow.triangle.2.circlepath")
                                 }
                             })
                             .disabled(model.isFetchingGameVersions)
@@ -180,7 +180,7 @@ struct GameView: View {
                                             Button {
                                                 model.fetchCurrentJavaMajorVersion()
                                             } label: {
-                                                Image(systemName: "arrow.trianglehead.2.clockwise.rotate.90")
+                                                Image(systemName: "arrow.triangle.2.circlepath")
                                             }
                                         }
                                     }
