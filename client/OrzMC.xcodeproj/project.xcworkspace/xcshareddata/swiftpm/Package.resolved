@@ -78,8 +78,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
       "state" : {
-        "revision" : "974438a7ed23ba36c52fc026d9f1bafa8ba9bc88",
-        "version" : "0.0.8"
+        "branch" : "main",
+        "revision" : "636ff86674911a7acf7a6f46eb06942f92401e4b"
       }
     },
     {

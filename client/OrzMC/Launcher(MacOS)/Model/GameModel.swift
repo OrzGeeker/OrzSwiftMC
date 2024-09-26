@@ -14,6 +14,8 @@ import JokerKits
 @Observable
 final class GameModel {
     
+    var settingsModel = SettingsModel()
+    
     enum GameType: String, CaseIterable {
         case client, server
     }
@@ -197,6 +199,10 @@ extension GameModel {
     }
     
     func startServer(_ selectedVersion: Version) async throws {
+        var jvmArgs = [String]()
+        if settingsModel.enableJVMDebugger, !settingsModel.jvmDebuggerArgs.isEmpty {
+            jvmArgs.append(settingsModel.jvmDebuggerArgs)
+        }
         let serverInfo = ServerInfo(
             version: selectedVersion.id,
             gui: false,
@@ -205,6 +211,7 @@ extension GameModel {
             demo: false,
             minMem: "512M",
             maxMem: "2G",
+            jvmArgs: jvmArgs,
             onlineMode: false,
             showJarHelpInfo: false,
             jarOptions: nil

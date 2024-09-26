@@ -16,4 +16,6 @@ struct Constants {
     static let minHeight: CGFloat = minWidth * 0.618
     
     static let feedbackEmail = "824219521@qq.com"
+    
+    static let defaultJVMDebuggerArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 }

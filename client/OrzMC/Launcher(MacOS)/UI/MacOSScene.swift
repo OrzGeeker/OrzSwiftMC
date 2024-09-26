@@ -8,12 +8,20 @@
 import SwiftUI
 
 struct MacOSScene: Scene {
+    
+    @State private var model = GameModel()
+    
     var body: some Scene {
         Window("Home", id: "macos") {
             LauncherUI()
                 .frame(minWidth: Constants.minWidth, minHeight: Constants.minHeight)
-                .environment(GameModel())
+                .environment(model)
         }
         .windowResizability(.contentSize)
+        
+        Settings {
+            SettingsView()
+                .environment(model.settingsModel)
+        }
     }
 }

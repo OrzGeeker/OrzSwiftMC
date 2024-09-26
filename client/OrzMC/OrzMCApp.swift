@@ -12,6 +12,7 @@ import OrzAppUpdater
 
 @main
 struct OrzMCApp: App {
+    
 #if canImport(OrzAppUpdater)
     let updaterController = OrzAppUpdaterController()
 #endif
