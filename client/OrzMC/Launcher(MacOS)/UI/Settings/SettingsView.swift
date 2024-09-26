@@ -13,24 +13,41 @@ struct SettingsView: View {
         
     var body: some View {
         @Bindable var model = model
-        Form {
-            VStack(alignment: .leading) {
-                HStack {
-                    Toggle(isOn: $model.enableJVMDebugger) {
-                        Text("远程 JVM 调试")
-                    }
-                    .onChange(of: model.enableJVMDebugger) {
-                        if model.enableJVMDebugger, model.jvmDebuggerArgs.isEmpty {
-                            model.jvmDebuggerArgs = Constants.defaultJVMDebuggerArgs
+        
+        VStack(spacing: 20) {
+            GroupBox {
+                VStack(alignment: .leading) {
+                    HStack {
+                        Toggle(isOn: $model.enableJVMDebugger) {
+                            Text("远程 JVM 调试")
                         }
+                        .onChange(of: model.enableJVMDebugger) {
+                            if model.enableJVMDebugger, model.jvmDebuggerArgs.isEmpty {
+                                model.jvmDebuggerArgs = Constants.defaultJVMDebuggerArgs
+                            }
+                        }
+                        Spacer()
                     }
-                    Spacer()
+                    
+                    TextField(text: $model.jvmDebuggerArgs, prompt: Text(Constants.defaultJVMDebuggerArgs)) {
+                    }
+                    .textFieldStyle(.roundedBorder)
+                    .disabled(!model.enableJVMDebugger)
                 }
-                
-                TextField(text: $model.jvmDebuggerArgs, prompt: Text(Constants.defaultJVMDebuggerArgs)) {
-                }
-                .disabled(!model.enableJVMDebugger)
+            } label: {
+                Label("Server", systemImage: "xserve")
+                    .font(.title)
             }
+            
+//            GroupBox {
+//                HStack {
+//                    Spacer()
+//                }
+//            } label: {
+//                Label("Client", systemImage: "macbook")
+//                    .font(.title)
+//            }
+
             Spacer()
         }
         .padding()

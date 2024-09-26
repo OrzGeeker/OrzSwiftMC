@@ -191,7 +191,7 @@ struct GameView: View {
                                         if let requiredJavaMajorVersion = model.selectedGameJavaMajorVersionRequired {
                                             Text("\(requiredJavaMajorVersion)")
                                         }
-                                        if model.javaRuntimeStatus != .valid {
+                                        if model.javaRuntimeStatus != .valid, let javaVersionInt = model.selectedGameJavaMajorVersionRequired  {
                                             Spacer()
                                             Button {
                                                 Task {
@@ -202,12 +202,7 @@ struct GameView: View {
                                                             return
                                                         }
                                                     }
-                                                    
-                                                    guard let javaVersionInt = model.selectedGameJavaMajorVersionRequired
-                                                    else {
-                                                        return
-                                                    }
-                                                    
+                                                                                                        
                                                     downloadingJDK = true
                                                     let javaVersion = String(javaVersionInt)
                                                     jdkFileURL = try await OracleJava.downloadJDK(javaVersion) { progress in
