@@ -17,6 +17,7 @@ public struct ServerInfo: Sendable {
     // JVM启动内存占用参数
     var minMem: String
     var maxMem: String
+    var jvmArgs: [String]
     
     // 服务端参数
     public var onlineMode: Bool // 是否以online模式运行服务端
@@ -25,7 +26,18 @@ public struct ServerInfo: Sendable {
     // Jar包对应的参数
     var jarOptions: String?
 
-    public init(version: String, gui: Bool, debug: Bool, forceUpgrade: Bool, demo: Bool, minMem: String, maxMem: String, onlineMode: Bool, showJarHelpInfo: Bool, jarOptions: String? = nil) {
+    public init(
+        version: String,
+        gui: Bool,
+        debug: Bool,
+        forceUpgrade: Bool,
+        demo: Bool,
+        minMem: String,
+        maxMem: String,
+        jvmArgs: [String] = [],
+        onlineMode: Bool,
+        showJarHelpInfo: Bool,
+        jarOptions: String? = nil) {
         self.version = version
         self.gui = gui
         self.debug = debug
@@ -33,6 +45,7 @@ public struct ServerInfo: Sendable {
         self.demo = demo
         self.minMem = minMem
         self.maxMem = maxMem
+        self.jvmArgs = jvmArgs
         self.onlineMode = onlineMode
         self.showJarHelpInfo = showJarHelpInfo
         self.jarOptions = jarOptions

@@ -17,6 +17,13 @@ public extension Server {
             "-server",
             "-Xms" + serverInfo.minMem,
             "-Xmx" + serverInfo.maxMem,
+        ]
+        
+        if !serverInfo.jvmArgs.isEmpty {
+            args += serverInfo.jvmArgs
+        }
+
+        args += [
             "-jar",
             filePath,
         ]
