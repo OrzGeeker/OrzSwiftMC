@@ -4,6 +4,14 @@
         <title>OrzMC</title>
         <item>
             <title>0.0.7</title>
+            <pubDate>Fri, 27 Sep 2024 21:59:01 +0800</pubDate>
+            <sparkle:version>18</sparkle:version>
+            <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.7/OrzMC_0.0.7_18_20240927_215901.zip" length="5581947" type="application/octet-stream" sparkle:edSignature="d2zxrLZgmu2DHOq5fJ2xvEarDO6l9FMluMllR7z40PwhPLKLLKK732N5QQtL9U7dF7lFMyvwoqfoCKswTcULBg=="/>
+        </item>
+        <item>
+            <title>0.0.7</title>
             <pubDate>Tue, 24 Sep 2024 18:04:29 +0800</pubDate>
             <sparkle:version>17</sparkle:version>
             <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
@@ -17,14 +25,6 @@
             <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
             <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
             <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.7/OrzMC_0.0.7_16_20240924_162934.zip" length="5566969" type="application/octet-stream" sparkle:edSignature="ri/eRHZiZoHlUHSi5aKoCFkoC/sUyC8nZ0snXpMv9k5dYu7xoPSlIvVdjZ23mNMJLyHHnKIDGFg/VP1nY+kaBA=="/>
-        </item>
-        <item>
-            <title>0.0.7</title>
-            <pubDate>Sun, 22 Sep 2024 12:17:46 +0800</pubDate>
-            <sparkle:version>15</sparkle:version>
-            <sparkle:shortVersionString>0.0.7</sparkle:shortVersionString>
-            <sparkle:minimumSystemVersion>14.0</sparkle:minimumSystemVersion>
-            <enclosure url="https://github.com/OrzGeeker/OrzSwiftMC/releases/download/0.0.7/OrzMC_0.0.7_15_20240922_121746.zip" length="5566543" type="application/octet-stream" sparkle:edSignature="k3uHOjpuiqbgE7BurNRNqflE16HnrwSlkFWiV5O4daAv65CSu77ocOVNDkWucKOU9Uz7529kcx/sOzpfHZ5lDw=="/>
         </item>
     </channel>
 </rss>
