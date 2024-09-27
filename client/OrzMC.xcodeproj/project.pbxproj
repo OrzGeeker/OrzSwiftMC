@@ -33,8 +33,8 @@
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2BA7F9942CA5848200ED2684 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7F9932CA5848200ED2684 /* SettingsView.swift */; platformFilters = (macos, ); };
 		2BA7F9962CA58DFD00ED2684 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7F9952CA58DFD00ED2684 /* SettingsModel.swift */; platformFilters = (macos, ); };
-		2BA7F9A52CA5982A00ED2684 /* Game in Frameworks */ = {isa = PBXBuildFile; productRef = 2BA7F9A42CA5982A00ED2684 /* Game */; };
-		2BA7F9A72CA5982A00ED2684 /* Mojang in Frameworks */ = {isa = PBXBuildFile; productRef = 2BA7F9A62CA5982A00ED2684 /* Mojang */; };
+		2BA7F9A52CA5982A00ED2684 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2BA7F9A42CA5982A00ED2684 /* Game */; };
+		2BA7F9A72CA5982A00ED2684 /* Mojang in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2BA7F9A62CA5982A00ED2684 /* Mojang */; };
 		2BD03D792907F93200BE1D1F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD03D782907F93200BE1D1F /* Model.swift */; platformFilter = ios; };
 		2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD301EE29000B2C00993823 /* LauncherUI.swift */; platformFilters = (macos, ); };
 		E20C658A2C8AFD8400831909 /* OrzAppUpdater in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = E20C65892C8AFD8400831909 /* OrzAppUpdater */; };
