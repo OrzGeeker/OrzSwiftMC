@@ -17,5 +17,6 @@ struct Constants {
     
     static let feedbackEmail = "824219521@qq.com"
     
+    /// https://docs.papermc.io/paper/dev/debugging#using-a-remote-debugger
     static let defaultJVMDebuggerArgs = "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
 }

@@ -9,10 +9,20 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ExarotonContent()
+        TabView {
+            
+            Tab("Client", systemImage: "macbook") {
+                Text("Client")
+            }
+            
+            Tab("Server", systemImage: "xserve") {
+                ExarotonContent()
+            }
+        }
     }
 }
 
 #Preview {
     ContentView()
+        .environment(Model())
 }
