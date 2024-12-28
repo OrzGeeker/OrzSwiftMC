@@ -15,18 +15,10 @@ extension Client {
         else {
             return false
         }
-        
-        let authParam =  Mojang.AuthAPI.AuthReqParam.init(
-            agent: Mojang.AuthAPI.AuthReqParam.Agent(),
-            username: accountName,
-            password: accountPassword
-        )
-        guard let data = try await Mojang.AuthAPI.authenticate(reqParam: authParam).data
-        else {
-            return false
-        }
-        
-        let authResp = try JSONDecoder().decode(Mojang.AuthAPI.AuthRespone.self, from: data)
+        let agent = AuthAgent(name: "minecraft", version: 1)
+        let reqParam = AuthReqParam(agent: agent, username: accountName, password: accountPassword)
+        let body = AuthReqBody.json(reqParam)
+        let authResp = try await Mojang.auth(action: .authenticate, reqBody: body)
         self.clientInfo.clientToken = authResp.clientToken
         self.clientInfo.accessToken = authResp.accessToken
         

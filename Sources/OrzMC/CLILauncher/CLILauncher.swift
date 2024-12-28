@@ -42,6 +42,7 @@ public struct CLILauncher: Client {
     /// 授权验证
     mutating func authenticate() async throws {
         guard try await auth() else {
+            Platform.console.output("帐号正版验证失败", style: .error)
             return
         }
         Platform.console.output("验证账号密码为正版用户", style: .success)
