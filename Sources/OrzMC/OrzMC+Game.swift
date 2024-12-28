@@ -5,13 +5,13 @@
 //  Created by joker on 2022/1/15.
 //
 
-import Mojang
+import MojangAPI
 import JokerKits
 import Game
 
 extension OrzMC {
     static func chooseGameVersion(_ version: String?) async throws -> Version {
-        guard let releaseVersions = try await Mojang.manifest?.versions.filter({ $0.type == "release" })
+        guard let releaseVersions = try? await Mojang.versions(type: .release)
         else {
             throw GameError.noGameVersions
         }

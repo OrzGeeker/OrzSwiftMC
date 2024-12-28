@@ -7,7 +7,7 @@
 
 import Foundation
 import JokerKits
-import Mojang
+import MojangAPI
 
 public struct GameUtils {
     
@@ -17,10 +17,14 @@ public struct GameUtils {
     }
     
     public static func releases() async -> [String] {
-        return await Mojang.releases().compactMap { $0.id }
+        do {
+            return try await Mojang.versions(type: .release).compactMap { $0.id }
+        } catch {
+            return []
+        }
     }
     
     public static func releaseGameVersion(_ version: String) async -> [Version]? {
-        return await Mojang.releases().filter { $0.id == version }
+        return try? await Mojang.versions(type: .release).filter { $0.id == version }
     }
 }

@@ -5,7 +5,7 @@
 //  Created by wangzhizhou on 2022/1/12.
 //
 
-import Mojang
+import MojangAPI
 import JokerKits
 import Utils
 import Foundation
@@ -57,16 +57,18 @@ public struct VanillaServer: Server {
     /// ```
     public func start() async throws -> Process? {
         
-        guard let serverVersion = try await Mojang.manifest?.versions.filter({ $0.id == serverInfo.version }).first?.gameInfo?.downloads.server
+        guard let version = try await Mojang.manifest().versions.filter({ $0.id == serverInfo.version }).first,
+              let serverVersion = try await version.gameVersion?.downloads.server,
+              let serverVersionURL = URL(string: serverVersion.url)
         else {
             throw VanillaServerError.getServerInfoFailed
         }
         
-        let serverJarFileName = serverVersion.url.lastPathComponent
+        let serverJarFileName = serverVersionURL.lastPathComponent
         let serverJarFileDirPath = GameDir.server(version: serverInfo.version, type: GameType.vanilla.rawValue)
         let serverJarFilePath = serverJarFileDirPath.filePath(serverJarFileName)
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
-        let serverJarFileItem = DownloadItemInfo(sourceURL: serverVersion.url, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)
+        let serverJarFileItem = DownloadItemInfo(sourceURL: serverVersionURL, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)
         
         let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)

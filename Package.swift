@@ -11,13 +11,13 @@ let package = Package(
     products: [
         .executable(name: "orzmc", targets: ["OrzMC"]),
         .library(name: "Game", targets: ["Game"]),
-        .library(name: "Mojang", targets: ["Mojang"]),
         .library(name: "Fabric", targets: ["Fabric"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", from: "0.0.3"),
         .package(url: "https://github.com/wangzhizhou/PaperMC.git", from: "0.0.3"),
+        .package(url: "https://github.com/wangzhizhou/MojangAPI.git", from: "0.0.1"),
     ],
     targets: [
         // MARK: Command Line executable
@@ -31,20 +31,11 @@ let package = Package(
         ),
         // MARK: Game Logic Capsule
         .target(name: "Game", dependencies: [
-            "Mojang",
+            "MojangAPI",
             "Fabric",
             .product(name: "Utils", package: "OrzSwiftKit"),
-            .product(name: "PaperMCAPI", package: "PaperMC")
+            .product(name: "PaperMCAPI", package: "PaperMC"),
         ]),
-        // MARK: Mojang Offical
-        .target(
-            name: "Mojang",
-            dependencies: [.product(name: "JokerKits", package: "OrzSwiftKit")]
-        ),
-        .testTarget(
-            name: "MojangTests",
-            dependencies: ["Mojang"]
-        ),
         // MARK: Fabric
         .target(
             name: "Fabric",

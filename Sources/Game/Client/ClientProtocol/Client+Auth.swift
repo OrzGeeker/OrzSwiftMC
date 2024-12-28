@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Mojang
+import MojangAPI
 
 extension Client {
     /// 授权验证
