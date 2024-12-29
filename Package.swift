@@ -33,8 +33,8 @@ let package = Package(
         .target(name: "Game", dependencies: [
             "MojangAPI",
             "Fabric",
-            .product(name: "Utils", package: "OrzSwiftKit"),
             .product(name: "PaperMCAPI", package: "PaperMC"),
+            .product(name: "Utils", package: "OrzSwiftKit"),
         ]),
         // MARK: Fabric
         .target(
