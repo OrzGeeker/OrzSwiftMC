@@ -1,5 +1,5 @@
 //
-//  CLILauncher.swift
+//  Launcher.swift
 //  
 //
 //  Created by joker on 2022/1/3.
@@ -11,14 +11,17 @@
 ///
 /// [启动器Wiki](https://minecraft.fandom.com/zh/wiki/教程/编写启动器)
 
-import Game
 import JokerKits
 import Utils
 
-public struct CLILauncher: Client {
+public struct Launcher: Client {
     
     /// 客户端启动器启动参数相关
     public var clientInfo: ClientInfo
+    
+    public init(clientInfo: ClientInfo) {
+        self.clientInfo = clientInfo
+    }
         
     /// 客户端启动
     mutating public func start() async throws {
@@ -41,8 +44,8 @@ public struct CLILauncher: Client {
     
     /// 授权验证
     mutating func authenticate() async throws {
-        guard try await auth() else {
-            Platform.console.output("帐号正版验证失败", style: .error)
+        guard try await auth()
+        else {
             return
         }
         Platform.console.output("验证账号密码为正版用户", style: .success)

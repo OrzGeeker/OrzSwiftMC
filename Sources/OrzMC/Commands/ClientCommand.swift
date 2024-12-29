@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  
+//
 //
 //  Created by joker on 2022/1/14.
 //
@@ -36,19 +36,19 @@ struct ClientCommand: AsyncCommand {
     
     func run(using context: CommandContext, signature: Signature) async throws {
         
-        let version = try await OrzMC.chooseGameVersion(signature.version)
+        let version = try await Terminal.chooseGameVersion(signature.version)
         
-        let username = signature.username ?? OrzMC.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
+        let username = signature.username ?? Terminal.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
         
         let debug = signature.debug
         
         // 显示指定是否进行正版授权
         var accountName: String? = nil
         if signature.authenticate {
-            accountName = OrzMC.userInput(hint: "输入正版帐号(如无可以直接回车)：")
+            accountName = Terminal.userInput(hint: "输入正版帐号(如无可以直接回车)：")
             if let accountName = accountName, accountName.count > 0 {
                 Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
-                let accountPassword = OrzMC.userInput(hint: "输入正版密码((如无可以直接回车))：")
+                let accountPassword = Terminal.userInput(hint: "输入正版密码((如无可以直接回车))：")
                 if accountPassword.count > 0 {
                     let secureText = String(repeating: "*", count: accountPassword.count)
                     Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
@@ -60,6 +60,7 @@ struct ClientCommand: AsyncCommand {
         let minMem = signature.minMem ?? "512M"
         let maxMem = signature.maxMem ?? "2G"
         
+        // 参数收集完成
         let clientInfo = ClientInfo(
             version: version,
             username: username,
@@ -69,8 +70,8 @@ struct ClientCommand: AsyncCommand {
             minMem: minMem,
             maxMem: maxMem
         )
-        
-        var laucher = CLILauncher(clientInfo: clientInfo)
+        // 启动 Launcher
+        var laucher = Launcher(clientInfo: clientInfo)
         try await laucher.start()
     }
 }
