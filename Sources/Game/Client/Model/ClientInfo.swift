@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Mojang
 import Fabric
+import MojangAPI
 
 public struct ClientInfo: Sendable {
     public var version: Version

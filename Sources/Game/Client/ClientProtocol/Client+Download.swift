@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Mojang
+import MojangAPI
 import JokerKits
 import Utils
 
@@ -15,17 +15,20 @@ public extension Client {
     /// - Returns: 需要下载的资源信息数组
     func generateDownloadItemInfos() async throws -> [DownloadItemInfo] {
         var downloadItems = [DownloadItemInfo]()
-        
-        let gameInfo = try await self.clientInfo.version.gameInfo
-        guard let client = gameInfo?.downloads.client,
-              let assetIndex = gameInfo?.assetIndex,
-              let objects = try await assetIndex.assetInfo?.objects,
-              let libraries = gameInfo?.libraries,
-              let clientLogCfgFile = gameInfo?.logging.client.file
+        guard
+            let gameInfo = try await self.clientInfo.version.gameVersion,
+            let objects = try await gameInfo.assetIndexObject?.objects,
+            let clientURL = URL(string: gameInfo.downloads.client.url),
+            let assetIndexURL = URL(string: gameInfo.assetIndex.url)
         else { return downloadItems }
         
+        let client = gameInfo.downloads.client
+        let assetIndex = gameInfo.assetIndex
+        let libraries = gameInfo.libraries
+        let clientLogCfgFile = gameInfo.logging.client.file
+        
         // 游戏版本信息JSON文件
-        if let sourceURL = clientInfo.version.url {
+        if let sourceURL = URL(string: clientInfo.version.url)  {
             let jsonFileName = sourceURL.lastPathComponent
             let jsonFilePath = GameDir.clientVersion(version: clientInfo.version.id).filePath(jsonFileName)
             let jsonFileURL = URL(fileURLWithPath: jsonFilePath)
@@ -34,43 +37,40 @@ public extension Client {
         }
         
         // 游戏客户端Jar文件
-        let clientJarFileName = [clientInfo.version.id, client.url.pathExtension].joined(separator: ".")
+        let clientJarFileName = [clientInfo.version.id, clientURL.pathExtension].joined(separator: ".")
         let clientJarFilePath = GameDir.clientVersion(version: clientInfo.version.id).filePath(clientJarFileName)
         let clientJarFileURL = URL(fileURLWithPath: clientJarFilePath)
-        let clientJarItem = DownloadItemInfo(sourceURL: client.url, dstFileURL: clientJarFileURL, hash: client.sha1, hashType: .sha1)
+        let clientJarItem = DownloadItemInfo(sourceURL: clientURL, dstFileURL: clientJarFileURL, hash: client.sha1, hashType: .sha1)
         downloadItems.append(clientJarItem)
         
         // 游戏客户端资源索引文件
-        let indexFileName = assetIndex.url.lastPathComponent
+        let indexFileName = assetIndexURL.lastPathComponent
         let indexFilePath = GameDir.assetsIdx(version: clientInfo.version.id).filePath(indexFileName)
         let indexFileURL = URL(fileURLWithPath: indexFilePath)
-        let indexFileItem = DownloadItemInfo(sourceURL: assetIndex.url, dstFileURL: indexFileURL, hash: assetIndex.sha1, hashType: .sha1)
+        let indexFileItem = DownloadItemInfo(sourceURL: assetIndexURL, dstFileURL: indexFileURL, hash: assetIndex.sha1, hashType: .sha1)
         downloadItems.append(indexFileItem)
         
         // 游戏客户端资源对象文件
-        for filename in objects.keys {
-            guard let info = objects[filename]
-            else {
-                continue
-            }
-            let assetObjURL = Mojang.assetObjURL(info.filePath())
-            let assetFilePath = GameDir.assetsObj(version: clientInfo.version.id, path: info.dirPath()).filePath(assetObjURL.lastPathComponent)
+        for object in objects.additionalProperties.values {
+            let assetObjURL = object.URL
+            let assetFilePath = GameDir.assetsObj(version: clientInfo.version.id, path: object.dirName).filePath(object.fileName)
             let assetFileURL = URL(fileURLWithPath: assetFilePath)
-            let assetFileItem = DownloadItemInfo(sourceURL: assetObjURL, dstFileURL: assetFileURL, hash: info.hash, hashType: .sha1)
+            let assetFileItem = DownloadItemInfo(sourceURL: assetObjURL, dstFileURL: assetFileURL, hash: object.hash, hashType: .sha1)
             downloadItems.append(assetFileItem)
         }
         
         // 游戏客户端依赖库文件
         for lib in libraries {
-            var artifact = lib.downloads.artifact
+            let artifact = lib.downloads.artifact
             let dirPath = NSString(string: artifact.path).deletingLastPathComponent
-            var targetDir = GameDir.libraryObj(version: clientInfo.version.id, path: dirPath)
+            let targetDir = GameDir.libraryObj(version: clientInfo.version.id, path: dirPath)
             
             let currentOSName = Platform.os.platformName()
-            if let natives = lib.natives, let nativeClassifier = natives[currentOSName], let nativeArtifact = lib.downloads.classifiers?[nativeClassifier] {
-                artifact = nativeArtifact
-                targetDir = GameDir.clientVersionNative(version: clientInfo.version.id)
-            }
+            
+//            if let natives = lib.natives, let nativeClassifier = natives[currentOSName], let nativeArtifact = lib.downloads.classifiers?[nativeClassifier] {
+//                artifact = nativeArtifact
+//                targetDir = GameDir.clientVersionNative(version: clientInfo.version.id)
+//            }
             
             // 判断当前平台是否需要下载
             var allowDownload = true
@@ -92,25 +92,28 @@ public extension Client {
                 allowDownload = allowOSSet.contains(currentOSName)
             }
             
-            if lib.rules == nil, let natives = lib.natives, !natives.keys.contains(currentOSName) {
-                allowDownload = false
-            }
+//            if lib.rules == nil, let natives = lib.natives, !natives.keys.contains(currentOSName) {
+//                allowDownload = false
+//            }
             
             guard allowDownload else {
                 continue
             }
-            
-            let libFilePath = targetDir.filePath(artifact.url.lastPathComponent)
-            let libFileURL = URL(fileURLWithPath: libFilePath)
-            let libFileItem = DownloadItemInfo(sourceURL: artifact.url, dstFileURL: libFileURL, hash: artifact.sha1, hashType: .sha1)
-            downloadItems.append(libFileItem)
+            if let artifactURL = URL(string: artifact.url) {
+                let libFilePath = targetDir.filePath(artifactURL.lastPathComponent)
+                let libFileURL = URL(fileURLWithPath: libFilePath)
+                let libFileItem = DownloadItemInfo(sourceURL: artifactURL, dstFileURL: libFileURL, hash: artifact.sha1, hashType: .sha1)
+                downloadItems.append(libFileItem)
+            }
         }
         
         // 游戏客户端日志配置文件
-        let clientLogCfgFilePath = GameDir.clientLogConfig(version: clientInfo.version.id).filePath(clientLogCfgFile.url.lastPathComponent)
-        let clientLogCfgFileURL = URL(fileURLWithPath: clientLogCfgFilePath)
-        let clientLogCfgFileItem = DownloadItemInfo(sourceURL: clientLogCfgFile.url, dstFileURL: clientLogCfgFileURL, hash: clientLogCfgFile.sha1, hashType: .sha1)
-        downloadItems.append(clientLogCfgFileItem)
+        if let clientLogCfgFileURL = URL(string: clientLogCfgFile.url) {
+            let clientLogCfgFilePath = GameDir.clientLogConfig(version: clientInfo.version.id).filePath(clientLogCfgFileURL.lastPathComponent)
+            let clientLogCfgFilePathURL = URL(fileURLWithPath: clientLogCfgFilePath)
+            let clientLogCfgFileItem = DownloadItemInfo(sourceURL: clientLogCfgFileURL, dstFileURL: clientLogCfgFilePathURL, hash: clientLogCfgFile.sha1, hashType: .sha1)
+            downloadItems.append(clientLogCfgFileItem)
+        }
         
         // 返回所有需要下载的项目信息
         return downloadItems

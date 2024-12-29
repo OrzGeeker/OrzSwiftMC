@@ -8,10 +8,11 @@
 import Foundation
 import JokerKits
 import Utils
+import MojangAPI
 
 extension Client {
     public mutating func parseBootArgs() async throws -> [String]? {
-        guard let gameInfo = try await self.clientInfo.version.gameInfo
+        guard let gameInfo = try await self.clientInfo.version.gameVersion
         else {
             return nil
         }
@@ -38,13 +39,13 @@ extension Client {
             "version_name": clientInfo.version.id,
             "game_directory": gameDir,
             "assets_root": GameDir.assets(version: clientInfo.version.id).dirPath,
-            "assets_index_name": try await clientInfo.version.gameInfo?.assetIndex.id ?? "",
+            "assets_index_name": gameInfo.assetIndex.id,
             "auth_uuid": UUID().uuidString,
             "auth_access_token": clientInfo.accessToken ?? UUID().uuidString,
             "clientid": clientInfo.version.id,
             "auth_xuid": clientInfo.username,
             "user_type": "mojang",
-            "version_type": clientInfo.version.type,
+            "version_type": clientInfo.version._type.rawValue,
             "classpath": classPath.joined(separator: cpSep),
             "path": GameDir.clientLogConfig(version: clientInfo.version.id).filePath(gameInfo.logging.client.file.id)
         ]
@@ -62,20 +63,24 @@ extension Client {
         // 处理jvm相关参数
         var jvmArgsArray = gameInfo.arguments.jvm.compactMap { (arg) -> String? in
             switch arg {
-            case .object(let obj):
-                for rule in obj.rules {
-                    if rule.os.name == Platform.os.platformName(), rule.action == "allow" {
-                        switch obj.value {
-                        case .array(let values):
-                            return values.joined(separator: " ")
-                        case .string(let value):
-                            return value
+            case .case1(let value):
+                return value
+            case .case2(let obj):
+                if let rules = obj.rules {
+                    for rule in rules {
+                        if rule.os?.name == Platform.os.platformName(), rule.action == "allow" {
+                            switch obj.value {
+                            case .case1(let value):
+                                return value
+                            case .case2(let values):
+                                return values.joined(separator: " ")
+                            case .none:
+                                return nil
+                            }
                         }
                     }
                 }
                 return nil
-            case .string(let value):
-                return value
             }
         }
         // 添加 Fabric 客户端相关的JVM参数
@@ -86,10 +91,10 @@ extension Client {
         // 处理游戏启动器参数
         let gameArgsArray = gameInfo.arguments.game.compactMap { (arg) -> String? in
             switch arg {
-            case .object(_):
-                return nil
-            case .string(let value):
+            case .case1(let value):
                 return value
+            case .case2(_):
+                return nil
             }
         }
         
