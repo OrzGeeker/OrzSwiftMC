@@ -6,8 +6,6 @@
 //
 
 import ConsoleKit
-import JokerKits
-import Utils
 import Game
 
 struct ClientCommand: AsyncCommand {
@@ -36,6 +34,8 @@ struct ClientCommand: AsyncCommand {
     
     func run(using context: CommandContext, signature: Signature) async throws {
         
+        let console = context.console
+        
         let version = try await Terminal.chooseGameVersion(signature.version)
         
         let username = signature.username ?? Terminal.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
@@ -47,11 +47,11 @@ struct ClientCommand: AsyncCommand {
         if signature.authenticate {
             accountName = Terminal.userInput(hint: "输入正版帐号(如无可以直接回车)：")
             if let accountName = accountName, accountName.count > 0 {
-                Platform.console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
+                console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
                 let accountPassword = Terminal.userInput(hint: "输入正版密码((如无可以直接回车))：")
                 if accountPassword.count > 0 {
                     let secureText = String(repeating: "*", count: accountPassword.count)
-                    Platform.console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
+                    console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
                 }
             }
         }
