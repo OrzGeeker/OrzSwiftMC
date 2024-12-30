@@ -8,7 +8,6 @@
 import ConsoleKit
 import Dispatch
 import JokerKits
-import Utils
 import Game
 
 struct ServerCommand: AsyncCommand {
@@ -59,8 +58,8 @@ struct ServerCommand: AsyncCommand {
             try await Shell.stopAll()
             return
         }
-        
-        let version = try await Terminal.chooseGameVersion(signature.version)
+        let console = context.console
+        let version = try await console.chooseGameVersion(signature.version)
         let gui = signature.gui
         let debug = signature.debug
         let minMem = signature.minMem ?? "1G"
@@ -85,7 +84,7 @@ struct ServerCommand: AsyncCommand {
         )
         
         if let type = GameType(rawValue: signature.type ?? GameType.paper.rawValue) {
-            Platform.console.success("服务器类型: \(type)")
+            console.success("服务器类型: \(type)")
             switch type {
             case .paper:
                 _ = try await PaperServer(serverInfo: serverInfo).start()
@@ -94,7 +93,7 @@ struct ServerCommand: AsyncCommand {
             }
         }
         else{
-            Platform.console.success("服务器类型: \(GameType.paper)")
+            console.success("服务器类型: \(GameType.paper)")
             _ = try await PaperServer(serverInfo: serverInfo).start()
         }
     }

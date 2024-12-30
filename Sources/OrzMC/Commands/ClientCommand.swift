@@ -36,19 +36,19 @@ struct ClientCommand: AsyncCommand {
         
         let console = context.console
         
-        let version = try await Terminal.chooseGameVersion(signature.version)
+        let version = try await console.chooseGameVersion(signature.version)
         
-        let username = signature.username ?? Terminal.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
+        let username = signature.username ?? console.userInput(hint: "输入一个用户名：", completedHint: "游戏用户名：")
         
         let debug = signature.debug
         
         // 显示指定是否进行正版授权
         var accountName: String? = nil
         if signature.authenticate {
-            accountName = Terminal.userInput(hint: "输入正版帐号(如无可以直接回车)：")
+            accountName = console.userInput(hint: "输入正版帐号(如无可以直接回车)：")
             if let accountName = accountName, accountName.count > 0 {
                 console.output("正版帐号：".consoleText(.success) + "\(accountName)".consoleText(.info))
-                let accountPassword = Terminal.userInput(hint: "输入正版密码((如无可以直接回车))：")
+                let accountPassword = console.userInput(hint: "输入正版密码((如无可以直接回车))：")
                 if accountPassword.count > 0 {
                     let secureText = String(repeating: "*", count: accountPassword.count)
                     console.output("正版密码：".consoleText(.success) + secureText.consoleText(.info))
