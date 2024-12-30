@@ -8,6 +8,7 @@
 import Foundation
 import Fabric
 import MojangAPI
+import ConsoleKit
 
 public struct ClientInfo: Sendable {
     public var version: Version
@@ -29,6 +30,9 @@ public struct ClientInfo: Sendable {
     // Fabric
     var fabricModel: FabricModel?
     
+    // Console
+    let console: (any Console)?
+    
     public init(
         version: Version,
         username: String,
@@ -41,7 +45,9 @@ public struct ClientInfo: Sendable {
         clientToken: String? = nil,
         minMem: String,
         maxMem: String,
-        fabricModel: FabricModel? = nil) {
+        fabricModel: FabricModel? = nil,
+        console: (any Console)? = nil
+    ) {
         self.version = version
         self.username = username
         self.debug = debug
@@ -54,5 +60,6 @@ public struct ClientInfo: Sendable {
         self.minMem = minMem
         self.maxMem = maxMem
         self.fabricModel = fabricModel
+        self.console = console
     }
 }

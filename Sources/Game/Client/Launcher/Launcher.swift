@@ -48,7 +48,7 @@ public struct Launcher: Client {
         else {
             return
         }
-        Platform.console.output("验证账号密码为正版用户", style: .success)
+        self.clientInfo.console?.success("验证账号密码为正版用户")
     }
     
     /// 启动客户端
@@ -56,26 +56,27 @@ public struct Launcher: Client {
         guard let args = try await parseBootArgs() else {
             return
         }
-        Platform.console.output("客户端正在启动，请稍等......", style: .success)
+        self.clientInfo.console?.success("客户端正在启动，请稍等......")
         // 客户端启动后，可以从UI界面关闭，所以可以异步启动
         let gameDir = GameDir.client(version: clientInfo.version.id).dirPath
+        let console = clientInfo.console
         try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: gameDir, terminationHandler: { process in
             guard process.terminationStatus == 0 else {
-                Platform.console.output("客户端异常退出", style: .error)
+                console?.error("客户端异常退出")
                 return
             }
-            Platform.console.output("客户端正常", style: .success)
+            console?.success("客户端正常")
         })
     }
     
     /// 下载启动器启动需要的文件
     func download() async throws {
-        Platform.console.pushEphemeral()
+        self.clientInfo.console?.pushEphemeral()
         let downloadItems = try await generateDownloadItemInfos()
-        let progressBar = Platform.console.progressBar(title: "正在下载客户端文件")
+        let progressBar = self.clientInfo.console?.progressBar(title: "正在下载客户端文件")
         try await Downloader.download(downloadItems, progressBar: progressBar)
-        Platform.console.popEphemeral()
-        Platform.console.output("下载客户端文件完成", style: .success)
+        self.clientInfo.console?.popEphemeral()
+        self.clientInfo.console?.success("下载客户端文件完成")
     }
     
     /// 下载Fabric客户端相关文件
@@ -83,9 +84,9 @@ public struct Launcher: Client {
         guard let downloadItemInfos = try fabricDownloadItems() else {
             return
         }
-        let progressBar = Platform.console.progressBar(title: "开始下载Fabric库文件")
+        let progressBar = self.clientInfo.console?.progressBar(title: "开始下载Fabric库文件")
         try await Downloader.download(downloadItemInfos, progressBar: progressBar)
-        Platform.console.output("下载Fabric库文件完成".consoleText(.success))
+        self.clientInfo.console?.success("下载Fabric库文件完成")
     }
     
     /// 选择客户端启动方式
@@ -93,13 +94,13 @@ public struct Launcher: Client {
         let menuItems = try launcherProfileItems()
         var chooseItem = menuItems.first
         if menuItems.count > 1 {
-            chooseItem = Platform.console.choose("选择启动方式：".consoleText(.success), from: menuItems)
+            chooseItem = self.clientInfo.console?.choose("选择启动方式：".consoleText(.success), from: menuItems)
         }
         guard let chooseItem = chooseItem else {
             return
         }
-        Platform.console.output("启动：".consoleText(.success), newLine: false)
-        Platform.console.output(chooseItem.consoleText(.info))
+        self.clientInfo.console?.success("启动：", newLine: false)
+        self.clientInfo.console?.output(chooseItem.consoleText(.info))
         try selectedProfile(chooseItem)
     }
 }

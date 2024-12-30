@@ -7,7 +7,6 @@
 
 import Foundation
 import JokerKits
-import Utils
 
 public extension Server {
     
@@ -62,11 +61,19 @@ public extension Server {
         if !FileManager.default.fileExists(atPath: eulaFilePath) || !FileManager.default.fileExists(atPath: propertiesFilePath) {
             await Shell.run(path: try GameUtils.javaPath(), args: args + ["--initSettings"], workDirectory: workDirectory.dirPath)
         }
-        try modifyEULA(at: eulaFilePath)
-        try modifyProperties(at: propertiesFilePath)
+        let agreeEULA = try modifyEULA(at: eulaFilePath)
+        if agreeEULA {
+            self.serverInfo.console?.success("已同意EULA协议")
+        } else {
+            self.serverInfo.console?.error("未同意EULA协议")
+        }
+        let isOnlineMode = try modifyProperties(at: propertiesFilePath)
+        if isOnlineMode {
+            self.serverInfo.console?.success("服务器运行为在线模式")
+        } else {
+            self.serverInfo.console?.warning("服务器运行为离线模式")
+        }
         let process = try Shell.run(path: try GameUtils.javaPath(), args: args, workDirectory: workDirectory.dirPath, terminationHandler: nil)
-        Platform.console.success("后台启动服务端: ", newLine: false)
-        Platform.console.info("PID = \(process.processIdentifier)")
         return process
     }
 }

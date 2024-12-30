@@ -5,9 +5,6 @@
 //  Created by joker on 2022/10/22.
 //
 
-import Foundation
-import JokerKits
-import ConsoleKit
 import Utils
 
 public extension Platform {
@@ -23,6 +20,4 @@ public extension Platform {
             return "unsupported"
         }
     }
-    
-    static let console = Terminal()
 }

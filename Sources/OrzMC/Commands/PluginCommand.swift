@@ -39,7 +39,7 @@ struct PluginCommand: AsyncCommand {
             }
             let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
             let progressBar = console.progressBar(title: "正在下载插件")
-            try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL), progressBar: progressBar)
+            try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL, console: console), progressBar: progressBar)
             console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
             await Shell.runCommand(with: ["open", "\(outpuFileDirURL.path)"])
         }

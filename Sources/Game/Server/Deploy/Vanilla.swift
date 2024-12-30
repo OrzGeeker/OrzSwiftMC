@@ -70,7 +70,7 @@ public struct VanillaServer: Server {
         let serverJarFileURL = URL(fileURLWithPath: serverJarFilePath)
         let serverJarFileItem = DownloadItemInfo(sourceURL: serverVersionURL, dstFileURL: serverJarFileURL, hash: serverVersion.sha1, hashType: .sha1)
         
-        let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
+        let progressBar = self.serverInfo.console?.progressBar(title: "正在下载服务端文件")
         try await Downloader.download(serverJarFileItem, progressBar: progressBar)
         let process = try await launchServer(serverJarFilePath, workDirectory: serverJarFileDirPath)
         return process

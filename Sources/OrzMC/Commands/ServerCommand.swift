@@ -51,13 +51,15 @@ struct ServerCommand: AsyncCommand {
     
     var help: String = "服务端相关"
     func run(using context: CommandContext, signature: Signature) async throws {
+        let console = context.console
         let killAll = signature.killAll
         guard !killAll
         else {
-            try await Shell.stopAll()
+            try await Shell.stopAll().forEach { stoppedPid in
+                console.success("服务端\(stoppedPid)已停止")
+            }
             return
         }
-        let console = context.console
         let version = try await console.chooseGameVersion(signature.version)
         let gui = signature.gui
         let debug = signature.debug
@@ -79,7 +81,8 @@ struct ServerCommand: AsyncCommand {
             maxMem: maxMem,
             onlineMode: onlineMode,
             showJarHelpInfo: jarHelp,
-            jarOptions: jarOpts
+            jarOptions: jarOpts,
+            console: console
         )
         
         if let type = GameType(rawValue: signature.type ?? GameType.paper.rawValue) {

@@ -6,7 +6,7 @@
 //
 
 import JokerKits
-import Utils
+import ConsoleKit
 import Foundation
 
 public extension PluginInfo {
@@ -225,10 +225,10 @@ public extension PluginInfo {
         ].filter { $0.enable && !$0.url.isEmpty && $0.downloadType != .needAuth }
     }
     
-    static func downloadItemInfos(of outputDirURL: URL) -> [DownloadItemInfo] {
+    static func downloadItemInfos(of outputDirURL: URL, console: any Console) -> [DownloadItemInfo] {
         return allPlugins().compactMap { pluginInfo in
             guard let sourceURL = URL(string: pluginInfo.url) else {
-                Platform.console.error("插件\(pluginInfo.name)下载地址无效")
+                console.error("插件\(pluginInfo.name)下载地址无效")
                 return nil
             }
             let dstFileURL = outputDirURL.appendingPathComponent(pluginInfo.name).appendingPathExtension("jar")

@@ -68,7 +68,8 @@ struct ClientCommand: AsyncCommand {
             authenticate: signature.authenticate,
             accountName: accountName,
             minMem: minMem,
-            maxMem: maxMem
+            maxMem: maxMem,
+            console: console
         )
         // 启动 Launcher
         var laucher = Launcher(clientInfo: clientInfo)

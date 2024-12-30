@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ConsoleKit
 
 public struct ServerInfo: Sendable {
     public let version: String
@@ -25,6 +26,9 @@ public struct ServerInfo: Sendable {
     
     // Jar包对应的参数
     var jarOptions: String?
+    
+    // Console
+    let console: (any Console)?
 
     public init(
         version: String,
@@ -37,7 +41,9 @@ public struct ServerInfo: Sendable {
         jvmArgs: [String] = [],
         onlineMode: Bool,
         showJarHelpInfo: Bool,
-        jarOptions: String? = nil) {
+        jarOptions: String? = nil,
+        console: (any Console)? = nil
+    ) {
         self.version = version
         self.gui = gui
         self.debug = debug
@@ -49,5 +55,6 @@ public struct ServerInfo: Sendable {
         self.onlineMode = onlineMode
         self.showJarHelpInfo = showJarHelpInfo
         self.jarOptions = jarOptions
+        self.console = console
     }
 }

@@ -96,16 +96,17 @@ public struct PaperServer: Server {
     public func start() async throws -> Process? {
 
         let version = serverInfo.version
-        let loadingBar = Platform.console.loadingBar(title: "获最最新构建版本")
-        loadingBar.start()
+        let console = serverInfo.console
+        let loadingBar = console?.loadingBar(title: "获最最新构建版本")
+        loadingBar?.start()
         guard let (build, name, _) = try await client.latestBuildApplication(project: .paper,
                                                                                     version: version)
         else {
-            loadingBar.fail()
+            loadingBar?.fail()
             return nil
         }
-        loadingBar.succeed()
-        Platform.console.info(name)
+        loadingBar?.succeed()
+        console?.info(name)
 
         let workDirectory = GameDir.server(version: serverInfo.version, type: GameType.paper.rawValue)
         let serverJarFileDirPath = workDirectory.dirPath
@@ -116,14 +117,14 @@ public struct PaperServer: Server {
         let jarFileURL = dirURL.appending(path: name)
 
         if !FileManager.default.fileExists(atPath: jarFileURL.path()) {
-            let progressBar = Platform.console.progressBar(title: "正在下载服务端文件")
-            progressBar.start()
+            let progressBar = console?.progressBar(title: "正在下载服务端文件")
+            progressBar?.start()
             guard let (jar, total) = try await client.downloadLatestBuild(project: .paper,
                                                                                  version: version,
                                                                                  build: build,
                                                                                  name: name)
             else {
-                progressBar.fail()
+                progressBar?.fail()
                 return nil
             }
 
@@ -131,9 +132,9 @@ public struct PaperServer: Server {
             for try await byteChunk in jar {
                 jarData.append(Data(byteChunk))
                 let progress = Double(jarData.count) / Double(total)
-                progressBar.activity.currentProgress = progress
+                progressBar?.activity.currentProgress = progress
             }
-            progressBar.succeed()
+            progressBar?.succeed()
 
             if !FileManager.default.fileExists(atPath: dirURL.path()) {
                 try FileManager.default.createDirectory(at: dirURL, withIntermediateDirectories: true)
