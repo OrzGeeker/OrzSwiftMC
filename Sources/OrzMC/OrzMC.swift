@@ -1,6 +1,5 @@
 import Utils
 import ConsoleKit
-import Foundation
 @main
 struct OrzMC {
     static func main() async throws {

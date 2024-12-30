@@ -14,10 +14,11 @@ struct CommandGroup: AsyncCommandGroup {
         .plugin: PluginCommand(),
         .fabric: FabricCommand(),
     ]
-    var help: String { "Minecraft 客户端/服务端部署工具" }
+    var help: String { Constants.commandGroupHelp.string }
     var commands: [String : any AnyAsyncCommand] {
         let sequence: [(String, any AnyAsyncCommand)] = features.keys.map { ($0.rawValue, features[$0]!) }
         return .init(uniqueKeysWithValues:sequence)
     }
     var defaultCommand: (any AnyAsyncCommand)? { features[.client] }
 }
+ 
