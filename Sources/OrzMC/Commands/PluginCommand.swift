@@ -1,22 +1,17 @@
-//
-//  PluginCommand.swift
-//
-//
-//  Created by wangzhizhou on 2022/3/28.
-//
-
 import ConsoleKit
 import JokerKits
 import Foundation
 import Game
 
 struct PluginCommand: AsyncCommand {
-    var help: String = "下载服务端需要的插件"
+    
+    var help: String = Constants.pluginHelp.string
+    
     struct Signature: CommandSignature {
-        @Flag(name: "list", short: "l", help: "列出所有需要下载的插件信息")
+        @Flag(name: "list", short: "l", help: Constants.pluginListHelp.string)
         var list: Bool
         
-        @Option(name: "output", short: "o", help: "下载插件后要保存到的目录路径")
+        @Option(name: "output", short: "o", help: Constants.pluginOutputHelp.string)
         var output: String?
     }
     
@@ -34,14 +29,14 @@ struct PluginCommand: AsyncCommand {
         else {
             let outputPath = signature.output ?? Bundle.main.executablePath
             guard let outputFilePath = outputPath else {
-                console.error("未指定文件存放路径")
+                console.error(Constants.uiOutputUnspecifyOutputPath.string)
                 return
             }
             let outpuFileDirURL = URL(fileURLWithPath: outputFilePath)
-            let progressBar = console.progressBar(title: "正在下载插件")
+            let progressBar = console.progressBar(title: Constants.uiOutputDownloading.string)
             try await Downloader.download(PluginInfo.downloadItemInfos(of: outpuFileDirURL, console: console), progressBar: progressBar)
-            console.output("文件已下载到目录：".consoleText(.info) + "\(outpuFileDirURL.path)".consoleText(.success))
-            await Shell.runCommand(with: ["open", "\(outpuFileDirURL.path)"])
+            console.output(Constants.uiOutputDownloadedToDir.string.consoleText(.info) + outpuFileDirURL.path.consoleText(.success))
+            await Shell.runCommand(with: ["open", outpuFileDirURL.path])
         }
     }
 }

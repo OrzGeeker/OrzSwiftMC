@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by joker on 2022/4/4.
-//
-
 import Foundation
 import ConsoleKit
 import JokerKits
@@ -12,16 +5,17 @@ import Fabric
 import Game
 
 struct FabricCommand: AsyncCommand {
-    var help: String = "安装Fabric"
+    
+    var help: String = Constants.fabricHelp.string
     
     struct Signature: CommandSignature {
-        @Flag(name: "server", short: "s", help: "安装服务端Fabric，不指定默认安装客户端Fabric")
+        @Flag(name: "server", short: "s", help: Constants.fabricServerHelp.string)
         var server: Bool
         
-        @Option(name: "installer", short: "i", help: "Fabric安装器文件下载URL链接或者本地文件URL")
+        @Option(name: "installer", short: "i", help: Constants.fabricInstallerHelp.string)
         var installer: String?
         
-        @Option(name: "version", short: "v", help: "指定游戏版本号")
+        @Option(name: "version", short: "v", help: Constants.fabricVersionHelp.string)
         var version: String?
     }
     

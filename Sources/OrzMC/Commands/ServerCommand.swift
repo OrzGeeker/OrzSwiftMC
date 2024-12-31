@@ -1,10 +1,3 @@
-//
-//  File.swift
-//
-//
-//  Created by joker on 2022/1/14.
-//
-
 import ConsoleKit
 import JokerKits
 import Game
@@ -12,59 +5,59 @@ import Game
 struct ServerCommand: AsyncCommand {
     
     struct Signature: CommandSignature {
-        @Flag(name: "debug", short: "d", help: "调试模式")
+        @Flag(name: "debug", short: "d", help: Constants.DebugHelp.string)
         var debug: Bool
         
-        @Flag(name: "gui", short: "g", help: "服务器以GUI方式启动")
+        @Flag(name: "gui", short: "g", help: Constants.serverGUIHelp.string)
         var gui: Bool
         
-        @Flag(name: "force_upgrade", short: "f", help: "强制升级地图")
+        @Flag(name: "force_upgrade", short: "f", help: Constants.serverForceUpgradeHelp.string)
         var forceUpgrade: Bool
         
-        @Option(name: "type", short: "t", help: "服务器类型: paper/vanilla, 默认：paper")
+        @Option(name: "type", short: "t", help: Constants.serverTypeHelp.string)
         var type: String?
         
-        @Option(name: "version", short: "v", help: "游戏版本号")
+        @Option(name: "version", short: "v", help: Constants.VersionHelp.string)
         var version: String?
         
-        @Option(name: "ms", short: "s", help: "客户端运行使用的最小内存，默认为：1G")
+        @Option(name: "ms", short: "s", help: Constants.serverMinMemHelp.string)
         var minMem: String?
         
-        @Option(name: "mx", short: "x", help: "客户端运行使用的最大内存，默认为：1G")
+        @Option(name: "mx", short: "x", help: Constants.serverMaxMemHelp.string)
         var maxMem: String?
         
-        @Option(name: "online-mode", short: "o", help: "服务端运行时是否使用Online模式，默认为：false")
+        @Option(name: "online-mode", short: "o", help: Constants.serverOnlineModeHelp.string)
         var onlineMode: Bool?
         
-        @Flag(name: "jar-help", short: "j", help: "查看服务端jar包的帮助信息")
+        @Flag(name: "jar-help", short: "j", help: Constants.serverJarHelp.string)
         var jarHelp: Bool
         
-        @Option(name: "jar-opts", short: "e", help: "jar文件运行时额外选项, 字符串参数以 a: 开头，例如：--jar-opts \"a:--help\"")
+        @Option(name: "jar-opts", short: "e", help: Constants.serverJarOptionHelp.string)
         var jarOpts: String?
         
-        @Flag(name: "demo", help: "演示模式")
+        @Flag(name: "demo", help: Constants.serverDemoModeHelp.string)
         var demo: Bool
         
-        @Flag(name: "kill-all", short: "k", help: "杀死所有正在运行的服务端")
+        @Flag(name: "kill-all", short: "k", help: Constants.serverKillAllHelp.string)
         var killAll: Bool
     }
     
-    var help: String = "服务端相关"
+    var help: String = Constants.serverHelp.string
     func run(using context: CommandContext, signature: Signature) async throws {
         let console = context.console
         let killAll = signature.killAll
         guard !killAll
         else {
             try await Shell.stopAll().forEach { stoppedPid in
-                console.success("服务端\(stoppedPid)已停止")
+                console.success(Constants.uiOutputServerStopped.string + stoppedPid)
             }
             return
         }
         let version = try await console.chooseGameVersion(signature.version)
         let gui = signature.gui
         let debug = signature.debug
-        let minMem = signature.minMem ?? "1G"
-        let maxMem = signature.maxMem ?? "1G"
+        let minMem = signature.minMem ?? Constants.serverMinMemDefault
+        let maxMem = signature.maxMem ?? Constants.serverMaxMemDefault
         let onlineMode = signature.onlineMode ?? false
         let forceUpgrade = signature.forceUpgrade
         let demo = signature.demo
@@ -86,7 +79,7 @@ struct ServerCommand: AsyncCommand {
         )
         
         if let type = GameType(rawValue: signature.type ?? GameType.paper.rawValue) {
-            console.success("服务器类型: \(type)")
+            console.success(Constants.uiOutputServerType.string + type.rawValue)
             switch type {
             case .paper:
                 _ = try await PaperServer(serverInfo: serverInfo).start()
@@ -95,7 +88,7 @@ struct ServerCommand: AsyncCommand {
             }
         }
         else{
-            console.success("服务器类型: \(GameType.paper)")
+            console.success(Constants.uiOutputServerType.string + GameType.paper.rawValue)
             _ = try await PaperServer(serverInfo: serverInfo).start()
         }
     }
