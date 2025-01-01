@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Game
-import Mojang
+import MojangAPI
 import JokerKits
 
 @MainActor
@@ -58,7 +58,7 @@ final class GameModel {
     
     var isServer: Bool { gameType == .server }
 
-    var gameInfoMap = [Version: GameInfo]()
+    var gameInfoMap = [Version: GameVersion]()
     
     var currentJavaMajorVersion: Int?
     
@@ -96,11 +96,14 @@ extension GameModel {
     }
     
     var selectedGameJavaMajorVersionRequired: Int? {
-        guard let selectedVersion, let gameInfo = gameInfoMap[selectedVersion]
+        guard
+            let selectedVersion,
+            let gameInfo = gameInfoMap[selectedVersion],
+            let javaVersion = gameInfo.javaVersion
         else {
             return nil
         }
-        return gameInfo.javaVersion.majorVersion
+        return Int(javaVersion.majorVersion)
     }
     
     enum JavaRuntimeStatus {
@@ -144,7 +147,7 @@ extension GameModel {
     }
     
     func fetchGameVersions() async throws {
-        versions = try await Mojang.manifest?.versions ?? []
+        versions = try await Mojang.manifest().versions
     }
     
     func fetchGameInfo() {
@@ -159,7 +162,7 @@ extension GameModel {
         }
         
         Task {
-            guard let gameInfo = try? await selectedVersion.gameInfo
+            guard let gameInfo = try? await selectedVersion.gameVersion
             else { return }
             await MainActor.run {
                 gameInfoMap[selectedVersion] = gameInfo

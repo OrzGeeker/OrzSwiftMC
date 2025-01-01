@@ -6,20 +6,19 @@
 //
 
 import SwiftUI
-import Mojang
+import MojangAPI
 
 extension Version {
     var typeTagColor: Color {
-        if type.contains("release") {
+        switch buildType {
+        case .release:
             return .accentColor
-        } else if type.contains("snapshot") {
+        case .snapshot:
             return .mint
-        } else if type.contains("alpha") {
+        case .oldAlpha:
             return .red
-        } else if type.contains("beta") {
+        case .oldBeta:
             return .orange
-        } else {
-            return .gray
         }
     }
 }

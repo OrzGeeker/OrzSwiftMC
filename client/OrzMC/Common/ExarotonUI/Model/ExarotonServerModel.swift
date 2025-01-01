@@ -33,7 +33,7 @@ final class ExarotonServerModel {
     // HTTP Client
     @ObservationIgnored
     lazy var httpClient: Client = {
-        Client(serverURL: try! Servers.server1(),
+        Client(serverURL: try! Servers.Server1.url(),
                transport: URLSessionTransport(),
                middlewares: [AuthenticationMiddleware(token: token)]
         )

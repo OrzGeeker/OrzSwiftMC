@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Mojang
+import MojangAPI
 import Game
 import JokerKits
 

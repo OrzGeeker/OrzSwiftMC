@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Mojang
+import MojangAPI
 import Game
 import JokerKits
 
@@ -100,7 +100,7 @@ struct GameView: View {
                             Spacer()
 
                             if !showOnlyRelease {
-                                Text(version.type)
+                                Text(version.buildType.rawValue)
                                     .bold()
                                     .foregroundStyle(version.typeTagColor)
                                     .padding([.horizontal], 5)
@@ -366,7 +366,7 @@ extension GameView {
         }
 
         if showOnlyRelease {
-            filteredVersions = filteredVersions.filter { $0.type == "release" }
+            filteredVersions = filteredVersions.filter { $0.buildType == .release }
         }
         
         if model.selectedVersion == nil {
