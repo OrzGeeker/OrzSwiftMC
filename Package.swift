@@ -17,7 +17,7 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", from: "0.0.3"),
         .package(url: "https://github.com/wangzhizhou/PaperMC.git", from: "0.0.3"),
-        .package(url: "https://github.com/wangzhizhou/MojangAPI.git", from: "0.0.2"),
+        .package(url: "https://github.com/wangzhizhou/MojangAPI.git", from: "0.0.3"),
     ],
     targets: [
         // MARK: Command Line executable
