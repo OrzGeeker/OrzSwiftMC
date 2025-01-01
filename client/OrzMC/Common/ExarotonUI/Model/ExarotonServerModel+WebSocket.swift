@@ -101,7 +101,7 @@ extension ExarotonServerModel: @preconcurrency ExarotonServerEventHandlerProtoco
         heapChanged = heap
     }
 
-    nonisolated func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
+    func didReceive(event: Starscream.WebSocketEvent, client: any Starscream.WebSocketClient) {
         // Do Nothing
     }
 }
