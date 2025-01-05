@@ -88,7 +88,7 @@
       "location" : "https://github.com/OrzGeeker/OrzSwiftMC.git",
       "state" : {
         "branch" : "main",
-        "revision" : "3edbe5a1284609f898f4373af2b367764fe49350"
+        "revision" : "f91bd27d335ba6f0b68a63d70cf4fa3466286289"
       }
     },
     {
@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wangzhizhou/PaperMC.git",
       "state" : {
-        "revision" : "ac56fc3dc0b80c7172e867a99708f1eba50c8914",
-        "version" : "0.0.3"
+        "revision" : "ebf2faeed988b080973ffeb49492c62124e549e5",
+        "version" : "0.0.4"
       }
     },
     {

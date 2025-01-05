@@ -16,7 +16,8 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/OrzGeeker/OrzSwiftKit.git", from: "0.0.3"),
-        .package(url: "https://github.com/wangzhizhou/PaperMC.git", from: "0.0.4"),
+        .package(url: "https://github.com/wangzhizhou/PaperMC.git", branch: "main"),
+//        .package(path: "/Users/bytedance/Documents/me/PaperMC"),
         .package(url: "https://github.com/wangzhizhou/MojangAPI.git", from: "0.0.3"),
     ],
     targets: [
@@ -34,6 +35,7 @@ let package = Package(
             "MojangAPI",
             "Fabric",
             .product(name: "PaperMCAPI", package: "PaperMC"),
+            .product(name: "HangarAPI", package: "PaperMC"),
             .product(name: "Utils", package: "OrzSwiftKit"),
         ]),
         // MARK: Fabric

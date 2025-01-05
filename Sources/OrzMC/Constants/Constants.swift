@@ -14,10 +14,11 @@ enum Constants: String {
     case uiOutputPasswordMask = "*"
     case uiOutputServerType = "服务器类型: "
     case uiOutputServerStopped = "服务端已停止: pid = "
-    case uiOutputUnspecifyOutputPath = "未指定文件存放路径"
+    case uiOutputUnspecifyOutputPath = "未指定有效的插件下载目录路径"
     case uiOutputDownloading = "正在下载中......"
+    case uiOutputDownloaded = "下载完成"
     case uiOutputDownloadedToDir = "文件已下载到目录："
-    
+    case uiOutputPluginSearchNoResult = "搜索无结果"
     // Common
     case commandGroupHelp = "Minecraft 客户端/服务端部署工具"
     case DebugHelp = "调试模式"
@@ -50,9 +51,12 @@ enum Constants: String {
     case fabricVersionHelp = "指定游戏版本号"
     
     // Plugin
-    case pluginHelp = "下载服务端需要的插件"
+    case pluginHelp = "使用HangarAPI搜索&下载需要的服务插件"
     case pluginListHelp = "列出所有需要下载的插件信息"
     case pluginOutputHelp = "下载插件后要保存到的目录路径"
+    case pluginSearchHelp = "按插件名称搜索Hangar"
+    case pluginSearchResultCountHelp = "指定搜索结果最大数量, 默认为："
+    case pluginSpecifiedGameVersionHelp = "指定插件需要适配的游戏版本号"
 }
 
 extension Constants {
@@ -60,6 +64,7 @@ extension Constants {
     static let clientMaxMemDefault = "2G"
     static let serverMinMemDefault = "1G"
     static let serverMaxMemDefault = "1G"
+    static let pluginSearchResultCountMaxDefault: Int64 = 3
 }
 
 extension Constants {
@@ -73,6 +78,8 @@ extension Constants {
             self.rawValue + Self.serverMinMemDefault
         case .serverMaxMemHelp:
             self.rawValue + Self.serverMaxMemDefault
+        case .pluginSearchResultCountHelp:
+            self.rawValue + String(Self.pluginSearchResultCountMaxDefault)
         default:
             self.rawValue
         }
