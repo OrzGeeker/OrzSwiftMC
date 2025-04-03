@@ -477,7 +477,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1410;
-				LastUpgradeCheck = 1610;
+				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					2B1C799128FEAB0600D53658 = {
 						CreatedOnToolsVersion = 14.1;
@@ -619,6 +619,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -679,6 +680,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -710,7 +712,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"OrzMC/Preview Content\"";
-				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrzMC/Common/Info.plist;
@@ -749,7 +750,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"OrzMC/Preview Content\"";
-				DEVELOPMENT_TEAM = 2N62934Y28;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = OrzMC/Common/Info.plist;
@@ -813,8 +813,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftMC.git";
 			requirement = {
-				branch = main;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.8;
 			};
 		};
 		F353DDDE2BFE600F0097986E /* XCRemoteSwiftPackageReference "OrzAppUpdater" */ = {
@@ -838,7 +838,7 @@
 			repositoryURL = "https://github.com/OrzGeeker/OrzSwiftKit.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.10;
+				minimumVersion = 0.0.12;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
