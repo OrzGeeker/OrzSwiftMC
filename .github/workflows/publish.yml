@@ -1,26 +1,20 @@
-name: Xcode - Build and Analyze
-
+name: Release
 on:
   workflow_dispatch:
   # push:
   #   branches: [ "main" ]
   # pull_request:
   #   branches: [ "main" ]
-
 jobs:
   build:
-    name: public products
+    name: build
     runs-on: macos-latest
-
     steps:
-
       - name: setup swift env
         uses: swift-actions/setup-swift@v2
         with:
           swift-version: "6.0"
-
       - name: checkout code
         uses: actions/checkout@v4
-
       - name: archive 
         run: ./client/release.sh
