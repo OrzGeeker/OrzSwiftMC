@@ -42,8 +42,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wangzhizhou/ExarotonAPI.git",
       "state" : {
-        "revision" : "b5c70757c3e9fee91e715bea57a1eb13769eb333",
-        "version" : "0.0.7"
+        "revision" : "159592dd724966475a906a69fc60087aa556f011",
+        "version" : "0.0.8"
       }
     },
     {
