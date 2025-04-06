@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SwiftUIX
 
 struct LinkMenu: View {
     let items: [LinkInfo] = LinkMenu.allLinkItems
@@ -29,7 +28,6 @@ struct LinkMenu: View {
         } label: {
             Image(systemName: "link")
         }
-        .navigationDestination(for: LinkMenu.LinkInfo.self, destination: handleLink)
     }
 }
 
@@ -58,19 +56,6 @@ extension LinkMenu {
         .init(url: "https://aternos.org/server/", icon: "testtube.2", type: .testServer, name: "Aternos"),
         .init(url: "https://exaroton.com/server", icon: "server.rack", type: .onlineServer, name: "Exaroton"),
     ]
-    @ViewBuilder
-    func handleLink(_ link: LinkMenu.LinkInfo) -> some View {
-        if let linkURL = URL(string: link.url) {
-            Web(url: linkURL)
-        }
-        else{
-            if link.url.isEmpty {
-                Text("URL为空")
-            } else {
-                Text("URL格式错误：\(link.url)")
-            }
-        }
-    }
 }
 
 #Preview {

@@ -22,21 +22,9 @@ struct ToolView: View {
                     model.path.append(ToolItem.exaroton)
                 }
                 .keyboardShortcut(.init(.init("s")), modifiers: .command)
-                .navigationDestination(for: ToolView.ToolItem.self, destination: handleTool)
             case .links:
                 LinkMenu(path: $model.path)
             }
-        }
-    }
-    
-    @ViewBuilder
-    func handleTool(_ tool: ToolItem) -> some View {
-        switch tool {
-        case .exaroton:
-            ExarotonServerList()
-                .environment(model)
-        default:
-            EmptyView()
         }
     }
 }
