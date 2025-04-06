@@ -12,12 +12,12 @@ struct GameInfoView: View {
     @State private var model = ExarotonServerModel()
     var body: some View {
         NavigationStack(path: $model.path) { BasicInfo() }
-            .navigationDestination(for: ToolView.ToolItem.self, destination: handleTool)
+            .navigationDestination(for: DetailViewTool.ToolItem.self, destination: handleTool)
             .navigationDestination(for: LinkMenu.LinkInfo.self, destination: handleLink)
-            .toolbar { ToolView(model: $model) }
+            .detailTool(model: $model)
     }
     @ViewBuilder
-    func handleTool(_ tool: ToolView.ToolItem) -> some View {
+    func handleTool(_ tool: DetailViewTool.ToolItem) -> some View {
         switch tool {
         case .exaroton:
             ExarotonServerList().environment(model)

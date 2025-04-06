@@ -32,7 +32,9 @@
 		2B62C9922BF76C6600387498 /* ExarotonServerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */; };
 		2B79DCF629066BBC000C21A1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B79DCF529066BBC000C21A1 /* ContentView.swift */; platformFilter = ios; };
 		2B8AB1CE2DA0CDF700DA6605 /* LinkMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AB1CD2DA0CDF700DA6605 /* LinkMenu.swift */; };
-		2B8AB1D02DA0D22200DA6605 /* ToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AB1CF2DA0D22200DA6605 /* ToolView.swift */; };
+		2B8AB1D02DA0D22200DA6605 /* DetailViewTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B8AB1CF2DA0D22200DA6605 /* DetailViewTool.swift */; };
+		2BA06D722DA2DD760043C0CE /* SideBarTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA06D712DA2DD760043C0CE /* SideBarTool.swift */; };
+		2BA06D742DA2E6500043C0CE /* GameList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA06D732DA2E6500043C0CE /* GameList.swift */; };
 		2BA7F9942CA5848200ED2684 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7F9932CA5848200ED2684 /* SettingsView.swift */; platformFilters = (macos, ); };
 		2BA7F9962CA58DFD00ED2684 /* SettingsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA7F9952CA58DFD00ED2684 /* SettingsModel.swift */; platformFilters = (macos, ); };
 		2BA7F9A52CA5982A00ED2684 /* Game in Frameworks */ = {isa = PBXBuildFile; platformFilters = (macos, ); productRef = 2BA7F9A42CA5982A00ED2684 /* Game */; };
@@ -101,7 +103,9 @@
 		2B62C9912BF76C6600387498 /* ExarotonServerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExarotonServerModel.swift; sourceTree = "<group>"; };
 		2B79DCF529066BBC000C21A1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2B8AB1CD2DA0CDF700DA6605 /* LinkMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkMenu.swift; sourceTree = "<group>"; };
-		2B8AB1CF2DA0D22200DA6605 /* ToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolView.swift; sourceTree = "<group>"; };
+		2B8AB1CF2DA0D22200DA6605 /* DetailViewTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewTool.swift; sourceTree = "<group>"; };
+		2BA06D712DA2DD760043C0CE /* SideBarTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarTool.swift; sourceTree = "<group>"; };
+		2BA06D732DA2E6500043C0CE /* GameList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameList.swift; sourceTree = "<group>"; };
 		2BA7F9932CA5848200ED2684 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2BA7F9952CA58DFD00ED2684 /* SettingsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsModel.swift; sourceTree = "<group>"; };
 		2BD03D782907F93200BE1D1F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -262,6 +266,8 @@
 			isa = PBXGroup;
 			children = (
 				F30F00EC2BDBDF7000CAA802 /* GameView.swift */,
+				2BA06D712DA2DD760043C0CE /* SideBarTool.swift */,
+				2BA06D732DA2E6500043C0CE /* GameList.swift */,
 			);
 			path = SideBar;
 			sourceTree = "<group>";
@@ -272,7 +278,7 @@
 				2B54E08B2BDE0ACA001B6877 /* BasicInfo.swift */,
 				2B54E0892BDE0945001B6877 /* GameInfoView.swift */,
 				2B8AB1CD2DA0CDF700DA6605 /* LinkMenu.swift */,
-				2B8AB1CF2DA0D22200DA6605 /* ToolView.swift */,
+				2B8AB1CF2DA0D22200DA6605 /* DetailViewTool.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -550,7 +556,7 @@
 				F30F00F32BDCCBD300CAA802 /* GUIServer.swift in Sources */,
 				F3FE52132BF7B4FC006E79AA /* ExarotonServerView.swift in Sources */,
 				F3B4D0E72A1A7BEB0095B108 /* MCServerInfo+Equatable.swift in Sources */,
-				2B8AB1D02DA0D22200DA6605 /* ToolView.swift in Sources */,
+				2B8AB1D02DA0D22200DA6605 /* DetailViewTool.swift in Sources */,
 				2BA7F9962CA58DFD00ED2684 /* SettingsModel.swift in Sources */,
 				2B54E08C2BDE0ACA001B6877 /* BasicInfo.swift in Sources */,
 				2B54E08E2BDE21A4001B6877 /* MacOSScene.swift in Sources */,
@@ -585,8 +591,10 @@
 				2BD301EF29000B2C00993823 /* LauncherUI.swift in Sources */,
 				2BA7F9942CA5848200ED2684 /* SettingsView.swift in Sources */,
 				F3B4D0D42A1A776A0095B108 /* MCSLP.swift in Sources */,
+				2BA06D742DA2E6500043C0CE /* GameList.swift in Sources */,
 				F3B4D0CF2A1A776A0095B108 /* RCONPacket.swift in Sources */,
 				F310C79E2C8B535700590F32 /* ExarotonCopyableText.swift in Sources */,
+				2BA06D722DA2DD760043C0CE /* SideBarTool.swift in Sources */,
 				F3FE52112BF7B494006E79AA /* ExarotonServerStatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
