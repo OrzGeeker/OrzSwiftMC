@@ -96,8 +96,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/wangzhizhou/PaperMC.git",
       "state" : {
-        "revision" : "a58d8d40f16c0642ac4ac42617f1dd93dddbdc85",
-        "version" : "0.0.5"
+        "revision" : "beafe3e5f403df5497639ca2e12efe6262e1475b",
+        "version" : "0.0.7"
       }
     },
     {
