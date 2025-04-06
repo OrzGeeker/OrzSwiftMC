@@ -10,9 +10,9 @@ import Game
 import MojangAPI
 
 struct GameList: View {
-    let versions: [Version]
-    let isOnlyRelease: Bool
+    @Binding var versions: [Version]
     @Binding var selectedVersion: Version?
+    let isOnlyRelease: Bool
     let canUseShortcut: Bool
     var body: some View {
         ScrollViewReader { proxy in
@@ -114,11 +114,12 @@ struct GameList: View {
 }
 
 #Preview {
+    @Previewable @State var versions = GameList.mockVersions
     @Previewable @State var selectedVersion: Version? = GameList.mockVersions.first
     GameList(
-        versions: GameList.mockVersions,
-        isOnlyRelease: true,
+        versions: $versions,
         selectedVersion: $selectedVersion,
+        isOnlyRelease: true,
         canUseShortcut: true,
     )
 }

@@ -36,9 +36,9 @@ struct GameView: View {
         @Bindable var model = model
         VStack(alignment: .leading) {
             GameList(
-                versions: filteredVersions,
-                isOnlyRelease: showOnlyRelease,
+                versions: $filteredVersions,
                 selectedVersion: $model.selectedVersion,
+                isOnlyRelease: showOnlyRelease,
                 canUseShortcut: !model.isLaunchingGame
             )
             .sideBarTool(
