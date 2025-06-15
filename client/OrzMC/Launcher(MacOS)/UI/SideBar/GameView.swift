@@ -197,18 +197,20 @@ struct GameView: View {
                         Button {
                             startGame()
                         } label: {
-                            Text("Start \(model.gameType.rawValue.capitalized)")
-                                .font(.headline)
-                                .bold()
-                            
-                            if (model.progress > 0 && model.progress < 1) {
-                                ProgressView(value: model.progress, total: 1)
-                                    .progressViewStyle(.circular)
-                                    .controlSize(.small)
-                                Text(model.progressDesc)
-                            } else if model.progress >= 1 {
-                                Image(systemName: "checkmark.seal.fill")
-                                    .controlSize(.regular)
+                            HStack {
+                                Text("Start \(model.gameType.rawValue.capitalized)")
+                                    .font(.headline)
+                                    .bold()
+                                
+                                if (model.progress > 0 && model.progress < 1) {
+                                    ProgressView(value: model.progress, total: 1)
+                                        .progressViewStyle(.circular)
+                                        .controlSize(.small)
+                                    Text(model.progressDesc)
+                                } else if model.progress >= 1 {
+                                    Image(systemName: "checkmark.seal.fill")
+                                        .controlSize(.regular)
+                                }
                             }
                         }
                         .tint(enableStartGameButton ? Color.accentColor : .gray)
