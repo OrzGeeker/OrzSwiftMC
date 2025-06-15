@@ -45,11 +45,9 @@ struct SideBarTool: View {
     var body: some View {
         Toggle(isOn: $showOnlyRelease) {
             Text("Release Only")
-                .padding(4)
-                .foregroundStyle(showOnlyRelease ? Color.accentColor : Color.gray)
-                .fontWeight(showOnlyRelease ? .medium : .regular)
+                .padding([.horizontal], 4)
+                .fontWeight(showOnlyRelease ? .semibold : .regular)
         }
-        .toggleStyle(.button)
         
         Button(action: {
             reloadList()

@@ -200,8 +200,6 @@ struct GameView: View {
                             Text("Start \(model.gameType.rawValue.capitalized)")
                                 .font(.headline)
                                 .bold()
-                                .padding([.horizontal], 4)
-                                .padding([.vertical], 4)
                             
                             if (model.progress > 0 && model.progress < 1) {
                                 ProgressView(value: model.progress, total: 1)
