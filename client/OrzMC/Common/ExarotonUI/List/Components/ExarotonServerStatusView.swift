@@ -77,7 +77,7 @@ struct ExarotonServerStatusView: View {
             
             HStack {
                 
-                Text("\(status)")
+                Text(.init("\(status)"))
                 
                 Spacer()
                 

@@ -124,9 +124,6 @@ struct GameList: View {
     )
 }
 
-
-#if DEBUG
-
 extension GameList {
     static var mockVersions: [Version] = {
         // https://launchermeta.mojang.com/mc/game/version_manifest.json
@@ -184,5 +181,3 @@ extension GameList {
         return versions
     }()
 }
-
-#endif
