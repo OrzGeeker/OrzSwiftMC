@@ -1,0 +1,147 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "" : {
+
+    },
+    "%@" : {
+
+    },
+    "%lld" : {
+
+    },
+    "%lld members" : {
+
+    },
+    "%lld servers" : {
+
+    },
+    "Actions" : {
+
+    },
+    "by Aternos" : {
+
+    },
+    "Clear Console" : {
+
+    },
+    "Console" : {
+
+    },
+    "Credit Pool Detail" : {
+
+    },
+    "Credit Pools" : {
+
+    },
+    "Current:" : {
+
+    },
+    "Down" : {
+
+    },
+    "exaroton" : {
+
+    },
+    "Exaroton" : {
+
+    },
+    "Filter a version" : {
+
+    },
+    "Game Version:" : {
+
+    },
+    "General" : {
+
+    },
+    "Home" : {
+
+    },
+    "Input Account Token" : {
+
+    },
+    "Input Command" : {
+
+    },
+    "Input User Name" : {
+
+    },
+    "Java Version" : {
+
+    },
+    "Members" : {
+
+    },
+    "Metrics" : {
+
+    },
+    "Playlist" : {
+
+    },
+    "RAM: %@ GB" : {
+
+    },
+    "Refresh Page" : {
+
+    },
+    "Release Only" : {
+
+    },
+    "Remote Server" : {
+
+    },
+    "Required:" : {
+
+    },
+    "Restart Server" : {
+
+    },
+    "Send Console Command" : {
+
+    },
+    "Server" : {
+
+    },
+    "Server Detail" : {
+
+    },
+    "Servers" : {
+
+    },
+    "Settings" : {
+
+    },
+    "Start %@" : {
+
+    },
+    "Start Server" : {
+
+    },
+    "Stop All Servers" : {
+
+    },
+    "Stop Server" : {
+
+    },
+    "TOKEN" : {
+
+    },
+    "Up" : {
+
+    },
+    "URL为空" : {
+
+    },
+    "URL格式错误：%@" : {
+
+    },
+    "User Name:" : {
+
+    },
+    "远程 JVM 调试" : {
+
+    }
+  },
+  "version" : "1.1"
+}
