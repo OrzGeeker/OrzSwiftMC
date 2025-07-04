@@ -16,8 +16,3 @@ CURRENT_PROJECT_VERSION=21
 SWIFT_VERSION=6.0
 SWIFT_STRICT_CONCURRENCY=Complete
 // ---
-
-// Info.plist - Sparkle App upgrade config
-INFOPLIST_KEY_SUPublicEDKey="aJydxF8TPBtlPfJhH+6bm1vD9sUHCStYOBOijD6ialA="
-INFOPLIST_KEY_SUFeedURL="https://raw.githubusercontent.com/OrzGeeker/OrzSwiftMC/main/products/appcast.xml"
-// ---

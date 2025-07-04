@@ -68,7 +68,7 @@ function tarxz() {
 }
 
 function build() {
-    cd $app_dir                       && \
+    cd $app_dir                          && \
     xcrun xcodebuild build                  \
         -skipPackagePluginValidation        \
         -skipMacroValidation                \
@@ -90,7 +90,7 @@ function sparkle() {
     sparkle_SUFeedURL=$($plistBuddyBin -c "Print SUFeedURL" "$app_info_plist")
     sparkle_appcast_xml_URL=${git_url%%.git}
     sparkle_appcast_xml_URL=${sparkle_appcast_xml_URL/github.com/raw.githubusercontent.com}
-    sparkle_appcast_xml_URL=${sparkle_appcast_xml_URL}/main${product_dir##"${git_repo_dir}"}/appcast.xml
+    sparkle_appcast_xml_URL=${sparkle_appcast_xml_URL}/main${product_dir##${git_repo_dir}}/appcast.xml
     if [ "$sparkle_SUFeedURL" != "$sparkle_appcast_xml_URL" ]; then
         $plistBuddyBin -c "Set :SUFeedURL $sparkle_appcast_xml_URL" "$app_info_plist"
         echo update appcast xml url: $sparkle_appcast_xml_URL
@@ -127,7 +127,7 @@ function sparkle() {
 }
 
 function archive() {
-    cd $app_dir                       && \
+    cd $app_dir                          && \
     xcrun xcodebuild archive                \
         -skipPackagePluginValidation        \
         -skipMacroValidation                \
@@ -154,7 +154,7 @@ cat > $export_options_plist <<EOF
 EOF
 }
 
-function export() {
+function exportArchive() {
     xcrun xcodebuild                                \
         -exportArchive                              \
         -archivePath $archive_path                  \
@@ -223,9 +223,14 @@ function clean_products() {
 }
 
 function cleanup() {
-    remove $app_dir/*.zip   \
-        *.plist *.log          \
+    remove $app_dir/*.zip       \
+        *.plist *.log           \
         $build_dir $derived_data_path $export_app
 }
 
-cleanup && clean_products && build && sparkle && archive && write_export_options_plist && export && notarize && sparkle && distribute "zip" && write_appcast_xml && cleanup
+cleanup && clean_products     && \
+build && sparkle && archive   && \
+write_export_options_plist    && \
+exportArchive && notarize     && \
+sparkle && distribute "zip"   && \
+write_appcast_xml && cleanup
