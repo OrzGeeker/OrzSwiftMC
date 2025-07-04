@@ -262,7 +262,7 @@ function release_doc() {
 
     # 2. 转换文档为静态网站
     echo "Converting documentation..."
-    DOCCARCHIVE_PATH=$(find ${derived_data_path} -type d -name "*.doccarchive")
+    DOCCARCHIVE_PATH=$(find ${derived_data_path} -type d -name "${scheme}.doccarchive")
     xcrun docc process-archive transform-for-static-hosting \
       "$DOCCARCHIVE_PATH" \
       --output-path ${docs_dir} \
