@@ -6,6 +6,7 @@ scheme=OrzMC
 team_id=2N62934Y28
 configuration=Release
 destination="generic/platform=macOS"
+gh_pages_branch="gh-pages"
 
 apple_id="824219521@qq.com"
 app_specific_password="bbgb-nzuk-trqz-uzax"
@@ -14,10 +15,25 @@ notary_timeout_duration="5m"
 # path defination
 git_repo_dir=$(git rev-parse --show-toplevel)
 git_url=$(git remote get-url origin)
+extract_user_repo() {
+    local url="$1"
+    # 移除协议前缀（https://, git://, ssh://等）
+    url=${url#*://}
+    # 处理git@格式（git@github.com:user/repo.git）
+    url=${url#*@}
+    # 替换:为/（处理git@格式）
+    url=${url/://}
+    # 移除.git后缀
+    url=${url%.git}
+    # 提取user/repo部分
+    echo "${url#*/}"
+}
+git_repo_name=$(extract_user_repo ${git_url})
 derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
 archive_path="$build_dir/$scheme.xcarchive"
 app_dir=$git_repo_dir
+docs_dir="${app_dir}/docs"
 product_dir=$app_dir/products
 
 export_options_plist=$app_dir/exportOptions.plist
@@ -228,9 +244,77 @@ function cleanup() {
         $build_dir $derived_data_path $export_app
 }
 
-cleanup && clean_products     && \
-build && sparkle && archive   && \
-write_export_options_plist    && \
-exportArchive && notarize     && \
-sparkle && distribute "zip"   && \
-write_appcast_xml && cleanup
+#cleanup && clean_products     && \
+#build && sparkle && archive   && \
+#write_export_options_plist    && \
+#exportArchive && notarize     && \
+#sparkle && distribute "zip"   && \
+#write_appcast_xml && cleanup
+
+function release_doc() {
+    # 1. 构建 DocC 文档
+    echo "Building documentation..."
+    xcodebuild docbuild             \
+        -quiet                      \
+        -scheme ${scheme}           \
+        -destination ${destination} \
+        -derivedDataPath ${derived_data_path}
+
+    # 2. 转换文档为静态网站
+    echo "Converting documentation..."
+    DOCCARCHIVE_PATH=$(find ${derived_data_path} -type d -name "*.doccarchive")
+    xcrun docc process-archive transform-for-static-hosting \
+      "$DOCCARCHIVE_PATH" \
+      --output-path ${docs_dir} \
+      --hosting-base-path /${git_repo_name}
+
+    # 3. 准备 GitHub Pages 文件
+    echo "Preparing GitHub Pages files..."
+    touch ${docs_dir}/.nojekyll
+    cat > ${docs_dir}/index.html <<EOF
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta http-equiv="refresh" content="0; url=/documentation/${scheme}">
+    </head>
+    <body>
+        <p>Redirecting to <a href="/documentation/${scheme}">documentation</a>...</p>
+    </body>
+    </html>
+EOF
+
+    # 4. 创建或更新 gh-pages 分支
+    echo "Publishing to GitHub Pages..."
+
+    # 检查分支是否存在
+    if git show-ref --quiet refs/heads/${gh_pages_branch}; then
+      # 分支存在，检出到临时目录
+      git worktree add --force ${gh_pages_branch} ${gh_pages_branch}
+    else
+      # 分支不存在，创建孤儿分支
+      git checkout --orphan ${gh_pages_branch}
+      git rm -rf .
+      git commit --allow-empty -m "Initial gh-pages commit"
+      git push origin ${gh_pages_branch}
+      git checkout - # 回到之前的分支
+      git worktree add ${gh_pages_branch} ${gh_pages_branch}
+    fi
+
+    # 复制文档
+    rsync -av --delete --exclude='.git' ${docs_dir} ${gh_pages_branch}
+
+    # 提交更改
+    cd ${gh_pages_branch}
+    git add --all
+    git commit -m "Update documentation $(date +'%Y-%m-%d %H:%M:%S')"
+    git push origin ${gh_pages_branch}
+    cd -
+
+    # 清理
+    git worktree remove ${gh_pages_branch}
+    rm -rf ${derived_data_path} ${docs_dir} {gh_pages_branch}
+    
+    echo "✅ Documentation published to GitHub Pages branch!"
+}
+
+release_doc
