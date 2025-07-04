@@ -1,9 +1,3 @@
-# OrzSwiftMC
+# OrzMCApp
 
-OrzMC Written by Swift Language
-
-
-## Installation
-
-## Usage
-
+App used on MacOS/iOS
