@@ -180,10 +180,9 @@
 			isa = PBXGroup;
 			children = (
 				2B8442F82E17D38800CB0EA0 /* README.md */,
-				F370F74029037521005497A1 /* Frameworks */,
 				2B1C799428FEAB0600D53658 /* OrzMC */,
+				2BEBE8E72E17FA900071B538 /* Scripts */,
 				2B1C799328FEAB0600D53658 /* Products */,
-				2BEBE8E72E17FA900071B538 /* scripts */,
 			);
 			sourceTree = "<group>";
 		};
@@ -353,12 +352,12 @@
 			path = "Launcher(MacOS)";
 			sourceTree = "<group>";
 		};
-		2BEBE8E72E17FA900071B538 /* scripts */ = {
+		2BEBE8E72E17FA900071B538 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
 				2BEBE8E62E17FA900071B538 /* release.sh */,
 			);
-			path = scripts;
+			path = Scripts;
 			sourceTree = "<group>";
 		};
 		F339F6302903FF53003CB50C /* Controller */ = {
@@ -368,13 +367,6 @@
 				F30F00F22BDCCBD300CAA802 /* GUIServer.swift */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		F370F74029037521005497A1 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		F3B4D0B72A1A76E70095B108 /* Models */ = {
