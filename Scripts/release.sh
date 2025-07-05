@@ -251,39 +251,43 @@ function cleanup() {
 #sparkle && distribute "zip"   && \
 #write_appcast_xml && cleanup
 
-function release_doc() {
-    # 1. 构建 DocC 文档
+
+function build_doc() {
     echo "Building documentation..."
     xcodebuild docbuild             \
         -quiet                      \
         -scheme ${scheme}           \
         -destination ${destination} \
         -derivedDataPath ${derived_data_path}
+}
 
-    # 2. 转换文档为静态网站
+function convert_doc() {
     echo "Converting documentation..."
     DOCCARCHIVE_PATH=$(find ${derived_data_path} -type d -name "${scheme}.doccarchive")
     xcrun docc process-archive transform-for-static-hosting \
       "$DOCCARCHIVE_PATH" \
-      --output-path ${docs_dir} \
-      --hosting-base-path /${git_repo_name}
+      --output-path ${docs_dir} #\
+      #--hosting-base-path /${git_repo_name}
+}
 
-    # 3. 准备 GitHub Pages 文件
+function prepare_index_page() {
     echo "Preparing GitHub Pages files..."
+    lowercase_scheme=$(echo "$scheme" | tr '[:upper:]' '[:lower:]')
     touch ${docs_dir}/.nojekyll
     cat > ${docs_dir}/index.html <<EOF
     <!DOCTYPE html>
     <html>
     <head>
-        <meta http-equiv="refresh" content="0; url=/documentation/${scheme}">
+        <meta http-equiv="refresh" content="0; url=/documentation/${lowercase_scheme}">
     </head>
     <body>
-        <p>Redirecting to <a href="/documentation/${scheme}">documentation</a>...</p>
+        <p>Redirecting to <a href="/documentation/${lowercase_scheme}">documentation</a>...</p>
     </body>
     </html>
 EOF
+}
 
-    # 4. 创建或更新 gh-pages 分支
+function push_to_gh_pages() {
     echo "Publishing to GitHub Pages..."
 
     # 检查分支是否存在
@@ -309,12 +313,17 @@ EOF
     git commit -m "Update documentation $(date +'%Y-%m-%d %H:%M:%S')"
     git push origin ${gh_pages_branch}
     cd -
-
-    # 清理
-    git worktree remove ${gh_pages_branch}
-    rm -rf ${derived_data_path} ${docs_dir} {gh_pages_branch}
-    
-    echo "✅ Documentation published to GitHub Pages branch!"
 }
 
-release_doc
+function cleanup_for_doc() {
+    git worktree remove ${gh_pages_branch}
+    rm -rf ${derived_data_path} ${docs_dir} {gh_pages_branch}
+}
+
+cd $app_dir         && \
+build_doc           && \
+convert_doc         && \
+prepare_index_page  && \
+push_to_gh_pages    && \
+cleanup_for_doc     && \
+echo "✅ Documentation published to GitHub Pages branch!"
