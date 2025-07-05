@@ -265,8 +265,10 @@ function convert_doc() {
     echo "Converting documentation..."
     DOCCARCHIVE_PATH=$(find ${derived_data_path} -type d -name "${scheme}.doccarchive")
     xcrun docc process-archive transform-for-static-hosting \
-      "$DOCCARCHIVE_PATH" \
-      --output-path ${docs_dir} #\
+      "$DOCCARCHIVE_PATH"                                   \
+      --output-path ${docs_dir}                             \
+      && rm -rf ${derived_data_path}
+      #\
       #--hosting-base-path /${git_repo_name}
 }
 
@@ -311,13 +313,13 @@ function push_to_gh_pages() {
     cd ${gh_pages_branch}
     git add --all
     git commit -m "Update documentation $(date +'%Y-%m-%d %H:%M:%S')"
-    git push -f origin ${gh_pages_branch}
+    git push origin ${gh_pages_branch}
     cd -
 }
 
 function cleanup_for_doc() {
     git worktree remove ${gh_pages_branch}
-    rm -rf ${derived_data_path} ${docs_dir} {gh_pages_branch}
+    rm -rf ${docs_dir} ${gh_pages_branch}
 }
 
 cd $app_dir         && \
