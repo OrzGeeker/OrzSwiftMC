@@ -15,6 +15,22 @@ notary_timeout_duration="5m"
 # path defination
 git_repo_dir=$(git rev-parse --show-toplevel)
 git_url=$(git remote get-url origin)
+extract_repo_name() {
+    local url="$1"
+    # 移除协议前缀
+    url=${url#*://}
+    # 移除用户名和密码部分（如果存在）
+    url=${url#*@}
+    # 提取路径部分
+    url=${url#*/}
+    # 移除 .git 后缀
+    url=${url%.git}
+    # 如果URL以/结尾，移除最后的/
+    url=${url%/}
+    # 返回最后一个路径部分
+    echo "${url##*/}"
+}
+git_repo_name=$(extract_repo_name ${git_url})
 extract_user_repo() {
     local url="$1"
     # 移除协议前缀（https://, git://, ssh://等）
@@ -28,7 +44,7 @@ extract_user_repo() {
     # 提取user/repo部分
     echo "${url#*/}"
 }
-git_repo_name=$(extract_user_repo ${git_url})
+git_user_repo_name=$(extract_user_repo ${git_url})
 derived_data_path="$git_repo_dir/DerivedData"
 build_dir=$git_repo_dir/build
 archive_path="$build_dir/$scheme.xcarchive"
@@ -267,9 +283,8 @@ function convert_doc() {
     xcrun docc process-archive transform-for-static-hosting \
       "$DOCCARCHIVE_PATH"                                   \
       --output-path ${docs_dir}                             \
+      --hosting-base-path /${git_repo_name}                 \
       && rm -rf ${derived_data_path}
-      #\
-      #--hosting-base-path /${git_repo_name}
 }
 
 function prepare_index_page() {
