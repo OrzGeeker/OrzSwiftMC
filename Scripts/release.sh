@@ -302,7 +302,7 @@ function push_to_gh_pages() {
       git checkout --orphan ${gh_pages_branch}
       git rm -rf .
       git commit --allow-empty -m "Initial gh-pages commit"
-      git push origin ${gh_pages_branch}
+      git push origin -u ${gh_pages_branch}
       git checkout ${current_branch_name_bak} # 回到之前的分支
       git worktree add ${gh_pages_branch} ${gh_pages_branch}
     fi
