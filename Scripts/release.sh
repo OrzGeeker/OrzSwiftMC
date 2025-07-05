@@ -295,10 +295,10 @@ function prepare_index_page() {
     <!DOCTYPE html>
     <html>
     <head>
-        <meta http-equiv="refresh" content="0; url=/documentation/${lowercase_scheme}">
+        <meta http-equiv="refresh" content="0; url=/${git_repo_name}/documentation/${lowercase_scheme}">
     </head>
     <body>
-        <p>Redirecting to <a href="/documentation/${lowercase_scheme}">documentation</a>...</p>
+        <p>Redirecting to <a href="/${git_repo_name}/documentation/${lowercase_scheme}">documentation</a>...</p>
     </body>
     </html>
 EOF
